@@ -1,0 +1,29 @@
+exclude: |
+  (?x)^(
+    README.md
+  )$
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.4.0
+  hooks:
+    - id: check-yaml
+    - id: end-of-file-fixer
+    - id: trailing-whitespace
+    - id: check-json
+    - id: check-yaml
+    - id: pretty-format-json
+      args: ["--indent", "2", "--autofix", "--no-sort-keys"]
+- repo: local
+  hooks:
+    - id: terraform-fmt
+      name: terraform fmt
+      description: runs terraform fmt
+      entry: terraform fmt -recursive
+      language: system
+      pass_filenames: false
+    - id: terraform-docs
+      name: terraform-docs
+      description: runs terraform-docs
+      entry: terraform-docs -c "./modules/key-vault/.terraform-docs.yml" "./"
+      language: system
+      pass_filenames: false

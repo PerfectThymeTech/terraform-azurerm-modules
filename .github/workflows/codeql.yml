@@ -1,0 +1,53 @@
+name: Code Scanning
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+  schedule:
+    - cron: "00 10 * * 6"
+
+jobs:
+  codeql:
+    name: CodeQL
+    runs-on: [ubuntu-latest]
+    timeout-minutes: 360
+
+    permissions:
+      security-events: write
+      # only required for workflows in private repositories
+      # actions: read
+      # contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ["python"]
+
+    steps:
+      # Checkout repository
+      - name: Check Out Repository
+        id: checkout_repository
+        uses: actions/checkout@v4
+
+      # CodeQL initialization of tools for scanning
+      - name: CodeQL - Initialize
+        id: codeql_init
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+
+
+      # CodeQL autobuild attempts to build any compiled languages (C/C++, C#, Go, Java, or Swift).
+      - name: CodeQL - Autobuild
+        id: codeql_build
+        uses: github/codeql-action/autobuild@v3
+
+      # CodeQL analysis of code
+      - name: CodeQL - Analysis
+        id: codeql_analyze
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{matrix.language}}"
