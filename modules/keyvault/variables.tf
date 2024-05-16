@@ -62,8 +62,8 @@ variable "diagnostics_configurations" {
     log_analytics_workspace_id = optional(string, ""),
     storage_account_id         = optional(string, "")
   }))
-  sensitive   = false
-  default     = []
+  sensitive = false
+  default   = []
   validation {
     condition = alltrue([
       length([for diagnostics_configuration in toset(var.diagnostics_configurations) : diagnostics_configuration if diagnostics_configuration.log_analytics_workspace_id == "" && diagnostics_configuration.storage_account_id == ""]) <= 0
@@ -99,7 +99,7 @@ variable "private_dns_zone_id_vault" {
   description = "Specifies the resource ID of the private DNS zone for Azure Key Vault. Not required if DNS A-records get created via Azure Policy."
   type        = string
   sensitive   = false
-  nullable = false
+  nullable    = false
   default     = ""
   validation {
     condition     = var.private_dns_zone_id_key_vault == "" || (length(split("/", var.private_dns_zone_id_key_vault)) == 9 && endswith(var.private_dns_zone_id_key_vault, "privatelink.vaultcore.azure.net"))
