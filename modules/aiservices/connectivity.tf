@@ -4,9 +4,9 @@ resource "azurerm_private_endpoint" "private_endpoint_cognitive_account" {
   resource_group_name = azurerm_cognitive_account.cognitive_account.resource_group_name
   tags                = var.tags
 
-  custom_network_interface_name = "${azurerm_cognitive_account.cognitive_account.name}-vault-nic"
+  custom_network_interface_name = "${azurerm_cognitive_account.cognitive_account.name}-account-nic"
   private_service_connection {
-    name                           = "${azurerm_cognitive_account.cognitive_account.name}-vault-svc"
+    name                           = "${azurerm_cognitive_account.cognitive_account.name}-account-svc"
     is_manual_connection           = false
     private_connection_resource_id = azurerm_cognitive_account.cognitive_account.id
     subresource_names              = ["account"]
