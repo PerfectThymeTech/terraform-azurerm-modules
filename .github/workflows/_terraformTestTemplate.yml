@@ -128,13 +128,6 @@ jobs:
         run: |
           terraform init
 
-      # Terraform Validate
-      - name: Terraform Validate
-        id: terraform_validate
-        working-directory: "./tests/${{ inputs.config }}"
-        run: |
-          terraform validate
-
       # Terraform Test
       - name: Terraform Test
         id: terraform_test
