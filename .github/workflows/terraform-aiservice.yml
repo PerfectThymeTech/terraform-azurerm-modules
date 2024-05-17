@@ -1,4 +1,4 @@
-name: Infrastructure Deployment
+name: aiservice tests
 on:
   push:
     branches:
@@ -20,7 +20,7 @@ on:
 
 jobs:
   terraform_dev:
-    uses: ./.github/workflows/_terraformEnvironmentTemplate.yml
+    uses: ./.github/workflows/_terraformTestTemplate.yml
     name: "Dev"
     with:
       environment: "dev"
