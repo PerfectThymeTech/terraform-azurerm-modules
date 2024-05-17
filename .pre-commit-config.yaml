@@ -1,7 +1,8 @@
 exclude: |
   (?x)^(
     modules/keyvault/README.md|
-    modules/aiservices/README.md
+    modules/aiservices/README.md|
+    modules/aisearch/README.md
   )$
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
