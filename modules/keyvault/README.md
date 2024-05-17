@@ -133,5 +133,4 @@ Description: Specifies the key vault resource vault uri.
 
 <!-- markdownlint-enable -->
 
-
 <!-- END_TF_DOCS -->

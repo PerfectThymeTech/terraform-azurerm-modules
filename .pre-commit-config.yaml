@@ -17,7 +17,7 @@ repos:
   rev: v0.17.0
   hooks:
     - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./module/keyvault"]
+      args: ["-c", "./.terraform-docs.yml", "./modules/keyvault"]
 - repo: local
   hooks:
     - id: terraform-fmt
