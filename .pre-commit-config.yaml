@@ -1,7 +1,7 @@
 exclude: |
   (?x)^(
     modules/keyvault/README.md|
-    modules/aiservices/README.md|
+    modules/aiservice/README.md|
     modules/aisearch/README.md
   )$
 repos:
@@ -21,7 +21,7 @@ repos:
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/keyvault"]
     - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/aiservices"]
+      args: ["-c", "./.terraform-docs.yml", "./modules/aiservice"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/aisearch"]
 - repo: local

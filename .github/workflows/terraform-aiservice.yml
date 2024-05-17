@@ -1,0 +1,33 @@
+name: Infrastructure Deployment
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "modules/aiservice/**"
+      - "tests/aiservide/**"
+      - ".github/workflows/terraform-aiservice.yml"
+      - ".github/workflows/_terraformTestTemplate.yml"
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "modules/aiservice/**"
+      - "tests/aiservide/**"
+      - ".github/workflows/terraform-aiservice.yml"
+      - ".github/workflows/_terraformTestTemplate.yml"
+
+jobs:
+  terraform_dev:
+    uses: ./.github/workflows/_terraformEnvironmentTemplate.yml
+    name: "Dev"
+    with:
+      environment: "dev"
+      config: "aiservice"
+      terraform_version: "1.8.2"
+      node_version: 20
+      tenant_id: "3556be79-2979-4b19-a1af-4dd4e6d9ed7e"
+      subscription_id: "8f171ff9-2b5b-4f0f-aed5-7fa360a1d094"
+    secrets:
+      CLIENT_ID: ${{ secrets.CLIENT_ID }}

@@ -1,0 +1,143 @@
+name: Terraform Template
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+        description: "Specifies the environment of the deployment."
+      config:
+        required: true
+        type: string
+        description: "Specifies the configuration folder for the deployment."
+      terraform_version:
+        required: true
+        type: string
+        description: "Specifies the terraform version."
+      node_version:
+        required: true
+        type: number
+        description: "Specifies the node version."
+      tenant_id:
+        required: true
+        type: string
+        description: "Specifies the tenant id of the deployment."
+      subscription_id:
+        required: true
+        type: string
+        description: "Specifies the subscription id of the deployment."
+    secrets:
+      CLIENT_ID:
+        required: true
+        description: "Specifies the client id."
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  lint:
+    name: Terraform Lint
+    runs-on: [ubuntu-latest]
+    continue-on-error: false
+
+    steps:
+      # Setup Terraform
+      - name: Setup Terraform
+        id: terraform_setup
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ inputs.terraform_version }}
+          terraform_wrapper: true
+
+      # Check Out Repository
+      - name: Check Out Repository
+        id: checkout_repository
+        uses: actions/checkout@v4
+
+      # Terraform Format
+      - name: Terraform Format
+        id: terraform_format
+        working-directory: "./tests/${{ inputs.config }}"
+        run: |
+          terraform fmt -check -recursive
+
+      # Add Pull Request Comment
+      - name: Add Pull Request Comment
+        uses: actions/github-script@v7
+        id: pr_comment
+        if: github.event_name == 'pull_request'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = `#### Terraform Lint Results
+            * Terraform Version 📎\`${{ inputs.terraform_version }}\`
+            * Working Directory 📂\`${{ inputs.working_directory }}\`
+            * Terraform Format and Style 🖌\`${{ steps.terraform_format.outcome }}\``;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+
+  test:
+    name: Terraform Test
+    runs-on: [self-hosted]
+    continue-on-error: false
+    environment: ${{ inputs.environment }}
+    needs: [lint]
+    concurrency:
+      group: terraform-${{ inputs.config }}-${{ inputs.environment }}
+      cancel-in-progress: false
+
+    env:
+      ARM_TENANT_ID: ${{ inputs.tenant_id }}
+      ARM_SUBSCRIPTION_ID: ${{ inputs.subscription_id }}
+      ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      ARM_USE_OIDC: true
+
+    steps:
+      # Setup Node
+      - name: Setup Node
+        id: node_setup
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node_version }}
+
+      # Setup Terraform
+      - name: Setup Terraform
+        id: terraform_setup
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ inputs.terraform_version }}
+          terraform_wrapper: true
+
+      # Check Out Repository
+      - name: Check Out Repository
+        id: checkout_repository
+        uses: actions/checkout@v4
+
+      # Terraform Init
+      - name: Terraform Init
+        id: terraform_init
+        working-directory: "./tests/${{ inputs.config }}"
+        run: |
+          terraform init
+
+      # Terraform Validate
+      - name: Terraform Validate
+        id: terraform_validate
+        working-directory: "./tests/${{ inputs.config }}"
+        run: |
+          terraform validate
+
+      # Terraform Test
+      - name: Terraform Test
+        id: terraform_test
+        working-directory: "./tests/${{ inputs.config }}"
+        run: |
+          terraform test
