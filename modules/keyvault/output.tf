@@ -1,24 +1,18 @@
-output "key_vault" {
-  description = "Specifies the key vault resource."
-  value       = azurerm_key_vault.kv
-  sensitive   = false
-}
-
 output "key_vault_id" {
   description = "Specifies the key vault resource id."
-  value       = azurerm_key_vault.kv.id
+  value       = azurerm_key_vault.key_vault.id
   sensitive   = false
 }
 
 output "key_vault_name" {
   description = "Specifies the key vault resource name."
-  value       = azurerm_key_vault.kv.name
+  value       = azurerm_key_vault.key_vault.name
   sensitive   = false
 }
 
 output "key_vault_uri" {
   description = "Specifies the key vault resource vault uri."
-  value       = azurerm_key_vault.kv.vault_uri
+  value       = azurerm_key_vault.key_vault.vault_uri
   sensitive   = false
 }
 
