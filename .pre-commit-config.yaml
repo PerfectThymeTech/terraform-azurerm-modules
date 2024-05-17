@@ -13,22 +13,16 @@ repos:
     - id: check-yaml
     - id: pretty-format-json
       args: ["--indent", "2", "--autofix", "--no-sort-keys"]
-# - repo: https://github.com/terraform-docs/terraform-docs
-#   rev: v0.17.0
-#   hooks:
-#     - id: terraform-docs-go
-#       args: ["-c", "./.terraform-docs.yml", "./module/keyvault"]
+- repo: https://github.com/terraform-docs/terraform-docs
+  rev: v0.17.0
+  hooks:
+    - id: terraform-docs-go
+      args: ["-c", "./.terraform-docs.yml", "./module/keyvault"]
 - repo: local
   hooks:
     - id: terraform-fmt
       name: terraform fmt
       description: runs terraform fmt
       entry: terraform fmt -recursive
-      language: system
-      pass_filenames: false
-    - id: terraform-docs
-      name: terraform-docs
-      description: runs terraform-docs
-      entry: terraform-docs -c "./.terraform-docs.yml" "./modules/keyvault"
       language: system
       pass_filenames: false
