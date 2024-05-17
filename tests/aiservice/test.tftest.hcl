@@ -1,5 +1,5 @@
 run "create_ai_service" {
-  command = "apply"
+  command = apply
 
   module {
     source = "../../modules/aiservice"
@@ -24,7 +24,7 @@ run "create_ai_service" {
   }
 
   assert {
-    condition     = true
+    condition     = azurerm_cognitive_account.cognitive_account.resource_group_name == "tfmdltst-dev-rg"
     error_message = "Failed to deploy."
   }
 }
