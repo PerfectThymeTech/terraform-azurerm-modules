@@ -5,13 +5,6 @@ variable "location" {
   sensitive   = false
 }
 
-variable "tags" {
-  description = "Specifies a key value map of tags to set on every taggable resources."
-  type        = map(string)
-  sensitive   = false
-  default     = {}
-}
-
 variable "resource_group_name" {
   description = "Specifies the resource group name in which all resources will get deployed."
   type        = string
@@ -20,6 +13,13 @@ variable "resource_group_name" {
     condition     = length(var.resource_group_name) >= 2
     error_message = "Please specify a valid resource group name."
   }
+}
+
+variable "tags" {
+  description = "Specifies a key value map of tags to set on every taggable resources."
+  type        = map(string)
+  sensitive   = false
+  default     = {}
 }
 
 # Key Vault variables

@@ -111,10 +111,6 @@ Default: `{}`
 
 The following outputs are exported:
 
-### <a name="output_key_vault"></a> [key\_vault](#output\_key\_vault)
-
-Description: Specifies the key vault resource.
-
 ### <a name="output_key_vault_id"></a> [key\_vault\_id](#output\_key\_vault\_id)
 
 Description: Specifies the key vault resource id.

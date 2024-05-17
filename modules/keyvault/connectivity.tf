@@ -1,14 +1,14 @@
-resource "azurerm_private_endpoint" "vault" {
-  name                = "${azurerm_key_vault.kv.name}-vault-endpoint"
-  location            = azurerm_key_vault.kv.location
-  resource_group_name = azurerm_key_vault.kv.resource_group_name
+resource "azurerm_private_endpoint" "private_endpoint_cognitive_account_vault" {
+  name                = "${azurerm_key_vault.key_vault.name}-vault-pe"
+  location            = azurerm_key_vault.key_vault.location
+  resource_group_name = azurerm_key_vault.key_vault.resource_group_name
   tags                = var.tags
 
-  custom_network_interface_name = "${azurerm_key_vault.kv.name}-vault-nic"
+  custom_network_interface_name = "${azurerm_key_vault.key_vault.name}-vault-nic"
   private_service_connection {
-    name                           = "${azurerm_key_vault.kv.name}-vault-svc"
+    name                           = "${azurerm_key_vault.key_vault.name}-vault-svc"
     is_manual_connection           = false
-    private_connection_resource_id = azurerm_key_vault.kv.id
+    private_connection_resource_id = azurerm_key_vault.key_vault.id
     subresource_names              = ["vault"]
   }
   subnet_id = var.subnet_id
@@ -33,6 +33,6 @@ resource "time_sleep" "sleep_connectivity" {
   create_duration = "${var.connectivity_delay_in_seconds}s"
 
   depends_on = [
-    azurerm_private_endpoint.vault
+    azurerm_private_endpoint.private_endpoint_cognitive_account_vault
   ]
 }
