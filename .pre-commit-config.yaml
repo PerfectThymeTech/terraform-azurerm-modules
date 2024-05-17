@@ -1,7 +1,8 @@
 exclude: |
   (?x)^(
     modules/keyvault/README.md|
-    modules/aiservices/README.md
+    modules/aiservices/README.md|
+    modules/aisearch/README.md
   )$
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -21,6 +22,8 @@ repos:
       args: ["-c", "./.terraform-docs.yml", "./modules/keyvault"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/aiservices"]
+    - id: terraform-docs-go
+      args: ["-c", "./.terraform-docs.yml", "./modules/aisearch"]
 - repo: local
   hooks:
     - id: terraform-fmt
