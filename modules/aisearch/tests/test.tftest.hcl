@@ -10,7 +10,7 @@ run "create_ai_search" {
     search_service_name                        = "mytftst-001"
     search_service_sku                         = "basic"
     search_service_semantic_search_sku         = "standard"
-    search_service_authentication_failure_mode = "http401WithBearerChallenge"
+    search_service_authentication_failure_mode = null
     search_service_hosting_mode                = "default"
     search_service_partition_count             = 1
     search_service_replica_count               = 1

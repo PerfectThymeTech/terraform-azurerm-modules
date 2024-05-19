@@ -106,7 +106,7 @@ Description: Specifies the authentication failure mode for the search service
 
 Type: `string`
 
-Default: `"http401WithBearerChallenge"`
+Default: `null`
 
 ### <a name="input_search_service_hosting_mode"></a> [search\_service\_hosting\_mode](#input\_search\_service\_hosting\_mode)
 
