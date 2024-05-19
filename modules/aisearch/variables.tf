@@ -76,7 +76,7 @@ variable "search_service_authentication_failure_mode" {
   nullable    = true
   default     = null
   validation {
-    condition     = var.search_service_authentication_failure_mode == null || contains(["http401WithBearerChallenge", "http403"], var.search_service_authentication_failure_mode)
+    condition     = var.search_service_authentication_failure_mode == null ? true : contains(["http401WithBearerChallenge", "http403"], var.search_service_authentication_failure_mode)
     error_message = "Please specify a valid authentication failure mode."
   }
 }

@@ -11,7 +11,7 @@ resource "azurerm_search_service" "search_service" {
   authentication_failure_mode              = var.search_service_authentication_failure_mode
   customer_managed_key_enforcement_enabled = false
   hosting_mode                             = var.search_service_hosting_mode
-  local_authentication_enabled             = false
+  local_authentication_enabled             = var.search_service_local_authentication_enabled
   partition_count                          = var.search_service_partition_count
   public_network_access_enabled            = false
   replica_count                            = var.search_service_replica_count
