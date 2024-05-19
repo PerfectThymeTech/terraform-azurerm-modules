@@ -61,6 +61,14 @@ variable "search_service_semantic_search_sku" {
   }
 }
 
+variable "search_service_local_authentication_enabled" {
+  description = "Specifies whether local auth should be enabled for the search service"
+  type        = bool
+  sensitive   = false
+  nullable    = false
+  default     = false
+}
+
 variable "search_service_authentication_failure_mode" {
   description = "Specifies the authentication failure mode for the search service"
   type        = string
@@ -68,7 +76,7 @@ variable "search_service_authentication_failure_mode" {
   nullable    = true
   default     = null
   validation {
-    condition     = contains([null, "http401WithBearerChallenge", "http403"], var.search_service_authentication_failure_mode)
+    condition     = var.search_service_authentication_failure_mode == null || contains(["http401WithBearerChallenge", "http403"], var.search_service_authentication_failure_mode)
     error_message = "Please specify a valid authentication failure mode."
   }
 }

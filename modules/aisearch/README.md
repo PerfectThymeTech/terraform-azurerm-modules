@@ -116,6 +116,14 @@ Type: `string`
 
 Default: `"default"`
 
+### <a name="input_search_service_local_authentication_enabled"></a> [search\_service\_local\_authentication\_enabled](#input\_search\_service\_local\_authentication\_enabled)
+
+Description: Specifies whether local auth should be enabled for the search service
+
+Type: `bool`
+
+Default: `false`
+
 ### <a name="input_search_service_partition_count"></a> [search\_service\_partition\_count](#input\_search\_service\_partition\_count)
 
 Description: Specifies the number of partitions in the search service.
