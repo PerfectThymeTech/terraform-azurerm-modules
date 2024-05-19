@@ -60,7 +60,7 @@ jobs:
       # Terraform Format
       - name: Terraform Format
         id: terraform_format
-        working-directory: "./tests/${{ inputs.config }}"
+        working-directory: "./modules/${{ inputs.config }}"
         run: |
           terraform fmt -check -recursive
 
@@ -74,7 +74,7 @@ jobs:
           script: |
             const output = `#### Terraform Lint Results
             * Terraform Version 📎\`${{ inputs.terraform_version }}\`
-            * Working Directory 📂\`${{ inputs.working_directory }}\`
+            * Working Directory 📂\`./modules/${{ inputs.config }}\`
             * Terraform Format and Style 🖌\`${{ steps.terraform_format.outcome }}\``;
 
             github.rest.issues.createComment({
@@ -124,13 +124,13 @@ jobs:
       # Terraform Init
       - name: Terraform Init
         id: terraform_init
-        working-directory: "./tests/${{ inputs.config }}"
+        working-directory: "./modules/${{ inputs.config }}/tests"
         run: |
           terraform init
 
       # Terraform Test
       - name: Terraform Test
         id: terraform_test
-        working-directory: "./tests/${{ inputs.config }}"
+        working-directory: "./modules/${{ inputs.config }}/tests"
         run: |
           terraform test
