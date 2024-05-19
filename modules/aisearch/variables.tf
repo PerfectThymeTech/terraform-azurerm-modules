@@ -130,8 +130,8 @@ variable "subnet_id" {
   type        = string
   sensitive   = false
   validation {
-    condition     = length(var.subnet_id) == 11
-    error_message = "Please specify a valid resource group name."
+    condition     = length(split("/", var.subnet_id)) == 11
+    error_message = "Please specify a valid subnet id."
   }
 }
 
