@@ -91,7 +91,7 @@ variable "search_service_partition_count" {
   sensitive   = false
   default     = 1
   validation {
-    condition     = contains([1, 2, 3, 4, 6, 12], var.search_service_sku)
+    condition     = contains([1, 2, 3, 4, 6, 12], var.search_service_partition_count)
     error_message = "Please specify a valid partition count."
   }
 }
