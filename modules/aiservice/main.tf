@@ -46,7 +46,7 @@ resource "azurerm_cognitive_deployment" "cognitive_deployments" {
   for_each = var.cognitive_account_deployments
 
   name                 = each.value.model_name
-  cognitive_account_id = azurerm_cognitive_account.cognitive_service.id
+  cognitive_account_id = azurerm_cognitive_account.cognitive_account.id
 
   model {
     format  = "OpenAI"
