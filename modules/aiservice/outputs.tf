@@ -9,8 +9,8 @@ output "cognitive_account_endpoint" {
 }
 
 output "cognitive_account_setup_completed" {
-  value       = true
   description = "Specifies whether the connectivity and identity has been successfully configured."
+  value       = true
   sensitive   = false
 
   depends_on = [
