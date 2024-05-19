@@ -3,14 +3,14 @@ variable "location" {
   description = "Specifies the location of all resources."
   type        = string
   sensitive   = false
-  nullable = false
+  nullable    = false
 }
 
 variable "resource_group_name" {
   description = "Specifies the resource group name in which all resources will get deployed."
   type        = string
   sensitive   = false
-  nullable = false
+  nullable    = false
   validation {
     condition     = length(var.resource_group_name) >= 2
     error_message = "Please specify a valid resource group name."
@@ -22,7 +22,7 @@ variable "tags" {
   type        = map(string)
   sensitive   = false
   default     = {}
-  nullable = false
+  nullable    = false
 }
 
 # Key Vault variables
@@ -30,7 +30,7 @@ variable "storage_account_name" {
   description = "Specifies the name of the storage account."
   type        = string
   sensitive   = false
-  nullable = false
+  nullable    = false
   validation {
     condition     = length(var.storage_account_name) >= 2
     error_message = "Please specify a valid name."
@@ -203,8 +203,8 @@ variable "storage_shared_access_key_enabled" {
   default     = false
 }
 
-variable "storage_containers" {
-  description = "Specifies the storage containers to create within the storage account."
+variable "storage_container_names" {
+  description = "Specifies the storage container names to create within the storage account."
   type        = list(string)
   sensitive   = false
   nullable    = false
