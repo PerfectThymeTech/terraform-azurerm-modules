@@ -54,21 +54,29 @@ variable "search_service_semantic_search_sku" {
   type        = string
   sensitive   = false
   nullable    = true
-  default     = "basic"
+  default     = "standard"
   validation {
-    condition     = contains(["basic", "standard"], var.search_service_semantic_search_sku)
+    condition     = contains(["free", "standard"], var.search_service_semantic_search_sku)
     error_message = "Please specify a valid semantic search sku."
   }
+}
+
+variable "search_service_local_authentication_enabled" {
+  description = "Specifies whether local auth should be enabled for the search service"
+  type        = bool
+  sensitive   = false
+  nullable    = false
+  default     = false
 }
 
 variable "search_service_authentication_failure_mode" {
   description = "Specifies the authentication failure mode for the search service"
   type        = string
   sensitive   = false
-  nullable    = false
-  default     = "http401WithBearerChallenge"
+  nullable    = true
+  default     = null
   validation {
-    condition     = contains(["http401WithBearerChallenge", "http403"], var.search_service_authentication_failure_mode)
+    condition     = var.search_service_authentication_failure_mode == null ? true : contains(["http401WithBearerChallenge", "http403"], var.search_service_authentication_failure_mode)
     error_message = "Please specify a valid authentication failure mode."
   }
 }
@@ -91,7 +99,7 @@ variable "search_service_partition_count" {
   sensitive   = false
   default     = 1
   validation {
-    condition     = contains([1, 2, 3, 4, 6, 12], var.search_service_sku)
+    condition     = contains([1, 2, 3, 4, 6, 12], var.search_service_partition_count)
     error_message = "Please specify a valid partition count."
   }
 }

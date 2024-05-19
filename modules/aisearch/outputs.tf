@@ -1,16 +1,16 @@
-output "cognitive_account_id" {
-  description = "The ID of the cognitive service account."
-  value       = azurerm_cognitive_account.cognitive_account.id
+output "search_service_id" {
+  description = "The id of the ai search service."
+  value       = azurerm_search_service.search_service.id
 }
 
-output "cognitive_account_endpoint" {
-  description = "The base URL of the cognitive service account."
-  value       = azurerm_cognitive_account.cognitive_account.endpoint
+output "search_service_name" {
+  description = "The name of the ai search service."
+  value       = azurerm_search_service.search_service.name
 }
 
-output "cognitive_account_setup_completed" {
-  value       = true
+output "search_service_setup_completed" {
   description = "Specifies whether the connectivity and identity has been successfully configured."
+  value       = true
   sensitive   = false
 
   depends_on = [

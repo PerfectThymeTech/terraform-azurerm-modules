@@ -91,7 +91,7 @@ jobs:
     environment: ${{ inputs.environment }}
     needs: [lint]
     concurrency:
-      group: terraform-${{ inputs.config }}-${{ inputs.environment }}
+      group: terraform-test-${{ inputs.config }}-${{ inputs.environment }}
       cancel-in-progress: false
 
     env:
