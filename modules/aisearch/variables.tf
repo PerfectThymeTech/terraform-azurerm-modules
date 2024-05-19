@@ -54,9 +54,9 @@ variable "search_service_semantic_search_sku" {
   type        = string
   sensitive   = false
   nullable    = true
-  default     = "basic"
+  default     = "standard"
   validation {
-    condition     = contains(["basic", "standard"], var.search_service_semantic_search_sku)
+    condition     = contains(["free", "standard"], var.search_service_semantic_search_sku)
     error_message = "Please specify a valid semantic search sku."
   }
 }

@@ -138,7 +138,7 @@ Description: Specifies the semantic search SKU for the search service
 
 Type: `string`
 
-Default: `"basic"`
+Default: `"standard"`
 
 ### <a name="input_search_service_sku"></a> [search\_service\_sku](#input\_search\_service\_sku)
 
@@ -160,15 +160,15 @@ Default: `{}`
 
 The following outputs are exported:
 
-### <a name="output_cognitive_account_endpoint"></a> [cognitive\_account\_endpoint](#output\_cognitive\_account\_endpoint)
+### <a name="output_search_service_id"></a> [search\_service\_id](#output\_search\_service\_id)
 
-Description: The base URL of the cognitive service account.
+Description: The id of the ai search service.
 
-### <a name="output_cognitive_account_id"></a> [cognitive\_account\_id](#output\_cognitive\_account\_id)
+### <a name="output_search_service_name"></a> [search\_service\_name](#output\_search\_service\_name)
 
-Description: The ID of the cognitive service account.
+Description: The name of the ai search service.
 
-### <a name="output_cognitive_account_setup_completed"></a> [cognitive\_account\_setup\_completed](#output\_cognitive\_account\_setup\_completed)
+### <a name="output_search_service_setup_completed"></a> [search\_service\_setup\_completed](#output\_search\_service\_setup\_completed)
 
 Description: Specifies whether the connectivity and identity has been successfully configured.
 

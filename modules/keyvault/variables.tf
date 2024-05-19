@@ -102,7 +102,7 @@ variable "private_dns_zone_id_vault" {
   nullable    = false
   default     = ""
   validation {
-    condition     = var.private_dns_zone_id_key_vault == "" || (length(split("/", var.private_dns_zone_id_key_vault)) == 9 && endswith(var.private_dns_zone_id_key_vault, "privatelink.vaultcore.azure.net"))
+    condition     = var.private_dns_zone_id_vault == "" || (length(split("/", var.private_dns_zone_id_vault)) == 9 && endswith(var.private_dns_zone_id_vault, "privatelink.vaultcore.azure.net"))
     error_message = "Please specify a valid resource ID for the private DNS Zone."
   }
 }
