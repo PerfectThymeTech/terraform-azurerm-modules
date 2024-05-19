@@ -5,7 +5,6 @@ on:
       - main
     paths:
       - "modules/aiservice/**"
-      - "tests/aiservide/**"
       - ".github/workflows/terraform-aiservice.yml"
       - ".github/workflows/_terraformTestTemplate.yml"
 
@@ -14,7 +13,6 @@ on:
       - main
     paths:
       - "modules/aiservice/**"
-      - "tests/aiservide/**"
       - ".github/workflows/terraform-aiservice.yml"
       - ".github/workflows/_terraformTestTemplate.yml"
 

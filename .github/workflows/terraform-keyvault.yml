@@ -1,19 +1,19 @@
-name: aisearch tests
+name: keyvault tests
 on:
   push:
     branches:
       - main
     paths:
-      - "modules/aisearch/**"
-      - ".github/workflows/terraform-aisearch.yml"
+      - "modules/keyvault/**"
+      - ".github/workflows/terraform-keyvault.yml"
       - ".github/workflows/_terraformTestTemplate.yml"
 
   pull_request:
     branches:
       - main
     paths:
-      - "modules/aisearch/**"
-      - ".github/workflows/terraform-aisearch.yml"
+      - "modules/keyvault/**"
+      - ".github/workflows/terraform-keyvault.yml"
       - ".github/workflows/_terraformTestTemplate.yml"
 
 jobs:
@@ -22,7 +22,7 @@ jobs:
     name: "Dev"
     with:
       environment: "dev"
-      config: "aisearch"
+      config: "keyvault"
       terraform_version: "1.8.2"
       node_version: 20
       tenant_id: "3556be79-2979-4b19-a1af-4dd4e6d9ed7e"
