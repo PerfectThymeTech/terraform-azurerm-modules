@@ -1,10 +1,6 @@
 run "create_ai_service" {
   command = apply
 
-  module {
-    source = "../../modules/aiservice"
-  }
-
   variables {
     location            = "northeurope"
     resource_group_name = "tfmdltst-dev-rg"
@@ -16,7 +12,7 @@ run "create_ai_service" {
     cognitive_account_sku                                = "S0"
     cognitive_account_outbound_network_access_restricted = true
     cognitive_account_deployments                        = {}
-    diagnostics_configurations                           = {}
+    diagnostics_configurations                           = []
     subnet_id                                            = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/tfmdltst-dev-rg/providers/Microsoft.Network/virtualNetworks/tfmdltst-dev-vnet/subnets/PrivateEndpoints"
     connectivity_delay_in_seconds                        = 0
     private_dns_zone_id_cognitive_account                = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/mycrp-prd-global-dns/providers/Microsoft.Network/privateDnsZones/privatelink.cognitiveservices.azure.com"
