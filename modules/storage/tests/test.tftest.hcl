@@ -41,7 +41,7 @@ run "create_storage" {
   }
 
   assert {
-    condition     = azurerm_storage_account.cognitive_account.resource_group_name == "tfmdltst-dev-rg"
+    condition     = azurerm_storage_account.storage_account.resource_group_name == "tfmdltst-dev-rg"
     error_message = "Failed to deploy."
   }
 }
