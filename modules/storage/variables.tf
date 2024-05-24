@@ -32,7 +32,7 @@ variable "storage_account_name" {
   sensitive   = false
   nullable    = false
   validation {
-    condition     = length(var.storage_account_name) >= 2
+    condition     = length(var.storage_account_name) >= 2 && length(regexall("[^[:alnum:]]", var.storage_account_name)) <= 0
     error_message = "Please specify a valid name."
   }
 }
@@ -152,15 +152,21 @@ variable "storage_is_hns_enabled" {
   type        = bool
   sensitive   = false
   nullable    = false
-  default     = true
+  default     = false
 }
 
 variable "storage_network_bypass" {
-  description = "Specifies bypass options for the storage account network rules. List can include \"None\", \"AzureServices\", \"Merics\" and \"Logs\""
+  description = "Specifies bypass options for the storage account network rules. List can include \"None\", \"AzureServices\", \"Metrics\" and \"Logs\""
   type        = set(string)
   sensitive   = false
   nullable    = false
   default     = ["None"]
+  validation {
+    condition = alltrue([
+      length([for value in toset(var.storage_network_bypass) : value if !contains(["None", "AzureServices", "Metrics", "Logs"], value)]) <= 0
+    ])
+    error_message = "Please provide a valid list. Valid values: \"None\", \"AzureServices\", \"Metrics\" and \"Logs\"."
+  }
 }
 
 variable "storage_network_private_link_access" {
@@ -169,6 +175,12 @@ variable "storage_network_private_link_access" {
   sensitive   = false
   nullable    = false
   default     = []
+  validation {
+    condition = alltrue([
+      length([for value in toset(var.storage_network_private_link_access) : value if length(split("/", value))]) < 8
+    ])
+    error_message = "Please provide a valid resource id that has the following format: \"/subscriptions/.../resourceGroups/.../providers/.../.../...\"."
+  }
 }
 
 variable "storage_public_network_access_enabled" {

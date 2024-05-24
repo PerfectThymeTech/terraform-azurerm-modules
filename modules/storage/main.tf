@@ -1,4 +1,4 @@
-resource "azurerm_storage_account" "asa" {
+resource "azurerm_storage_account" "storage_account" {
   name                = var.storage_account_name
   location            = var.location
   resource_group_name = var.resource_group_name
@@ -93,7 +93,7 @@ resource "azurerm_storage_account" "asa" {
 resource "azurerm_storage_container" "storage_container" {
   for_each = toset(var.storage_container_names)
 
-  storage_account_name  = azurerm_storage_account.asa.name
+  storage_account_name  = azurerm_storage_account.storage_account.name
   name                  = each.key
   container_access_type = "private"
 
@@ -106,7 +106,7 @@ resource "azurerm_storage_container" "storage_container" {
 resource "azurerm_storage_account_customer_managed_key" "storage_account_customer_managed_key" {
   count = var.customer_managed_key != null ? 1 : 0
 
-  storage_account_id        = azurerm_storage_account.asa.id
+  storage_account_id        = azurerm_storage_account.storage_account.id
   key_vault_id              = var.customer_managed_key.key_vault_id
   key_name                  = reverse(split("/", var.customer_managed_key.key_vault_key_versionless_id))[0]
   user_assigned_identity_id = var.customer_managed_key.user_assigned_identity_id

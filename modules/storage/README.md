@@ -258,11 +258,11 @@ Description: Specifies whetehr hierarchical namespace (Data Lake) should be enab
 
 Type: `bool`
 
-Default: `true`
+Default: `false`
 
 ### <a name="input_storage_network_bypass"></a> [storage\_network\_bypass](#input\_storage\_network\_bypass)
 
-Description: Specifies bypass options for the storage account network rules. List can include "None", "AzureServices", "Merics" and "Logs"
+Description: Specifies bypass options for the storage account network rules. List can include "None", "AzureServices", "Metrics" and "Logs"
 
 Type: `set(string)`
 
