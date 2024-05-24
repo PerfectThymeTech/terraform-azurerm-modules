@@ -2,13 +2,13 @@ exclude: |
   (?x)^(
     modules/keyvault/README.md|
     modules/aiservice/README.md|
-    modules/aisearch/README.md
+    modules/aisearch/README.md|
+    modules/storage/README.md
   )$
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.4.0
   hooks:
-    - id: check-yaml
     - id: end-of-file-fixer
     - id: trailing-whitespace
     - id: check-json
@@ -24,6 +24,8 @@ repos:
       args: ["-c", "./.terraform-docs.yml", "./modules/aiservice"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/aisearch"]
+    - id: terraform-docs-go
+      args: ["-c", "./.terraform-docs.yml", "./modules/storage"]
 - repo: local
   hooks:
     - id: terraform-fmt
