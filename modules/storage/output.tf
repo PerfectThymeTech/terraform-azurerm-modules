@@ -47,6 +47,6 @@ output "storage_setup_completed" {
 
   depends_on = [
     azurerm_role_assignment.current_roleassignment_storage_blob_data_owner,
-    time_sleep.sleep,
+    time_sleep.sleep_connectivity,
   ]
 }
