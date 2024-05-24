@@ -25,7 +25,7 @@ variable "tags" {
   nullable    = false
 }
 
-# Key Vault variables
+# Storage variables
 variable "storage_account_name" {
   description = "Specifies the name of the storage account."
   type        = string

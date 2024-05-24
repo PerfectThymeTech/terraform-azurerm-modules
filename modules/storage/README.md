@@ -1,5 +1,5 @@
 <!-- BEGIN_TF_DOCS -->
-# Azure Key Vault Terraform Module
+# Azure Storage Terraform Module
 
 ## Documentation
 <!-- markdownlint-disable MD033 -->
