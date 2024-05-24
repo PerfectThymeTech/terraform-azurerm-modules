@@ -5,7 +5,7 @@ run "create_key_vault" {
     location            = "northeurope"
     resource_group_name = "tfmdltst-dev-rg"
     tags = {
-      test = "aiservice"
+      test = "keyvault"
     }
     key_vault_name                       = "mytftst-001"
     key_vault_sku_name                   = "standard"
