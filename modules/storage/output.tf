@@ -46,7 +46,7 @@ output "storage_setup_completed" {
   sensitive   = false
 
   depends_on = [
-    azurerm_role_assignment.current_roleassignment_storage,
+    azurerm_role_assignment.current_roleassignment_storage_blob_data_owner,
     time_sleep.sleep,
   ]
 }
