@@ -25,7 +25,7 @@ run "create_storage" {
     storage_nfsv3_enabled                           = false
     storage_sftp_enabled                            = false
     storage_shared_access_key_enabled               = false
-    storage_container_names                         = ["test"]
+    storage_container_names                         = []
     storage_static_website                          = []
     diagnostics_configurations                      = []
     subnet_id                                       = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/tfmdltst-dev-rg/providers/Microsoft.Network/virtualNetworks/tfmdltst-dev-vnet/subnets/PrivateEndpoints"
