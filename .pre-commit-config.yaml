@@ -3,6 +3,7 @@ exclude: |
     modules/keyvault/README.md|
     modules/aiservice/README.md|
     modules/aisearch/README.md|
+    modules/applicationinsights/README.md|
     modules/storage/README.md
   )$
 repos:
@@ -24,6 +25,8 @@ repos:
       args: ["-c", "./.terraform-docs.yml", "./modules/aiservice"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/aisearch"]
+    - id: terraform-docs-go
+      args: ["-c", "./.terraform-docs.yml", "./modules/applicationinsights"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/storage"]
 - repo: local
