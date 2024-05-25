@@ -7,3 +7,4 @@ This module contains secure by default Terraform modules for Azure Services. Fol
 - [Azure Key Vault](/modules/keyvault/)
 - [Azure Application Insights](/modules/applicationinsights/)
 - [Azure Storage Account](/modules/storage/)
+- [Azure Container Registry](/modules/containerregistry/)

@@ -4,7 +4,8 @@ exclude: |
     modules/aiservice/README.md|
     modules/aisearch/README.md|
     modules/applicationinsights/README.md|
-    modules/storage/README.md
+    modules/storage/README.md|
+    modules/containerregistry/README.md
   )$
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -29,6 +30,8 @@ repos:
       args: ["-c", "./.terraform-docs.yml", "./modules/applicationinsights"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/storage"]
+    - id: terraform-docs-go
+      args: ["-c", "./.terraform-docs.yml", "./modules/containerregistry"]
 - repo: local
   hooks:
     - id: terraform-fmt
