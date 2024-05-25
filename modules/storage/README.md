@@ -343,31 +343,35 @@ The following outputs are exported:
 
 ### <a name="output_storage_account_id"></a> [storage\_account\_id](#output\_storage\_account\_id)
 
-Description: Resource of the storage account
+Description: Specifies the resource id of the storage account.
 
 ### <a name="output_storage_account_name"></a> [storage\_account\_name](#output\_storage\_account\_name)
 
-Description: Name
+Description: Specifies the resource name of the storage account.
 
 ### <a name="output_storage_account_primary_blob_endpoint"></a> [storage\_account\_primary\_blob\_endpoint](#output\_storage\_account\_primary\_blob\_endpoint)
 
-Description: Primary blob endpoint
+Description: Specifies the primary blob endpoint of the storage account.
+
+### <a name="output_storage_account_primary_dfs_endpoint"></a> [storage\_account\_primary\_dfs\_endpoint](#output\_storage\_account\_primary\_dfs\_endpoint)
+
+Description: Specifies the primary dfs endpoint of the storage account.
 
 ### <a name="output_storage_account_primary_file_endpoint"></a> [storage\_account\_primary\_file\_endpoint](#output\_storage\_account\_primary\_file\_endpoint)
 
-Description: Primary file endpoint
+Description: Specifies the primary file endpoint of the storage account.
 
 ### <a name="output_storage_account_primary_queue_endpoint"></a> [storage\_account\_primary\_queue\_endpoint](#output\_storage\_account\_primary\_queue\_endpoint)
 
-Description: Primary queue endpoint
+Description: Specifies the primary queue endpoint of the storage account.
 
 ### <a name="output_storage_account_primary_table_endpoint"></a> [storage\_account\_primary\_table\_endpoint](#output\_storage\_account\_primary\_table\_endpoint)
 
-Description: Primary table endpoint
+Description: Specifies the primary table endpoint of the storage account.
 
 ### <a name="output_storage_account_primary_web_endpoint"></a> [storage\_account\_primary\_web\_endpoint](#output\_storage\_account\_primary\_web\_endpoint)
 
-Description: Primary web endpoint
+Description: Specifies the primary web endpoint of the storage account.
 
 ### <a name="output_storage_setup_completed"></a> [storage\_setup\_completed](#output\_storage\_setup\_completed)
 
