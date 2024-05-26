@@ -32,6 +32,8 @@ repos:
       args: ["-c", "./.terraform-docs.yml", "./modules/storage"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/containerregistry"]
+    - id: terraform-docs-go
+      args: ["-c", "./.terraform-docs.yml", "./modules/loganalytics"]
 - repo: local
   hooks:
     - id: terraform-fmt

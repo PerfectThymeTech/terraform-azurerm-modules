@@ -8,3 +8,4 @@ This module contains secure by default Terraform modules for Azure Services. Fol
 - [Azure Application Insights](/modules/applicationinsights/)
 - [Azure Storage Account](/modules/storage/)
 - [Azure Container Registry](/modules/containerregistry/)
+- [Azure Log Analytics Workspace](/modules/loganalytics/)
