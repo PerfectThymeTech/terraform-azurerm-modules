@@ -8,7 +8,7 @@ run "create_loganalytics" {
       test = "loganalytics"
     }
     log_analytics_workspace_name              = "mytftst-001"
-    log_analytics_workspace_retention_in_days = 7
+    log_analytics_workspace_retention_in_days = 30
     diagnostics_configurations                = []
   }
 

@@ -37,8 +37,9 @@ variable "log_analytics_workspace_retention_in_days" {
   description = "Specifies the retention in days for the log analytics workspace."
   type        = number
   sensitive   = false
+  default     = 30
   validation {
-    condition     = var.log_analytics_workspace_retention_in_days > 0
+    condition     = var.log_analytics_workspace_retention_in_days >= 30 && var.log_analytics_workspace_retention_in_days <= 730
     error_message = "Please specify a valid number of days."
   }
 }
