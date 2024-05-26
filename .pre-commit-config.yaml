@@ -1,11 +1,12 @@
 exclude: |
   (?x)^(
-    modules/keyvault/README.md|
-    modules/aiservice/README.md|
     modules/aisearch/README.md|
+    modules/aiservice/README.md|
     modules/applicationinsights/README.md|
-    modules/storage/README.md|
-    modules/containerregistry/README.md
+    modules/containerregistry/README.md|
+    modules/keyvault/README.md|
+    modules/loganalytics/README.md|
+    modules/storage/README.md
   )$
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -21,19 +22,19 @@ repos:
   rev: v0.17.0
   hooks:
     - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/keyvault"]
+      args: ["-c", "./.terraform-docs.yml", "./modules/aisearch"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/aiservice"]
     - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/aisearch"]
-    - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/applicationinsights"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/storage"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/containerregistry"]
     - id: terraform-docs-go
+      args: ["-c", "./.terraform-docs.yml", "./modules/keyvault"]
+    - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/loganalytics"]
+    - id: terraform-docs-go
+      args: ["-c", "./.terraform-docs.yml", "./modules/storage"]
 - repo: local
   hooks:
     - id: terraform-fmt
