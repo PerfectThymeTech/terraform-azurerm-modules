@@ -1,5 +1,5 @@
 <!-- BEGIN_TF_DOCS -->
-# Azure Log Analytics Terraform Module
+# Azure AI Studio Hub Terraform Module
 
 ## Documentation
 <!-- markdownlint-disable MD033 -->

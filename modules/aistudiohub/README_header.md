@@ -1,1 +1,1 @@
-# Azure Log Analytics Terraform Module
+# Azure AI Studio Hub Terraform Module
