@@ -12,7 +12,7 @@ resource "azurerm_monitor_diagnostic_setting" "diagnostic_setting_log_analytics_
 
   dynamic "enabled_log" {
     iterator = entry
-    for_each = data.azurerm_monitor_diagnostic_categories.diagnostic_categories_application_insights.log_category_groups
+    for_each = data.azurerm_monitor_diagnostic_categories.diagnostic_categories_log_analytics_workspace.log_category_groups
     content {
       category_group = entry.value
     }
@@ -20,7 +20,7 @@ resource "azurerm_monitor_diagnostic_setting" "diagnostic_setting_log_analytics_
 
   dynamic "metric" {
     iterator = entry
-    for_each = data.azurerm_monitor_diagnostic_categories.diagnostic_categories_application_insights.metrics
+    for_each = data.azurerm_monitor_diagnostic_categories.diagnostic_categories_log_analytics_workspace.metrics
     content {
       category = entry.value
       enabled  = true
