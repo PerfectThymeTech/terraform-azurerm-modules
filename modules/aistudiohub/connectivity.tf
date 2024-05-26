@@ -1,7 +1,7 @@
 resource "azurerm_private_endpoint" "private_endpoint_ai_studio_hub" {
   name                = "${azapi_resource.ai_studio_hub.name}-amlworkspace-pe"
   location            = var.location
-  resource_group_name = azapi_resource.ai_studio_hub.resource_group_name
+  resource_group_name = azapi_resource.ai_studio_hub.parent_id
   tags                = var.tags
 
   custom_network_interface_name = "${azapi_resource.ai_studio_hub.name}-nic"
@@ -34,6 +34,6 @@ resource "time_sleep" "sleep_connectivity" {
   create_duration = "${var.connectivity_delay_in_seconds}s"
 
   depends_on = [
-    azurerm_private_endpoint.private_endpoint_cognitive_account
+    azurerm_private_endpoint.private_endpoint_ai_studio_hub
   ]
 }

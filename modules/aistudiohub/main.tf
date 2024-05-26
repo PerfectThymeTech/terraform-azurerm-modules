@@ -74,7 +74,6 @@ resource "azapi_resource" "ai_studio_hub" {
   response_export_values    = ["*"]
   schema_validation_enabled = true
   locks                     = []
-  ignore_body_changes       = []
   ignore_casing             = false
   ignore_missing_property   = false
 }
