@@ -46,6 +46,10 @@ variable "application_insights_log_analytics_workspace_id" {
   type        = string
   sensitive   = false
   nullable    = false
+  validation {
+    condition     = length(split("/", var.application_insights_log_analytics_workspace_id)) == 8
+    error_message = "Please specify a valid resource id."
+  }
 }
 
 # Diagnostics variables
