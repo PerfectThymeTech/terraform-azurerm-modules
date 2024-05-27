@@ -106,7 +106,7 @@ run "create_aistudio" {
   }
 
   assert {
-    condition     = azapi_resource.ai_studio_hub.resource_group_name == "tfmdltst-dev-rg"
+    condition     = azapi_resource.ai_studio_hub.name == "mytftst-001"
     error_message = "Failed to deploy."
   }
 }
