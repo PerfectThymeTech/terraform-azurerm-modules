@@ -7,12 +7,12 @@ run "create_userassignedidentity" {
     tags = {
       test = "userassignedidentity"
     }
-    user_assigned_identity_name                       = "mytftst-001"
-    user_assigned_identity_federated_identity_credentials                   = {
+    user_assigned_identity_name = "mytftst-001"
+    user_assigned_identity_federated_identity_credentials = {
       example = {
         audience = "foo"
-        issuer = "https://foo"
-        subject = "foo"
+        issuer   = "https://foo"
+        subject  = "foo"
       }
     }
   }
