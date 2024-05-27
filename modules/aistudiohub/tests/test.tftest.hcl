@@ -1,6 +1,6 @@
 run "setup" {
   module {
-    source = "./modules/aistudiohub/tests/setup"
+    source = "./tests/setup"
   }
 
   variables {
