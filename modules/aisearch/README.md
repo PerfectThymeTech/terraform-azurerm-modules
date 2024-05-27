@@ -170,11 +170,11 @@ The following outputs are exported:
 
 ### <a name="output_search_service_id"></a> [search\_service\_id](#output\_search\_service\_id)
 
-Description: The id of the ai search service.
+Description: Specifies the resource id of the ai search service.
 
 ### <a name="output_search_service_name"></a> [search\_service\_name](#output\_search\_service\_name)
 
-Description: The name of the ai search service.
+Description: Specifies the name of the ai search service.
 
 ### <a name="output_search_service_setup_completed"></a> [search\_service\_setup\_completed](#output\_search\_service\_setup\_completed)
 
