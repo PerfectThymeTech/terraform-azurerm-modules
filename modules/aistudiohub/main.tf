@@ -2,7 +2,7 @@ resource "azapi_resource" "ai_studio_hub" {
   type      = "Microsoft.MachineLearningServices/workspaces@2023-10-01"
   name      = var.ai_studio_name
   location  = var.location
-  parent_id = "/szbscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${var.resource_group_name}"
+  parent_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourcegroups/${var.resource_group_name}"
   tags      = var.tags
   dynamic "identity" {
     for_each = var.customer_managed_key != null ? [{
