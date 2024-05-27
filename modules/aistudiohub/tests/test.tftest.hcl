@@ -7,7 +7,7 @@ provider "azurerm" {
 
   features {
     application_insights {
-      disable_generated_rule = true
+      disable_generated_rule = false
     }
     machine_learning {
       purge_soft_deleted_workspace_on_destroy = true
