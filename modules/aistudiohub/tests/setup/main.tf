@@ -1,5 +1,5 @@
 module "application_insights" {
-  source = "../../../../applicationinsights"
+  source = "${path.module}/../../../../applicationinsights"
 
   location                                        = var.location
   resource_group_name                             = var.resource_group_name
@@ -11,7 +11,7 @@ module "application_insights" {
 }
 
 module "container_registry" {
-  source = "../../../../containerregistry"
+  source = "${path.module}/../../../../containerregistry"
 
   location                                     = var.location
   resource_group_name                          = var.resource_group_name
@@ -33,7 +33,7 @@ module "container_registry" {
 }
 
 module "key_vault" {
-  source = "../../../../keyvault"
+  source = "${path.module}/../../../../keyvault"
 
   location                             = var.location
   resource_group_name                  = var.resource_group_name
@@ -48,7 +48,7 @@ module "key_vault" {
 }
 
 module "storage_account" {
-  source = "../../../../storage"
+  source = "${path.module}/../../../../storage"
 
   location                                        = var.location
   resource_group_name                             = var.resource_group_name
@@ -88,5 +88,4 @@ module "storage_account" {
   private_dns_zone_id_file              = var.private_dns_zone_id_file
   private_dns_zone_id_table             = var.private_dns_zone_id_table
   private_dns_zone_id_queue             = var.private_dns_zone_id_queue
-
 }
