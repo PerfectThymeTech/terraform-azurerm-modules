@@ -37,6 +37,8 @@ provider "azapi" {
   use_oidc                       = true
 }
 
+provider "time" {}
+
 run "setup" {
   command = apply
 
