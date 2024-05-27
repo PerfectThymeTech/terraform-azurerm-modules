@@ -39,7 +39,7 @@ variable "application_insights_id" {
   sensitive   = false
   nullable    = false
   validation {
-    condition     = length(split("/", var.application_insights_id)) == 8
+    condition     = length(split("/", var.application_insights_id)) == 9
     error_message = "Please specify a valid resource id."
   }
 }
@@ -50,7 +50,7 @@ variable "container_registry_id" {
   sensitive   = false
   nullable    = false
   validation {
-    condition     = length(split("/", var.container_registry_id)) == 8
+    condition     = length(split("/", var.container_registry_id)) == 9
     error_message = "Please specify a valid resource id."
   }
 }
@@ -61,7 +61,7 @@ variable "key_vault_id" {
   sensitive   = false
   nullable    = false
   validation {
-    condition     = length(split("/", var.key_vault_id)) == 8
+    condition     = length(split("/", var.key_vault_id)) == 9
     error_message = "Please specify a valid resource id."
   }
 }
@@ -72,7 +72,7 @@ variable "storage_account_id" {
   sensitive   = false
   nullable    = false
   validation {
-    condition     = length(split("/", var.storage_account_id)) == 8
+    condition     = length(split("/", var.storage_account_id)) == 9
     error_message = "Please specify a valid resource id."
   }
 }
