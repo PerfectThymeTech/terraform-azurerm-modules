@@ -6,7 +6,8 @@ exclude: |
     modules/containerregistry/README.md|
     modules/keyvault/README.md|
     modules/loganalytics/README.md|
-    modules/storage/README.md
+    modules/storage/README.md|
+    modules/userassignedidentity/README.md
   )$
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -35,6 +36,8 @@ repos:
       args: ["-c", "./.terraform-docs.yml", "./modules/loganalytics"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/storage"]
+    - id: terraform-docs-go
+      args: ["-c", "./.terraform-docs.yml", "./modules/userassignedidentity"]
 - repo: local
   hooks:
     - id: terraform-fmt
