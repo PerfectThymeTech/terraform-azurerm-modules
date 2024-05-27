@@ -4,7 +4,8 @@ variables {
   tags = {
     test = "aistudiohub"
   }
-  subnet_id = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/tfmdltst-dev-rg/providers/Microsoft.Network/virtualNetworks/tfmdltst-dev-vnet/subnets/PrivateEndpoints"
+  subnet_id                     = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/tfmdltst-dev-rg/providers/Microsoft.Network/virtualNetworks/tfmdltst-dev-vnet/subnets/PrivateEndpoints"
+  connectivity_delay_in_seconds = 0
 }
 
 provider "azurerm" {
@@ -68,7 +69,7 @@ run "setup" {
     tags                                   = var.tags
     log_analytics_workspace_id             = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-8f171ff9-2b5b-4f0f-aed5-7fa360a1d094-WEU"
     subnet_id                              = var.subnet_id
-    connectivity_delay_in_seconds          = 0
+    connectivity_delay_in_seconds          = var.connectivity_delay_in_seconds
     private_dns_zone_id_container_registry = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/mycrp-prd-global-dns/providers/Microsoft.Network/privateDnsZones/privatelink.azurecr.io"
     private_dns_zone_id_vault              = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/mycrp-prd-global-dns/providers/Microsoft.Network/privateDnsZones/privatelink.vaultcore.azure.net"
     private_dns_zone_id_blob               = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/mycrp-prd-global-dns/providers/Microsoft.Network/privateDnsZones/privatelink.blob.core.windows.net"
@@ -98,7 +99,7 @@ run "create_aistudio" {
     storage_account_id                             = run.setup.storage_account_id
     diagnostics_configurations                     = []
     subnet_id                                      = var.subnet_id
-    connectivity_delay_in_seconds                  = 0
+    connectivity_delay_in_seconds                  = var.connectivity_delay_in_seconds
     private_dns_zone_id_machine_learning_api       = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/mycrp-prd-global-dns/providers/Microsoft.Network/privateDnsZones/privatelink.api.azureml.ms"
     private_dns_zone_id_machine_learning_notebooks = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/mycrp-prd-global-dns/providers/Microsoft.Network/privateDnsZones/privatelink.notebooks.azure.net"
     customer_managed_key                           = null

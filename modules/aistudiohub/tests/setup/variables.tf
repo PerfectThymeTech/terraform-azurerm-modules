@@ -67,6 +67,18 @@ variable "subnet_id" {
   }
 }
 
+variable "connectivity_delay_in_seconds" {
+  description = "Specifies the delay in seconds after the private endpoint deployment (required for the DNS automation via Policies)."
+  type        = number
+  sensitive   = false
+  nullable    = false
+  default     = 120
+  validation {
+    condition     = var.connectivity_delay_in_seconds >= 0
+    error_message = "Please specify a valid non-negative number."
+  }
+}
+
 variable "private_dns_zone_id_container_registry" {
   description = "Specifies the resource ID of the private DNS zone for the container registry. Not required if DNS A-records get created via Azure Policy."
   type        = string

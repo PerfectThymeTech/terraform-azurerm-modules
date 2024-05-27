@@ -1,7 +1,7 @@
 resource "azurerm_private_endpoint" "private_endpoint_ai_studio_hub" {
   name                = "${azapi_resource.ai_studio_hub.name}-amlworkspace-pe"
   location            = var.location
-  resource_group_name = azapi_resource.ai_studio_hub.parent_id
+  resource_group_name = reverse(split("/", azapi_resource.ai_studio_hub.parent_id))[0]
   tags                = var.tags
 
   custom_network_interface_name = "${azapi_resource.ai_studio_hub.name}-nic"

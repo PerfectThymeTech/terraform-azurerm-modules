@@ -27,7 +27,7 @@ module "container_registry" {
   container_registry_zone_redundancy_enabled   = false
   diagnostics_configurations                   = []
   subnet_id                                    = var.subnet_id
-  connectivity_delay_in_seconds                = local.connectivity_delay_in_seconds
+  connectivity_delay_in_seconds                = var.connectivity_delay_in_seconds
   private_dns_zone_id_container_registry       = var.private_dns_zone_id_container_registry
   customer_managed_key                         = null
 }
@@ -43,7 +43,7 @@ module "key_vault" {
   key_vault_soft_delete_retention_days = 7
   diagnostics_configurations           = []
   subnet_id                            = var.subnet_id
-  connectivity_delay_in_seconds        = local.connectivity_delay_in_seconds
+  connectivity_delay_in_seconds        = var.connectivity_delay_in_seconds
   private_dns_zone_id_vault            = var.private_dns_zone_id_vault
 }
 
@@ -82,7 +82,7 @@ module "storage_account" {
   storage_static_website                = []
   diagnostics_configurations            = []
   subnet_id                             = var.subnet_id
-  connectivity_delay_in_seconds         = local.connectivity_delay_in_seconds
+  connectivity_delay_in_seconds         = var.connectivity_delay_in_seconds
   private_endpoint_subresource_names    = ["blob", "file", "queue", "table"]
   private_dns_zone_id_blob              = var.private_dns_zone_id_blob
   private_dns_zone_id_file              = var.private_dns_zone_id_file

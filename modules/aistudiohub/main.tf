@@ -30,17 +30,7 @@ resource "azapi_resource" "ai_studio_hub" {
 
       allowPublicAccessWhenBehindVnet = false
       description                     = "Azure AI Studio Hub"
-      # encryption = {
-      #   keyVaultProperties = {
-      #     keyIdentifier = ""
-      #     keyVaultArmId = ""
-      #     identityClientId = ""
-      #   }
-      #   status = "Enabled"
-      #   identity = {
-      #     userAssignedIdentity = ""
-      #   }
-      # }
+      encryption                      = local.encryption
       # featureStoreSettings = {
       #   computeRuntime = {
       #     sparkRuntimeVersion = "3.4"
