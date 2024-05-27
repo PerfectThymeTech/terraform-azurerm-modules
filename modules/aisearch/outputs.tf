@@ -1,10 +1,10 @@
 output "search_service_id" {
-  description = "The id of the ai search service."
+  description = "Specifies the resource id of the ai search service."
   value       = azurerm_search_service.search_service.id
 }
 
 output "search_service_name" {
-  description = "The name of the ai search service."
+  description = "Specifies the name of the ai search service."
   value       = azurerm_search_service.search_service.name
 }
 
