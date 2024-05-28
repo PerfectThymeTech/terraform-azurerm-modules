@@ -10,11 +10,11 @@ output "container_registry_id" {
   sensitive   = false
 }
 
-output "key_vault_id" {
-  description = "Specifies the resource id of the key vault."
-  value       = module.key_vault.key_vault_id
-  sensitive   = false
-}
+# output "key_vault_id" {
+#   description = "Specifies the resource id of the key vault."
+#   value       = module.key_vault.key_vault_id
+#   sensitive   = false
+# }
 
 output "storage_account_id" {
   description = "Specifies the resource id of the storage account."

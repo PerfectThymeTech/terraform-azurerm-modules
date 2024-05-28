@@ -33,7 +33,7 @@ provider "azurerm" {
       recover_soft_deleted_secrets               = true
     }
     resource_group {
-      prevent_deletion_if_contains_resources = true
+      prevent_deletion_if_contains_resources = false
     }
   }
 }
@@ -79,6 +79,40 @@ run "setup" {
   }
 }
 
+run "create_keyvault" {
+  command = apply
+  
+  module {
+    source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/keyvault?ref=main"
+  }
+
+  providers = {
+    azurerm = azurerm
+    time    = time
+  }
+
+  variables {
+    location            = "northeurope"
+    resource_group_name = "tfmdltst-dev-rg"
+    tags = {
+      test = "keyvault"
+    }
+    key_vault_name                       = "mytftstaihub-001"
+    key_vault_sku_name                   = "standard"
+    key_vault_soft_delete_retention_days = 7
+    diagnostics_configurations           = []
+    subnet_id                            = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/tfmdltst-dev-rg/providers/Microsoft.Network/virtualNetworks/tfmdltst-dev-vnet/subnets/PrivateEndpoints"
+    connectivity_delay_in_seconds        = 0
+    private_dns_zone_id_vault            = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/mycrp-prd-global-dns/providers/Microsoft.Network/privateDnsZones/privatelink.vaultcore.azure.net"
+    customer_managed_key                 = null
+  }
+
+  assert {
+    condition     = azurerm_key_vault.key_vault.resource_group_name == "tfmdltst-dev-rg"
+    error_message = "Failed to deploy."
+  }
+}
+
 run "create_aistudio" {
   command = apply
 
@@ -95,7 +129,7 @@ run "create_aistudio" {
     ai_studio_name                                 = "mytftst-001"
     application_insights_id                        = run.setup.application_insights_id
     container_registry_id                          = run.setup.container_registry_id
-    key_vault_id                                   = run.setup.key_vault_id
+    key_vault_id                                   = run.create_keyvault.key_vault_id
     storage_account_id                             = run.setup.storage_account_id
     ai_studio_outbound_rules_fqdns                 = ["azure.com"]
     ai_studio_outbound_rules_private_endpoints     = []
