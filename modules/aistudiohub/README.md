@@ -78,6 +78,45 @@ Type: `string`
 
 The following input variables are optional (have default values):
 
+### <a name="input_ai_studio_outbound_rules_fqdns"></a> [ai\_studio\_outbound\_rules\_fqdns](#input\_ai\_studio\_outbound\_rules\_fqdns)
+
+Description: Specifies the outbound FQDN rules that should be added to the AI Studio Hub. Only provide FQDNs without specific paths such as 'microsoft.com' or '*.microsoft.com' but NOT 'microsoft.com/mypath'.
+
+Type: `list(string)`
+
+Default: `[]`
+
+### <a name="input_ai_studio_outbound_rules_private_endpoints"></a> [ai\_studio\_outbound\_rules\_private\_endpoints](#input\_ai\_studio\_outbound\_rules\_private\_endpoints)
+
+Description: Specifies the private endpoint rules that should be added to the AI Studio Hub.
+
+Type:
+
+```hcl
+list(object({
+    private_connection_resource_id = string
+    subresource_name               = string
+  }))
+```
+
+Default: `[]`
+
+### <a name="input_ai_studio_outbound_rules_service_endpoints"></a> [ai\_studio\_outbound\_rules\_service\_endpoints](#input\_ai\_studio\_outbound\_rules\_service\_endpoints)
+
+Description: Specifies the service endpoint rules that should be added to the AI Studio Hub.
+
+Type:
+
+```hcl
+list(object({
+    service_tag = string
+    protocol    = optional(string, "TCP")
+    port_range  = optional(string, "443")
+  }))
+```
+
+Default: `[]`
+
 ### <a name="input_connectivity_delay_in_seconds"></a> [connectivity\_delay\_in\_seconds](#input\_connectivity\_delay\_in\_seconds)
 
 Description: Specifies the delay in seconds after the private endpoint deployment (required for the DNS automation via Policies).

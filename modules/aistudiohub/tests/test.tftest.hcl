@@ -97,6 +97,9 @@ run "create_aistudio" {
     container_registry_id                          = run.setup.container_registry_id
     key_vault_id                                   = run.setup.key_vault_id
     storage_account_id                             = run.setup.storage_account_id
+    ai_studio_outbound_rules_fqdns                 = ["azure.com"]
+    ai_studio_outbound_rules_private_endpoints     = []
+    ai_studio_outbound_rules_service_endpoints     = []
     diagnostics_configurations                     = []
     subnet_id                                      = var.subnet_id
     connectivity_delay_in_seconds                  = var.connectivity_delay_in_seconds

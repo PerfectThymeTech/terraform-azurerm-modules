@@ -23,11 +23,10 @@ resource "azapi_resource" "ai_studio_hub" {
   body = jsonencode({
     kind = "Hub"
     properties = {
-      applicationInsights = var.application_insights_id
-      containerRegistry   = var.container_registry_id
-      keyVault            = var.key_vault_id
-      storageAccount      = var.storage_account_id
-
+      applicationInsights             = var.application_insights_id
+      containerRegistry               = var.container_registry_id
+      keyVault                        = var.key_vault_id
+      storageAccount                  = var.storage_account_id
       allowPublicAccessWhenBehindVnet = false
       description                     = "Azure AI Studio Hub"
       encryption                      = local.encryption
@@ -43,9 +42,7 @@ resource "azapi_resource" "ai_studio_hub" {
       imageBuildCompute = null
       managedNetwork = {
         isolationMode = "AllowOnlyApprovedOutbound"
-        outboundRules = {
-          # TODO
-        }
+        outboundRules = local.ai_studio_outbound_rules
         status = {
           sparkReady = true
           status     = "Active"
