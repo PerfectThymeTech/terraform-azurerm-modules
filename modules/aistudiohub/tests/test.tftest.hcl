@@ -81,7 +81,7 @@ run "setup" {
 
 run "create_keyvault" {
   command = apply
-  
+
   module {
     source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/keyvault?ref=main"
   }
