@@ -98,7 +98,7 @@ variable "ai_studio_outbound_rules_private_endpoints" {
   default   = []
   validation {
     condition = alltrue([
-      length([for outbound_rule_private_endpoint in toset(var.ai_studio_outbound_rules_fqdns) : true if outbound_rule_private_endpoint.private_connection_resource_id == "" || outbound_rule_private_endpoint.subresource_name == ""]) <= 0
+      length([for outbound_rule_private_endpoint in toset(var.ai_studio_outbound_rules_private_endpoints) : true if outbound_rule_private_endpoint.private_connection_resource_id == "" || outbound_rule_private_endpoint.subresource_name == ""]) <= 0
     ])
     error_message = "Please specify valid configurations."
   }
