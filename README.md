@@ -4,6 +4,7 @@ This module contains secure by default Terraform modules for Azure Services. Fol
 
 - [Azure AI Search](/modules/aisearch/)
 - [Azure AI Service](/modules/aiservice/)
+- [Azure AI Studio Project](/modules/aistudioproject/)
 - [Azure Application Insights](/modules/applicationinsights/)
 - [Azure Container Registry](/modules/containerregistry/)
 - [Azure Key Vault](/modules/keyvault/)
