@@ -56,11 +56,6 @@ run "setup" {
     source = "./tests/setup"
   }
 
-  providers = {
-    azurerm = azurerm
-    time    = time
-  }
-
   variables {
     location                               = var.location
     environment                            = "int"
@@ -81,12 +76,6 @@ run "setup" {
 
 run "create_aistudio" {
   command = apply
-
-  providers = {
-    azurerm = azurerm
-    azapi   = azapi
-    time    = time
-  }
 
   variables {
     location                                       = var.location
