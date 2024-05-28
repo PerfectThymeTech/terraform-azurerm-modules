@@ -1,5 +1,9 @@
 module "application_insights" {
   source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/applicationinsights?ref=main"
+  providers = {
+    azurerm = azurerm
+    time    = time
+  }
 
   location                                        = var.location
   resource_group_name                             = var.resource_group_name
@@ -12,6 +16,10 @@ module "application_insights" {
 
 module "container_registry" {
   source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/containerregistry?ref=main"
+  providers = {
+    azurerm = azurerm
+    time    = time
+  }
 
   location                                     = var.location
   resource_group_name                          = var.resource_group_name
@@ -34,6 +42,10 @@ module "container_registry" {
 
 module "key_vault" {
   source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/keyvault?ref=main"
+  providers = {
+    azurerm = azurerm
+    time    = time
+  }
 
   location                             = var.location
   resource_group_name                  = var.resource_group_name
@@ -49,6 +61,10 @@ module "key_vault" {
 
 module "storage_account" {
   source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/storage?ref=main"
+  providers = {
+    azurerm = azurerm
+    time    = time
+  }
 
   location                                        = var.location
   resource_group_name                             = var.resource_group_name
