@@ -128,7 +128,7 @@ locals {
   ]
   ai_studio_outbound_rules_fqdns = {
     for item in toset(setunion(var.ai_studio_outbound_rules_fqdns, local.default_ai_studio_outbound_rules_fqdns)) :
-    replace(replace(item, "*", "all"), "[^[:alnum:]]", "-") => {
+    replace(replace(item, "*", "all"), "/[^[:alnum:]]/", "-") => {
       category    = "UserDefined"
       type        = "FQDN"
       destination = item
