@@ -5,13 +5,13 @@ locals {
       keyVaultArmId    = var.customer_managed_key.key_vault_id
       identityClientId = var.customer_managed_key.user_assigned_identity_client_id
     }
-    status = "Enabled"
-    identity = {
-      userAssignedIdentity = var.customer_managed_key.user_assigned_identity_id
-    }
+    # status = "Enabled"
+    # identity = {
+    #   userAssignedIdentity = var.customer_managed_key.user_assigned_identity_id
+    # }
   }
 
-  default_ai_studio_outbound_rules_private_endpoints = [
+  default_ai_studio_hub_outbound_rules_private_endpoints = [
     {
       private_connection_resource_id = var.storage_account_id
       subresource_name               = "table"
@@ -21,8 +21,8 @@ locals {
       subresource_name               = "queue"
     }
   ]
-  ai_studio_outbound_rules_private_endpoints = {
-    for item in toset(setunion(var.ai_studio_outbound_rules_private_endpoints, local.default_ai_studio_outbound_rules_private_endpoints)) :
+  ai_studio_hub_outbound_rules_private_endpoints = {
+    for item in toset(setunion(var.ai_studio_hub_outbound_rules_private_endpoints, local.default_ai_studio_hub_outbound_rules_private_endpoints)) :
     "${reverse(split("/", item.private_connection_resource_id))[0]}-${item.subresource_name}" => {
       type     = "PrivateEndpoint"
       category = "UserDefined"
@@ -36,15 +36,15 @@ locals {
     }
   }
 
-  default_ai_studio_outbound_rules_service_endpoints = [
+  default_ai_studio_hub_outbound_rules_service_endpoints = [
     {
       service_tag = "AzureOpenDatasets"
       protocol    = "TCP"
       port_range  = "443"
     }
   ]
-  ai_studio_outbound_rules_service_endpoints = {
-    for item in toset(setunion(var.ai_studio_outbound_rules_service_endpoints, local.default_ai_studio_outbound_rules_service_endpoints)) :
+  ai_studio_hub_outbound_rules_service_endpoints = {
+    for item in toset(setunion(var.ai_studio_hub_outbound_rules_service_endpoints, local.default_ai_studio_hub_outbound_rules_service_endpoints)) :
     "${item.service_tag}-${item.protocol}-${item.port_range}" => {
       type     = "ServiceTag"
       category = "UserDefined"
@@ -58,7 +58,7 @@ locals {
     }
   }
 
-  default_ai_studio_outbound_rules_fqdns = [
+  default_ai_studio_hub_outbound_rules_fqdns = [
     # General dependencies
     "graph.microsoft.com",
     "*.aznbcontent.net",
@@ -126,8 +126,8 @@ locals {
     "ubuntu.com",
     "*.ubuntu.com"
   ]
-  ai_studio_outbound_rules_fqdns = {
-    for item in toset(setunion(var.ai_studio_outbound_rules_fqdns, local.default_ai_studio_outbound_rules_fqdns)) :
+  ai_studio_hub_outbound_rules_fqdns = {
+    for item in toset(setunion(var.ai_studio_hub_outbound_rules_fqdns, local.default_ai_studio_hub_outbound_rules_fqdns)) :
     replace(replace(item, "*", "all"), "/[^[:alnum:]]/", "-") => {
       category    = "UserDefined"
       type        = "FQDN"
@@ -136,5 +136,5 @@ locals {
     }
   }
 
-  ai_studio_outbound_rules = merge(local.ai_studio_outbound_rules_private_endpoints, local.ai_studio_outbound_rules_service_endpoints, local.ai_studio_outbound_rules_fqdns)
+  ai_studio_hub_outbound_rules = merge(local.ai_studio_hub_outbound_rules_private_endpoints, local.ai_studio_hub_outbound_rules_service_endpoints, local.ai_studio_hub_outbound_rules_fqdns)
 }

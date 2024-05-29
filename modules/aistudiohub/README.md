@@ -26,27 +26,27 @@ No modules.
 
 The following input variables are required:
 
-### <a name="input_ai_studio_name"></a> [ai\_studio\_name](#input\_ai\_studio\_name)
+### <a name="input_ai_studio_hub_name"></a> [ai\_studio\_hub\_name](#input\_ai\_studio\_hub\_name)
 
-Description: Specifies the name of the ai studio.
+Description: Specifies the name of the ai studio hub.
 
 Type: `string`
 
 ### <a name="input_application_insights_id"></a> [application\_insights\_id](#input\_application\_insights\_id)
 
-Description: Specifies the id of application insights that will be connected to the ai studio.
+Description: Specifies the id of application insights that will be connected to the ai studio hub.
 
 Type: `string`
 
 ### <a name="input_container_registry_id"></a> [container\_registry\_id](#input\_container\_registry\_id)
 
-Description: Specifies the id of the container registry that will be connected to the ai studio.
+Description: Specifies the id of the container registry that will be connected to the ai studio hub.
 
 Type: `string`
 
 ### <a name="input_key_vault_id"></a> [key\_vault\_id](#input\_key\_vault\_id)
 
-Description: Specifies the id of the key vaul that will be connected to the ai studio.
+Description: Specifies the id of the key vaul that will be connected to the ai studio hub.
 
 Type: `string`
 
@@ -64,7 +64,7 @@ Type: `string`
 
 ### <a name="input_storage_account_id"></a> [storage\_account\_id](#input\_storage\_account\_id)
 
-Description: Specifies the id of the storage account that will be connected to the ai studio.
+Description: Specifies the id of the storage account that will be connected to the ai studio hub.
 
 Type: `string`
 
@@ -78,7 +78,25 @@ Type: `string`
 
 The following input variables are optional (have default values):
 
-### <a name="input_ai_studio_outbound_rules_fqdns"></a> [ai\_studio\_outbound\_rules\_fqdns](#input\_ai\_studio\_outbound\_rules\_fqdns)
+### <a name="input_ai_studio_hub_connections"></a> [ai\_studio\_hub\_connections](#input\_ai\_studio\_hub\_connections)
+
+Description: Specifies the connections that should be added to the AI Studio Hub. Only provide connections to be shared with all projects at the hub level.
+
+Type:
+
+```hcl
+map(object({
+    auth_type   = optional(string, "AAD")
+    category    = string
+    credentials = optional(any, null)
+    target      = string
+    metadata    = any
+  }))
+```
+
+Default: `{}`
+
+### <a name="input_ai_studio_hub_outbound_rules_fqdns"></a> [ai\_studio\_hub\_outbound\_rules\_fqdns](#input\_ai\_studio\_hub\_outbound\_rules\_fqdns)
 
 Description: Specifies the outbound FQDN rules that should be added to the AI Studio Hub. Only provide FQDNs without specific paths such as 'microsoft.com' or '*.microsoft.com' but NOT 'microsoft.com/mypath'.
 
@@ -86,7 +104,7 @@ Type: `list(string)`
 
 Default: `[]`
 
-### <a name="input_ai_studio_outbound_rules_private_endpoints"></a> [ai\_studio\_outbound\_rules\_private\_endpoints](#input\_ai\_studio\_outbound\_rules\_private\_endpoints)
+### <a name="input_ai_studio_hub_outbound_rules_private_endpoints"></a> [ai\_studio\_hub\_outbound\_rules\_private\_endpoints](#input\_ai\_studio\_hub\_outbound\_rules\_private\_endpoints)
 
 Description: Specifies the private endpoint rules that should be added to the AI Studio Hub.
 
@@ -101,7 +119,7 @@ list(object({
 
 Default: `[]`
 
-### <a name="input_ai_studio_outbound_rules_service_endpoints"></a> [ai\_studio\_outbound\_rules\_service\_endpoints](#input\_ai\_studio\_outbound\_rules\_service\_endpoints)
+### <a name="input_ai_studio_hub_outbound_rules_service_endpoints"></a> [ai\_studio\_hub\_outbound\_rules\_service\_endpoints](#input\_ai\_studio\_hub\_outbound\_rules\_service\_endpoints)
 
 Description: Specifies the service endpoint rules that should be added to the AI Studio Hub.
 

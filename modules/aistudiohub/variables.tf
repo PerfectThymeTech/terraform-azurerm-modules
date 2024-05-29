@@ -25,16 +25,16 @@ variable "tags" {
   default     = {}
 }
 
-# AI studio variables
-variable "ai_studio_name" {
-  description = "Specifies the name of the ai studio."
+# AI studio hub variables
+variable "ai_studio_hub_name" {
+  description = "Specifies the name of the ai studio hub."
   type        = string
   sensitive   = false
   nullable    = false
 }
 
 variable "application_insights_id" {
-  description = "Specifies the id of application insights that will be connected to the ai studio."
+  description = "Specifies the id of application insights that will be connected to the ai studio hub."
   type        = string
   sensitive   = false
   nullable    = false
@@ -45,7 +45,7 @@ variable "application_insights_id" {
 }
 
 variable "container_registry_id" {
-  description = "Specifies the id of the container registry that will be connected to the ai studio."
+  description = "Specifies the id of the container registry that will be connected to the ai studio hub."
   type        = string
   sensitive   = false
   nullable    = false
@@ -56,7 +56,7 @@ variable "container_registry_id" {
 }
 
 variable "key_vault_id" {
-  description = "Specifies the id of the key vaul that will be connected to the ai studio."
+  description = "Specifies the id of the key vaul that will be connected to the ai studio hub."
   type        = string
   sensitive   = false
   nullable    = false
@@ -67,7 +67,7 @@ variable "key_vault_id" {
 }
 
 variable "storage_account_id" {
-  description = "Specifies the id of the storage account that will be connected to the ai studio."
+  description = "Specifies the id of the storage account that will be connected to the ai studio hub."
   type        = string
   sensitive   = false
   nullable    = false
@@ -77,7 +77,7 @@ variable "storage_account_id" {
   }
 }
 
-variable "ai_studio_outbound_rules_fqdns" {
+variable "ai_studio_hub_outbound_rules_fqdns" {
   description = "Specifies the outbound FQDN rules that should be added to the AI Studio Hub. Only provide FQDNs without specific paths such as 'microsoft.com' or '*.microsoft.com' but NOT 'microsoft.com/mypath'."
   type        = list(string)
   sensitive   = false
@@ -88,7 +88,7 @@ variable "ai_studio_outbound_rules_fqdns" {
   }
 }
 
-variable "ai_studio_outbound_rules_private_endpoints" {
+variable "ai_studio_hub_outbound_rules_private_endpoints" {
   description = "Specifies the private endpoint rules that should be added to the AI Studio Hub."
   type = list(object({
     private_connection_resource_id = string
@@ -104,7 +104,7 @@ variable "ai_studio_outbound_rules_private_endpoints" {
   }
 }
 
-variable "ai_studio_outbound_rules_service_endpoints" {
+variable "ai_studio_hub_outbound_rules_service_endpoints" {
   description = "Specifies the service endpoint rules that should be added to the AI Studio Hub."
   type = list(object({
     service_tag = string
@@ -119,6 +119,27 @@ variable "ai_studio_outbound_rules_service_endpoints" {
       length([for outbound_rule_service_endpoint in toset(var.ai_studio_outbound_rules_service_endpoints) : true if !contains(["TCP", "UDP", "ICMP"], outbound_rule_service_endpoint.protocol)]) <= 0,
     ])
     error_message = "Please specify valid configurations."
+  }
+}
+
+variable "ai_studio_hub_connections" {
+  description = "Specifies the connections that should be added to the AI Studio Hub. Only provide connections to be shared with all projects at the hub level."
+  type = map(object({
+    auth_type   = optional(string, "AAD")
+    category    = string
+    credentials = optional(any, null)
+    target      = string
+    metadata    = any
+  }))
+  sensitive = false
+  default   = {}
+  validation {
+    condition = alltrue([
+      length([for ai_studio_connection in var.ai_studio_connections : true if !contains(["AAD", "AccessKey", "AccountKey", "ApiKey", "CustomKeys", "ManagedIdentity", "None", "OAuth2", "PAT", "SAS", "ServicePrincipal", "UsernamePassword"], ai_studio_connection.auth_type)]) <= 0,
+      length([for ai_studio_connection in var.ai_studio_connections : true if !contains(["ADLSGen2", "AzureBlob", "AzureDataExplorer", "AzureMariaDb", "AzureMySqlDb", "AzureOneLake", "AzureOpenAI", "AzurePostgresDb", "AzureSqlDb", "AzureSqlMi", "AzureSynapseAnalytics", "AzureTableStorage", "BingLLMSearch", "Cassandra", "CognitiveSearch", "CognitiveService", "ContainerRegistry", "CosmosDb", "CosmosDbMongoDbApi", "GenericContainerRegistry", "GenericHttp", "GenericRest", "Git", "ODataRest", "Odbc", "OpenAI", "PythonFeed", "Redis", ""], ai_studio_connection.category)]) <= 0,
+      length([for ai_studio_connection in var.ai_studio_connections : true if !startswith(ai_studio_connection.target, "https://")]) <= 0,
+    ])
+    error_message = "Please specify valid connection configurations."
   }
 }
 

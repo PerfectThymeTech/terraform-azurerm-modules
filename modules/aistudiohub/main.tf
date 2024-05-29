@@ -1,6 +1,6 @@
 resource "azapi_resource" "ai_studio_hub" {
   type      = "Microsoft.MachineLearningServices/workspaces@2023-10-01"
-  name      = var.ai_studio_name
+  name      = var.ai_studio_hub_name
   location  = var.location
   parent_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourcegroups/${var.resource_group_name}"
   tags      = var.tags
@@ -37,12 +37,12 @@ resource "azapi_resource" "ai_studio_hub" {
       #   offlineStoreConnectionName = ""
       #   onlineStoreConnectionName = ""
       # }
-      friendlyName      = title(replace(var.ai_studio_name, "-", " "))
+      friendlyName      = title(replace(var.ai_studio_hub_name, "-", " "))
       hbiWorkspace      = true
       imageBuildCompute = null
       managedNetwork = {
         isolationMode = "AllowOnlyApprovedOutbound"
-        outboundRules = local.ai_studio_outbound_rules
+        outboundRules = local.ai_studio_hub_outbound_rules
         status = {
           sparkReady = true
           status     = "Active"

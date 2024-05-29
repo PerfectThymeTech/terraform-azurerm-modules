@@ -92,12 +92,13 @@ run "create_aistudioproject" {
   }
 
   variables {
-    location                   = "northeurope"
-    resource_group_name        = "tfmdltst-dev-rg"
-    tags                       = var.tags
-    ai_studio_project_name     = "mytftst-001"
-    ai_studio_hub_id           = run.setup.ai_studio_hub_id
-    diagnostics_configurations = []
+    location                      = "northeurope"
+    resource_group_name           = "tfmdltst-dev-rg"
+    tags                          = var.tags
+    ai_studio_project_name        = "mytftst-001"
+    ai_studio_hub_id              = run.setup.ai_studio_hub_id
+    ai_studio_project_connections = {}
+    diagnostics_configurations    = []
   }
 
   assert {
