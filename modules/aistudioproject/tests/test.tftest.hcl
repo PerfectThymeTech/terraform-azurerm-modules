@@ -2,7 +2,7 @@ variables {
   location            = "northeurope"
   resource_group_name = "tfmdltst-dev-rg"
   tags = {
-    test = "aistudiohub"
+    test = "aistudioproject"
   }
   subnet_id                     = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/tfmdltst-dev-rg/providers/Microsoft.Network/virtualNetworks/tfmdltst-dev-vnet/subnets/PrivateEndpoints"
   connectivity_delay_in_seconds = 0
@@ -64,7 +64,7 @@ run "setup" {
   variables {
     location                                       = var.location
     environment                                    = "int"
-    prefix                                         = "tfmdlaihub"
+    prefix                                         = "tfmdlaiprj"
     resource_group_name                            = var.resource_group_name
     tags                                           = var.tags
     log_analytics_workspace_id                     = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-8f171ff9-2b5b-4f0f-aed5-7fa360a1d094-WEU"
@@ -91,11 +91,9 @@ run "create_aistudioproject" {
   }
 
   variables {
-    location            = "northeurope"
-    resource_group_name = "tfmdltst-dev-rg"
-    tags = {
-      test = "aistudioproject"
-    }
+    location                   = "northeurope"
+    resource_group_name        = "tfmdltst-dev-rg"
+    tags                       = var.tags
     ai_studio_project_name     = "mytftst-001"
     ai_studio_hub_id           = run.setup.ai_studio_hub_id
     diagnostics_configurations = []
