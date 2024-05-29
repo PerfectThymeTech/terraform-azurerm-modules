@@ -1,0 +1,31 @@
+name: aistudiohub tests
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "modules/aistudiohub/**"
+      - ".github/workflows/terraform-aistudiohub.yml"
+      - ".github/workflows/_terraformTestTemplate.yml"
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "modules/aistudiohub/**"
+      - ".github/workflows/terraform-aistudiohub.yml"
+      - ".github/workflows/_terraformTestTemplate.yml"
+
+jobs:
+  terraform_dev:
+    uses: ./.github/workflows/_terraformTestTemplate.yml
+    name: "Dev"
+    with:
+      environment: "dev"
+      config: "aistudiohub"
+      terraform_version: "1.9.0-alpha20240516"
+      node_version: 20
+      tenant_id: "3556be79-2979-4b19-a1af-4dd4e6d9ed7e"
+      subscription_id: "8f171ff9-2b5b-4f0f-aed5-7fa360a1d094"
+    secrets:
+      CLIENT_ID: ${{ secrets.CLIENT_ID }}
