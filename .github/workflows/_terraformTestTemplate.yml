@@ -27,6 +27,11 @@ on:
         required: true
         type: string
         description: "Specifies the subscription id of the deployment."
+      run_test:
+        required: false
+        type: boolean
+        description: "Specifies whether the test should be executed."
+        default: true
     secrets:
       CLIENT_ID:
         required: true
@@ -89,6 +94,7 @@ jobs:
     runs-on: [self-hosted]
     continue-on-error: false
     environment: ${{ inputs.environment }}
+    if: inputs.run_test
     needs: [lint]
     concurrency:
       group: terraform-test-${{ inputs.config }}-${{ inputs.environment }}
