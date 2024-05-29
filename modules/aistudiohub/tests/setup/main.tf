@@ -49,7 +49,7 @@ module "key_vault" {
   location                             = var.location
   resource_group_name                  = var.resource_group_name
   tags                                 = var.tags
-  key_vault_name                       = "${local.prefix}-kv003"
+  key_vault_name                       = "${local.prefix}-kv004"
   key_vault_sku_name                   = "standard"
   key_vault_soft_delete_retention_days = 7
   diagnostics_configurations           = []
