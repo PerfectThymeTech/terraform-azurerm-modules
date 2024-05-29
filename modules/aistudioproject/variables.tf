@@ -57,9 +57,9 @@ variable "ai_studio_project_connections" {
   default   = {}
   validation {
     condition = alltrue([
-      length([for ai_studio_connection in var.ai_studio_connections : true if !contains(["AAD", "AccessKey", "AccountKey", "ApiKey", "CustomKeys", "ManagedIdentity", "None", "OAuth2", "PAT", "SAS", "ServicePrincipal", "UsernamePassword"], ai_studio_connection.auth_type)]) <= 0,
-      length([for ai_studio_connection in var.ai_studio_connections : true if !contains(["ADLSGen2", "AzureBlob", "AzureDataExplorer", "AzureMariaDb", "AzureMySqlDb", "AzureOneLake", "AzureOpenAI", "AzurePostgresDb", "AzureSqlDb", "AzureSqlMi", "AzureSynapseAnalytics", "AzureTableStorage", "BingLLMSearch", "Cassandra", "CognitiveSearch", "CognitiveService", "ContainerRegistry", "CosmosDb", "CosmosDbMongoDbApi", "GenericContainerRegistry", "GenericHttp", "GenericRest", "Git", "ODataRest", "Odbc", "OpenAI", "PythonFeed", "Redis", ""], ai_studio_connection.category)]) <= 0,
-      length([for ai_studio_connection in var.ai_studio_connections : true if !startswith(ai_studio_connection.target, "https://")]) <= 0,
+      length([for ai_studio_project_connection in var.ai_studio_project_connections : true if !contains(["AAD", "AccessKey", "AccountKey", "ApiKey", "CustomKeys", "ManagedIdentity", "None", "OAuth2", "PAT", "SAS", "ServicePrincipal", "UsernamePassword"], ai_studio_project_connection.auth_type)]) <= 0,
+      length([for ai_studio_project_connection in var.ai_studio_project_connections : true if !contains(["ADLSGen2", "AzureBlob", "AzureDataExplorer", "AzureMariaDb", "AzureMySqlDb", "AzureOneLake", "AzureOpenAI", "AzurePostgresDb", "AzureSqlDb", "AzureSqlMi", "AzureSynapseAnalytics", "AzureTableStorage", "BingLLMSearch", "Cassandra", "CognitiveSearch", "CognitiveService", "ContainerRegistry", "CosmosDb", "CosmosDbMongoDbApi", "GenericContainerRegistry", "GenericHttp", "GenericRest", "Git", "ODataRest", "Odbc", "OpenAI", "PythonFeed", "Redis", ""], ai_studio_project_connection.category)]) <= 0,
+      length([for ai_studio_project_connection in var.ai_studio_project_connections : true if !startswith(ai_studio_project_connection.target, "https://")]) <= 0,
     ])
     error_message = "Please specify valid connection configurations."
   }
