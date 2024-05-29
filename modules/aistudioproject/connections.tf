@@ -10,7 +10,7 @@ resource "azapi_resource" "ai_studio_project_connection" {
       authType       = each.value.auth_type
       category       = each.value.category
       credentials    = each.value.credentials
-      isSharedToAll  = true
+      isSharedToAll  = false
       sharedUserList = []
       target         = each.value.target
       metadata       = each.value.metadata
