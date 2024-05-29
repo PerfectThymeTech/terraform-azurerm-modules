@@ -2,8 +2,8 @@ exclude: |
   (?x)^(
     modules/aisearch/README.md|
     modules/aiservice/README.md|
-    modules/aistudioproject/README.md|
     modules/aistudiohub/README.md|
+    modules/aistudioproject/README.md|
     modules/applicationinsights/README.md|
     modules/containerregistry/README.md|
     modules/keyvault/README.md|
@@ -29,9 +29,9 @@ repos:
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/aiservice"]
     - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/aistudioproject"]
-    - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/aistudiohub"]
+    - id: terraform-docs-go
+      args: ["-c", "./.terraform-docs.yml", "./modules/aistudioproject"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/applicationinsights"]
     - id: terraform-docs-go
