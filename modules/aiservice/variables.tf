@@ -70,9 +70,9 @@ variable "cognitive_account_outbound_network_access_allowed_fqdns" {
   validation {
     condition = alltrue([
       length([for allowed_fqdn in toset(var.cognitive_account_outbound_network_access_allowed_fqdns) : true if startswith(allowed_fqdn, "http")]) <= 0,
-      length([for outbound_rule_service_endpoint in toset(var.ai_studio_hub_outbound_rules_service_endpoints) : true if strcontains(allowed_fqdn, "/")]) <= 0,
+      length([for allowed_fqdn in toset(var.cognitive_account_outbound_network_access_allowed_fqdns) : true if strcontains(allowed_fqdn, "/")]) <= 0,
     ])
-    error_message = "Please specify valid configurations."
+    error_message = "Please specify valid domain names without https or paths. For example, provide \"microsoft.com\" instead of \"https://microsoft.com/mysubpage\"."
   }
 }
 
