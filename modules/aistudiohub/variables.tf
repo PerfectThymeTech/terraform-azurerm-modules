@@ -83,7 +83,7 @@ variable "ai_studio_hub_outbound_rules_fqdns" {
   sensitive   = false
   default     = []
   validation {
-    condition     = alltrue([for outbound_rule_fqdn in toset(var.ai_studio_outbound_rules_fqdns) : !strcontains(outbound_rule_fqdn, "/")])
+    condition     = alltrue([for outbound_rule_fqdn in toset(var.ai_studio_hub_outbound_rules_fqdns) : !strcontains(outbound_rule_fqdn, "/")])
     error_message = "Please specify valid FQDNs without paths (e.g. '/'.)."
   }
 }
@@ -98,7 +98,7 @@ variable "ai_studio_hub_outbound_rules_private_endpoints" {
   default   = []
   validation {
     condition = alltrue([
-      length([for outbound_rule_private_endpoint in toset(var.ai_studio_outbound_rules_private_endpoints) : true if outbound_rule_private_endpoint.private_connection_resource_id == "" || outbound_rule_private_endpoint.subresource_name == ""]) <= 0
+      length([for outbound_rule_private_endpoint in toset(var.ai_studio_hub_outbound_rules_private_endpoints) : true if outbound_rule_private_endpoint.private_connection_resource_id == "" || outbound_rule_private_endpoint.subresource_name == ""]) <= 0
     ])
     error_message = "Please specify valid configurations."
   }
@@ -115,8 +115,8 @@ variable "ai_studio_hub_outbound_rules_service_endpoints" {
   default   = []
   validation {
     condition = alltrue([
-      length([for outbound_rule_service_endpoint in toset(var.ai_studio_outbound_rules_service_endpoints) : true if outbound_rule_service_endpoint.service_tag == ""]) <= 0,
-      length([for outbound_rule_service_endpoint in toset(var.ai_studio_outbound_rules_service_endpoints) : true if !contains(["TCP", "UDP", "ICMP"], outbound_rule_service_endpoint.protocol)]) <= 0,
+      length([for outbound_rule_service_endpoint in toset(var.ai_studio_hub_outbound_rules_service_endpoints) : true if outbound_rule_service_endpoint.service_tag == ""]) <= 0,
+      length([for outbound_rule_service_endpoint in toset(var.ai_studio_hub_outbound_rules_service_endpoints) : true if !contains(["TCP", "UDP", "ICMP"], outbound_rule_service_endpoint.protocol)]) <= 0,
     ])
     error_message = "Please specify valid configurations."
   }
