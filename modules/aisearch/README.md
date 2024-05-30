@@ -162,7 +162,7 @@ map(object({
   }))
 ```
 
-Default: `1`
+Default: `{}`
 
 ### <a name="input_search_service_sku"></a> [search\_service\_sku](#input\_search\_service\_sku)
 
