@@ -61,6 +61,21 @@ variable "cognitive_account_outbound_network_access_restricted" {
   default     = true
 }
 
+variable "cognitive_account_outbound_network_access_allowed_fqdns" {
+  description = "Specifies the outbound network allowed fqdns of the cognitive service."
+  type        = list(string)
+  sensitive   = false
+  nullable    = false
+  default     = []
+  validation {
+    condition = alltrue([
+      length([for allowed_fqdn in toset(var.cognitive_account_outbound_network_access_allowed_fqdns) : true if startswith(allowed_fqdn, "http")]) <= 0,
+      length([for allowed_fqdn in toset(var.cognitive_account_outbound_network_access_allowed_fqdns) : true if strcontains(allowed_fqdn, "/")]) <= 0,
+    ])
+    error_message = "Please specify valid domain names without https or paths. For example, provide \"microsoft.com\" instead of \"https://microsoft.com/mysubpage\"."
+  }
+}
+
 variable "cognitive_account_deployments" {
   description = "Specifies the models that should be deployed within your ai service. Only applicable to ai services of kind openai."
   type = map(object({
