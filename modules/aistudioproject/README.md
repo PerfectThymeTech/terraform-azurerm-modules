@@ -52,6 +52,24 @@ Type: `string`
 
 The following input variables are optional (have default values):
 
+### <a name="input_ai_studio_project_connections"></a> [ai\_studio\_project\_connections](#input\_ai\_studio\_project\_connections)
+
+Description: Specifies the connections that should be added to the AI Studio Hub. Only provide connections to be shared with all projects at the hub level.
+
+Type:
+
+```hcl
+map(object({
+    auth_type   = optional(string, "AAD")
+    category    = string
+    credentials = optional(any, null)
+    target      = string
+    metadata    = any
+  }))
+```
+
+Default: `{}`
+
 ### <a name="input_diagnostics_configurations"></a> [diagnostics\_configurations](#input\_diagnostics\_configurations)
 
 Description: Specifies the diagnostic configuration for the service.

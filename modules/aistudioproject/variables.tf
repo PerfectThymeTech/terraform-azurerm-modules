@@ -44,6 +44,27 @@ variable "ai_studio_hub_id" {
   }
 }
 
+variable "ai_studio_project_connections" {
+  description = "Specifies the connections that should be added to the AI Studio Hub. Only provide connections to be shared with all projects at the hub level."
+  type = map(object({
+    auth_type   = optional(string, "AAD")
+    category    = string
+    credentials = optional(any, null)
+    target      = string
+    metadata    = any
+  }))
+  sensitive = false
+  default   = {}
+  validation {
+    condition = alltrue([
+      length([for ai_studio_project_connection in var.ai_studio_project_connections : true if !contains(["AAD", "AccessKey", "AccountKey", "ApiKey", "CustomKeys", "ManagedIdentity", "None", "OAuth2", "PAT", "SAS", "ServicePrincipal", "UsernamePassword"], ai_studio_project_connection.auth_type)]) <= 0,
+      length([for ai_studio_project_connection in var.ai_studio_project_connections : true if !contains(["ADLSGen2", "AzureBlob", "AzureDataExplorer", "AzureMariaDb", "AzureMySqlDb", "AzureOneLake", "AzureOpenAI", "AzurePostgresDb", "AzureSqlDb", "AzureSqlMi", "AzureSynapseAnalytics", "AzureTableStorage", "BingLLMSearch", "Cassandra", "CognitiveSearch", "CognitiveService", "ContainerRegistry", "CosmosDb", "CosmosDbMongoDbApi", "GenericContainerRegistry", "GenericHttp", "GenericRest", "Git", "ODataRest", "Odbc", "OpenAI", "PythonFeed", "Redis", ""], ai_studio_project_connection.category)]) <= 0,
+      length([for ai_studio_project_connection in var.ai_studio_project_connections : true if !startswith(ai_studio_project_connection.target, "https://")]) <= 0,
+    ])
+    error_message = "Please specify valid connection configurations."
+  }
+}
+
 # Diagnostics variables
 variable "diagnostics_configurations" {
   description = "Specifies the diagnostic configuration for the service."
