@@ -15,6 +15,7 @@ run "create_ai_search" {
     search_service_hosting_mode                 = "default"
     search_service_partition_count              = 1
     search_service_replica_count                = 1
+    search_service_shared_private_links         = {}
     diagnostics_configurations                  = []
     subnet_id                                   = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/tfmdltst-dev-rg/providers/Microsoft.Network/virtualNetworks/tfmdltst-dev-vnet/subnets/PrivateEndpoints"
     connectivity_delay_in_seconds               = 0
