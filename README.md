@@ -1,6 +1,6 @@
 # Terraform Modules - Secure by default
 
-This module contains secure by default Terraform modules for Azure Services. Following services are available today:
+This repository contains secure by default Terraform modules for Azure Services. Modules for the following services are available today:
 
 - [Azure AI Search](/modules/aisearch/)
 - [Azure AI Service](/modules/aiservice/)
