@@ -158,6 +158,7 @@ Type:
 map(object({
     subresource_name   = string
     target_resource_id = string
+    approve            = optional(bool, false)
   }))
 ```
 
