@@ -1,5 +1,5 @@
 resource "azurerm_search_shared_private_link_service" "search_shared_private_link_service" {
-
+  for_each = var.search_service_shared_private_links
 
   name              = each.key
   search_service_id = azurerm_search_service.search_service.id
