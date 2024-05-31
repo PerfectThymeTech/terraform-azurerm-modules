@@ -148,6 +148,22 @@ Type: `string`
 
 Default: `"standard"`
 
+### <a name="input_search_service_shared_private_links"></a> [search\_service\_shared\_private\_links](#input\_search\_service\_shared\_private\_links)
+
+Description: Specifies the shared private links that should be connected to the search service.
+
+Type:
+
+```hcl
+map(object({
+    subresource_name   = string
+    target_resource_id = string
+    approve            = optional(bool, false)
+  }))
+```
+
+Default: `{}`
+
 ### <a name="input_search_service_sku"></a> [search\_service\_sku](#input\_search\_service\_sku)
 
 Description: Specifies the SKU for the search service

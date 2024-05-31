@@ -9,7 +9,7 @@ resource "azurerm_search_service" "search_service" {
 
   allowed_ips                              = []
   authentication_failure_mode              = var.search_service_authentication_failure_mode
-  customer_managed_key_enforcement_enabled = false
+  customer_managed_key_enforcement_enabled = var.customer_managed_key != null ? true : false
   hosting_mode                             = var.search_service_hosting_mode
   local_authentication_enabled             = var.search_service_local_authentication_enabled
   partition_count                          = var.search_service_partition_count

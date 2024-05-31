@@ -115,6 +115,24 @@ variable "search_service_replica_count" {
   }
 }
 
+variable "search_service_shared_private_links" {
+  description = "Specifies the shared private links that should be connected to the search service."
+  type = map(object({
+    subresource_name   = string
+    target_resource_id = string
+    approve            = optional(bool, false)
+  }))
+  sensitive = false
+  default   = {}
+  validation {
+    condition = alltrue([
+      length([for shared_private_link in var.search_service_shared_private_links : true if shared_private_link.subresource_name == ""]) <= 0,
+      length([for shared_private_link in var.search_service_shared_private_links : true if length(split("/", shared_private_link.target_resource_id)) < 9]) <= 0,
+    ])
+    error_message = "Please specify valid shared private link configurations."
+  }
+}
+
 # Monitoring variables
 variable "diagnostics_configurations" {
   description = "Specifies the diagnostic configuration for the service."
