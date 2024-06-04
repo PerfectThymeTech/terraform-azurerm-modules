@@ -10,7 +10,7 @@ output "ai_studio_project_name" {
   sensitive   = true
 }
 
-output "ai_studio_project_id" {
+output "ai_studio_project_principal_id" {
   description = "Specifies the principal id of the ai studio project."
   value       = azapi_resource.ai_studio_project.identity[0].principal_id
   sensitive   = true

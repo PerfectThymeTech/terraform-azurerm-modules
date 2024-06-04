@@ -99,11 +99,15 @@ The following outputs are exported:
 
 ### <a name="output_ai_studio_project_id"></a> [ai\_studio\_project\_id](#output\_ai\_studio\_project\_id)
 
-Description: Specifies the principal id of the ai studio project.
+Description: Specifies the resource ID of the ai studio project.
 
 ### <a name="output_ai_studio_project_name"></a> [ai\_studio\_project\_name](#output\_ai\_studio\_project\_name)
 
 Description: Specifies the name of the ai studio project.
+
+### <a name="output_ai_studio_project_principal_id"></a> [ai\_studio\_project\_principal\_id](#output\_ai\_studio\_project\_principal\_id)
+
+Description: Specifies the principal id of the ai studio project.
 
 <!-- markdownlint-enable -->
 
