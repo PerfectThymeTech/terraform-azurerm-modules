@@ -169,6 +169,10 @@ Description: The base URL of the cognitive service account.
 
 Description: The ID of the cognitive service account.
 
+### <a name="output_cognitive_account_primary_access_key"></a> [cognitive\_account\_primary\_access\_key](#output\_cognitive\_account\_primary\_access\_key)
+
+Description: The primary access key of the cognitive service account.
+
 ### <a name="output_cognitive_account_setup_completed"></a> [cognitive\_account\_setup\_completed](#output\_cognitive\_account\_setup\_completed)
 
 Description: Specifies whether the connectivity and identity has been successfully configured.
