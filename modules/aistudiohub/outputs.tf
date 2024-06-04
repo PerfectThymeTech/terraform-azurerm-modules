@@ -10,6 +10,12 @@ output "ai_studio_hub_name" {
   sensitive   = true
 }
 
+output "ai_studio_hub_principal_id" {
+  description = "Specifies the principal id of the ai studio hub."
+  value       = azapi_resource.ai_studio_hub.identity[0].principal_id
+  sensitive   = true
+}
+
 output "ai_studio_hub_setup_completed" {
   description = "Specifies whether the connectivity and identity has been successfully configured."
   value       = true
