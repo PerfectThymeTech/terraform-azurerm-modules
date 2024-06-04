@@ -211,6 +211,10 @@ Description: Specifies the resource id of the ai studio hub.
 
 Description: Specifies the name of the ai studio hub.
 
+### <a name="output_ai_studio_hub_principal_id"></a> [ai\_studio\_hub\_principal\_id](#output\_ai\_studio\_hub\_principal\_id)
+
+Description: Specifies the principal id of the ai studio hub.
+
 ### <a name="output_ai_studio_hub_setup_completed"></a> [ai\_studio\_hub\_setup\_completed](#output\_ai\_studio\_hub\_setup\_completed)
 
 Description: Specifies whether the connectivity and identity has been successfully configured.
