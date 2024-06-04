@@ -1,11 +1,19 @@
 output "search_service_id" {
   description = "Specifies the resource id of the ai search service."
   value       = azurerm_search_service.search_service.id
+  sensitive   = false
 }
 
 output "search_service_name" {
   description = "Specifies the name of the ai search service."
   value       = azurerm_search_service.search_service.name
+  sensitive   = false
+}
+
+output "search_service_primary_key" {
+  description = "Specifies the primary key of the ai search service."
+  value       = azurerm_search_service.search_service.primary_key
+  sensitive   = true
 }
 
 output "search_service_setup_completed" {
