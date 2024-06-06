@@ -1,5 +1,5 @@
 resource "azapi_resource" "ai_studio_project" {
-  type      = "Microsoft.MachineLearningServices/workspaces@2024-04-01-preview"
+  type      = "Microsoft.MachineLearningServices/workspaces@2024-04-01"
   name      = var.ai_studio_project_name
   location  = var.location
   parent_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourcegroups/${var.resource_group_name}"
@@ -19,7 +19,7 @@ resource "azapi_resource" "ai_studio_project" {
   })
 
   response_export_values    = ["*"]
-  schema_validation_enabled = true
+  schema_validation_enabled = false # Can be reverted once this is closed: https://github.com/Azure/terraform-provider-azapi/issues/524
   locks                     = []
   ignore_casing             = false
   ignore_missing_property   = false
