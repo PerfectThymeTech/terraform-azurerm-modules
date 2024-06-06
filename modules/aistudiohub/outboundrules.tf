@@ -1,0 +1,77 @@
+resource "azapi_resource" "ai_studio_hub_outbound_rules_private_endpoints" {
+  for_each = local.ai_studio_hub_outbound_rules_private_endpoints
+
+  type      = "Microsoft.MachineLearningServices/workspaces/outboundRules@2024-04-01"
+  name      = "extension-${each.key}"
+  parent_id = azapi_resource.ai_studio_hub.id
+
+  body = jsonencode({
+    properties = {
+      type     = each.value.type
+      category = each.value.category
+      status   = each.value.status
+      destination = {
+        serviceResourceId = each.value.destination.serviceResourceId
+        subresourceTarget = each.value.destination.subresourceTarget
+        sparkEnabled      = each.value.destination.sparkEnabled
+        sparkStatus       = each.value.destination.sparkStatus
+      }
+    }
+
+  })
+  response_export_values    = ["*"]
+  schema_validation_enabled = false # Can be reverted once this is closed: https://github.com/Azure/terraform-provider-azapi/issues/524
+  locks                     = []
+  ignore_casing             = false
+  ignore_missing_property   = false
+}
+
+resource "azapi_resource" "ai_studio_hub_outbound_rules_service_endpoints" {
+  for_each = local.ai_studio_hub_outbound_rules_service_endpoints
+
+  type      = "Microsoft.MachineLearningServices/workspaces/outboundRules@2024-04-01"
+  name      = "extension-${each.key}"
+  parent_id = azapi_resource.ai_studio_hub.id
+
+  body = jsonencode({
+    properties = {
+      type     = each.value.type
+      category = each.value.category
+      destination = {
+        serviceTag = each.value.destination.serviceTag
+        protocol   = each.value.destination.protocol
+        portRanges = each.value.destination.portRanges
+        action     = each.value.destination.action
+      }
+    }
+
+  })
+  response_export_values    = ["*"]
+  schema_validation_enabled = false # Can be reverted once this is closed: https://github.com/Azure/terraform-provider-azapi/issues/524
+  locks                     = []
+  ignore_casing             = false
+  ignore_missing_property   = false
+}
+
+resource "azapi_resource" "ai_studio_hub_outbound_rules_fqdns" {
+  for_each = local.ai_studio_hub_outbound_rules_fqdns
+
+  type      = "Microsoft.MachineLearningServices/workspaces/outboundRules@2024-04-01"
+  name      = "extension-${each.key}"
+  parent_id = azapi_resource.ai_studio_hub.id
+
+  body = jsonencode({
+    properties = {
+      type        = each.value.type
+      category    = each.value.category
+      destination = each.value.destination
+      status      = each.value.status
+    }
+
+  })
+  response_export_values    = ["*"]
+  schema_validation_enabled = false # Can be reverted once this is closed: https://github.com/Azure/terraform-provider-azapi/issues/524
+  locks                     = []
+  ignore_casing             = false
+  ignore_missing_property   = false
+}

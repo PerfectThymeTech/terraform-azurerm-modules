@@ -1,4 +1,5 @@
 locals {
+  # Encryption configuration
   encryption = var.customer_managed_key == null ? null : {
     keyVaultProperties = {
       keyIdentifier    = var.customer_managed_key.key_vault_key_versionless_id
@@ -11,6 +12,7 @@ locals {
     }
   }
 
+  # Outbound rules - private endpoints
   default_ai_studio_hub_outbound_rules_private_endpoints = [
     {
       private_connection_resource_id = var.storage_account_id
@@ -36,6 +38,7 @@ locals {
     }
   }
 
+  # Outbound rules - service endpoints
   default_ai_studio_hub_outbound_rules_service_endpoints = [
     {
       service_tag = "AzureOpenDatasets"
@@ -58,6 +61,7 @@ locals {
     }
   }
 
+  # Outbound rules - fqdns
   default_ai_studio_hub_outbound_rules_fqdns = [
     # General dependencies
     "graph.microsoft.com",
@@ -129,12 +133,10 @@ locals {
   ai_studio_hub_outbound_rules_fqdns = {
     for item in toset(setunion(var.ai_studio_hub_outbound_rules_fqdns, local.default_ai_studio_hub_outbound_rules_fqdns)) :
     replace(replace(item, "*", "all"), "/[^[:alnum:]]/", "-") => {
-      category    = "UserDefined"
       type        = "FQDN"
+      category    = "UserDefined"
       destination = item
       status      = "Active"
     }
   }
-
-  ai_studio_hub_outbound_rules = merge(local.ai_studio_hub_outbound_rules_private_endpoints, local.ai_studio_hub_outbound_rules_service_endpoints, local.ai_studio_hub_outbound_rules_fqdns)
 }

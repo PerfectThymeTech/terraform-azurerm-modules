@@ -37,7 +37,7 @@ resource "azapi_resource" "ai_studio_hub" {
       ipAllowlist                     = []
       managedNetwork = {
         isolationMode = "AllowOnlyApprovedOutbound"
-        outboundRules = local.ai_studio_hub_outbound_rules
+        outboundRules = []
         status = {
           sparkReady = true
           status     = "Active"
@@ -74,5 +74,6 @@ resource "azapi_resource" "ai_studio_hub" {
   schema_validation_enabled = false # Can be reverted once this is closed: https://github.com/Azure/terraform-provider-azapi/issues/524
   locks                     = []
   ignore_casing             = false
+  ignore_body_changes       = ["properties.managedNetwork"]
   ignore_missing_property   = false
 }

@@ -1,4 +1,4 @@
-resource "azapi_resource" "ai_studio_hub_connection" {
+resource "azapi_resource" "ai_studio_hub_connections" {
   for_each = var.ai_studio_hub_connections
 
   type      = "Microsoft.MachineLearningServices/workspaces/connections@2024-04-01"
