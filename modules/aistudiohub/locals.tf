@@ -5,10 +5,10 @@ locals {
       keyVaultArmId    = var.customer_managed_key.key_vault_id
       identityClientId = var.customer_managed_key.user_assigned_identity_client_id
     }
-    # status = "Enabled"
-    # identity = {
-    #   userAssignedIdentity = var.customer_managed_key.user_assigned_identity_id
-    # }
+    status = "Enabled"
+    identity = {
+      userAssignedIdentity = var.customer_managed_key.user_assigned_identity_id
+    }
   }
 
   default_ai_studio_hub_outbound_rules_private_endpoints = [
