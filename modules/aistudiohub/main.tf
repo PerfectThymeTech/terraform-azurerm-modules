@@ -37,7 +37,7 @@ resource "azapi_resource" "ai_studio_hub" {
       ipAllowlist                     = []
       managedNetwork = {
         isolationMode = "AllowOnlyApprovedOutbound"
-        outboundRules = []
+        outboundRules = {}
         status = {
           sparkReady = true
           status     = "Active"
@@ -58,7 +58,6 @@ resource "azapi_resource" "ai_studio_hub" {
       #   offlineStoreConnectionName = ""
       #   onlineStoreConnectionName = ""
       # }
-      # enableSoftwareBillOfMaterials = true
       # workspaceHubConfig = {
       #   additionalWorkspaceStorageAccounts = []
       #   defaultWorkspaceResourceGroup = ""
@@ -77,3 +76,19 @@ resource "azapi_resource" "ai_studio_hub" {
   ignore_body_changes       = ["properties.managedNetwork"]
   ignore_missing_property   = false
 }
+
+# resource "azapi_resource_action" "ai_studio_hub_provision_managed_network" {
+#   type        = "Microsoft.MachineLearningServices/workspaces@2024-04-01"
+#   resource_id = azapi_resource.ai_studio_hub.id
+
+#   action = "provisionManagedNetwork"
+#   method = "POST"
+#   body = jsonencode({
+#     includeSpark = true
+#   })
+
+#   response_export_values = []
+#   depends_on = [
+#     azapi_resource.ai_studio_hub_outbound_rules_fqdns
+#   ]
+# }
