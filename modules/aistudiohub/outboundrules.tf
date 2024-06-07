@@ -2,7 +2,7 @@ resource "azapi_resource" "ai_studio_hub_outbound_rules_private_endpoints" {
   for_each = local.ai_studio_hub_outbound_rules_private_endpoints
 
   type      = "Microsoft.MachineLearningServices/workspaces/outboundRules@2024-04-01"
-  name      = "extension-${each.key}"
+  name      = "pe-${each.key}"
   parent_id = azapi_resource.ai_studio_hub.id
 
   body = jsonencode({
@@ -30,7 +30,7 @@ resource "azapi_resource" "ai_studio_hub_outbound_rules_service_endpoints" {
   for_each = local.ai_studio_hub_outbound_rules_service_endpoints
 
   type      = "Microsoft.MachineLearningServices/workspaces/outboundRules@2024-04-01"
-  name      = "extension-${each.key}"
+  name      = "se-${each.key}"
   parent_id = azapi_resource.ai_studio_hub.id
 
   body = jsonencode({
@@ -57,7 +57,7 @@ resource "azapi_resource" "ai_studio_hub_outbound_rules_fqdns" {
   for_each = local.ai_studio_hub_outbound_rules_fqdns
 
   type      = "Microsoft.MachineLearningServices/workspaces/outboundRules@2024-04-01"
-  name      = "extension-${each.key}"
+  name      = "fq-${each.key}"
   parent_id = azapi_resource.ai_studio_hub.id
 
   body = jsonencode({
