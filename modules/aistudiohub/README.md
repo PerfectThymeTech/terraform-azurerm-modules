@@ -135,6 +135,14 @@ list(object({
 
 Default: `[]`
 
+### <a name="input_ai_studio_hub_provision_managed_network"></a> [ai\_studio\_hub\_provision\_managed\_network](#input\_ai\_studio\_hub\_provision\_managed\_network)
+
+Description: Specifies whether the managed vnet should be providioned as part of the ai studio hub deployment.
+
+Type: `bool`
+
+Default: `false`
+
 ### <a name="input_connectivity_delay_in_seconds"></a> [connectivity\_delay\_in\_seconds](#input\_connectivity\_delay\_in\_seconds)
 
 Description: Specifies the delay in seconds after the private endpoint deployment (required for the DNS automation via Policies).

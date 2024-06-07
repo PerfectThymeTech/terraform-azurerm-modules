@@ -33,6 +33,14 @@ variable "ai_studio_hub_name" {
   nullable    = false
 }
 
+variable "ai_studio_hub_provision_managed_network" {
+  description = "Specifies whether the managed vnet should be providioned as part of the ai studio hub deployment."
+  type        = bool
+  sensitive   = false
+  nullable    = false
+  default     = false
+}
+
 variable "application_insights_id" {
   description = "Specifies the id of application insights that will be connected to the ai studio hub."
   type        = string
