@@ -18,9 +18,10 @@ resource "azapi_resource" "ai_studio_project_connection" {
 
   })
 
-  response_export_values    = ["*"]
+  response_export_values    = []
   schema_validation_enabled = false # Can be reverted once this is closed: https://github.com/Azure/terraform-provider-azapi/issues/524
   locks                     = []
+  ignore_body_changes       = []
   ignore_casing             = false
   ignore_missing_property   = false
 }
