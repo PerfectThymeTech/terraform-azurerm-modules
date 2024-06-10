@@ -22,6 +22,7 @@ resource "azapi_resource" "ai_studio_hub_outbound_rules_private_endpoints" {
   response_export_values    = []
   schema_validation_enabled = false # Can be reverted once this is closed: https://github.com/Azure/terraform-provider-azapi/issues/524
   locks                     = []
+  ignore_body_changes       = []
   ignore_casing             = false
   ignore_missing_property   = false
 }
@@ -49,6 +50,7 @@ resource "azapi_resource" "ai_studio_hub_outbound_rules_service_endpoints" {
   response_export_values    = []
   schema_validation_enabled = false # Can be reverted once this is closed: https://github.com/Azure/terraform-provider-azapi/issues/524
   locks                     = []
+  ignore_body_changes       = []
   ignore_casing             = false
   ignore_missing_property   = false
 }
@@ -72,6 +74,7 @@ resource "azapi_resource" "ai_studio_hub_outbound_rules_fqdns" {
   response_export_values    = []
   schema_validation_enabled = false # Can be reverted once this is closed: https://github.com/Azure/terraform-provider-azapi/issues/524
   locks                     = []
+  ignore_body_changes       = []
   ignore_casing             = false
   ignore_missing_property   = false
 }
