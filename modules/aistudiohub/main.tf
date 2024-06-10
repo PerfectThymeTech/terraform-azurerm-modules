@@ -72,7 +72,7 @@ resource "azapi_resource" "ai_studio_hub" {
   response_export_values    = []
   schema_validation_enabled = false # Can be reverted once this is closed: https://github.com/Azure/terraform-provider-azapi/issues/524
   locks                     = []
-  ignore_casing             = false
   ignore_body_changes       = ["properties.managedNetwork"]
+  ignore_casing             = false
   ignore_missing_property   = false
 }
