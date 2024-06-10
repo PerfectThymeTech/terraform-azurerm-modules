@@ -53,6 +53,14 @@ variable "cognitive_account_sku" {
   }
 }
 
+variable "cognitive_account_firewall_bypass_azure_services" {
+  description = "Specifies whether Azure Services should be allowed to bypass the firewall of the cognitive service. This is required for some common integration sceanrios but not supported by all ai services."
+  type        = bool
+  sensitive   = false
+  nullable    = false
+  default     = false
+}
+
 variable "cognitive_account_outbound_network_access_restricted" {
   description = "Specifies the outbound network restrictions of the cognitive service."
   type        = bool

@@ -8,8 +8,9 @@ run "create_ai_service" {
       test = "aiservice"
     }
     cognitive_account_name                                  = "mytftst-001"
-    cognitive_account_kind                                  = "Face"
+    cognitive_account_kind                                  = "OpenAI"
     cognitive_account_sku                                   = "S0"
+    cognitive_account_firewall_bypass_azure_services        = true
     cognitive_account_outbound_network_access_restricted    = true
     cognitive_account_outbound_network_access_allowed_fqdns = ["microsoft.com"]
     cognitive_account_deployments                           = {}
