@@ -5,6 +5,14 @@ variable "location" {
   sensitive   = false
 }
 
+variable "location_private_endpoint" {
+  description = "Specifies the location of the private endpoint. Use this variables only if the private endpoint(s) should reside in a different location than the service itself."
+  type        = string
+  sensitive   = false
+  nullable    = true
+  default     = null
+}
+
 variable "resource_group_name" {
   description = "Specifies the resource group name in which all resources will get deployed."
   type        = string
@@ -51,6 +59,14 @@ variable "cognitive_account_sku" {
     condition     = length(var.cognitive_account_sku) >= 1
     error_message = "Please specify a valid sku name."
   }
+}
+
+variable "cognitive_account_firewall_bypass_azure_services" {
+  description = "Specifies whether Azure Services should be allowed to bypass the firewall of the cognitive service. This is required for some common integration sceanrios but not supported by all ai services."
+  type        = bool
+  sensitive   = false
+  nullable    = false
+  default     = false
 }
 
 variable "cognitive_account_outbound_network_access_restricted" {
