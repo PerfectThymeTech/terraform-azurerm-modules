@@ -196,6 +196,10 @@ Description: Specifies the name of the ai search service.
 
 Description: Specifies the primary key of the ai search service.
 
+### <a name="output_search_service_principal_id"></a> [search\_service\_principal\_id](#output\_search\_service\_principal\_id)
+
+Description: Specifies the principal id of the ai search service.
+
 ### <a name="output_search_service_setup_completed"></a> [search\_service\_setup\_completed](#output\_search\_service\_setup\_completed)
 
 Description: Specifies whether the connectivity and identity has been successfully configured.
