@@ -1,6 +1,6 @@
 resource "azurerm_private_endpoint" "private_endpoint_cognitive_account" {
   name                = "${azurerm_cognitive_account.cognitive_account.name}-account-pe"
-  location            = azurerm_cognitive_account.cognitive_account.location
+  location            = var.location_private_endpoint != null ? var.location_private_endpoint : var.location
   resource_group_name = azurerm_cognitive_account.cognitive_account.resource_group_name
   tags                = var.tags
 

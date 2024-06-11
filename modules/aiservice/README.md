@@ -10,6 +10,8 @@ The following requirements are needed by this module:
 
 - <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (>=0.12)
 
+- <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) (>= 1.12.1)
+
 - <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (>= 3.50.0)
 
 - <a name="requirement_time"></a> [time](#requirement\_time) (>= 0.9.1)
@@ -85,6 +87,14 @@ map(object({
 
 Default: `{}`
 
+### <a name="input_cognitive_account_firewall_bypass_azure_services"></a> [cognitive\_account\_firewall\_bypass\_azure\_services](#input\_cognitive\_account\_firewall\_bypass\_azure\_services)
+
+Description: Specifies whether Azure Services should be allowed to bypass the firewall of the cognitive service. This is required for some common integration sceanrios but not supported by all ai services.
+
+Type: `bool`
+
+Default: `false`
+
 ### <a name="input_cognitive_account_outbound_network_access_allowed_fqdns"></a> [cognitive\_account\_outbound\_network\_access\_allowed\_fqdns](#input\_cognitive\_account\_outbound\_network\_access\_allowed\_fqdns)
 
 Description: Specifies the outbound network allowed fqdns of the cognitive service.
@@ -140,6 +150,14 @@ list(object({
 ```
 
 Default: `[]`
+
+### <a name="input_location_private_endpoint"></a> [location\_private\_endpoint](#input\_location\_private\_endpoint)
+
+Description: Specifies the location of the private endpoint. Use this variables only if the private endpoint(s) should reside in a different location than the service itself.
+
+Type: `string`
+
+Default: `null`
 
 ### <a name="input_private_dns_zone_id_cognitive_account"></a> [private\_dns\_zone\_id\_cognitive\_account](#input\_private\_dns\_zone\_id\_cognitive\_account)
 

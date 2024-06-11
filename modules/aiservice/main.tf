@@ -42,6 +42,29 @@ resource "azurerm_cognitive_account" "cognitive_account" {
   sku_name                           = var.cognitive_account_sku
 }
 
+resource "azapi_update_resource" "cognitive_account_bypass_azureservices" {
+  count       = var.cognitive_account_firewall_bypass_azure_services ? 1 : 0
+  type        = "Microsoft.CognitiveServices/accounts@2023-05-01"
+  resource_id = azurerm_cognitive_account.cognitive_account.id
+
+  body = jsonencode({
+    properties = {
+      networkAcls = {
+        bypass              = "AzureServices"
+        defaultAction       = "Deny"
+        ipRules             = []
+        virtualNetworkRules = []
+      }
+      publicNetworkAccess = "Disabled"
+    }
+  })
+
+  response_export_values  = []
+  locks                   = []
+  ignore_casing           = false
+  ignore_missing_property = false
+}
+
 resource "azurerm_cognitive_deployment" "cognitive_deployments" {
   for_each = var.cognitive_account_deployments
 

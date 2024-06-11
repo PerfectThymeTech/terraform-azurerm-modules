@@ -10,6 +10,12 @@ output "search_service_name" {
   sensitive   = false
 }
 
+output "search_service_principal_id" {
+  description = "Specifies the principal id of the ai search service."
+  value       = azurerm_search_service.search_service.identity[0].principal_id
+  sensitive   = false
+}
+
 output "search_service_primary_key" {
   description = "Specifies the primary key of the ai search service."
   value       = azurerm_search_service.search_service.primary_key
