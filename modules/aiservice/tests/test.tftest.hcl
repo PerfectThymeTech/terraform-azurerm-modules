@@ -2,8 +2,9 @@ run "create_ai_service" {
   command = apply
 
   variables {
-    location            = "northeurope"
-    resource_group_name = "tfmdltst-dev-rg"
+    location                  = "swedencentral"
+    location_private_endpoint = "northeurope"
+    resource_group_name       = "tfmdltst-dev-rg"
     tags = {
       test = "aiservice"
     }

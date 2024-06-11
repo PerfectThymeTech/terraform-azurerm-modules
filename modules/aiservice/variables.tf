@@ -5,6 +5,14 @@ variable "location" {
   sensitive   = false
 }
 
+variable "location_private_endpoint" {
+  description = "Specifies the location of the private endpoint. Use this variables only if the private endpoint(s) should reside in a different location than the service itself."
+  type        = string
+  sensitive   = false
+  nullable    = true
+  default     = null
+}
+
 variable "resource_group_name" {
   description = "Specifies the resource group name in which all resources will get deployed."
   type        = string

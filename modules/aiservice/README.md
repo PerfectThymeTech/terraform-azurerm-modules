@@ -151,6 +151,14 @@ list(object({
 
 Default: `[]`
 
+### <a name="input_location_private_endpoint"></a> [location\_private\_endpoint](#input\_location\_private\_endpoint)
+
+Description: Specifies the location of the private endpoint. Use this variables only if the private endpoint(s) should reside in a different location than the service itself.
+
+Type: `string`
+
+Default: `null`
+
 ### <a name="input_private_dns_zone_id_cognitive_account"></a> [private\_dns\_zone\_id\_cognitive\_account](#input\_private\_dns\_zone\_id\_cognitive\_account)
 
 Description: Specifies the resource ID of the private DNS zone for Azure Cognitive Services. Not required if DNS A-records get created via Azure Policy.
