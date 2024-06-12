@@ -113,14 +113,14 @@ module "ai_studio_hub" {
     time    = time
   }
 
-  location                                       = var.location
-  resource_group_name                            = var.resource_group_name
-  tags                                           = var.tags
-  ai_studio_name                                 = "${local.prefix}-aih002"
-  application_insights_id                        = module.application_insights.application_insights_id
-  container_registry_id                          = module.container_registry.container_registry_id
-  key_vault_id                                   = module.key_vault.key_vault_id
-  storage_account_id                             = module.storage_account.storage_account_id
+  location                = var.location
+  resource_group_name     = var.resource_group_name
+  tags                    = var.tags
+  ai_studio_name          = "${local.prefix}-aih002"
+  application_insights_id = module.application_insights.application_insights_id
+  container_registry_id   = module.container_registry.container_registry_id
+  key_vault_id            = module.key_vault.key_vault_id
+  storage_account_id      = module.storage_account.storage_account_id
   # ai_studio_hub_outbound_rules_fqdns             = { "azure-com" = "azure.com" }
   # ai_studio_hub_outbound_rules_private_endpoints = {}
   # ai_studio_hub_outbound_rules_service_endpoints = {}
