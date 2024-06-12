@@ -92,7 +92,7 @@ run "create_aistudiooutboundrules" {
   variables {
     ai_studio_hub_id                               = run.setup.ai_studio_hub_id
     ai_studio_hub_storage_account_id               = run.setup.ai_studio_hub_storage_account_id
-    ai_studio_hub_outbound_rules_fqdns             = {}
+    ai_studio_hub_outbound_rules_fqdns             = { "azure-com" = "azure.com" }
     ai_studio_hub_outbound_rules_private_endpoints = {}
     ai_studio_hub_outbound_rules_service_endpoints = {}
     ai_studio_hub_provision_managed_network        = false
