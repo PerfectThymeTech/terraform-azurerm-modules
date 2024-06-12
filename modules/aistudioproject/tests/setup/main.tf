@@ -121,9 +121,9 @@ module "ai_studio_hub" {
   container_registry_id                          = module.container_registry.container_registry_id
   key_vault_id                                   = module.key_vault.key_vault_id
   storage_account_id                             = module.storage_account.storage_account_id
-  ai_studio_outbound_rules_fqdns                 = []
-  ai_studio_outbound_rules_private_endpoints     = []
-  ai_studio_outbound_rules_service_endpoints     = []
+  # ai_studio_hub_outbound_rules_fqdns             = { "azure-com" = "azure.com" }
+  # ai_studio_hub_outbound_rules_private_endpoints = {}
+  # ai_studio_hub_outbound_rules_service_endpoints = {}
   diagnostics_configurations                     = []
   subnet_id                                      = var.subnet_id
   connectivity_delay_in_seconds                  = var.connectivity_delay_in_seconds

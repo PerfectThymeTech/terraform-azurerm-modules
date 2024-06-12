@@ -37,7 +37,7 @@ resource "azapi_resource" "ai_studio_hub" {
       ipAllowlist                     = []
       managedNetwork = {
         isolationMode = "AllowOnlyApprovedOutbound"
-        outboundRules = {}
+        outboundRules = {} # local.ai_studio_hub_outbound_rules # Will be managed using a separate module due to service limitations: https://github.com/PerfectThymeTech/terraform-azurerm-modules/tree/main/modules/aistudiooutboundrules
         status = {
           sparkReady = true
           status     = "Active"
