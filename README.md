@@ -5,6 +5,7 @@ This repository contains secure by default Terraform modules for Azure Services.
 - [Azure AI Search](/modules/aisearch/)
 - [Azure AI Service](/modules/aiservice/)
 - [Azure AI Studio Hub](/modules/aistudiohub/)
+- [Azure AI Studio Outbound Rules](/modules/aistudiooutboundrules/)
 - [Azure AI Studio Project](/modules/aistudioproject/)
 - [Azure Application Insights](/modules/applicationinsights/)
 - [Azure Container Registry](/modules/containerregistry/)
