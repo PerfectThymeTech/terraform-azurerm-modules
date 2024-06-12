@@ -89,17 +89,17 @@ run "create_aistudio" {
   }
 
   variables {
-    location                                       = var.location
-    resource_group_name                            = var.resource_group_name
-    tags                                           = var.tags
-    ai_studio_hub_name                             = "mytftst-001"
-    application_insights_id                        = run.setup.application_insights_id
-    container_registry_id                          = run.setup.container_registry_id
-    key_vault_id                                   = run.setup.key_vault_id
-    storage_account_id                             = run.setup.storage_account_id
-    ai_studio_hub_outbound_rules_fqdns             = ["azure.com"]
-    ai_studio_hub_outbound_rules_private_endpoints = []
-    ai_studio_hub_outbound_rules_service_endpoints = []
+    location                = var.location
+    resource_group_name     = var.resource_group_name
+    tags                    = var.tags
+    ai_studio_hub_name      = "mytftst-001"
+    application_insights_id = run.setup.application_insights_id
+    container_registry_id   = run.setup.container_registry_id
+    key_vault_id            = run.setup.key_vault_id
+    storage_account_id      = run.setup.storage_account_id
+    # ai_studio_hub_outbound_rules_fqdns             = { "azure-com" = "azure.com" }
+    # ai_studio_hub_outbound_rules_private_endpoints = {}
+    # ai_studio_hub_outbound_rules_service_endpoints = {}
     ai_studio_hub_connections                      = {}
     diagnostics_configurations                     = []
     subnet_id                                      = var.subnet_id

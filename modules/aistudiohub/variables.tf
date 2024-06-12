@@ -33,6 +33,14 @@ variable "ai_studio_hub_name" {
   nullable    = false
 }
 
+variable "ai_studio_hub_provision_managed_network" {
+  description = "Specifies whether the managed vnet should be providioned as part of the ai studio hub deployment."
+  type        = bool
+  sensitive   = false
+  nullable    = false
+  default     = false
+}
+
 variable "application_insights_id" {
   description = "Specifies the id of application insights that will be connected to the ai studio hub."
   type        = string
@@ -77,50 +85,50 @@ variable "storage_account_id" {
   }
 }
 
-variable "ai_studio_hub_outbound_rules_fqdns" {
-  description = "Specifies the outbound FQDN rules that should be added to the AI Studio Hub. Only provide FQDNs without specific paths such as 'microsoft.com' or '*.microsoft.com' but NOT 'microsoft.com/mypath'."
-  type        = list(string)
-  sensitive   = false
-  default     = []
-  validation {
-    condition     = alltrue([for outbound_rule_fqdn in toset(var.ai_studio_hub_outbound_rules_fqdns) : !strcontains(outbound_rule_fqdn, "/")])
-    error_message = "Please specify valid FQDNs without paths (e.g. '/'.)."
-  }
-}
+# variable "ai_studio_hub_outbound_rules_fqdns" { # Will be managed using a separate module due to service limitations: https://github.com/PerfectThymeTech/terraform-azurerm-modules/tree/main/modules/aistudiooutboundrules
+#   description = "Specifies the outbound FQDN rules that should be added to the AI Studio Hub. Only provide FQDNs without specific paths such as 'microsoft.com' or '*.microsoft.com' but NOT 'microsoft.com/mypath'."
+#   type        = list(string)
+#   sensitive   = false
+#   default     = []
+#   validation {
+#     condition     = alltrue([for outbound_rule_fqdn in toset(var.ai_studio_hub_outbound_rules_fqdns) : !strcontains(outbound_rule_fqdn, "/")])
+#     error_message = "Please specify valid FQDNs without paths (e.g. '/'.)."
+#   }
+# }
 
-variable "ai_studio_hub_outbound_rules_private_endpoints" {
-  description = "Specifies the private endpoint rules that should be added to the AI Studio Hub."
-  type = list(object({
-    private_connection_resource_id = string
-    subresource_name               = string
-  }))
-  sensitive = false
-  default   = []
-  validation {
-    condition = alltrue([
-      length([for outbound_rule_private_endpoint in toset(var.ai_studio_hub_outbound_rules_private_endpoints) : true if outbound_rule_private_endpoint.private_connection_resource_id == "" || outbound_rule_private_endpoint.subresource_name == ""]) <= 0
-    ])
-    error_message = "Please specify valid configurations."
-  }
-}
+# variable "ai_studio_hub_outbound_rules_private_endpoints" { # Will be managed using a separate module due to service limitations: https://github.com/PerfectThymeTech/terraform-azurerm-modules/tree/main/modules/aistudiooutboundrules
+#   description = "Specifies the private endpoint rules that should be added to the AI Studio Hub."
+#   type = list(object({
+#     private_connection_resource_id = string
+#     subresource_name               = string
+#   }))
+#   sensitive = false
+#   default   = []
+#   validation {
+#     condition = alltrue([
+#       length([for outbound_rule_private_endpoint in toset(var.ai_studio_hub_outbound_rules_private_endpoints) : true if outbound_rule_private_endpoint.private_connection_resource_id == "" || outbound_rule_private_endpoint.subresource_name == ""]) <= 0
+#     ])
+#     error_message = "Please specify valid configurations."
+#   }
+# }
 
-variable "ai_studio_hub_outbound_rules_service_endpoints" {
-  description = "Specifies the service endpoint rules that should be added to the AI Studio Hub."
-  type = list(object({
-    service_tag = string
-    protocol    = optional(string, "TCP")
-    port_range  = optional(string, "443")
-  }))
-  sensitive = false
-  default   = []
-  validation {
-    condition = alltrue([
-      length([for outbound_rule_service_endpoint in toset(var.ai_studio_hub_outbound_rules_service_endpoints) : true if outbound_rule_service_endpoint.service_tag == ""]) <= 0,
-      length([for outbound_rule_service_endpoint in toset(var.ai_studio_hub_outbound_rules_service_endpoints) : true if !contains(["TCP", "UDP", "ICMP"], outbound_rule_service_endpoint.protocol)]) <= 0,
-    ])
-    error_message = "Please specify valid configurations."
-  }
-}
+# variable "ai_studio_hub_outbound_rules_service_endpoints" { # Will be managed using a separate module due to service limitations: https://github.com/PerfectThymeTech/terraform-azurerm-modules/tree/main/modules/aistudiooutboundrules
+#   description = "Specifies the service endpoint rules that should be added to the AI Studio Hub."
+#   type = list(object({
+#     service_tag = string
+#     protocol    = optional(string, "TCP")
+#     port_range  = optional(string, "443")
+#   }))
+#   sensitive = false
+#   default   = []
+#   validation {
+#     condition = alltrue([
+#       length([for outbound_rule_service_endpoint in toset(var.ai_studio_hub_outbound_rules_service_endpoints) : true if outbound_rule_service_endpoint.service_tag == ""]) <= 0,
+#       length([for outbound_rule_service_endpoint in toset(var.ai_studio_hub_outbound_rules_service_endpoints) : true if !contains(["TCP", "UDP", "ICMP"], outbound_rule_service_endpoint.protocol)]) <= 0,
+#     ])
+#     error_message = "Please specify valid configurations."
+#   }
+# }
 
 variable "ai_studio_hub_connections" {
   description = "Specifies the connections that should be added to the AI Studio Hub. Only provide connections to be shared with all projects at the hub level."

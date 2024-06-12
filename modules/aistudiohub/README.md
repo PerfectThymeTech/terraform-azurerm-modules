@@ -1,6 +1,16 @@
 <!-- BEGIN_TF_DOCS -->
 # Azure AI Studio Hub Terraform Module
 
+## Info for CMK Deployments
+
+CMK deployments are currently not supported because the service-side encryption of metadata is not supported for hub workspaces today. Once this is supported, we can update the module and enable CMK deployments. More details: https://learn.microsoft.com/en-us/azure/machine-learning/concept-customer-managed-keys?view=azureml-api-2#preview-service-side-encryption-of-metadata
+
+The standard deployment is currently blocked because of a managed Cosmos DB that gets created inside the customer environment. The workspace requires the asignment of a contributor role on that managed resource group in which the cosmos DB will reside. This assignment is currently being blocked by Azure Policies.
+
+## Info for user-defined outbound rule management
+
+We have decided to manage the outbund rules using a separate Terraform module. Reasons for this decision and the module can be found here: [Azure AI Studio Outbound Rules](/modules/aistudiooutboundrules/)
+
 ## Documentation
 <!-- markdownlint-disable MD033 -->
 
@@ -10,7 +20,7 @@ The following requirements are needed by this module:
 
 - <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (>=0.12)
 
-- <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) (>= 1.13.1)
+- <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) (>= 1.12.1)
 
 - <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (>= 3.100.0)
 
@@ -96,44 +106,13 @@ map(object({
 
 Default: `{}`
 
-### <a name="input_ai_studio_hub_outbound_rules_fqdns"></a> [ai\_studio\_hub\_outbound\_rules\_fqdns](#input\_ai\_studio\_hub\_outbound\_rules\_fqdns)
+### <a name="input_ai_studio_hub_provision_managed_network"></a> [ai\_studio\_hub\_provision\_managed\_network](#input\_ai\_studio\_hub\_provision\_managed\_network)
 
-Description: Specifies the outbound FQDN rules that should be added to the AI Studio Hub. Only provide FQDNs without specific paths such as 'microsoft.com' or '*.microsoft.com' but NOT 'microsoft.com/mypath'.
+Description: Specifies whether the managed vnet should be providioned as part of the ai studio hub deployment.
 
-Type: `list(string)`
+Type: `bool`
 
-Default: `[]`
-
-### <a name="input_ai_studio_hub_outbound_rules_private_endpoints"></a> [ai\_studio\_hub\_outbound\_rules\_private\_endpoints](#input\_ai\_studio\_hub\_outbound\_rules\_private\_endpoints)
-
-Description: Specifies the private endpoint rules that should be added to the AI Studio Hub.
-
-Type:
-
-```hcl
-list(object({
-    private_connection_resource_id = string
-    subresource_name               = string
-  }))
-```
-
-Default: `[]`
-
-### <a name="input_ai_studio_hub_outbound_rules_service_endpoints"></a> [ai\_studio\_hub\_outbound\_rules\_service\_endpoints](#input\_ai\_studio\_hub\_outbound\_rules\_service\_endpoints)
-
-Description: Specifies the service endpoint rules that should be added to the AI Studio Hub.
-
-Type:
-
-```hcl
-list(object({
-    service_tag = string
-    protocol    = optional(string, "TCP")
-    port_range  = optional(string, "443")
-  }))
-```
-
-Default: `[]`
+Default: `false`
 
 ### <a name="input_connectivity_delay_in_seconds"></a> [connectivity\_delay\_in\_seconds](#input\_connectivity\_delay\_in\_seconds)
 

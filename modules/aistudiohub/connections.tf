@@ -1,7 +1,7 @@
-resource "azapi_resource" "ai_studio_hub_connection" {
+resource "azapi_resource" "ai_studio_hub_connections" {
   for_each = var.ai_studio_hub_connections
 
-  type      = "Microsoft.MachineLearningServices/workspaces/connections@2024-04-01-preview"
+  type      = "Microsoft.MachineLearningServices/workspaces/connections@2024-04-01"
   name      = each.key
   parent_id = azapi_resource.ai_studio_hub.id
 
@@ -18,9 +18,10 @@ resource "azapi_resource" "ai_studio_hub_connection" {
 
   })
 
-  response_export_values    = ["*"]
-  schema_validation_enabled = true
+  response_export_values    = []
+  schema_validation_enabled = false # Can be reverted once this is closed: https://github.com/Azure/terraform-provider-azapi/issues/524
   locks                     = []
+  ignore_body_changes       = []
   ignore_casing             = false
   ignore_missing_property   = false
 }

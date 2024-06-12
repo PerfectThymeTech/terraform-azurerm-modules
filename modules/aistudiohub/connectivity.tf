@@ -4,9 +4,9 @@ resource "azurerm_private_endpoint" "private_endpoint_ai_studio_hub" {
   resource_group_name = reverse(split("/", azapi_resource.ai_studio_hub.parent_id))[0]
   tags                = var.tags
 
-  custom_network_interface_name = "${azapi_resource.ai_studio_hub.name}-nic"
+  custom_network_interface_name = "${azapi_resource.ai_studio_hub.name}-amlworkspace-nic"
   private_service_connection {
-    name                           = "${azapi_resource.ai_studio_hub.name}-pe"
+    name                           = "${azapi_resource.ai_studio_hub.name}-amlworkspace-pe"
     is_manual_connection           = false
     private_connection_resource_id = azapi_resource.ai_studio_hub.id
     subresource_names              = ["amlworkspace"]

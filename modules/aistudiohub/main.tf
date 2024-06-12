@@ -1,5 +1,5 @@
 resource "azapi_resource" "ai_studio_hub" {
-  type      = "Microsoft.MachineLearningServices/workspaces@2024-04-01-preview"
+  type      = "Microsoft.MachineLearningServices/workspaces@2024-04-01"
   name      = var.ai_studio_hub_name
   location  = var.location
   parent_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourcegroups/${var.resource_group_name}"
@@ -37,7 +37,7 @@ resource "azapi_resource" "ai_studio_hub" {
       ipAllowlist                     = []
       managedNetwork = {
         isolationMode = "AllowOnlyApprovedOutbound"
-        outboundRules = local.ai_studio_hub_outbound_rules
+        outboundRules = {} # local.ai_studio_hub_outbound_rules # Will be managed using a separate module due to service limitations: https://github.com/PerfectThymeTech/terraform-azurerm-modules/tree/main/modules/aistudiooutboundrules
         status = {
           sparkReady = true
           status     = "Active"
@@ -50,7 +50,7 @@ resource "azapi_resource" "ai_studio_hub" {
       v1LegacyMode                = false
 
       # TODO: Evaluate adding below properties
-      # containerRegistries = []
+      # enableServiceSideCMKEncryption  = var.customer_managed_key == null ? false : true # Not supported today on hub and project: https://learn.microsoft.com/en-us/azure/machine-learning/concept-customer-managed-keys?view=azureml-api-2#preview-service-side-encryption-of-metadata
       # featureStoreSettings = {
       #   computeRuntime = {
       #     sparkRuntimeVersion = "3.4"
@@ -58,7 +58,6 @@ resource "azapi_resource" "ai_studio_hub" {
       #   offlineStoreConnectionName = ""
       #   onlineStoreConnectionName = ""
       # }
-      # enableSoftwareBillOfMaterials = true
       # workspaceHubConfig = {
       #   additionalWorkspaceStorageAccounts = []
       #   defaultWorkspaceResourceGroup = ""
@@ -70,9 +69,10 @@ resource "azapi_resource" "ai_studio_hub" {
     }
   })
 
-  response_export_values    = ["*"]
-  schema_validation_enabled = true
+  response_export_values    = []
+  schema_validation_enabled = false # Can be reverted once this is closed: https://github.com/Azure/terraform-provider-azapi/issues/524
   locks                     = []
+  ignore_body_changes       = ["properties.managedNetwork"]
   ignore_casing             = false
   ignore_missing_property   = false
 }

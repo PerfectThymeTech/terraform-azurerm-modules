@@ -83,3 +83,5 @@ variable "diagnostics_configurations" {
 }
 
 # Network variables
+
+# Customer-managed key variables
