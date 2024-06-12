@@ -44,18 +44,6 @@ Description: Specifies the id of the storage account that is connected to the ai
 
 Type: `string`
 
-### <a name="input_location"></a> [location](#input\_location)
-
-Description: Specifies the location of all resources.
-
-Type: `string`
-
-### <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name)
-
-Description: Specifies the resource group name in which all resources will get deployed.
-
-Type: `string`
-
 ## Optional Inputs
 
 The following input variables are optional (have default values):
@@ -106,14 +94,6 @@ Description: Specifies whether the managed vnet should be providioned as part of
 Type: `bool`
 
 Default: `false`
-
-### <a name="input_tags"></a> [tags](#input\_tags)
-
-Description: Specifies a key value map of tags to set on every taggable resources.
-
-Type: `map(string)`
-
-Default: `{}`
 
 ## Outputs
 
