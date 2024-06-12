@@ -48,4 +48,9 @@ resource "null_resource" "synapse_managed_private_endpoint_monitor_private_link_
     interpreter = ["pwsh", "-Command"]
     command     = "./Approve-ManagedPrivateEndpoint.ps1 -ResourceId '${each.value.destination.serviceResourceId}' -ManagedPrivateEndpointName '${each.key}'"
   }
+
+  depends_on = [
+    azapi_update_resource.ai_studio_hub_outbound_rules,
+    azapi_resource_action.ai_studio_hub_provision_managed_network,
+  ]
 }
