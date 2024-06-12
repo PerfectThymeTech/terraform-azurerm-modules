@@ -9,7 +9,7 @@ The standard deployment is currently blocked because of a managed Cosmos DB that
 
 ## Info for user-defined outbound rule management
 
-We have decided to manage the outbund rules using a separate Terraform module. Reasons for this decision and the module can be found here:
+We have decided to manage the outbund rules using a separate Terraform module. Reasons for this decision and the module can be found here: [Azure AI Studio Outbound Rules](/modules/aistudiooutboundrules/)
 
 ## Documentation
 <!-- markdownlint-disable MD033 -->
