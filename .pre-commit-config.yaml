@@ -9,7 +9,8 @@ exclude: |
     modules/keyvault/README.md|
     modules/loganalytics/README.md|
     modules/storage/README.md|
-    modules/userassignedidentity/README.md
+    modules/userassignedidentity/README.md|
+    modules/aistudiooutboundrules/README.md
   )$
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -44,6 +45,8 @@ repos:
       args: ["-c", "./.terraform-docs.yml", "./modules/storage"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/userassignedidentity"]
+    - id: terraform-docs-go
+      args: ["-c", "./.terraform-docs.yml", "./modules/aistudiooutboundrules"]
 - repo: local
   hooks:
     - id: terraform-fmt
