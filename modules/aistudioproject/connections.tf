@@ -23,5 +23,5 @@ resource "azapi_resource" "ai_studio_project_connection" {
   locks                     = []
   ignore_body_changes       = []
   ignore_casing             = false
-  ignore_missing_property   = false
+  ignore_missing_property   = true
 }
