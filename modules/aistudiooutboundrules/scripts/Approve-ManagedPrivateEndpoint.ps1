@@ -17,7 +17,7 @@ param (
     [Parameter(Mandatory = $false)]
     [ValidateNotNullOrEmpty()]
     [int]
-    $CheckFrequency = 10,
+    $Retries = 10,
 
     [Parameter(Mandatory = $false, ValueFromRemainingArguments = $true)]
     [string[]]
@@ -41,21 +41,21 @@ function Get-PrivateEndpointId {
         [Parameter(Mandatory = $false)]
         [ValidateNotNullOrEmpty()]
         [int]
-        $CheckFrequency = 10
+        $Retries = 10
     )
 
     # Initialize variable
     $privateEndpointId = $null
 
     # Get Private Endpoint ID
-    for ($i = 0; $i -lt $CheckFrequency; $i++) {
+    for ($i = 0; $i -lt $Retries; $i++) {
         $privateEndpointId = $(az network private-endpoint-connection list --id $ResourceId --query "[?contains(properties.privateEndpoint.id, '$ManagedPrivateEndpointName')].id | [0]" -o json) | ConvertFrom-Json
 
         if ($privateEndpointId) {
-            Write-Output "Private Endpoint found. Continuing with approval."
+            Write-Host "Private Endpoint found with id: '$($privateEndpointId)'. Continuing with approval."
             break
         }
-        Write-Output "Private Endpoint not found. Sleeping for $($CheckIntervalInSeconds) seconds ..."
+        Write-Host "Private Endpoint not found. Sleeping for $($CheckIntervalInSeconds) seconds ..."
         Start-Sleep -Seconds $CheckIntervalInSeconds
     }
 
@@ -79,22 +79,29 @@ function Approve-PrivateEndpoint {
     )
 
     # Check status of private endpoint
-    Write-Output "Checking status of Private Endpoint"
+    Write-Host "Checking status of Private Endpoint"
     $privateEndpointstatus = $(az network private-endpoint-connection list --id $ResourceId --query "[?contains(properties.privateEndpoint.id, '$ManagedPrivateEndpointName')].properties.privateLinkServiceConnectionState.status | [0]" -o json) | ConvertFrom-Json
 
     if ($privateEndpointStatus -eq "Approved") {
         # Private Endpoint Connection already approved
-        Write-Output "Private Endpoint Connection already approved"
+        Write-Host "Private Endpoint Connection already approved"
+    }
+    elseif ($privateEndpointStatus -eq "Failed") {
+        # Private Endpoint Connection has failed
+        Write-Error "Private Endpoint Connection has failed"
+        throw "Private Endpoint Connection has failed"
     }
     else {
         # Approve Private Endpoint Connection
-        Write-Output "Approving Private Endpoint Connection"
-        az network private-endpoint-connection approve --id $privateEndpointId --description "Approved in Terraform"
+        Write-Host "Approving Private Endpoint Connection"
+        az network private-endpoint-connection approve --id $PrivateEndpointId --description "Approved in Terraform"
     }
 }
 
 $privateEndpointId = Get-PrivateEndpointId `
-    -ManagedPrivateEndpointName $ManagedPrivateEndpointName
+    -ManagedPrivateEndpointName $ManagedPrivateEndpointName `
+    -CheckIntervalInSeconds $CheckIntervalInSeconds `
+    -Retries $Retries
 
 Approve-PrivateEndpoint `
     -ManagedPrivateEndpointName $ManagedPrivateEndpointName `
