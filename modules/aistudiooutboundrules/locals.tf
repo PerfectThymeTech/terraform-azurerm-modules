@@ -27,7 +27,7 @@ locals {
 
   # Outbound rules - service endpoints
   default_ai_studio_hub_outbound_rules_service_endpoints = {
-    "AzureOpenDatasets-TCP-443" = {
+    "AzureOpenDatasets-TCP-443" = { # Related to sample storage endpoints
       service_tag = "AzureOpenDatasets"
       protocol    = "TCP"
       port_range  = "443"
@@ -70,8 +70,10 @@ locals {
 
     # Required R dependencies
     "cloud.r-project.org",
+    "ghcr.io", ?!
+    "pkg-containers.githubusercontent.com", ?!
 
-    # VSCode dependencies (Docs: https://code.visualstudio.com/docs/setup/network#_common-hostnames)
+    # VSCode dependencies (Docs: https://code.visualstudio.com/docs/setup/network#_common-hostnames) - Not all needed --> Update
     "*.vscode.dev",
     "vscode.dev",
     "vscode.blob.core.windows.net",
@@ -92,7 +94,7 @@ locals {
     "download.visualstudio.microsoft.com",
     "vscode-sync.trafficmanager.net",
 
-    # Azure ML dependencies
+    # Azure ML Sample Endpoints --> crosscheck
     "azclientextensionsync.blob.core.windows.net",
     "azureexamples.blob.core.windows.net",
     "azuremlexamples.blob.core.windows.net",
@@ -100,7 +102,7 @@ locals {
     "notebiwesteurope.blob.core.windows.net",
     "i40vsblobprodsu6weus59.blob.core.windows.net",
 
-    # Huggingface dependencies
+    # Huggingface dependencies --> cross check with list which was shared
     "docker.io",
     "*.docker.io",
     "*.docker.com",
@@ -108,12 +110,8 @@ locals {
     "cdn.auth0.com",
     "cdn-lfs.huggingface.co",
 
-    # Ubuntu dependencies
+    # Ubuntu dependencies --> Update with specific rules
     "*.maven.org",
-    "snapcraft.io",
-    "*.snapcraft.io",
-    "snapcraftcontent.com",
-    "*.snapcraftcontent.com",
     "ubuntu.com",
     "*.ubuntu.com",
   ]
