@@ -37,7 +37,7 @@ resource "azapi_resource_action" "ai_studio_hub_provision_managed_network" {
   depends_on             = []
 }
 
-resource "null_resource" "synapse_managed_private_endpoint_monitor_private_link_scope_approval" {
+resource "null_resource" "ai_studio_hub_private_endpoints_approval" {
   for_each = var.ai_studio_hub_approve_private_endpoints ? local.ai_studio_hub_outbound_rules_private_endpoints : {}
 
   triggers = {
