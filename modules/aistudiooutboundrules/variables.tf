@@ -69,7 +69,15 @@ variable "ai_studio_hub_outbound_rules_service_endpoints" {
 }
 
 variable "ai_studio_hub_provision_managed_network" {
-  description = "Specifies whether the managed vnet should be providioned as part of the ai studio hub deployment."
+  description = "Specifies whether the managed vnet should be provisioned as part of the ai studio hub deployment."
+  type        = bool
+  sensitive   = false
+  nullable    = false
+  default     = false
+}
+
+variable "ai_studio_hub_approve_private_endpoints" {
+  description = "Specifies whether the managed private endpoints should be approved as part of the ai studio hub deployment."
   type        = bool
   sensitive   = false
   nullable    = false

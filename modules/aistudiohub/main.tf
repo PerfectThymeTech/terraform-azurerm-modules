@@ -74,5 +74,5 @@ resource "azapi_resource" "ai_studio_hub" {
   locks                     = []
   ignore_body_changes       = ["properties.managedNetwork"]
   ignore_casing             = false
-  ignore_missing_property   = false
+  ignore_missing_property   = true
 }

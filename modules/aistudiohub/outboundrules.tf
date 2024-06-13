@@ -24,7 +24,7 @@
 #   locks                     = []
 #   ignore_body_changes       = []
 #   ignore_casing             = false
-#   ignore_missing_property   = false
+#   ignore_missing_property   = true
 # }
 
 # resource "azapi_resource" "ai_studio_hub_outbound_rules_service_endpoints" { # Will be managed using a separate module due to service limitations: https://github.com/PerfectThymeTech/terraform-azurerm-modules/tree/main/modules/aistudiooutboundrules
@@ -52,7 +52,7 @@
 #   locks                     = []
 #   ignore_body_changes       = []
 #   ignore_casing             = false
-#   ignore_missing_property   = false
+#   ignore_missing_property   = true
 # }
 
 # resource "azapi_resource" "ai_studio_hub_outbound_rules_fqdns" { # Will be managed using a separate module due to service limitations: https://github.com/PerfectThymeTech/terraform-azurerm-modules/tree/main/modules/aistudiooutboundrules
@@ -76,7 +76,7 @@
 #   locks                     = []
 #   ignore_body_changes       = []
 #   ignore_casing             = false
-#   ignore_missing_property   = false
+#   ignore_missing_property   = true
 # }
 
 resource "azapi_resource_action" "ai_studio_hub_provision_managed_network" {

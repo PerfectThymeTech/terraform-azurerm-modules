@@ -48,6 +48,14 @@ Type: `string`
 
 The following input variables are optional (have default values):
 
+### <a name="input_ai_studio_hub_approve_private_endpoints"></a> [ai\_studio\_hub\_approve\_private\_endpoints](#input\_ai\_studio\_hub\_approve\_private\_endpoints)
+
+Description: Specifies whether the managed private endpoints should be approved as part of the ai studio hub deployment.
+
+Type: `bool`
+
+Default: `false`
+
 ### <a name="input_ai_studio_hub_outbound_rules_fqdns"></a> [ai\_studio\_hub\_outbound\_rules\_fqdns](#input\_ai\_studio\_hub\_outbound\_rules\_fqdns)
 
 Description: Specifies the outbound FQDN rules that should be added to the AI Studio Hub. Only provide FQDNs without specific paths such as 'microsoft.com' or '*.microsoft.com' but NOT 'microsoft.com/mypath'.
@@ -89,7 +97,7 @@ Default: `{}`
 
 ### <a name="input_ai_studio_hub_provision_managed_network"></a> [ai\_studio\_hub\_provision\_managed\_network](#input\_ai\_studio\_hub\_provision\_managed\_network)
 
-Description: Specifies whether the managed vnet should be providioned as part of the ai studio hub deployment.
+Description: Specifies whether the managed vnet should be provisioned as part of the ai studio hub deployment.
 
 Type: `bool`
 

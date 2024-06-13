@@ -96,6 +96,7 @@ run "create_aistudiooutboundrules" {
     ai_studio_hub_outbound_rules_private_endpoints = {}
     ai_studio_hub_outbound_rules_service_endpoints = {}
     ai_studio_hub_provision_managed_network        = false
+    ai_studio_hub_approve_private_endpoints        = false
   }
 
   assert {
