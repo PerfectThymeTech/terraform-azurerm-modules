@@ -26,8 +26,8 @@ locals {
   }
 
   # Outbound rules - service endpoints
-  default_ai_studio_hub_outbound_rules_service_endpoints = {
-    "AzureOpenDatasets-TCP-443" = { # Related to sample storage endpoints
+  default_ai_studio_hub_outbound_rules_service_endpoints = {  # Related to AI Studio & AML samples
+    "AzureOpenDatasets-TCP-443" = {
       service_tag = "AzureOpenDatasets"
       protocol    = "TCP"
       port_range  = "443"
@@ -60,7 +60,6 @@ locals {
     "pypi.org",
     "pythonhosted.org",
     "*.pythonhosted.org",
-    "pypi.python.org",
     "anaconda.com",
     "*.anaconda.com",
     "*.anaconda.org",
@@ -68,14 +67,13 @@ locals {
     "*.pytorch.org",
     "*.tensorflow.org",
 
-    # Required R dependencies
+    # Required R dependencies (Docs: https://learn.microsoft.com/en-us/azure/machine-learning/how-to-access-azureml-behind-firewall?view=azureml-api-2&tabs=ipaddress%2Cpublic#scenario-install-rstudio-on-compute-instance)
     "cloud.r-project.org",
-    "ghcr.io", ?!
-    "pkg-containers.githubusercontent.com", ?!
+    "ghcr.io",
+    "pkg-containers.githubusercontent.com",
 
-    # VSCode dependencies (Docs: https://code.visualstudio.com/docs/setup/network#_common-hostnames) - Not all needed --> Update
+    # VSCode dependencies (Docs: https://code.visualstudio.com/docs/setup/network#_common-hostnames) - Not all needed in AML
     "*.vscode.dev",
-    "vscode.dev",
     "vscode.blob.core.windows.net",
     "*.gallerycdn.vsassets.io",
     "raw.githubusercontent.com",
@@ -88,13 +86,8 @@ locals {
     "*.vo.msecnd.net",
     "marketplace.visualstudio.com",
     "vscode.download.prss.microsoft.com",
-    "*.gallery.vsassets.io",
-    "vscode.search.windows.net",
-    "vsmarketplacebadges.dev",
-    "download.visualstudio.microsoft.com",
-    "vscode-sync.trafficmanager.net",
 
-    # Azure ML Sample Endpoints --> crosscheck
+    # AI Studio & AML samples
     "azclientextensionsync.blob.core.windows.net",
     "azureexamples.blob.core.windows.net",
     "azuremlexamples.blob.core.windows.net",
@@ -102,18 +95,20 @@ locals {
     "notebiwesteurope.blob.core.windows.net",
     "i40vsblobprodsu6weus59.blob.core.windows.net",
 
-    # Huggingface dependencies --> cross check with list which was shared
+    # Model Catalogue Huggingface
     "docker.io",
     "*.docker.io",
     "*.docker.com",
     "production.cloudflare.docker.com",
     "cdn.auth0.com",
     "cdn-lfs.huggingface.co",
+    "huggingface.co",
 
     # Ubuntu dependencies --> Update with specific rules
     "*.maven.org",
-    "ubuntu.com",
-    "*.ubuntu.com",
+    "archive.ubuntu.com",
+    "security.ubuntu.com",
+    "ppa.launchpad.net",
   ]
   default_ai_studio_hub_outbound_rules_fqdns_map = {
     for item in toset(local.default_ai_studio_hub_outbound_rules_fqdns) :
