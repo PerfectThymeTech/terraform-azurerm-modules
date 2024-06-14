@@ -26,7 +26,7 @@ locals {
   }
 
   # Outbound rules - service endpoints
-  default_ai_studio_hub_outbound_rules_service_endpoints = {  # Related to AI Studio & AML samples
+  default_ai_studio_hub_outbound_rules_service_endpoints = { # Related to AI Studio & AML samples
     "AzureOpenDatasets-TCP-443" = {
       service_tag = "AzureOpenDatasets"
       protocol    = "TCP"
@@ -72,7 +72,7 @@ locals {
     "ghcr.io",
     "pkg-containers.githubusercontent.com",
 
-    # VSCode dependencies (Docs: https://code.visualstudio.com/docs/setup/network#_common-hostnames) - Not all needed in AML
+    # VSCode dependencies (Docs: https://code.visualstudio.com/docs/setup/network#_common-hostnames) - Not all are needed in AML
     "*.vscode.dev",
     "vscode.blob.core.windows.net",
     "*.gallerycdn.vsassets.io",
