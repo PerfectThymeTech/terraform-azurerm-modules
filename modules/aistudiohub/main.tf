@@ -75,6 +75,6 @@ resource "azapi_resource" "ai_studio_hub" {
   ignore_casing             = false
   ignore_missing_property   = true
   lifecycle {
-    ignore_changes = [ "body.properties.managedNetwork" ]
+    ignore_changes = ["body.properties.managedNetwork"]
   }
 }
