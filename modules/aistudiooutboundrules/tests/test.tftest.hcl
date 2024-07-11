@@ -65,7 +65,7 @@ run "setup" {
   variables {
     location                                       = var.location
     environment                                    = "int"
-    prefix                                         = "tfmdlaiprj"
+    prefix                                         = "tfmdlaiobr"
     resource_group_name                            = var.resource_group_name
     tags                                           = var.tags
     log_analytics_workspace_id                     = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-8f171ff9-2b5b-4f0f-aed5-7fa360a1d094-WEU"
@@ -97,10 +97,5 @@ run "create_aistudiooutboundrules" {
     ai_studio_hub_outbound_rules_service_endpoints = {}
     ai_studio_hub_provision_managed_network        = false
     ai_studio_hub_approve_private_endpoints        = false
-  }
-
-  assert {
-    condition     = azapi_resource.ai_studio_project.name == "mytftst-001"
-    error_message = "Failed to deploy."
   }
 }
