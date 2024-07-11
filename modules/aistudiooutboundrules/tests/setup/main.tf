@@ -116,7 +116,7 @@ module "ai_studio_hub" {
   location                = var.location
   resource_group_name     = var.resource_group_name
   tags                    = var.tags
-  ai_studio_name          = "${local.prefix}-aih002"
+  ai_studio_hub_name      = "${local.prefix}-aih002"
   application_insights_id = module.application_insights.application_insights_id
   container_registry_id   = module.container_registry.container_registry_id
   key_vault_id            = module.key_vault.key_vault_id
