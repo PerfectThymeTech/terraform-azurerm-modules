@@ -92,9 +92,9 @@ resource "azapi_resource_action" "ai_studio_hub_provision_managed_network" {
   })
 
   response_export_values = []
-  depends_on = [
-    azapi_resource.ai_studio_hub_outbound_rules_private_endpoints,
-    azapi_resource.ai_studio_hub_outbound_rules_service_endpoints,
-    azapi_resource.ai_studio_hub_outbound_rules_fqdns,
-  ]
+  # depends_on = [
+  #   azapi_resource.ai_studio_hub_outbound_rules_private_endpoints,
+  #   azapi_resource.ai_studio_hub_outbound_rules_service_endpoints,
+  #   azapi_resource.ai_studio_hub_outbound_rules_fqdns,
+  # ]
 }
