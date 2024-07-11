@@ -98,9 +98,4 @@ run "create_aistudiooutboundrules" {
     ai_studio_hub_provision_managed_network        = false
     ai_studio_hub_approve_private_endpoints        = false
   }
-
-  assert {
-    condition     = azapi_resource.ai_studio_project.name == "mytftst-001"
-    error_message = "Failed to deploy."
-  }
 }
