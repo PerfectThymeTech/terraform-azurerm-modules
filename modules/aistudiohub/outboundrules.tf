@@ -5,7 +5,7 @@
 #   name      = "pe-${each.key}"
 #   parent_id = azapi_resource.ai_studio_hub.id
 
-#   body = jsonencode({
+#   body = {
 #     properties = {
 #       type     = each.value.type
 #       category = each.value.category
@@ -17,12 +17,11 @@
 #         sparkStatus       = each.value.destination.sparkStatus
 #       }
 #     }
+#   }
 
-#   })
 #   response_export_values    = []
 #   schema_validation_enabled = false # Can be reverted once this is closed: https://github.com/Azure/terraform-provider-azapi/issues/524
 #   locks                     = []
-#   ignore_body_changes       = []
 #   ignore_casing             = false
 #   ignore_missing_property   = true
 # }
@@ -34,7 +33,7 @@
 #   name      = "se-${each.key}"
 #   parent_id = azapi_resource.ai_studio_hub.id
 
-#   body = jsonencode({
+#   body = {
 #     properties = {
 #       type     = each.value.type
 #       category = each.value.category
@@ -45,12 +44,11 @@
 #         action     = each.value.destination.action
 #       }
 #     }
+#   }
 
-#   })
 #   response_export_values    = []
 #   schema_validation_enabled = false # Can be reverted once this is closed: https://github.com/Azure/terraform-provider-azapi/issues/524
 #   locks                     = []
-#   ignore_body_changes       = []
 #   ignore_casing             = false
 #   ignore_missing_property   = true
 # }
@@ -62,19 +60,18 @@
 #   name      = "fq-${each.key}"
 #   parent_id = azapi_resource.ai_studio_hub.id
 
-#   body = jsonencode({
+#   body = {
 #     properties = {
 #       type        = each.value.type
 #       category    = each.value.category
 #       destination = each.value.destination
 #       status      = each.value.status
 #     }
+#   }
 
-#   })
 #   response_export_values    = []
 #   schema_validation_enabled = false # Can be reverted once this is closed: https://github.com/Azure/terraform-provider-azapi/issues/524
 #   locks                     = []
-#   ignore_body_changes       = []
 #   ignore_casing             = false
 #   ignore_missing_property   = true
 # }
@@ -87,9 +84,9 @@ resource "azapi_resource_action" "ai_studio_hub_provision_managed_network" {
 
   action = "provisionManagedNetwork"
   method = "POST"
-  body = jsonencode({
+  body = {
     includeSpark = true
-  })
+  }
 
   response_export_values = []
   # depends_on = [
