@@ -92,7 +92,7 @@ run "create_aistudio" {
     location                                = var.location
     resource_group_name                     = var.resource_group_name
     tags                                    = var.tags
-    ai_studio_hub_name                      = "mytftst-001"
+    ai_studio_hub_name                      = "mytftst-006"
     ai_studio_hub_provision_managed_network = false
     application_insights_id                 = run.setup.application_insights_id
     container_registry_id                   = run.setup.container_registry_id
