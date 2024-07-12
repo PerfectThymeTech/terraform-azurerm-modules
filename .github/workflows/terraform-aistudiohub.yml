@@ -27,6 +27,6 @@ jobs:
       node_version: 20
       tenant_id: "3556be79-2979-4b19-a1af-4dd4e6d9ed7e"
       subscription_id: "8f171ff9-2b5b-4f0f-aed5-7fa360a1d094"
-      run_test: false
+      run_test: true
     secrets:
       CLIENT_ID: ${{ secrets.CLIENT_ID }}
