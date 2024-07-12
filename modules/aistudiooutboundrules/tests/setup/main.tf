@@ -49,7 +49,7 @@ module "key_vault" {
   location                             = var.location
   resource_group_name                  = var.resource_group_name
   tags                                 = var.tags
-  key_vault_name                       = "${local.prefix}-kv007"
+  key_vault_name                       = "${local.prefix}-kv008"
   key_vault_sku_name                   = "standard"
   key_vault_soft_delete_retention_days = 7
   diagnostics_configurations           = []
@@ -116,7 +116,7 @@ module "ai_studio_hub" {
   location                = var.location
   resource_group_name     = var.resource_group_name
   tags                    = var.tags
-  ai_studio_hub_name      = "${local.prefix}-aih005"
+  ai_studio_hub_name      = "${local.prefix}-aih008"
   application_insights_id = module.application_insights.application_insights_id
   container_registry_id   = module.container_registry.container_registry_id
   key_vault_id            = module.key_vault.key_vault_id
