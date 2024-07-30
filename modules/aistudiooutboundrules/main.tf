@@ -35,6 +35,10 @@ resource "azapi_resource_action" "ai_studio_hub_provision_managed_network" {
 
   response_export_values = []
   depends_on             = []
+
+  timeouts {
+    create = "60m"
+  }
 }
 
 resource "null_resource" "ai_studio_hub_private_endpoints_approval" {
