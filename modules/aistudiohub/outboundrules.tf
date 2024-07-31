@@ -94,4 +94,8 @@ resource "azapi_resource_action" "ai_studio_hub_provision_managed_network" {
   #   azapi_resource.ai_studio_hub_outbound_rules_service_endpoints,
   #   azapi_resource.ai_studio_hub_outbound_rules_fqdns,
   # ]
+
+  timeouts {
+    create = "60m"
+  }
 }
