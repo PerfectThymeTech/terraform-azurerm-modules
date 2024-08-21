@@ -50,6 +50,8 @@ resource "azapi_resource" "ai_studio_hub" {
       v1LegacyMode                = false
 
       # TODO: Evaluate adding below properties
+      # allowRoleAssignmentOnRG = false
+      # enableSimplifiedCmk     = true
       # enableServiceSideCMKEncryption  = var.customer_managed_key == null ? false : true # Not supported today on hub and project: https://learn.microsoft.com/en-us/azure/machine-learning/concept-customer-managed-keys?view=azureml-api-2#preview-service-side-encryption-of-metadata
       # featureStoreSettings = {
       #   computeRuntime = {

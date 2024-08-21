@@ -1,7 +1,9 @@
-resource "azapi_update_resource" "ai_studio_hub_outbound_rules" {
+resource "azapi_resource_action" "ai_studio_hub_outbound_rules" {
   type        = "Microsoft.MachineLearningServices/workspaces@2024-04-01"
   resource_id = var.ai_studio_hub_id
 
+  action = null
+  method = "PATCH"
   body = {
     properties = {
       managedNetwork = {
@@ -14,11 +16,10 @@ resource "azapi_update_resource" "ai_studio_hub_outbound_rules" {
       }
     }
   }
+  when = "apply"
 
-  response_export_values  = []
-  locks                   = []
-  ignore_casing           = false
-  ignore_missing_property = false
+  response_export_values = []
+  locks                  = []
 }
 
 resource "azapi_resource_action" "ai_studio_hub_provision_managed_network" {
@@ -32,6 +33,7 @@ resource "azapi_resource_action" "ai_studio_hub_provision_managed_network" {
   body = {
     includeSpark = true
   }
+  when = "apply"
 
   response_export_values = []
   depends_on = [
