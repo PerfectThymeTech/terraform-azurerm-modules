@@ -97,7 +97,7 @@ variable "bot_service_icon_url" {
   nullable    = false
   default     = "https://docs.botframework.com/static/devportal/client/images/bot-framework-default.png"
   validation {
-    condition     = startswith(var.bot_service_sku, "https://")
+    condition     = startswith(var.bot_service_icon_url, "https://")
     error_message = "Please specify a valid bot service icon url which starts with 'https://'."
   }
 }
