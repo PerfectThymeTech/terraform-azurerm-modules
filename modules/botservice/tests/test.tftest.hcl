@@ -67,10 +67,11 @@ run "create_botservice" {
   command = apply
 
   variables {
-    location             = var.location_bot
+    location             = var.location
     resource_group_name  = "tfmdltst-dev-rg"
     tags                 = var.tags
     bot_service_name     = "tfmdlbot-int-bot"
+    bot_service_location = var.location_bot
     bot_service_endpoint = "https://example.com"
     bot_service_luis = {
       app_ids = []

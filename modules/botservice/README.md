@@ -87,6 +87,14 @@ Type: `string`
 
 Default: `"https://docs.botframework.com/static/devportal/client/images/bot-framework-default.png"`
 
+### <a name="input_bot_service_location"></a> [bot\_service\_location](#input\_bot\_service\_location)
+
+Description: Specifies the location of the bot service.
+
+Type: `string`
+
+Default: `"global"`
+
 ### <a name="input_bot_service_luis"></a> [bot\_service\_luis](#input\_bot\_service\_luis)
 
 Description: Specifies the luis app details of the bot service.

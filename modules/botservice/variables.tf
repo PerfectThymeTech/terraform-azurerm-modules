@@ -4,10 +4,6 @@ variable "location" {
   type        = string
   sensitive   = false
   nullable    = false
-  validation {
-    condition     = contains(["global", "westeurope", "westus", "centralindia"], var.location)
-    error_message = "Please specify a valid region which must be one of 'global', 'westeurope', 'westus' or 'centralindia'."
-  }
 }
 
 variable "resource_group_name" {
@@ -38,6 +34,18 @@ variable "bot_service_name" {
   validation {
     condition     = length(var.bot_service_name) >= 2 && length(var.bot_service_name) <= 64
     error_message = "Please specify a valid name."
+  }
+}
+
+variable "bot_service_location" {
+  description = "Specifies the location of the bot service."
+  type        = string
+  sensitive   = false
+  nullable    = false
+  default     = "global"
+  validation {
+    condition     = contains(["global", "westeurope", "westus", "centralindia"], var.location)
+    error_message = "Please specify a valid region which must be one of 'global', 'westeurope', 'westus' or 'centralindia'."
   }
 }
 

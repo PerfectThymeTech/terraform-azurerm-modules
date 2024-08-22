@@ -1,6 +1,6 @@
 resource "azurerm_bot_service_azure_bot" "bot_service_azure_bot" {
   name                = var.bot_service_name
-  location            = var.location
+  location            = var.bot_service_location
   resource_group_name = var.resource_group_name
   tags                = var.tags
 
