@@ -1,5 +1,6 @@
 variables {
   location            = "northeurope"
+  location_bot        = "global"
   resource_group_name = "tfmdltst-dev-rg"
   tags = {
     test = "botservice"
@@ -66,7 +67,7 @@ run "create_botservice" {
   command = apply
 
   variables {
-    location             = var.location
+    location             = var.location_bot
     resource_group_name  = "tfmdltst-dev-rg"
     tags                 = var.tags
     bot_service_name     = "tfmdlbot-int-bot"

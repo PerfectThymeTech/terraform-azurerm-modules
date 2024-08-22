@@ -4,6 +4,10 @@ variable "location" {
   type        = string
   sensitive   = false
   nullable    = false
+  validation {
+    condition     = contains(["global", "westeurope", "westus", "centralindia"], var.location.app_type)
+    error_message = "Please specify a valid region which must be one of 'global', 'westeurope', 'westus' or 'centralindia'."
+  }
 }
 
 variable "resource_group_name" {
