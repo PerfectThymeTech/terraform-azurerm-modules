@@ -5,7 +5,7 @@ variable "location" {
   sensitive   = false
   nullable    = false
   validation {
-    condition     = contains(["global", "westeurope", "westus", "centralindia"], var.location.app_type)
+    condition     = contains(["global", "westeurope", "westus", "centralindia"], var.location)
     error_message = "Please specify a valid region which must be one of 'global', 'westeurope', 'westus' or 'centralindia'."
   }
 }
