@@ -174,16 +174,27 @@ variable "connectivity_delay_in_seconds" {
   }
 }
 
-# variable "private_dns_zone_id_container_registry" {
-#   description = "Specifies the resource ID of the private DNS zone for the container registry. Not required if DNS A-records get created via Azure Policy."
-#   type        = string
-#   sensitive   = false
-#   default     = ""
-#   validation {
-#     condition     = var.private_dns_zone_id_container_registry == "" || (length(split("/", var.private_dns_zone_id_container_registry)) == 9 && endswith(var.private_dns_zone_id_container_registry, "privatelink.azurecr.io"))
-#     error_message = "Please specify a valid resource ID for the private DNS Zone."
-#   }
-# }
+variable "private_dns_zone_id_bot_framework_directline" {
+  description = "Specifies the resource ID of the private DNS zone for the bot framework directline. Not required if DNS A-records get created via Azure Policy."
+  type        = string
+  sensitive   = false
+  default     = ""
+  validation {
+    condition     = var.private_dns_zone_id_bot_framework_directline == "" || (length(split("/", var.private_dns_zone_id_bot_framework_directline)) == 9 && endswith(var.private_dns_zone_id_bot_framework_directline, "privatelink.directline.botframework.com"))
+    error_message = "Please specify a valid resource ID for the private DNS Zone."
+  }
+}
+
+variable "private_dns_zone_id_bot_framework_token" {
+  description = "Specifies the resource ID of the private DNS zone for the bot framework token. Not required if DNS A-records get created via Azure Policy."
+  type        = string
+  sensitive   = false
+  default     = ""
+  validation {
+    condition     = var.private_dns_zone_id_bot_framework_token == "" || (length(split("/", var.private_dns_zone_id_bot_framework_token)) == 9 && endswith(var.private_dns_zone_id_bot_framework_token, "privatelink.token.botframework.com"))
+    error_message = "Please specify a valid resource ID for the private DNS Zone."
+  }
+}
 
 # Customer-managed key variables
 variable "customer_managed_key" {

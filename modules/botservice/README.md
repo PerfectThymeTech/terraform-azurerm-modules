@@ -173,6 +173,22 @@ list(object({
 
 Default: `[]`
 
+### <a name="input_private_dns_zone_id_bot_framework_directline"></a> [private\_dns\_zone\_id\_bot\_framework\_directline](#input\_private\_dns\_zone\_id\_bot\_framework\_directline)
+
+Description: Specifies the resource ID of the private DNS zone for the bot framework directline. Not required if DNS A-records get created via Azure Policy.
+
+Type: `string`
+
+Default: `""`
+
+### <a name="input_private_dns_zone_id_bot_framework_token"></a> [private\_dns\_zone\_id\_bot\_framework\_token](#input\_private\_dns\_zone\_id\_bot\_framework\_token)
+
+Description: Specifies the resource ID of the private DNS zone for the bot framework token. Not required if DNS A-records get created via Azure Policy.
+
+Type: `string`
+
+Default: `""`
+
 ### <a name="input_tags"></a> [tags](#input\_tags)
 
 Description: Specifies a key value map of tags to set on every taggable resources.
@@ -188,6 +204,10 @@ The following outputs are exported:
 ### <a name="output_bot_service_id"></a> [bot\_service\_id](#output\_bot\_service\_id)
 
 Description: Specifies the resource id of the bot service.
+
+### <a name="output_bot_service_setup_completed"></a> [bot\_service\_setup\_completed](#output\_bot\_service\_setup\_completed)
+
+Description: Specifies whether the connectivity and identity has been successfully configured.
 
 <!-- markdownlint-enable -->
 

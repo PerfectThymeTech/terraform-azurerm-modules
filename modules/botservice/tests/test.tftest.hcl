@@ -82,14 +82,16 @@ run "create_botservice" {
       app_tenant_id = run.setup.user_assigned_identity_tenant_id
       app_type      = "UserAssignedMSI"
     }
-    bot_service_sku                           = "S1"
-    bot_service_streaming_endpoint_enabled    = false
-    bot_service_public_network_access_enabled = true
-    bot_service_application_insights_id       = run.setup.application_insights_id
-    diagnostics_configurations                = []
-    subnet_id                                 = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/tfmdltst-dev-rg/providers/Microsoft.Network/virtualNetworks/tfmdltst-dev-vnet/subnets/PrivateEndpoints"
-    connectivity_delay_in_seconds             = 0
-    customer_managed_key                      = null
+    bot_service_sku                              = "S1"
+    bot_service_streaming_endpoint_enabled       = false
+    bot_service_public_network_access_enabled    = true
+    bot_service_application_insights_id          = run.setup.application_insights_id
+    diagnostics_configurations                   = []
+    subnet_id                                    = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/tfmdltst-dev-rg/providers/Microsoft.Network/virtualNetworks/tfmdltst-dev-vnet/subnets/PrivateEndpoints"
+    connectivity_delay_in_seconds                = 0
+    private_dns_zone_id_bot_framework_directline = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/fsi-int-privatedns-rg/providers/Microsoft.Network/privateDnsZones/privatelink.directline.botframework.com"
+    private_dns_zone_id_bot_framework_token      = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/fsi-int-privatedns-rg/providers/Microsoft.Network/privateDnsZones/privatelink.token.botframework.com"
+    customer_managed_key                         = null
   }
 
   assert {
