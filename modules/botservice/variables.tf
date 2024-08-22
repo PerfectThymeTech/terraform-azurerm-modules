@@ -43,7 +43,7 @@ variable "bot_service_endpoint" {
   sensitive   = false
   nullable    = false
   validation {
-    condition     = length(var.bot_service_endpoint) >= 2 && startswith(var.bot_service_endpoint, "https://") <= 64
+    condition     = length(var.bot_service_endpoint) >= 2 && startswith(var.bot_service_endpoint, "https://")
     error_message = "Please specify a valid endpoint name that starts with 'https://'."
   }
 }
