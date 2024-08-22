@@ -12,8 +12,6 @@ The following requirements are needed by this module:
 
 - <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (>= 3.50.0)
 
-- <a name="requirement_time"></a> [time](#requirement\_time) (>= 0.9.1)
-
 ## Modules
 
 No modules.
@@ -74,6 +72,10 @@ Default: `{}`
 
 The following outputs are exported:
 
+### <a name="output_user_assigned_identity_client_id"></a> [user\_assigned\_identity\_client\_id](#output\_user\_assigned\_identity\_client\_id)
+
+Description: Specifies the client id of the user assigned identity.
+
 ### <a name="output_user_assigned_identity_id"></a> [user\_assigned\_identity\_id](#output\_user\_assigned\_identity\_id)
 
 Description: Specifies the resource id of the user assigned identity.
@@ -81,6 +83,14 @@ Description: Specifies the resource id of the user assigned identity.
 ### <a name="output_user_assigned_identity_name"></a> [user\_assigned\_identity\_name](#output\_user\_assigned\_identity\_name)
 
 Description: Specifies the name of the user assigned identity.
+
+### <a name="output_user_assigned_identity_principal_id"></a> [user\_assigned\_identity\_principal\_id](#output\_user\_assigned\_identity\_principal\_id)
+
+Description: Specifies the client id of the user assigned identity.
+
+### <a name="output_user_assigned_identity_tenant_id"></a> [user\_assigned\_identity\_tenant\_id](#output\_user\_assigned\_identity\_tenant\_id)
+
+Description: Specifies the client id of the user assigned identity.
 
 <!-- markdownlint-enable -->
 
