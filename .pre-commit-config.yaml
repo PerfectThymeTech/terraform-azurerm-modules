@@ -5,6 +5,7 @@ exclude: |
     modules/aistudiohub/README.md|
     modules/aistudioproject/README.md|
     modules/applicationinsights/README.md|
+    modules/botservice/README.md|
     modules/containerregistry/README.md|
     modules/keyvault/README.md|
     modules/loganalytics/README.md|
@@ -35,6 +36,8 @@ repos:
       args: ["-c", "./.terraform-docs.yml", "./modules/aistudioproject"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/applicationinsights"]
+    - id: terraform-docs-go
+      args: ["-c", "./.terraform-docs.yml", "./modules/botservice"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/containerregistry"]
     - id: terraform-docs-go
