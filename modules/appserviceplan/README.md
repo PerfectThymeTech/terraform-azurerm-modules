@@ -1,5 +1,5 @@
 <!-- BEGIN_TF_DOCS -->
-# Azure Application Insights Terraform Module
+# Azure App Service Plan Terraform Module
 
 ## Documentation
 <!-- markdownlint-disable MD033 -->
@@ -22,18 +22,6 @@ No modules.
 
 The following input variables are required:
 
-### <a name="input_application_insights_log_analytics_workspace_id"></a> [application\_insights\_log\_analytics\_workspace\_id](#input\_application\_insights\_log\_analytics\_workspace\_id)
-
-Description: Specifies the log analytics workspace of the application insights service.
-
-Type: `string`
-
-### <a name="input_application_insights_name"></a> [application\_insights\_name](#input\_application\_insights\_name)
-
-Description: Specifies the name of the application insights service.
-
-Type: `string`
-
 ### <a name="input_location"></a> [location](#input\_location)
 
 Description: Specifies the location of all resources.
@@ -46,17 +34,15 @@ Description: Specifies the resource group name in which all resources will get d
 
 Type: `string`
 
-## Optional Inputs
+### <a name="input_service_plan_name"></a> [service\_plan\_name](#input\_service\_plan\_name)
 
-The following input variables are optional (have default values):
-
-### <a name="input_application_insights_application_type"></a> [application\_insights\_application\_type](#input\_application\_insights\_application\_type)
-
-Description: Specifies the application type of the application insights service.
+Description: Specifies the name of the app service plan.
 
 Type: `string`
 
-Default: `"web"`
+## Optional Inputs
+
+The following input variables are optional (have default values):
 
 ### <a name="input_diagnostics_configurations"></a> [diagnostics\_configurations](#input\_diagnostics\_configurations)
 
@@ -73,6 +59,54 @@ list(object({
 
 Default: `[]`
 
+### <a name="input_service_plan_maximum_elastic_worker_count"></a> [service\_plan\_maximum\_elastic\_worker\_count](#input\_service\_plan\_maximum\_elastic\_worker\_count)
+
+Description: Specifies the maximum elastic worker count of the app service plan. Can only be set for an elastic SKU.
+
+Type: `string`
+
+Default: `null`
+
+### <a name="input_service_plan_os_type"></a> [service\_plan\_os\_type](#input\_service\_plan\_os\_type)
+
+Description: Specifies the os type of the app service plan.
+
+Type: `string`
+
+Default: `"Linux"`
+
+### <a name="input_service_plan_per_site_scaling_enabled"></a> [service\_plan\_per\_site\_scaling\_enabled](#input\_service\_plan\_per\_site\_scaling\_enabled)
+
+Description: Specifies whether per site scaling should be enabled for the app service plan.
+
+Type: `bool`
+
+Default: `false`
+
+### <a name="input_service_plan_sku_name"></a> [service\_plan\_sku\_name](#input\_service\_plan\_sku\_name)
+
+Description: Specifies the sku name of the app service plan.
+
+Type: `string`
+
+Default: `"P0v3"`
+
+### <a name="input_service_plan_worker_count"></a> [service\_plan\_worker\_count](#input\_service\_plan\_worker\_count)
+
+Description: Specifies the worker count of the app service plan.
+
+Type: `number`
+
+Default: `1`
+
+### <a name="input_service_plan_zone_balancing_enabled"></a> [service\_plan\_zone\_balancing\_enabled](#input\_service\_plan\_zone\_balancing\_enabled)
+
+Description: Specifies whether zone balancing should be enabled for the app service plan. Can only be enabled if woker count is >= 3.
+
+Type: `bool`
+
+Default: `false`
+
 ### <a name="input_tags"></a> [tags](#input\_tags)
 
 Description: Specifies a key value map of tags to set on every taggable resources.
@@ -85,17 +119,9 @@ Default: `{}`
 
 The following outputs are exported:
 
-### <a name="output_application_insights_connection_string"></a> [application\_insights\_connection\_string](#output\_application\_insights\_connection\_string)
+### <a name="output_service_plan_id"></a> [service\_plan\_id](#output\_service\_plan\_id)
 
-Description: Specifies the connection string of application insights.
-
-### <a name="output_application_insights_id"></a> [application\_insights\_id](#output\_application\_insights\_id)
-
-Description: Specifies the resource ID of application insights.
-
-### <a name="output_application_insights_instrumentation_key"></a> [application\_insights\_instrumentation\_key](#output\_application\_insights\_instrumentation\_key)
-
-Description: Specifies the instrumentation key of application insights.
+Description: Specifies the resource ID of the app service plan.
 
 <!-- markdownlint-enable -->
 
