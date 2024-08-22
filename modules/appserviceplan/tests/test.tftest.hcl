@@ -1,20 +1,24 @@
-run "create_applicationinsights" {
+run "create_appserviceplan" {
   command = apply
 
   variables {
     location            = "northeurope"
     resource_group_name = "tfmdltst-dev-rg"
     tags = {
-      test = "applicationinsights"
+      test = "appserviceplan"
     }
-    application_insights_name                       = "mytftst-001"
-    application_insights_application_type           = "web"
-    application_insights_log_analytics_workspace_id = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-8f171ff9-2b5b-4f0f-aed5-7fa360a1d094-WEU"
+    service_plan_name                       = "mytftst-asp001"
+    service_plan_maximum_elastic_worker_count           = null
+    service_plan_os_type = "Linux"
+    service_plan_per_site_scaling_enabled = false
+    service_plan_sku_name = "Y1"
+    service_plan_worker_count = 1
+    service_plan_zone_balancing_enabled = false
     diagnostics_configurations                      = []
   }
 
   assert {
-    condition     = azurerm_application_insights.application_insights.resource_group_name == "tfmdltst-dev-rg"
+    condition     = azurerm_service_plan.service_plan.resource_group_name == "tfmdltst-dev-rg"
     error_message = "Failed to deploy."
   }
 }
