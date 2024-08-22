@@ -44,7 +44,7 @@ variable "bot_service_location" {
   nullable    = false
   default     = "global"
   validation {
-    condition     = contains(["global", "westeurope", "westus", "centralindia"], var.location)
+    condition     = contains(["global", "westeurope", "westus", "centralindia"], var.bot_service_location)
     error_message = "Please specify a valid region which must be one of 'global', 'westeurope', 'westus' or 'centralindia'."
   }
 }
