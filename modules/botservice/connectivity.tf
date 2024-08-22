@@ -4,9 +4,9 @@ resource "azurerm_private_endpoint" "bot_service_azure_bot_private_endpoint_bot"
   resource_group_name = azurerm_bot_service_azure_bot.bot_service_azure_bot.resource_group_name
   tags                = var.tags
 
-  custom_network_interface_name = "${azurerm_bot_service_azure_bot.bot_service_azure_bot.name}-nic"
+  custom_network_interface_name = "${azurerm_bot_service_azure_bot.bot_service_azure_bot.name}-bot-nic"
   private_service_connection {
-    name                           = "${azurerm_bot_service_azure_bot.bot_service_azure_bot.name}-svc"
+    name                           = "${azurerm_bot_service_azure_bot.bot_service_azure_bot.name}-bot-svc"
     is_manual_connection           = false
     private_connection_resource_id = azurerm_bot_service_azure_bot.bot_service_azure_bot.id
     subresource_names              = ["Bot"]
@@ -35,9 +35,9 @@ resource "azurerm_private_endpoint" "bot_service_azure_bot_private_endpoint_toke
   resource_group_name = azurerm_bot_service_azure_bot.bot_service_azure_bot.resource_group_name
   tags                = var.tags
 
-  custom_network_interface_name = "${azurerm_bot_service_azure_bot.bot_service_azure_bot.name}-nic"
+  custom_network_interface_name = "${azurerm_bot_service_azure_bot.bot_service_azure_bot.name}-token-nic"
   private_service_connection {
-    name                           = "${azurerm_bot_service_azure_bot.bot_service_azure_bot.name}-svc"
+    name                           = "${azurerm_bot_service_azure_bot.bot_service_azure_bot.name}-token-svc"
     is_manual_connection           = false
     private_connection_resource_id = azurerm_bot_service_azure_bot.bot_service_azure_bot.id
     subresource_names              = ["Token"]
