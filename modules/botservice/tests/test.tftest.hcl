@@ -76,10 +76,10 @@ run "create_botservice" {
       key     = null
     }
     bot_service_microsoft_app = {
-      app_id        = ""
-      app_msi_id    = null
-      app_tenant_id = ""
-      app_type      = "SingleTenant"
+      app_id        = run.setup.user_assigned_identity_client_id
+      app_msi_id    = run.setup.user_assigned_identity_id
+      app_tenant_id = run.setup.user_assigned_identity_tenant_id
+      app_type      = "UserAssignedMSI"
     }
     bot_service_sku                           = "S1"
     bot_service_streaming_endpoint_enabled    = false
