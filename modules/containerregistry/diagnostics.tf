@@ -1,4 +1,4 @@
-resource "azurerm_monitor_diagnostic_setting" "diagnostic_setting_ai_studio_project" {
+resource "azurerm_monitor_diagnostic_setting" "diagnostic_setting_container_registry" {
   for_each = { for index, value in var.diagnostics_configurations :
     index => {
       log_analytics_workspace_id = value.log_analytics_workspace_id,
@@ -6,13 +6,13 @@ resource "azurerm_monitor_diagnostic_setting" "diagnostic_setting_ai_studio_proj
     }
   }
   name                       = "applicationLogs-${each.key}"
-  target_resource_id         = azapi_resource.ai_studio_project.id
+  target_resource_id         = azurerm_container_registry.container_registry.id
   log_analytics_workspace_id = each.value.log_analytics_workspace_id == "" ? null : each.value.log_analytics_workspace_id
   storage_account_id         = each.value.storage_account_id == "" ? null : each.value.storage_account_id
 
   dynamic "enabled_log" {
     iterator = entry
-    for_each = data.azurerm_monitor_diagnostic_categories.diagnostic_categories_ai_studio_project.log_category_groups
+    for_each = data.azurerm_monitor_diagnostic_categories.diagnostic_categories_container_registry.log_category_groups
     content {
       category_group = entry.value
     }
@@ -20,7 +20,7 @@ resource "azurerm_monitor_diagnostic_setting" "diagnostic_setting_ai_studio_proj
 
   dynamic "metric" {
     iterator = entry
-    for_each = data.azurerm_monitor_diagnostic_categories.diagnostic_categories_ai_studio_project.metrics
+    for_each = data.azurerm_monitor_diagnostic_categories.diagnostic_categories_container_registry.metrics
     content {
       category = entry.value
       enabled  = true
