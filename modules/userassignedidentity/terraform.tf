@@ -6,9 +6,5 @@ terraform {
       source  = "hashicorp/azurerm"
       version = ">= 3.50.0"
     }
-    time = {
-      source  = "hashicorp/time"
-      version = ">= 0.9.1"
-    }
   }
 }
