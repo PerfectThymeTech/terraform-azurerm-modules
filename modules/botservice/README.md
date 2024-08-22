@@ -185,21 +185,9 @@ Default: `{}`
 
 The following outputs are exported:
 
-### <a name="output_container_registry_id"></a> [container\_registry\_id](#output\_container\_registry\_id)
+### <a name="output_bot_service_id"></a> [bot\_service\_id](#output\_bot\_service\_id)
 
-Description: Specifies the resource id of the container registry.
-
-### <a name="output_container_registry_name"></a> [container\_registry\_name](#output\_container\_registry\_name)
-
-Description: Specifies the resource name of the container registry.
-
-### <a name="output_container_registry_principal_id"></a> [container\_registry\_principal\_id](#output\_container\_registry\_principal\_id)
-
-Description: Specifies the principal id of the container registry.
-
-### <a name="output_container_registry_setup_completed"></a> [container\_registry\_setup\_completed](#output\_container\_registry\_setup\_completed)
-
-Description: Specifies whether the connectivity and identity has been successfully configured.
+Description: Specifies the resource id of the bot service.
 
 <!-- markdownlint-enable -->
 

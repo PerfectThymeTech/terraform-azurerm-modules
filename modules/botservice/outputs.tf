@@ -1,27 +1,15 @@
-output "container_registry_id" {
-  description = "Specifies the resource id of the container registry."
-  value       = azurerm_container_registry.container_registry.id
+output "bot_service_id" {
+  description = "Specifies the resource id of the bot service."
+  value       = azurerm_bot_service_azure_bot.bot_service_azure_bot.id
   sensitive   = false
 }
 
-output "container_registry_name" {
-  description = "Specifies the resource name of the container registry."
-  value       = azurerm_container_registry.container_registry.name
-  sensitive   = false
-}
+# output "bot_service_setup_completed" {
+#   description = "Specifies whether the connectivity and identity has been successfully configured."
+#   value       = true
+#   sensitive   = false
 
-output "container_registry_principal_id" {
-  description = "Specifies the principal id of the container registry."
-  value       = azurerm_container_registry.container_registry.identity[0].principal_id
-  sensitive   = false
-}
-
-output "container_registry_setup_completed" {
-  description = "Specifies whether the connectivity and identity has been successfully configured."
-  value       = true
-  sensitive   = false
-
-  depends_on = [
-    time_sleep.sleep_connectivity,
-  ]
-}
+#   depends_on = [
+#     time_sleep.sleep_connectivity,
+#   ]
+# }
