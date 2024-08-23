@@ -7,7 +7,7 @@ resource "azurerm_bot_service_azure_bot" "bot_service_azure_bot" {
   cmk_key_vault_key_url                 = var.customer_managed_key == null ? null : var.customer_managed_key.key_vault_key_versionless_id
   developer_app_insights_api_key        = azurerm_application_insights_api_key.application_insights_api_key.api_key
   developer_app_insights_application_id = data.azurerm_application_insights.application_insights.app_id
-  developer_app_insights_key            = null
+  developer_app_insights_key            = data.azurerm_application_insights.application_insights.instrumentation_key
   display_name                          = "Azure Bot Service - ${title(replace(var.bot_service_name, "-", " "))}"
   endpoint                              = var.bot_service_endpoint
   icon_url                              = var.bot_service_icon_url
