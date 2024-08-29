@@ -49,7 +49,7 @@ resource "azurerm_storage_account" "storage_account" {
   }
   cross_tenant_replication_enabled  = false
   default_to_oauth_authentication   = true
-  enable_https_traffic_only         = true
+  https_traffic_only_enabled        = true
   infrastructure_encryption_enabled = true
   is_hns_enabled                    = var.storage_is_hns_enabled
   large_file_share_enabled          = false
