@@ -4,23 +4,23 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.111.0"
+      version = "4.0.1"
     }
     azapi = {
       source  = "Azure/azapi"
-      version = "1.14.0"
+      version = "1.15.0"
     }
     time = {
       source  = "hashicorp/time"
-      version = "0.9.1"
+      version = "0.12.0"
     }
   }
 }
 
 provider "azurerm" {
-  environment                = "public"
-  skip_provider_registration = false
-  storage_use_azuread        = true
+  environment                     = "public"
+  resource_provider_registrations = "all"
+  storage_use_azuread             = true
 
   features {
     cognitive_account {
