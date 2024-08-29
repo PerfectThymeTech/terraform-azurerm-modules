@@ -77,10 +77,10 @@ resource "azurerm_cognitive_deployment" "cognitive_deployments" {
     version = each.value.model_version
   }
   sku {
-    name = each.value.sku_name
-    tier = each.value.sku_tier
-    size = each.value.sku_size
-    family = each.value.sku_family
+    name     = each.value.sku_name
+    tier     = each.value.sku_tier
+    size     = each.value.sku_size
+    family   = each.value.sku_family
     capacity = each.value.sku_capacity
   }
 }
