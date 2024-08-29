@@ -98,11 +98,11 @@ variable "cognitive_account_deployments" {
     model_name        = string
     model_version     = string
     model_api_version = optional(string, "2024-02-15-preview")
-    scale_type        = optional(string, "Standard")
-    scale_tier        = optional(string, "Standard")
-    scale_size        = optional(string, null)
-    scale_family      = optional(string, null)
-    scale_capacity    = optional(number, 1)
+    sku_name          = optional(string, "Standard")
+    sku_tier          = optional(string, "Standard")
+    sku_size          = optional(string, null)
+    sku_family        = optional(string, null)
+    sku_capacity      = optional(number, 1)
   }))
   sensitive = false
   default   = {}

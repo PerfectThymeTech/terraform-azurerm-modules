@@ -25,7 +25,6 @@ resource "azurerm_container_registry" "container_registry" {
   dynamic "encryption" {
     for_each = var.customer_managed_key != null ? [1] : []
     content {
-      enabled            = true
       identity_client_id = var.customer_managed_key.user_assigned_identity_client_id
       key_vault_key_id   = var.customer_managed_key.key_vault_key_versionless_id
     }
@@ -34,24 +33,14 @@ resource "azurerm_container_registry" "container_registry" {
   network_rule_bypass_option = "AzureServices"
   network_rule_set = [
     {
-      default_action  = "Deny"
-      ip_rule         = []
-      virtual_network = []
+      default_action = "Deny"
+      ip_rule        = []
     }
   ]
   public_network_access_enabled = false
   quarantine_policy_enabled     = var.container_registry_quarantine_policy_enabled
-  retention_policy = [
-    {
-      days    = var.container_registry_retention_policy_in_days
-      enabled = true
-    }
-  ]
-  sku = "Premium"
-  trust_policy = [
-    {
-      enabled = var.container_registry_trust_policy_enabled
-    }
-  ]
-  zone_redundancy_enabled = var.container_registry_zone_redundancy_enabled
+  retention_policy_in_days      = var.container_registry_retention_policy_in_days
+  sku                           = "Premium"
+  trust_policy_enabled          = var.container_registry_trust_policy_enabled
+  zone_redundancy_enabled       = var.container_registry_zone_redundancy_enabled
 }

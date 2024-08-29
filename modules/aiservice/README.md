@@ -12,7 +12,7 @@ The following requirements are needed by this module:
 
 - <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) (>= 1.12.1)
 
-- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (>= 3.50.0)
+- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (>= 4.0.0)
 
 - <a name="requirement_time"></a> [time](#requirement\_time) (>= 0.9.1)
 
@@ -77,11 +77,11 @@ map(object({
     model_name        = string
     model_version     = string
     model_api_version = optional(string, "2024-02-15-preview")
-    scale_type        = optional(string, "Standard")
-    scale_tier        = optional(string, "Standard")
-    scale_size        = optional(string, null)
-    scale_family      = optional(string, null)
-    scale_capacity    = optional(number, 1)
+    sku_name          = optional(string, "Standard")
+    sku_tier          = optional(string, "Standard")
+    sku_size          = optional(string, null)
+    sku_family        = optional(string, null)
+    sku_capacity      = optional(number, 1)
   }))
 ```
 
