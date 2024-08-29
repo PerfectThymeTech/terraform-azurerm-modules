@@ -127,10 +127,10 @@ jobs:
         id: checkout_repository
         uses: actions/checkout@v4
 
-      # # Terraform Override
-      # - name: Terraform Override
-      #   run: |
-      #     mv code/utilities/terraform_override.tf modules/${{ inputs.config }}
+      # Terraform Override
+      - name: Terraform Override
+        run: |
+          mv code/utilities/terraform_override.tf modules/${{ inputs.config }}
 
       # Terraform Init
       - name: Terraform Init
