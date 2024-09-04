@@ -70,7 +70,7 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
     }
   }
   create_mode           = "Default"
-  default_identity_type = var.cosmosdb_account_default_identity_type
+  default_identity_type = var.cosmosdb_account_default_identity_type == "" ? null : var.cosmosdb_account_default_identity_type
   free_tier_enabled     = false
   dynamic "geo_location" {
     for_each = var.cosmosdb_account_geo_location

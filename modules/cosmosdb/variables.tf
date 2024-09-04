@@ -153,10 +153,10 @@ variable "cosmosdb_account_default_identity_type" {
   description = "Specifies the default identity type for key vault access for customer-managed key."
   type        = string
   sensitive   = false
-  nullable    = true
-  default     = null
+  nullable    = false
+  default     = ""
   validation {
-    condition     = var.cosmosdb_account_default_identity_type == null || contains(["FirstPartyIdentity", "SystemAssignedIdentity"], var.cosmosdb_account_default_identity_type) || startswith(var.cosmosdb_account_default_identity_type, "UserAssignedIdentity=")
+    condition     = var.cosmosdb_account_default_identity_type == "" || contains(["FirstPartyIdentity", "SystemAssignedIdentity"], var.cosmosdb_account_default_identity_type) || startswith(var.cosmosdb_account_default_identity_type, "UserAssignedIdentity=")
     error_message = "Please specify a valid default identity type for the key vault access for customer-managed keys."
   }
 }
