@@ -106,7 +106,17 @@ object({
   })
 ```
 
-Default: `null`
+Default:
+
+```json
+{
+  "interval_in_minutes": 240,
+  "retention_in_hours": 8,
+  "storage_redundancy": "Geo",
+  "tier": "Continuous7Days",
+  "type": "Continuous"
+}
+```
 
 ### <a name="input_cosmosdb_account_capabilities"></a> [cosmosdb\_account\_capabilities](#input\_cosmosdb\_account\_capabilities)
 
@@ -172,7 +182,7 @@ Description: Specifies the default identity type for key vault access for custom
 
 Type: `string`
 
-Default: `null`
+Default: `""`
 
 ### <a name="input_cosmosdb_account_kind"></a> [cosmosdb\_account\_kind](#input\_cosmosdb\_account\_kind)
 

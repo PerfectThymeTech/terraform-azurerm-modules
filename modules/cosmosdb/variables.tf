@@ -64,7 +64,13 @@ variable "cosmosdb_account_backup" {
   })
   sensitive = false
   nullable  = true
-  default   = null
+  default = {
+    type                = "Continuous"
+    tier                = "Continuous7Days"
+    storage_redundancy  = "Geo"
+    retention_in_hours  = 8
+    interval_in_minutes = 240
+  }
   validation {
     condition     = contains(["Continuous", "Periodic"], var.cosmosdb_account_backup.type)
     error_message = "Please specify a valid backup type."
@@ -265,7 +271,7 @@ variable "private_dns_zone_id_cosmos_sql" {
   sensitive   = false
   default     = ""
   validation {
-    condition     = var.private_dns_zone_id_cosmos_sql == "" || (length(split("/", var.private_dns_zone_id_cosmos_sql)) == 9 && endswith(var.private_dns_zone_id_cosmos_sql, "privatelink.documents.azure.com"))
+    condition     = var.private_dns_zone_id_cosmos_sql == "" || (length(split("/", var.private_dns_zone_id_cosmos_sql)) == 9 && endswith(var.private_dns_zone_id_cosmos_sql, "privatelink.documents.cosmos.azure.com"))
     error_message = "Please specify a valid resource ID for the private DNS Zone."
   }
 }

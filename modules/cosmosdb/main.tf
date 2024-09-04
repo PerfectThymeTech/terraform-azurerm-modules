@@ -28,16 +28,6 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
     }
   }
   automatic_failover_enabled = var.cosmosdb_account_automatic_failover_enabled
-  dynamic "backup" {
-    for_each = var.cosmosdb_account_backup != null ? [1] : [0]
-    content {
-      interval_in_minutes = backup.value.interval_in_minutes
-      retention_in_hours  = backup.value.retention_in_hours
-      storage_redundancy  = backup.value.storage_redundancy
-      tier                = backup.value.tier
-      type                = backup.value.type
-    }
-  }
   backup {
     type                = var.cosmosdb_account_backup.type
     tier                = var.cosmosdb_account_backup.tier
