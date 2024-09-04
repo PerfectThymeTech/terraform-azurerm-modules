@@ -13,9 +13,9 @@ run "create_cosmosdb_account" {
     cosmosdb_account_backup = {
       type                = "Continuous"
       tier                = "Continuous7Days"
-      storage_redundancy  = "Geo"
-      retention_in_hours  = 8
-      interval_in_minutes = 240
+      storage_redundancy  = null
+      retention_in_hours  = null
+      interval_in_minutes = null
     }
     cosmosdb_account_capabilities = [
       "DisableRateLimitingResponses"

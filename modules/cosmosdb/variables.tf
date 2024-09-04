@@ -76,19 +76,19 @@ variable "cosmosdb_account_backup" {
     error_message = "Please specify a valid backup type."
   }
   validation {
-    condition     = var.cosmosdb_account_backup.type == "Continuous" ? contains(["Continuous7Days", "Continuous30Days"], var.cosmosdb_account_backup.tier) : var.cosmosdb_account_backup.tier == null
+    condition     = var.cosmosdb_account_backup.type == "Periodic" ? contains(["Continuous7Days", "Continuous30Days"], var.cosmosdb_account_backup.tier) : var.cosmosdb_account_backup.tier == null
     error_message = "Please specify a valid backup tier."
   }
   validation {
-    condition     = var.cosmosdb_account_backup.type == "Continuous" ? contains(["Geo", "Zone", "Local"], var.cosmosdb_account_backup.storage_redundancy) : var.cosmosdb_account_backup.storage_redundancy == null
+    condition     = var.cosmosdb_account_backup.type == "Periodic" ? contains(["Geo", "Zone", "Local"], var.cosmosdb_account_backup.storage_redundancy) : var.cosmosdb_account_backup.storage_redundancy == null
     error_message = "Please specify a valid backup storage redundancy."
   }
   validation {
-    condition     = var.cosmosdb_account_backup.type == "Continuous" ? var.cosmosdb_account_backup.retention_in_hours >= 8 && var.cosmosdb_account_backup.retention_in_hours <= 720 : var.cosmosdb_account_backup.retention_in_hours == null
+    condition     = var.cosmosdb_account_backup.type == "Periodic" ? var.cosmosdb_account_backup.retention_in_hours >= 8 && var.cosmosdb_account_backup.retention_in_hours <= 720 : var.cosmosdb_account_backup.retention_in_hours == null
     error_message = "Please specify a valid backup retention in hours."
   }
   validation {
-    condition     = var.cosmosdb_account_backup.type == "Continuous" ? var.cosmosdb_account_backup.interval_in_minutes >= 60 && var.cosmosdb_account_backup.interval_in_minutes <= 1440 : var.cosmosdb_account_backup.interval_in_minutes == null
+    condition     = var.cosmosdb_account_backup.type == "Periodic" ? var.cosmosdb_account_backup.interval_in_minutes >= 60 && var.cosmosdb_account_backup.interval_in_minutes <= 1440 : var.cosmosdb_account_backup.interval_in_minutes == null
     error_message = "Please specify a valid backup interval in minutes."
   }
 }
