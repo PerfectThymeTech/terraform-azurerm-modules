@@ -58,25 +58,25 @@ variable "cosmosdb_account_backup" {
   type = object({
     type                = optional(string, "Continuous"),
     tier                = optional(string, "Continuous7Days")
-    storage_redundancy  = optional(string, "Geo")
-    retention_in_hours  = optional(number, 8)
-    interval_in_minutes = optional(number, 240)
+    storage_redundancy  = optional(string, null)
+    retention_in_hours  = optional(number, null)
+    interval_in_minutes = optional(number, null)
   })
   sensitive = false
   nullable  = true
   default = {
     type                = "Continuous"
     tier                = "Continuous7Days"
-    storage_redundancy  = "Geo"
-    retention_in_hours  = 8
-    interval_in_minutes = 240
+    storage_redundancy  = null
+    retention_in_hours  = null
+    interval_in_minutes = null
   }
   validation {
     condition     = contains(["Continuous", "Periodic"], var.cosmosdb_account_backup.type)
     error_message = "Please specify a valid backup type."
   }
   validation {
-    condition     = var.cosmosdb_account_backup.type == "Periodic" ? contains(["Continuous7Days", "Continuous30Days"], var.cosmosdb_account_backup.tier) : var.cosmosdb_account_backup.tier == null
+    condition     = var.cosmosdb_account_backup.type == "Continuous" ? contains(["Continuous7Days", "Continuous30Days"], var.cosmosdb_account_backup.tier) : var.cosmosdb_account_backup.tier == null
     error_message = "Please specify a valid backup tier."
   }
   validation {

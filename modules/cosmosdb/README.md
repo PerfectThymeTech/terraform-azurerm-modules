@@ -100,9 +100,9 @@ Type:
 object({
     type                = optional(string, "Continuous"),
     tier                = optional(string, "Continuous7Days")
-    storage_redundancy  = optional(string, "Geo")
-    retention_in_hours  = optional(number, 8)
-    interval_in_minutes = optional(number, 240)
+    storage_redundancy  = optional(string, null)
+    retention_in_hours  = optional(number, null)
+    interval_in_minutes = optional(number, null)
   })
 ```
 
@@ -110,9 +110,9 @@ Default:
 
 ```json
 {
-  "interval_in_minutes": 240,
-  "retention_in_hours": 8,
-  "storage_redundancy": "Geo",
+  "interval_in_minutes": null,
+  "retention_in_hours": null,
+  "storage_redundancy": null,
   "tier": "Continuous7Days",
   "type": "Continuous"
 }
