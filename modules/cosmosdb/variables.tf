@@ -279,7 +279,7 @@ variable "private_dns_zone_id_cosmos_sql" {
   sensitive   = false
   default     = ""
   validation {
-    condition     = var.private_dns_zone_id_cosmos_sql == "" || (length(split("/", var.private_dns_zone_id_cosmos_sql)) == 9 && endswith(var.private_dns_zone_id_cosmos_sql, "privatelink.documents.cosmos.azure.com"))
+    condition     = var.private_dns_zone_id_cosmos_sql == "" || (length(split("/", var.private_dns_zone_id_cosmos_sql)) == 9 && endswith(var.private_dns_zone_id_cosmos_sql, "privatelink.documents.azure.com"))
     error_message = "Please specify a valid resource ID for the private DNS Zone."
   }
 }
