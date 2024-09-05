@@ -13,7 +13,7 @@ output "cosmosdb_account_name" {
 output "cosmosdb_account_primary_key" {
   description = "Specifies the primary key of the cosmos db account."
   value       = azurerm_cosmosdb_account.cosmosdb_account.primary_key
-  sensitive   = false
+  sensitive   = true
 }
 
 output "cosmosdb_account_endpoint" {
