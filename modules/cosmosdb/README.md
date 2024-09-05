@@ -192,6 +192,14 @@ Type: `string`
 
 Default: `"GlobalDocumentDB"`
 
+### <a name="input_cosmosdb_account_local_authentication_disabled"></a> [cosmosdb\_account\_local\_authentication\_disabled](#input\_cosmosdb\_account\_local\_authentication\_disabled)
+
+Description: Specifies whether local authentication should be enabled for the cosmos db account.
+
+Type: `bool`
+
+Default: `true`
+
 ### <a name="input_cosmosdb_account_mongo_server_version"></a> [cosmosdb\_account\_mongo\_server\_version](#input\_cosmosdb\_account\_mongo\_server\_version)
 
 Description: Specifies the mongo server version of the cosmos db account.
@@ -337,6 +345,10 @@ Description: Specifies the resource id of the cosmos db account.
 ### <a name="output_cosmosdb_account_name"></a> [cosmosdb\_account\_name](#output\_cosmosdb\_account\_name)
 
 Description: Specifies the resource name of the cosmos db account.
+
+### <a name="output_cosmosdb_account_primary_key"></a> [cosmosdb\_account\_primary\_key](#output\_cosmosdb\_account\_primary\_key)
+
+Description: Specifies the primary key of the cosmos db account.
 
 ### <a name="output_cosmosdb_account_read_endpoints"></a> [cosmosdb\_account\_read\_endpoints](#output\_cosmosdb\_account\_read\_endpoints)
 

@@ -10,6 +10,12 @@ output "cosmosdb_account_name" {
   sensitive   = false
 }
 
+output "cosmosdb_account_primary_key" {
+  description = "Specifies the primary key of the cosmos db account."
+  value       = azurerm_cosmosdb_account.cosmosdb_account.primary_key
+  sensitive   = false
+}
+
 output "cosmosdb_account_endpoint" {
   description = "Specifies the endpoint of the cosmos db account."
   value       = azurerm_cosmosdb_account.cosmosdb_account.endpoint
