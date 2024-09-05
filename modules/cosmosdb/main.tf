@@ -74,7 +74,7 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
   is_virtual_network_filter_enabled     = true
   key_vault_key_id                      = var.customer_managed_key != null ? var.customer_managed_key.key_vault_key_versionless_id : null
   kind                                  = var.cosmosdb_account_kind
-  local_authentication_disabled         = true
+  local_authentication_disabled         = var.cosmosdb_account_local_authentication_disabled
   minimal_tls_version                   = "Tls12"
   mongo_server_version                  = null
   multiple_write_locations_enabled      = var.cosmosdb_account_mongo_server_version

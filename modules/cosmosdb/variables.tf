@@ -190,6 +190,14 @@ variable "cosmosdb_account_kind" {
   }
 }
 
+variable "cosmosdb_account_local_authentication_disabled" {
+  description = "Specifies whether local authentication should be enabled for the cosmos db account."
+  type        = bool
+  sensitive   = false
+  nullable    = false
+  default     = true
+}
+
 variable "cosmosdb_account_mongo_server_version" {
   description = "Specifies the mongo server version of the cosmos db account."
   type        = string
