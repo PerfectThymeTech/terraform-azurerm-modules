@@ -74,6 +74,14 @@ Type: `number`
 
 Default: `120`
 
+### <a name="input_cosmosdb_account_access_key_metadata_writes_enabled"></a> [cosmosdb\_account\_access\_key\_metadata\_writes\_enabled](#input\_cosmosdb\_account\_access\_key\_metadata\_writes\_enabled)
+
+Description: Specifies whether the key metadata writes should be enabled for the cosmos db account.
+
+Type: `bool`
+
+Default: `false`
+
 ### <a name="input_cosmosdb_account_analytical_storage_enabled"></a> [cosmosdb\_account\_analytical\_storage\_enabled](#input\_cosmosdb\_account\_analytical\_storage\_enabled)
 
 Description: Specifies whether the analytical storage should be enabled for the cosmos db account.

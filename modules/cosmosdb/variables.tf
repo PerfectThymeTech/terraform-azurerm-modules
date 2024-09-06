@@ -37,6 +37,14 @@ variable "cosmosdb_account_name" {
   }
 }
 
+variable "cosmosdb_account_access_key_metadata_writes_enabled" {
+  description = "Specifies whether the key metadata writes should be enabled for the cosmos db account."
+  type        = bool
+  sensitive   = false
+  nullable    = false
+  default     = false
+}
+
 variable "cosmosdb_account_analytical_storage_enabled" {
   description = "Specifies whether the analytical storage should be enabled for the cosmos db account."
   type        = bool

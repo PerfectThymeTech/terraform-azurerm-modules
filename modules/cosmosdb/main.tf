@@ -19,7 +19,7 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
     }
   }
 
-  access_key_metadata_writes_enabled = false
+  access_key_metadata_writes_enabled = var.cosmosdb_account_access_key_metadata_writes_enabled
   analytical_storage_enabled         = var.cosmosdb_account_analytical_storage_enabled
   dynamic "analytical_storage" {
     for_each = var.cosmosdb_account_analytical_storage_enabled ? [1] : [0]
