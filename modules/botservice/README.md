@@ -213,6 +213,10 @@ The following outputs are exported:
 
 Description: Specifies the resource id of the bot service.
 
+### <a name="output_bot_service_name"></a> [bot\_service\_name](#output\_bot\_service\_name)
+
+Description: Specifies the name of the bot service.
+
 ### <a name="output_bot_service_setup_completed"></a> [bot\_service\_setup\_completed](#output\_bot\_service\_setup\_completed)
 
 Description: Specifies whether the connectivity and identity has been successfully configured.
