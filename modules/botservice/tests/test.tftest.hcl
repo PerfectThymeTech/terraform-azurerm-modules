@@ -87,6 +87,7 @@ run "create_botservice" {
     bot_service_streaming_endpoint_enabled       = false
     bot_service_public_network_access_enabled    = true
     bot_service_application_insights_id          = run.setup.application_insights_id
+    bot_service_application_insights_key_enabled = false
     diagnostics_configurations                   = []
     subnet_id                                    = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/tfmdltst-dev-rg/providers/Microsoft.Network/virtualNetworks/tfmdltst-dev-vnet/subnets/PrivateEndpoints"
     connectivity_delay_in_seconds                = 0
