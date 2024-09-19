@@ -141,6 +141,14 @@ variable "bot_service_application_insights_id" {
   }
 }
 
+variable "bot_service_application_insights_key_enabled" {
+  description = "Specifies whether the application insights key should be created for the bot service."
+  type        = bool
+  sensitive   = false
+  nullable    = false
+  default     = true
+}
+
 # Diagnostics variables
 variable "diagnostics_configurations" {
   description = "Specifies the diagnostic configuration for the service."

@@ -79,6 +79,14 @@ Type: `string`
 
 The following input variables are optional (have default values):
 
+### <a name="input_bot_service_application_insights_key_enabled"></a> [bot\_service\_application\_insights\_key\_enabled](#input\_bot\_service\_application\_insights\_key\_enabled)
+
+Description: Specifies whether the application insights key should be created for the bot service.
+
+Type: `bool`
+
+Default: `true`
+
 ### <a name="input_bot_service_icon_url"></a> [bot\_service\_icon\_url](#input\_bot\_service\_icon\_url)
 
 Description: Specifies the icon url of the bot service.
