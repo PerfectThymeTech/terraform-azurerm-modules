@@ -6,7 +6,6 @@ on:
     paths:
       - "modules/keyvault/**"
       - ".github/workflows/terraform-keyvault.yml"
-      - ".github/workflows/_terraformTestTemplate.yml"
 
   pull_request:
     branches:
@@ -14,7 +13,6 @@ on:
     paths:
       - "modules/keyvault/**"
       - ".github/workflows/terraform-keyvault.yml"
-      - ".github/workflows/_terraformTestTemplate.yml"
 
 jobs:
   terraform_dev:

@@ -6,7 +6,6 @@ on:
     paths:
       - "modules/aisearch/**"
       - ".github/workflows/terraform-aisearch.yml"
-      - ".github/workflows/_terraformTestTemplate.yml"
 
   pull_request:
     branches:
@@ -14,7 +13,6 @@ on:
     paths:
       - "modules/aisearch/**"
       - ".github/workflows/terraform-aisearch.yml"
-      - ".github/workflows/_terraformTestTemplate.yml"
 
 jobs:
   terraform_dev:

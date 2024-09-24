@@ -1,18 +1,18 @@
-name: storage tests
+name: fabricworkspace tests
 on:
   push:
     branches:
       - main
     paths:
-      - "modules/storage/**"
-      - ".github/workflows/terraform-storage.yml"
+      - "modules/fabricworkspace/**"
+      - ".github/workflows/terraform-fabricworkspace.yml"
 
   pull_request:
     branches:
       - main
     paths:
-      - "modules/storage/**"
-      - ".github/workflows/terraform-storage.yml"
+      - "modules/fabricworkspace/**"
+      - ".github/workflows/terraform-fabricworkspace.yml"
 
 jobs:
   terraform_dev:
@@ -20,7 +20,7 @@ jobs:
     name: "Dev"
     with:
       environment: "dev"
-      config: "storage"
+      config: "fabricworkspace"
       terraform_version: "1.9.5"
       node_version: 20
       tenant_id: "3556be79-2979-4b19-a1af-4dd4e6d9ed7e"
