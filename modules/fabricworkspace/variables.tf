@@ -8,7 +8,7 @@ variable "workspace_capacity_id" {
   nullable    = true
   default     = null
   validation {
-    condition     = var.workspace_capacity_id == null || length(split("/", var.workspace_capacity_id)) == 9
+    condition     = var.workspace_capacity_id == null || length(split("/", try(var.workspace_capacity_id, ""))) == 9
     error_message = "Please specify a valid capacity id."
   }
 }
@@ -21,7 +21,7 @@ variable "workspace_capacity_id" {
 #   nullable    = true
 #   default     = null
 #   validation {
-#     condition     = var.workspace_domain == null || length(split("/", var.workspace_capacity_id)) == 9
+#     condition     = var.workspace_domain == null || length(try(var.workspace_domain_id, "")) > 2
 #     error_message = "Please specify a valid capacity id."
 #   }
 # }
@@ -94,7 +94,7 @@ variable "workspace_git" {
   nullable  = true
   default   = null
   validation {
-    condition     = var.workspace_git == null || contains(["AzureDevOps"], var.workspace_settings.environment.runtime_version)
+    condition     = var.workspace_git == null || contains(["AzureDevOps"], try(var.workspace_settings.environment.runtime_version, ""))
     error_message = "Please specify a valid git provider. Valid values today include: [ 'AzureDevOps' ]."
   }
 }
