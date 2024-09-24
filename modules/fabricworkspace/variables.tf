@@ -8,7 +8,7 @@ variable "workspace_capacity_id" {
   nullable    = true
   default     = null
   validation {
-    condition     = var.workspace_capacity_id == null || var.workspace_capacity_id != null && length(split("/", var.workspace_capacity_id)) == 9
+    condition     = var.workspace_capacity_id == null ? true : length(split("/", var.workspace_capacity_id)) == 9
     error_message = "Please specify a valid capacity id."
   }
 }
@@ -21,7 +21,7 @@ variable "workspace_capacity_id" {
 #   nullable    = true
 #   default     = null
 #   validation {
-#     condition     = var.workspace_domain == null || var.workspace_domain != null &&length(var.workspace_domain_id) > 2
+#     condition     = var.workspace_domain == null ? true : length(var.workspace_domain_id) > 2
 #     error_message = "Please specify a valid capacity id."
 #   }
 # }

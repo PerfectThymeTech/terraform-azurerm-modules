@@ -44,6 +44,8 @@ resource "fabric_spark_workspace_settings" "workspace_settings" {
 }
 
 resource "fabric_workspace_git" "workspace_git" {
+  count = var.workspace_git == null ? 0 : 1
+
   workspace_id = fabric_workspace.workspace.id
 
   git_provider_details = {
