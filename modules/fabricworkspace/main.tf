@@ -58,9 +58,11 @@ resource "fabric_workspace_git" "workspace_git" {
 }
 
 resource "fabric_workspace_role_assignment" "example" {
+  for_each = var.workspace_role_assignments
+
   workspace_id = fabric_workspace.workspace.id
 
-  principal_id   = "11111111-1111-1111-1111-111111111111"
-  principal_type = "User"
-  role           = "Member"
+  principal_id   = each.value.principal_id
+  principal_type = each.value.principal_type
+  role           = each.value.role
 }
