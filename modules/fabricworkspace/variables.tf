@@ -51,6 +51,10 @@ variable "workspace_identity_enabled" {
   sensitive   = false
   nullable    = false
   default     = true
+  validation {
+    condition     = !var.workspace_identity_enabled || var.workspace_identity_enabled && var.workspace_capacity_id != null
+    error_message = "Please specify a capacity id to enable the workspace identity."
+  }
 }
 
 variable "workspace_settings" {
