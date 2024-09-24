@@ -82,14 +82,14 @@ Description: Specifies the list of role assignments to be created at the fabric 
 Type:
 
 ```hcl
-list(object({
+map(object({
     principal_id   = string
     principal_type = string
     role           = string
   }))
 ```
 
-Default: `[]`
+Default: `{}`
 
 ### <a name="input_workspace_settings"></a> [workspace\_settings](#input\_workspace\_settings)
 

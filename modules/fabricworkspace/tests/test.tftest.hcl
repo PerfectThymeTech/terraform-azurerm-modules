@@ -25,7 +25,7 @@ run "create_fabric_workspace" {
       }
     }
     workspace_git              = null
-    workspace_role_assignments = []
+    workspace_role_assignments = {}
   }
 
   assert {

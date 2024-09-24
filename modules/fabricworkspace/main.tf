@@ -58,7 +58,7 @@ resource "fabric_workspace_git" "workspace_git" {
 }
 
 resource "fabric_workspace_role_assignment" "example" {
-  for_each = local.workspace_role_assignments_map
+  for_each = var.workspace_role_assignments
 
   workspace_id = fabric_workspace.workspace.id
 
