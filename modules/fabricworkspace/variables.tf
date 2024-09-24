@@ -111,13 +111,13 @@ variable "workspace_role_assignments" {
   default   = []
   validation {
     condition = alltrue([
-      length([for role_assignment in toset(var.workspace_role_assignments) : true if !contains(["Group", "ServicePrincipal", "ServicePrincipalProfile", "User"], role_assignments.principal_type)]) <= 0
+      length([for role_assignment in toset(var.workspace_role_assignments) : true if !contains(["Group", "ServicePrincipal", "ServicePrincipalProfile", "User"], role_assignment.principal_type)]) <= 0
     ])
     error_message = "Please specify a valid principal type. Valid values are: ['Group', 'ServicePrincipal', 'ServicePrincipalProfile', 'User']"
   }
   validation {
     condition = alltrue([
-      length([for role_assignment in toset(var.workspace_role_assignments) : true if !contains(["Admin", "Contributor", "Member", "Viewer"], role_assignments.role)]) <= 0
+      length([for role_assignment in toset(var.workspace_role_assignments) : true if !contains(["Admin", "Contributor", "Member", "Viewer"], role_assignment.role)]) <= 0
     ])
     error_message = "Please specify a valid role. Valid values are: ['Admin', 'Contributor', 'Member', 'Viewer']"
   }
