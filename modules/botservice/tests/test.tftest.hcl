@@ -10,11 +10,11 @@ variables {
 }
 
 provider "azurerm" {
-  disable_correlation_request_id = false
-  environment                    = "public"
-  skip_provider_registration     = false
-  storage_use_azuread            = true
-  use_oidc                       = true
+  disable_correlation_request_id  = false
+  environment                     = "public"
+  resource_provider_registrations = "none"
+  storage_use_azuread             = true
+  use_oidc                        = true
 
   features {
     application_insights {
