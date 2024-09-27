@@ -7,7 +7,7 @@ run "create_cosmosdb_account" {
     tags = {
       test = "cosmosdb_account"
     }
-    cosmosdb_account_name                               = "mytftst001"
+    cosmosdb_account_name                               = "tftstr001"
     cosmosdb_account_access_key_metadata_writes_enabled = false
     cosmosdb_account_analytical_storage_enabled         = false
     cosmosdb_account_automatic_failover_enabled         = false

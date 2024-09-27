@@ -7,7 +7,7 @@ run "create_containerregistry" {
     tags = {
       test = "containerregistry"
     }
-    container_registry_name                      = "mytftst001"
+    container_registry_name                      = "tftstr001"
     container_registry_admin_enabled             = false
     container_registry_anonymous_pull_enabled    = false
     container_registry_data_endpoint_enabled     = false

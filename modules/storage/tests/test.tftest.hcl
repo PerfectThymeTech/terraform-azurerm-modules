@@ -7,7 +7,7 @@ run "create_storage" {
     tags = {
       test = "storage"
     }
-    storage_account_name                            = "mytftst001"
+    storage_account_name                            = "tftstr001"
     storage_access_tier                             = "Hot"
     storage_account_type                            = "StorageV2"
     storage_account_tier                            = "Standard"

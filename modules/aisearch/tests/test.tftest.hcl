@@ -7,7 +7,7 @@ run "create_ai_search" {
     tags = {
       test = "aisearch"
     }
-    search_service_name                         = "mytftst-001"
+    search_service_name                         = "tftstr-001"
     search_service_sku                          = "basic"
     search_service_semantic_search_sku          = "standard"
     search_service_local_authentication_enabled = false

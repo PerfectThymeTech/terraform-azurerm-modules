@@ -92,7 +92,7 @@ run "create_aistudio" {
     location                                = var.location
     resource_group_name                     = var.resource_group_name
     tags                                    = var.tags
-    ai_studio_hub_name                      = "mytftst-007"
+    ai_studio_hub_name                      = "tftstr-007"
     ai_studio_hub_provision_managed_network = false
     application_insights_id                 = run.setup.application_insights_id
     container_registry_id                   = run.setup.container_registry_id
@@ -111,7 +111,7 @@ run "create_aistudio" {
   }
 
   assert {
-    condition     = azapi_resource.ai_studio_hub.name == "mytftst-007"
+    condition     = azapi_resource.ai_studio_hub.name == "tftstr-007"
     error_message = "Failed to deploy."
   }
 }

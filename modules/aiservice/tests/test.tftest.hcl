@@ -8,7 +8,7 @@ run "create_ai_service" {
     tags = {
       test = "aiservice"
     }
-    cognitive_account_name                                  = "mytftst-001"
+    cognitive_account_name                                  = "tftstr-001"
     cognitive_account_kind                                  = "OpenAI"
     cognitive_account_sku                                   = "S0"
     cognitive_account_firewall_bypass_azure_services        = true

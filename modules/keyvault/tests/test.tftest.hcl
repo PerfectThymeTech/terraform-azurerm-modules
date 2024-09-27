@@ -7,7 +7,7 @@ run "create_key_vault" {
     tags = {
       test = "keyvault"
     }
-    key_vault_name                       = "mytftst-001"
+    key_vault_name                       = "tftstr-001"
     key_vault_sku_name                   = "standard"
     key_vault_soft_delete_retention_days = 7
     diagnostics_configurations           = []
