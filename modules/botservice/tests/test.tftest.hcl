@@ -1,7 +1,7 @@
 variables {
   location            = "northeurope"
   location_bot        = "global"
-  resource_group_name = "tfmdltst-dev-rg"
+  resource_group_name = "tfmodule-test-rg"
   tags = {
     test = "botservice"
   }
@@ -68,7 +68,7 @@ run "create_botservice" {
 
   variables {
     location             = var.location
-    resource_group_name  = "tfmdltst-dev-rg"
+    resource_group_name  = "tfmodule-test-rg"
     tags                 = var.tags
     bot_service_name     = "tfmdlbot-int-bot"
     bot_service_location = var.location_bot
@@ -97,7 +97,7 @@ run "create_botservice" {
   }
 
   assert {
-    condition     = azurerm_bot_service_azure_bot.bot_service_azure_bot.resource_group_name == "tfmdltst-dev-rg"
+    condition     = azurerm_bot_service_azure_bot.bot_service_azure_bot.resource_group_name == "tfmodule-test-rg"
     error_message = "Failed to deploy."
   }
 }

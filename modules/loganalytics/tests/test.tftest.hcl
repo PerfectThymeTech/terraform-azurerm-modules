@@ -3,7 +3,7 @@ run "create_loganalytics" {
 
   variables {
     location            = "northeurope"
-    resource_group_name = "tfmdltst-dev-rg"
+    resource_group_name = "tfmodule-test-rg"
     tags = {
       test = "loganalytics"
     }
@@ -13,7 +13,7 @@ run "create_loganalytics" {
   }
 
   assert {
-    condition     = azurerm_log_analytics_workspace.log_analytics_workspace.resource_group_name == "tfmdltst-dev-rg"
+    condition     = azurerm_log_analytics_workspace.log_analytics_workspace.resource_group_name == "tfmodule-test-rg"
     error_message = "Failed to deploy."
   }
 }

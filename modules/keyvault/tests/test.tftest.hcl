@@ -3,7 +3,7 @@ run "create_key_vault" {
 
   variables {
     location            = "northeurope"
-    resource_group_name = "tfmdltst-dev-rg"
+    resource_group_name = "tfmodule-test-rg"
     tags = {
       test = "keyvault"
     }
@@ -18,7 +18,7 @@ run "create_key_vault" {
   }
 
   assert {
-    condition     = azurerm_key_vault.key_vault.resource_group_name == "tfmdltst-dev-rg"
+    condition     = azurerm_key_vault.key_vault.resource_group_name == "tfmodule-test-rg"
     error_message = "Failed to deploy."
   }
 }

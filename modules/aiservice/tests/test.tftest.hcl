@@ -4,7 +4,7 @@ run "create_ai_service" {
   variables {
     location                  = "swedencentral"
     location_private_endpoint = "northeurope"
-    resource_group_name       = "tfmdltst-dev-rg"
+    resource_group_name       = "tfmodule-test-rg"
     tags = {
       test = "aiservice"
     }
@@ -23,7 +23,7 @@ run "create_ai_service" {
   }
 
   assert {
-    condition     = azurerm_cognitive_account.cognitive_account.resource_group_name == "tfmdltst-dev-rg"
+    condition     = azurerm_cognitive_account.cognitive_account.resource_group_name == "tfmodule-test-rg"
     error_message = "Failed to deploy."
   }
 }

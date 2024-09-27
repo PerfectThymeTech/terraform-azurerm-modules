@@ -3,7 +3,7 @@ run "create_containerregistry" {
 
   variables {
     location            = "northeurope"
-    resource_group_name = "tfmdltst-dev-rg"
+    resource_group_name = "tfmodule-test-rg"
     tags = {
       test = "containerregistry"
     }
@@ -24,7 +24,7 @@ run "create_containerregistry" {
   }
 
   assert {
-    condition     = azurerm_container_registry.container_registry.resource_group_name == "tfmdltst-dev-rg"
+    condition     = azurerm_container_registry.container_registry.resource_group_name == "tfmodule-test-rg"
     error_message = "Failed to deploy."
   }
 }

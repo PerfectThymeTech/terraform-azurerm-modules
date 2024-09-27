@@ -1,6 +1,6 @@
 variables {
   location            = "northeurope"
-  resource_group_name = "tfmdltst-dev-rg"
+  resource_group_name = "tfmodule-test-rg"
   tags = {
     test = "aistudiooutboundrules"
   }

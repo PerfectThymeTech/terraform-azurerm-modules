@@ -3,7 +3,7 @@ run "create_cosmosdb_account" {
 
   variables {
     location            = "northeurope"
-    resource_group_name = "tfmdltst-dev-rg"
+    resource_group_name = "tfmodule-test-rg"
     tags = {
       test = "cosmosdb_account"
     }
@@ -55,7 +55,7 @@ run "create_cosmosdb_account" {
   }
 
   assert {
-    condition     = azurerm_cosmosdb_account.cosmosdb_account.resource_group_name == "tfmdltst-dev-rg"
+    condition     = azurerm_cosmosdb_account.cosmosdb_account.resource_group_name == "tfmodule-test-rg"
     error_message = "Failed to deploy."
   }
 }

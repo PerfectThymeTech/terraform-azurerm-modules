@@ -3,7 +3,7 @@ run "create_appserviceplan" {
 
   variables {
     location            = "northeurope"
-    resource_group_name = "tfmdltst-dev-rg"
+    resource_group_name = "tfmodule-test-rg"
     tags = {
       test = "appserviceplan"
     }
@@ -18,7 +18,7 @@ run "create_appserviceplan" {
   }
 
   assert {
-    condition     = azurerm_service_plan.service_plan.resource_group_name == "tfmdltst-dev-rg"
+    condition     = azurerm_service_plan.service_plan.resource_group_name == "tfmodule-test-rg"
     error_message = "Failed to deploy."
   }
 }

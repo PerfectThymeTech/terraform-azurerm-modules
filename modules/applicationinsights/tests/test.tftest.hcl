@@ -3,7 +3,7 @@ run "create_applicationinsights" {
 
   variables {
     location            = "northeurope"
-    resource_group_name = "tfmdltst-dev-rg"
+    resource_group_name = "tfmodule-test-rg"
     tags = {
       test = "applicationinsights"
     }
@@ -14,7 +14,7 @@ run "create_applicationinsights" {
   }
 
   assert {
-    condition     = azurerm_application_insights.application_insights.resource_group_name == "tfmdltst-dev-rg"
+    condition     = azurerm_application_insights.application_insights.resource_group_name == "tfmodule-test-rg"
     error_message = "Failed to deploy."
   }
 }

@@ -3,7 +3,7 @@ run "create_ai_search" {
 
   variables {
     location            = "northeurope"
-    resource_group_name = "tfmdltst-dev-rg"
+    resource_group_name = "tfmodule-test-rg"
     tags = {
       test = "aisearch"
     }
@@ -30,7 +30,7 @@ run "create_ai_search" {
   }
 
   assert {
-    condition     = azurerm_search_service.search_service.resource_group_name == "tfmdltst-dev-rg"
+    condition     = azurerm_search_service.search_service.resource_group_name == "tfmodule-test-rg"
     error_message = "Failed to deploy."
   }
 }

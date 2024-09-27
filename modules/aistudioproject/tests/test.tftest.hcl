@@ -1,6 +1,6 @@
 variables {
   location            = "northeurope"
-  resource_group_name = "tfmdltst-dev-rg"
+  resource_group_name = "tfmodule-test-rg"
   tags = {
     test = "aistudioproject"
   }
@@ -93,7 +93,7 @@ run "create_aistudioproject" {
 
   variables {
     location                      = "northeurope"
-    resource_group_name           = "tfmdltst-dev-rg"
+    resource_group_name           = "tfmodule-test-rg"
     tags                          = var.tags
     ai_studio_project_name        = "mytftst-009"
     ai_studio_hub_id              = run.setup.ai_studio_hub_id
