@@ -23,8 +23,7 @@ jobs:
       config: "fabricworkspace"
       terraform_version: "1.9.5"
       node_version: 20
-      tenant_id: "3556be79-2979-4b19-a1af-4dd4e6d9ed7e"
-      subscription_id: "8f171ff9-2b5b-4f0f-aed5-7fa360a1d094"
-      log_level_test: "DEBUG"
+      tenant_id: "37963dd4-f4e6-40f8-a7d6-24b97919e452"
+      subscription_id: "1fdab118-1638-419a-8b12-06c9543714a0"
     secrets:
       CLIENT_ID: ${{ secrets.CLIENT_ID }}

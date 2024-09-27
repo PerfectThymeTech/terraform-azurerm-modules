@@ -35,7 +35,7 @@ on:
       log_level_test:
         required: false
         type: string
-        description: "Specifies teh log level for the test run."
+        description: "Specifies the log level for the test run."
         default: "ERROR"
     secrets:
       CLIENT_ID:
