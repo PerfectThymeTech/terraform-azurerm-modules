@@ -18,6 +18,8 @@ resource "fabric_workspace" "workspace" {
 # }
 
 resource "fabric_spark_workspace_settings" "workspace_settings" {
+  count = var.workspace_capacity_id == null ? 0 : 1
+
   workspace_id = fabric_workspace.workspace.id
 
   automatic_log = {
