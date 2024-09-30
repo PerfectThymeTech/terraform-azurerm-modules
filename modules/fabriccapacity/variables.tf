@@ -32,7 +32,7 @@ variable "fabric_capacity_name" {
   sensitive   = false
   nullable    = false
   validation {
-    condition     = length(var.fabric_capacity_name) >= 2
+    condition     = length(var.fabric_capacity_name) >= 2 && length(regexall("[^[:alnum:]]", var.fabric_capacity_name)) <= 0
     error_message = "Please specify a valid name."
   }
 }
