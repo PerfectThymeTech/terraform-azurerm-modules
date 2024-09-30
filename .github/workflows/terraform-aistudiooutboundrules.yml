@@ -6,7 +6,6 @@ on:
     paths:
       - "modules/aistudiooutboundrules/**"
       - ".github/workflows/terraform-aistudiooutboundrules.yml"
-      - ".github/workflows/_terraformTestTemplate.yml"
 
   pull_request:
     branches:
@@ -14,7 +13,6 @@ on:
     paths:
       - "modules/aistudiooutboundrules/**"
       - ".github/workflows/terraform-aistudiooutboundrules.yml"
-      - ".github/workflows/_terraformTestTemplate.yml"
 
 jobs:
   terraform_dev:
@@ -25,8 +23,8 @@ jobs:
       config: "aistudiooutboundrules"
       terraform_version: "1.9.1"
       node_version: 20
-      tenant_id: "3556be79-2979-4b19-a1af-4dd4e6d9ed7e"
-      subscription_id: "8f171ff9-2b5b-4f0f-aed5-7fa360a1d094"
+      tenant_id: "37963dd4-f4e6-40f8-a7d6-24b97919e452"
+      subscription_id: "1fdab118-1638-419a-8b12-06c9543714a0"
       run_test: false
     secrets:
       CLIENT_ID: ${{ secrets.CLIENT_ID }}

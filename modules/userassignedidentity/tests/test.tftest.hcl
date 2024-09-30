@@ -3,11 +3,11 @@ run "create_userassignedidentity" {
 
   variables {
     location            = "northeurope"
-    resource_group_name = "tfmdltst-dev-rg"
+    resource_group_name = "tfmodule-test-rg"
     tags = {
       test = "userassignedidentity"
     }
-    user_assigned_identity_name = "mytftst-001"
+    user_assigned_identity_name = "tftstr-001"
     user_assigned_identity_federated_identity_credentials = {
       example = {
         audience = "foo"
@@ -18,7 +18,7 @@ run "create_userassignedidentity" {
   }
 
   assert {
-    condition     = azurerm_user_assigned_identity.user_assigned_identity.resource_group_name == "tfmdltst-dev-rg"
+    condition     = azurerm_user_assigned_identity.user_assigned_identity.resource_group_name == "tfmodule-test-rg"
     error_message = "Failed to deploy."
   }
 }

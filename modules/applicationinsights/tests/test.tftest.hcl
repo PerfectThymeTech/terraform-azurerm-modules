@@ -3,18 +3,18 @@ run "create_applicationinsights" {
 
   variables {
     location            = "northeurope"
-    resource_group_name = "tfmdltst-dev-rg"
+    resource_group_name = "tfmodule-test-rg"
     tags = {
       test = "applicationinsights"
     }
-    application_insights_name                       = "mytftst-001"
+    application_insights_name                       = "tftstr-001"
     application_insights_application_type           = "web"
-    application_insights_log_analytics_workspace_id = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-8f171ff9-2b5b-4f0f-aed5-7fa360a1d094-WEU"
+    application_insights_log_analytics_workspace_id = "/subscriptions/e82c5267-9dc4-4f45-ac13-abdd5e130d27/resourceGroups/ptt-dev-logging-rg/providers/Microsoft.OperationalInsights/workspaces/ptt-dev-log001"
     diagnostics_configurations                      = []
   }
 
   assert {
-    condition     = azurerm_application_insights.application_insights.resource_group_name == "tfmdltst-dev-rg"
+    condition     = azurerm_application_insights.application_insights.resource_group_name == "tfmodule-test-rg"
     error_message = "Failed to deploy."
   }
 }

@@ -32,6 +32,11 @@ on:
         type: boolean
         description: "Specifies whether the test should be executed."
         default: true
+      log_level_test:
+        required: false
+        type: string
+        description: "Specifies the log level for the test run."
+        default: "ERROR"
     secrets:
       CLIENT_ID:
         required: true
@@ -105,6 +110,9 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ inputs.subscription_id }}
       ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
       ARM_USE_OIDC: true
+      FABRIC_TENANT_ID: ${{ inputs.tenant_id }}
+      FABRIC_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      FABRIC_USE_OIDC: true
 
     steps:
       # Setup Node
@@ -145,6 +153,8 @@ jobs:
         working-directory: "./modules/${{ inputs.config }}"
         run: |
           terraform test
+        env:
+          TF_LOG: ${{ inputs.log_level_test }}
 
       # Add Pull Request Comment
       - name: Add Pull Request Comment
