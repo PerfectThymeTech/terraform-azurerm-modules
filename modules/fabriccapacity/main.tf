@@ -8,7 +8,7 @@ resource "azapi_resource" "fabric_capacity" {
   body = {
     properties = {
       administration = {
-        members = setunion([data.azurerm_client_config.current.client_id], var.fabric_capacity_admin_emails)
+        members = setunion([data.azurerm_client_config.current.object_id], var.fabric_capacity_admin_emails)
       }
     }
     sku = {
