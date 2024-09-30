@@ -1,10 +1,47 @@
+variables {
+  location            = "germanywestcentral"
+  resource_group_name = "tfmodule-test-rg"
+  tags = {
+    test = "fabric-workspace"
+  }
+}
+
+provider "azapi" {
+  default_location               = var.location
+  default_tags                   = var.tags
+  disable_correlation_request_id = false
+  environment                    = "public"
+  skip_provider_registration     = false
+  use_oidc                       = true
+}
+
 provider "fabric" {}
+
+run "setup" {
+  command = apply
+
+  module {
+    source = "./tests/setup"
+  }
+
+  providers = {
+    azapi = azapi
+  }
+
+  variables {
+    location            = var.location
+    environment         = "int"
+    prefix              = "tfmdlfbrc"
+    resource_group_name = var.resource_group_name
+    tags                = var.tags
+  }
+}
 
 run "create_fabric_workspace" {
   command = apply
 
   variables {
-    workspace_capacity_id      = null
+    workspace_capacity_id      = run.setup.fabric_capacity_id
     workspace_display_name     = "MyTestWs"
     workspace_description      = "My Test Workspace"
     workspace_identity_enabled = false
