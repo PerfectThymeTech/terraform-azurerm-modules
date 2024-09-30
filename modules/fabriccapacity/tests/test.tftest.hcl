@@ -13,7 +13,7 @@ run "create_fabric_capacity" {
   }
 
   assert {
-    condition     = azapi_resource.fabric_capacity.resource_group_name == "tfmodule-test-rg"
+    condition     = azapi_resource.fabric_capacity.name == "tftstr001"
     error_message = "Failed to deploy."
   }
 }
