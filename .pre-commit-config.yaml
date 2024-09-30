@@ -9,6 +9,7 @@ exclude: |
     modules/botservice/README.md|
     modules/containerregistry/README.md|
     modules/cosmosdb/README.md|
+    modules/fabriccapacity/README.md|
     modules/fabricworkspace/README.md|
     modules/keyvault/README.md|
     modules/loganalytics/README.md|
@@ -47,6 +48,8 @@ repos:
       args: ["-c", "./.terraform-docs.yml", "./modules/containerregistry"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/cosmosdb"]
+    - id: terraform-docs-go
+      args: ["-c", "./.terraform-docs.yml", "./modules/fabriccapacity"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/fabricworkspace"]
     - id: terraform-docs-go
