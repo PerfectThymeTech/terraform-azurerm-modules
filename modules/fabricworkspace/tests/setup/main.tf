@@ -2,7 +2,7 @@ module "fabric_capacity" {
   source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/fabriccapacity?ref=main"
   providers = {
     azurerm = azurerm
-    azapi = azapi
+    azapi   = azapi
   }
 
   location                     = var.location

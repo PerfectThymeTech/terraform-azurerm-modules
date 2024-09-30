@@ -56,7 +56,7 @@ run "setup" {
 
   providers = {
     azurerm = azurerm
-    azapi = azapi
+    azapi   = azapi
   }
 
   variables {
