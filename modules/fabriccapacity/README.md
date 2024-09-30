@@ -70,7 +70,11 @@ Default: `{}`
 
 ## Outputs
 
-No outputs.
+The following outputs are exported:
+
+### <a name="output_fabric_capacity_id"></a> [fabric\_capacity\_id](#output\_fabric\_capacity\_id)
+
+Description: Specifies the id of the fabric capacity.
 
 <!-- markdownlint-enable -->
 
