@@ -1,7 +1,7 @@
 resource "fabric_workspace" "workspace" {
   display_name = var.workspace_display_name
   description  = var.workspace_description
-  capacity_id  = var.workspace_capacity_id == null ? null : var.workspace_capacity_id
+  capacity_id  = local.fabric_capity_id
   identity = var.workspace_identity_enabled ? {
     type = "SystemAssigned"
   } : null
