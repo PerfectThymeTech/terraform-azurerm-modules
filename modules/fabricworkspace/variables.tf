@@ -1,15 +1,15 @@
 # General variables
 
 # Fabric workspace variables
-variable "workspace_capacity_id" {
-  description = "Specifies the resource id of a fabric capacity hosted in Azure to assign to the fabric workspace."
+variable "workspace_capacity_name" {
+  description = "Specifies the name of a fabric capacity hosted in Azure to assign to the fabric workspace."
   type        = string
   sensitive   = false
   nullable    = true
   default     = null
   validation {
-    condition     = var.workspace_capacity_id == null || can(length(split("/", var.workspace_capacity_id)) == 9)
-    error_message = "Please specify a valid capacity id."
+    condition     = var.workspace_capacity_name == null || length(var.workspace_capacity_id) > 2
+    error_message = "Please specify a valid capacity name."
   }
 }
 

@@ -36,9 +36,9 @@ Type: `string`
 
 The following input variables are optional (have default values):
 
-### <a name="input_workspace_capacity_id"></a> [workspace\_capacity\_id](#input\_workspace\_capacity\_id)
+### <a name="input_workspace_capacity_name"></a> [workspace\_capacity\_name](#input\_workspace\_capacity\_name)
 
-Description: Specifies the resource id of a fabric capacity hosted in Azure to assign to the fabric workspace.
+Description: Specifies the name of a fabric capacity hosted in Azure to assign to the fabric workspace.
 
 Type: `string`
 

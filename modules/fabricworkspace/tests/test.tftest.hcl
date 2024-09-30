@@ -72,7 +72,7 @@ run "create_fabric_workspace" {
   command = apply
 
   variables {
-    workspace_capacity_id      = run.setup.fabric_capacity_id
+    workspace_capacity_name    = run.setup.fabric_capacity_name
     workspace_display_name     = "MyTestWs"
     workspace_description      = "My Test Workspace"
     workspace_identity_enabled = false
