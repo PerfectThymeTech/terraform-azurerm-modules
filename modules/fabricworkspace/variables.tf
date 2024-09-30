@@ -8,7 +8,7 @@ variable "workspace_capacity_name" {
   nullable    = true
   default     = null
   validation {
-    condition     = var.workspace_capacity_name == null || length(var.workspace_capacity_id) > 2
+    condition     = var.workspace_capacity_name == null || length(var.workspace_capacity_name) > 2
     error_message = "Please specify a valid capacity name."
   }
 }
@@ -52,7 +52,7 @@ variable "workspace_identity_enabled" {
   nullable    = false
   default     = true
   validation {
-    condition     = !var.workspace_identity_enabled || var.workspace_identity_enabled && var.workspace_capacity_id != null
+    condition     = !var.workspace_identity_enabled || var.workspace_identity_enabled && var.workspace_capacity_name != null
     error_message = "Please specify a capacity id to enable the workspace identity."
   }
 }
