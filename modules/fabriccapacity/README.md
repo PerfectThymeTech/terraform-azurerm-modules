@@ -44,7 +44,7 @@ Type: `string`
 
 The following input variables are optional (have default values):
 
-### <a name="input_fabric_capacity_admin_email"></a> [fabric\_capacity\_admin\_email](#input\_fabric\_capacity\_admin\_email)
+### <a name="input_fabric_capacity_admin_emails"></a> [fabric\_capacity\_admin\_emails](#input\_fabric\_capacity\_admin\_emails)
 
 Description: Specifies the list of admin email addresses of the fabric capacity.
 

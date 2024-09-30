@@ -37,7 +37,7 @@ variable "fabric_capacity_name" {
   }
 }
 
-variable "fabric_capacity_admin_email" {
+variable "fabric_capacity_admin_emails" {
   description = "Specifies the list of admin email addresses of the fabric capacity."
   type        = list(string)
   sensitive   = false

@@ -7,9 +7,9 @@ run "create_fabric_capacity" {
     tags = {
       test = "fabric-capacity"
     }
-    fabric_capacity_name        = "tftstr001"
-    fabric_capacity_admin_email = []
-    fabric_capacity_sku         = "F2"
+    fabric_capacity_name         = "tftstr001"
+    fabric_capacity_admin_emails = []
+    fabric_capacity_sku          = "F2"
   }
 
   assert {
