@@ -123,6 +123,10 @@ The following outputs are exported:
 
 Description: Specifies the resource ID of the app service plan.
 
+### <a name="output_service_plan_os_type"></a> [service\_plan\_os\_type](#output\_service\_plan\_os\_type)
+
+Description: Specifies the os type of the app service plan.
+
 <!-- markdownlint-enable -->
 
 <!-- END_TF_DOCS -->
