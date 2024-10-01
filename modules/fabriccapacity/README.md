@@ -78,6 +78,10 @@ The following outputs are exported:
 
 Description: Specifies the id of the fabric capacity.
 
+### <a name="output_fabric_capacity_name"></a> [fabric\_capacity\_name](#output\_fabric\_capacity\_name)
+
+Description: Specifies the name of the fabric capacity.
+
 <!-- markdownlint-enable -->
 
 <!-- END_TF_DOCS -->

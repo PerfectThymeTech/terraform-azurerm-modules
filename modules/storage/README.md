@@ -349,6 +349,10 @@ Description: Specifies the resource id of the storage account.
 
 Description: Specifies the resource name of the storage account.
 
+### <a name="output_storage_account_primary_access_key"></a> [storage\_account\_primary\_access\_key](#output\_storage\_account\_primary\_access\_key)
+
+Description: Specifies the primary access key of the storage account.
+
 ### <a name="output_storage_account_primary_blob_endpoint"></a> [storage\_account\_primary\_blob\_endpoint](#output\_storage\_account\_primary\_blob\_endpoint)
 
 Description: Specifies the primary blob endpoint of the storage account.
