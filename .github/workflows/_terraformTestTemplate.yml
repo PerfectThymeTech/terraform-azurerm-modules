@@ -146,7 +146,7 @@ jobs:
         uses: azure/login@v2
         if: inputs.run_azure_login
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          client-id: ${{ secrets.CLIENT_ID }}
           tenant-id: ${{ inputs.tenant_id }}
           subscription-id: ${{ inputs.subscription_id }}
 
