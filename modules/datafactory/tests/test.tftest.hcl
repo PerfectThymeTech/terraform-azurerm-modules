@@ -19,14 +19,19 @@ run "create_fabric_capacity" {
     data_factory_published_content_template_variables = {
       data_factory_name = "tftst-adf001"
     }
-    data_factory_triggers_start            = []
-    data_factory_pipelines_run             = []
-    data_factory_managed_private_endpoints = {}
-    diagnostics_configurations             = []
-    subnet_id                              = "/subscriptions/1fdab118-1638-419a-8b12-06c9543714a0/resourceGroups/ptt-dev-networking-rg/providers/Microsoft.Network/virtualNetworks/spoke-ptt-dev-vnet001/subnets/TerraformTestSubnet"
-    connectivity_delay_in_seconds          = 0
-    private_dns_zone_id_data_factory       = "/subscriptions/e82c5267-9dc4-4f45-ac13-abdd5e130d27/resourceGroups/ptt-dev-privatedns-rg/providers/Microsoft.Network/privateDnsZones/privatelink.datafactory.azure.net"
-    customer_managed_key                   = null
+    data_factory_triggers_start = []
+    data_factory_pipelines_run  = []
+    data_factory_managed_private_endpoints = {
+      "storage-test" = {
+        subresource_name   = "blob"
+        target_resource_id = "/subscriptions/1fdab118-1638-419a-8b12-06c9543714a0/resourceGroups/tfmodule-test-rg/providers/Microsoft.Storage/storageAccounts/mytfteststg"
+      }
+    }
+    diagnostics_configurations       = []
+    subnet_id                        = "/subscriptions/1fdab118-1638-419a-8b12-06c9543714a0/resourceGroups/ptt-dev-networking-rg/providers/Microsoft.Network/virtualNetworks/spoke-ptt-dev-vnet001/subnets/TerraformTestSubnet"
+    connectivity_delay_in_seconds    = 0
+    private_dns_zone_id_data_factory = "/subscriptions/e82c5267-9dc4-4f45-ac13-abdd5e130d27/resourceGroups/ptt-dev-privatedns-rg/providers/Microsoft.Network/privateDnsZones/privatelink.datafactory.azure.net"
+    customer_managed_key             = null
   }
 
   assert {
