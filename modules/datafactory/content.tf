@@ -1,7 +1,7 @@
 resource "azurerm_resource_group_template_deployment" "data_factory_content_deployment" {
   count = var.data_factory_published_content.parameters_file != "" && var.data_factory_published_content.template_file != "" ? 1 : 0
 
-  name                = "dataFactoryContentDeployment-${timestamp()}"
+  name                = "dataFactoryContentDeployment-${replace(timestamp(), ":", "-")}"
   resource_group_name = azurerm_data_factory.data_factory.resource_group_name
   tags                = var.tags
 
