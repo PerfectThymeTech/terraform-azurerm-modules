@@ -16,7 +16,7 @@ param (
     [Parameter(Mandatory = $false)]
     [ValidateNotNullOrEmpty()]
     [int]
-    $CheckIntervalInSeconds = 10,
+    $CheckIntervalInSeconds = 30,
 
     [Parameter(Mandatory = $false)]
     [ValidateNotNullOrEmpty()]

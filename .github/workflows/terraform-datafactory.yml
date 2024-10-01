@@ -25,5 +25,6 @@ jobs:
       node_version: 20
       tenant_id: "37963dd4-f4e6-40f8-a7d6-24b97919e452"
       subscription_id: "1fdab118-1638-419a-8b12-06c9543714a0"
+      run_azure_login: true
     secrets:
       CLIENT_ID: ${{ secrets.CLIENT_ID }}
