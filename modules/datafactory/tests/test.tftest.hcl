@@ -2,7 +2,7 @@ run "create_fabric_capacity" {
   command = apply
 
   variables {
-    location            = "germanywestcentral"
+    location            = "northeurope"
     resource_group_name = "tfmodule-test-rg"
     tags = {
       test = "data-factory"
