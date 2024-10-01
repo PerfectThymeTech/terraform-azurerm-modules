@@ -13,8 +13,8 @@ run "create_fabric_capacity" {
     data_factory_github_repo       = {}
     data_factory_global_parameters = {}
     data_factory_published_content = {
-      parameters_file = "./adf/ARMTemplateParametersForFactory.json"
-      template_file   = "./adf/ARMTemplateForFactory.json"
+      parameters_file = "./tests/adf/ARMTemplateParametersForFactory.json"
+      template_file   = "./tests/adf/ARMTemplateForFactory.json"
     }
     data_factory_published_content_template_variables = {
       data_factory_name = "tftst-adf001"
