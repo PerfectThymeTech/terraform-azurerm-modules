@@ -1,0 +1,30 @@
+name: datafactory tests
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "modules/datafactory/**"
+      - ".github/workflows/terraform-datafactory.yml"
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "modules/datafactory/**"
+      - ".github/workflows/terraform-datafactory.yml"
+
+jobs:
+  terraform_dev:
+    uses: ./.github/workflows/_terraformTestTemplate.yml
+    name: "Dev"
+    with:
+      environment: "dev"
+      config: "datafactory"
+      terraform_version: "1.9.6"
+      node_version: 20
+      tenant_id: "37963dd4-f4e6-40f8-a7d6-24b97919e452"
+      subscription_id: "1fdab118-1638-419a-8b12-06c9543714a0"
+      run_azure_login: true
+    secrets:
+      CLIENT_ID: ${{ secrets.CLIENT_ID }}

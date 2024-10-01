@@ -27,6 +27,11 @@ on:
         required: true
         type: string
         description: "Specifies the subscription id of the deployment."
+      run_azure_login:
+        required: false
+        type: boolean
+        description: "Specifies whether the test should be executed."
+        default: false
       run_test:
         required: false
         type: boolean
@@ -134,6 +139,16 @@ jobs:
       - name: Check Out Repository
         id: checkout_repository
         uses: actions/checkout@v4
+
+      # Azure login
+      - name: Azure login
+        id: azure_login
+        uses: azure/login@v2
+        if: inputs.run_azure_login
+        with:
+          client-id: ${{ secrets.CLIENT_ID }}
+          tenant-id: ${{ inputs.tenant_id }}
+          subscription-id: ${{ inputs.subscription_id }}
 
       # Terraform Override
       - name: Terraform Override

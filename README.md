@@ -12,6 +12,7 @@ This repository contains secure by default Terraform modules for Azure Services.
 - [Azure AI Bot Service](/modules/botservice/)
 - [Azure Container Registry](/modules/containerregistry/)
 - [Azure Cosmos DB](/modules/cosmosdb/)
+- [Azure Data Factory](/modules/datafactory/)
 - [Azure Key Vault](/modules/keyvault/)
 - [Azure Log Analytics Workspace](/modules/loganalytics/)
 - [Azure Storage Account](/modules/storage/)
