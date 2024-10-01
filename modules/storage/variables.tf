@@ -177,7 +177,7 @@ variable "storage_network_private_link_access" {
   default     = []
   validation {
     condition = alltrue([
-      length([for value in toset(var.storage_network_private_link_access) : value if length(split("/", value)) < 8]) <= 0
+      length([for value in toset(var.storage_network_private_link_access) : value if length(split("/", value)) < 7]) <= 0
     ])
     error_message = "Please provide a valid resource id that has the following format: \"/subscriptions/.../resourceGroups/.../providers/.../.../...\"."
   }
