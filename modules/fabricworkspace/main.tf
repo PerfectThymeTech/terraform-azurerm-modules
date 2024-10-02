@@ -34,10 +34,10 @@ resource "fabric_spark_workspace_settings" "workspace_settings" {
   }
   pool = {
     customize_compute_enabled = var.workspace_settings.pool.customize_compute_enabled
-    default_pool = {
-      name = var.workspace_settings.pool.default_pool_name
-      type = var.workspace_capacity_name == null ? "Workspace" : "Capacity"
-    }
+    # default_pool = {
+    #   name = var.workspace_settings.pool.default_pool_name
+    #   type = var.workspace_capacity_name == null ? "Workspace" : "Capacity"
+    # }
     # starter_pool = {
     #   max_executors  = 3
     #   max_node_count = 1
