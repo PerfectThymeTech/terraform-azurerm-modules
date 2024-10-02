@@ -18,7 +18,7 @@ resource "azapi_resource" "fabric_capacity" {
   }
 
   response_export_values    = []
-  schema_validation_enabled = false # Can be reverted once this is closed: https://github.com/Azure/terraform-provider-azapi/issues/524
+  schema_validation_enabled = true
   locks                     = []
   ignore_casing             = false
   ignore_missing_property   = true
