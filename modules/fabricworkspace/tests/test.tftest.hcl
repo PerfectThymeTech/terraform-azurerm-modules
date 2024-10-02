@@ -92,8 +92,14 @@ run "create_fabric_workspace" {
         default_pool_name         = "starterPool"
       }
     }
-    workspace_git              = null
-    workspace_role_assignments = {}
+    workspace_git = null
+    workspace_role_assignments = {
+      my_sp = {
+        principal_id   = run.setup.client_config_object_id
+        principal_type = "ServicePrincipal"
+        role           = "Viewer"
+      }
+    }
   }
 
   # assert {

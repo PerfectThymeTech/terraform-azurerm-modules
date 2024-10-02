@@ -45,28 +45,28 @@ resource "fabric_spark_workspace_settings" "workspace_settings" {
   }
 }
 
-# resource "fabric_workspace_git" "workspace_git" {
-#   count = var.workspace_git == null ? 0 : 1
+resource "fabric_workspace_git" "workspace_git" {
+  count = var.workspace_git == null ? 0 : 1
 
-#   workspace_id = fabric_workspace.workspace.id
+  workspace_id = fabric_workspace.workspace.id
 
-#   git_provider_details = {
-#     git_provider_type = var.workspace_git.git_provider_type
-#     organization_name = var.workspace_git.organization_name
-#     project_name      = var.workspace_git.project_name
-#     repository_name   = var.workspace_git.repository_name
-#     branch_name       = var.workspace_git.branch_name
-#     directory_name    = var.workspace_git.directory_name
-#   }
-#   initialization_strategy = "PreferWorkspace"
-# }
+  git_provider_details = {
+    git_provider_type = var.workspace_git.git_provider_type
+    organization_name = var.workspace_git.organization_name
+    project_name      = var.workspace_git.project_name
+    repository_name   = var.workspace_git.repository_name
+    branch_name       = var.workspace_git.branch_name
+    directory_name    = var.workspace_git.directory_name
+  }
+  initialization_strategy = "PreferWorkspace"
+}
 
-# resource "fabric_workspace_role_assignment" "example" {
-#   for_each = var.workspace_role_assignments
+resource "fabric_workspace_role_assignment" "example" {
+  for_each = var.workspace_role_assignments
 
-#   workspace_id = fabric_workspace.workspace.id
+  workspace_id = fabric_workspace.workspace.id
 
-#   principal_id   = each.value.principal_id
-#   principal_type = each.value.principal_type
-#   role           = each.value.role
-# }
+  principal_id   = each.value.principal_id
+  principal_type = each.value.principal_type
+  role           = each.value.role
+}
