@@ -101,7 +101,7 @@ jobs:
 
   test:
     name: Terraform Test
-    runs-on: [ubuntu-latest] # [self-hosted]
+    runs-on: [self-hosted]
     continue-on-error: false
     environment: ${{ inputs.environment }}
     if: inputs.run_test
