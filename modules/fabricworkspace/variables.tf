@@ -72,7 +72,7 @@ variable "workspace_settings" {
     }), {})
     pool = optional(object({
       customize_compute_enabled = optional(bool, true)
-      default_pool_name         = optional(string, "defaultpool")
+      default_pool_name         = optional(string, "StarterPool")
     }), {})
   })
   sensitive = false
