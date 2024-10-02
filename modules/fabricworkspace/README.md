@@ -54,7 +54,7 @@ Default: `""`
 
 ### <a name="input_workspace_git"></a> [workspace\_git](#input\_workspace\_git)
 
-Description: Specifies git config of the fabric workspace.
+Description: Specifies git config of the fabric workspace. Not supported when deploying with service principal.
 
 Type:
 
@@ -106,16 +106,11 @@ object({
     automatic_log = optional(object({
       enabled = optional(bool, true)
     }), {})
-    environment = optional(object({
-      default_environment_name = optional(string, "")
-      runtime_version          = optional(string, "1.3")
-    }), {})
     high_concurrency = optional(object({
       notebook_interactive_run_enabled = optional(bool, true)
     }), {})
     pool = optional(object({
       customize_compute_enabled = optional(bool, true)
-      default_pool_name         = optional(string, "StarterPool")
     }), {})
   })
 ```
