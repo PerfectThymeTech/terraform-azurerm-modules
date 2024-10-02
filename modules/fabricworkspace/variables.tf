@@ -8,8 +8,8 @@ variable "workspace_capacity_name" {
   nullable    = true
   default     = null
   validation {
-    condition     = var.workspace_capacity_name == null || length(var.workspace_capacity_name) > 2
-    error_message = "Please specify a valid capacity name."
+    condition     = length(var.workspace_capacity_name) >= 2 && length(regexall("[^[:alnum:]]", var.workspace_capacity_name)) <= 0
+    error_message = "Please specify a valid name."
   }
 }
 
