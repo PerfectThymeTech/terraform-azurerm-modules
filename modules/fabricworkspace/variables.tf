@@ -73,10 +73,6 @@ variable "workspace_settings" {
   sensitive = false
   nullable  = false
   default   = {}
-  validation {
-    condition     = contains(["1.2", "1.3"], var.workspace_settings.environment.runtime_version)
-    error_message = "Please specify a valid runtime version. Version 1.1 should no longer be used."
-  }
 }
 
 # variable "workspace_settings" {
