@@ -7,6 +7,11 @@ on:
         required: true
         type: string
         description: "Specifies the environment of the deployment."
+      runner_label:
+        required: false
+        type: string
+        description: "Specifies the runner label."
+        default: "self-hosted"
       config:
         required: true
         type: string
@@ -101,7 +106,7 @@ jobs:
 
   test:
     name: Terraform Test
-    runs-on: [self-hosted]
+    runs-on: [${{ inputs.runner_label }}]
     continue-on-error: false
     environment: ${{ inputs.environment }}
     if: inputs.run_test
@@ -117,7 +122,6 @@ jobs:
       ARM_USE_OIDC: true
       FABRIC_TENANT_ID: ${{ inputs.tenant_id }}
       FABRIC_CLIENT_ID: ${{ secrets.CLIENT_ID }}
-      # FABRIC_USE_MSI: true
       FABRIC_USE_OIDC: true
 
     steps:
