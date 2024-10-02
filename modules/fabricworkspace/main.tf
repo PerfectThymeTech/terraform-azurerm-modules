@@ -25,10 +25,10 @@ resource "fabric_spark_workspace_settings" "workspace_settings" {
   automatic_log = {
     enabled = var.workspace_settings.automatic_log.enabled
   }
-  environment = {
-    name            = var.workspace_settings.environment.default_environment_name
-    runtime_version = var.workspace_settings.environment.runtime_version
-  }
+  # environment = {
+  #   name            = var.workspace_settings.environment.default_environment_name
+  #   runtime_version = var.workspace_settings.environment.runtime_version
+  # }
   high_concurrency = {
     notebook_interactive_run_enabled = var.workspace_settings.high_concurrency.notebook_interactive_run_enabled
   }
