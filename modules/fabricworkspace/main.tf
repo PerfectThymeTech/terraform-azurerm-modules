@@ -17,33 +17,33 @@ resource "fabric_workspace" "workspace" {
 #   ]
 # }
 
-# resource "fabric_spark_workspace_settings" "workspace_settings" {
-#   count = var.workspace_capacity_id == null ? 0 : 1
+resource "fabric_spark_workspace_settings" "workspace_settings" {
+  count = var.workspace_capacity_name == null ? 0 : 1
 
-#   workspace_id = fabric_workspace.workspace.id
+  workspace_id = fabric_workspace.workspace.id
 
-#   automatic_log = {
-#     enabled = var.workspace_settings.automatic_log.enabled
-#   }
-#   environment = {
-#     name            = var.workspace_settings.environment.default_environment_name
-#     runtime_version = var.workspace_settings.environment.runtime_version
-#   }
-#   high_concurrency = {
-#     notebook_interactive_run_enabled = var.workspace_settings.high_concurrency.notebook_interactive_run_enabled
-#   }
-#   pool = {
-#     customize_compute_enabled = var.workspace_settings.pool.customize_compute_enabled
-#     default_pool = {
-#       name = var.workspace_settings.pool.default_pool_name
-#       type = var.workspace_capacity_id == null ? "Workspace" : "Capacity"
-#     }
-#     # starter_pool = {
-#     #   max_executors  = 3
-#     #   max_node_count = 1
-#     # }
-#   }
-# }
+  automatic_log = {
+    enabled = var.workspace_settings.automatic_log.enabled
+  }
+  environment = {
+    name            = var.workspace_settings.environment.default_environment_name
+    runtime_version = var.workspace_settings.environment.runtime_version
+  }
+  high_concurrency = {
+    notebook_interactive_run_enabled = var.workspace_settings.high_concurrency.notebook_interactive_run_enabled
+  }
+  pool = {
+    customize_compute_enabled = var.workspace_settings.pool.customize_compute_enabled
+    default_pool = {
+      name = var.workspace_settings.pool.default_pool_name
+      type = var.workspace_capacity_name == null ? "Workspace" : "Capacity"
+    }
+    # starter_pool = {
+    #   max_executors  = 3
+    #   max_node_count = 1
+    # }
+  }
+}
 
 # resource "fabric_workspace_git" "workspace_git" {
 #   count = var.workspace_git == null ? 0 : 1
