@@ -32,17 +32,17 @@ resource "fabric_spark_workspace_settings" "workspace_settings" {
   high_concurrency = {
     notebook_interactive_run_enabled = var.workspace_settings.high_concurrency.notebook_interactive_run_enabled
   }
-  pool = {
-    customize_compute_enabled = var.workspace_settings.pool.customize_compute_enabled
-    default_pool = {
-      name = var.workspace_settings.pool.default_pool_name
-      type = var.workspace_capacity_name == null ? "Workspace" : "Capacity"
+    pool = {
+      customize_compute_enabled = var.workspace_settings.pool.customize_compute_enabled
+      default_pool = {
+        name = var.workspace_settings.pool.default_pool_name
+        type = var.workspace_capacity_name == null ? "Workspace" : "Capacity"
+      }
+      # starter_pool = {
+      #   max_executors  = 3
+      #   max_node_count = 1
+      # }
     }
-    # starter_pool = {
-    #   max_executors  = 3
-    #   max_node_count = 1
-    # }
-  }
 }
 
 # resource "fabric_workspace_git" "workspace_git" {
