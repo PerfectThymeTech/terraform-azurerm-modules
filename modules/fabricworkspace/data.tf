@@ -1,5 +1,5 @@
 data "fabric_capacity" "capacitiy" {
-  display_name = var.workspace_capacity_name
+  display_name = "mabutst" # var.workspace_capacity_name
 }
 
 # Not enabled as other workspaces not in the list would be removed from the domain
