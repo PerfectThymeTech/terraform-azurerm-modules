@@ -95,7 +95,7 @@ run "create_fabric_workspace" {
     workspace_git = null
     workspace_role_assignments = {
       my_sp = {
-        principal_id   = run.setup.client_config_object_id
+        principal_id   = "973df2ad-4e5e-4e8b-9df6-17f61e9efd55"
         principal_type = "ServicePrincipal"
         role           = "Viewer"
       }
