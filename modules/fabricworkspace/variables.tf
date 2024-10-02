@@ -1,15 +1,15 @@
 # General variables
 
 # Fabric workspace variables
-variable "workspace_capacity_id" {
-  description = "Specifies the resource id of a fabric capacity hosted in Azure to assign to the fabric workspace."
+variable "workspace_capacity_name" {
+  description = "Specifies the name of a fabric capacity hosted in Azure to assign to the fabric workspace."
   type        = string
   sensitive   = false
   nullable    = true
   default     = null
   validation {
-    condition     = var.workspace_capacity_id == null || can(length(split("/", var.workspace_capacity_id)) == 9)
-    error_message = "Please specify a valid capacity id."
+    condition     = length(var.workspace_capacity_name) >= 2 && length(regexall("[^[:alnum:]]", var.workspace_capacity_name)) <= 0
+    error_message = "Please specify a valid name."
   }
 }
 
@@ -52,7 +52,7 @@ variable "workspace_identity_enabled" {
   nullable    = false
   default     = true
   validation {
-    condition     = !var.workspace_identity_enabled || var.workspace_identity_enabled && var.workspace_capacity_id != null
+    condition     = !var.workspace_identity_enabled || var.workspace_identity_enabled && var.workspace_capacity_name != null
     error_message = "Please specify a capacity id to enable the workspace identity."
   }
 }
@@ -63,29 +63,64 @@ variable "workspace_settings" {
     automatic_log = optional(object({
       enabled = optional(bool, true)
     }), {})
-    environment = optional(object({
-      default_environment_name = optional(string, "")
-      runtime_version          = optional(string, "1.3")
-    }), {})
     high_concurrency = optional(object({
       notebook_interactive_run_enabled = optional(bool, true)
     }), {})
     pool = optional(object({
       customize_compute_enabled = optional(bool, true)
-      default_pool_name         = optional(string, "defaultpool")
     }), {})
   })
   sensitive = false
   nullable  = false
   default   = {}
-  validation {
-    condition     = contains(["1.2", "1.3"], var.workspace_settings.environment.runtime_version)
-    error_message = "Please specify a valid runtime version. Version 1.1 should no longer be used."
-  }
 }
 
+# variable "workspace_settings" {
+#   description = "Specifies settings of the fabric workspace."
+#   type = object({
+#     automatic_log = optional(object({
+#       enabled = optional(bool, true)
+#     }), {})
+#     environment = optional(object({
+#       default_environment_enabled = optional(bool, false)
+#       runtime_version             = optional(string, "1.3")
+#       default_environment_config = optional(object({
+#         publication_status = optional(string, "Published")
+#         driver_cores       = optional(number, 4)
+#         driver_memory      = optional(string, "28g")
+#         executor_cores     = optional(number, 4)
+#         executor_memory    = optional(string, "28g")
+#         dynamic_executor_allocation = optional(object({
+#           enabled       = optional(bool, false)
+#           min_executors = optional(number, null)
+#           max_executors = optional(number, null)
+#         }), {})
+#       }), {})
+#     }), {})
+#     high_concurrency = optional(object({
+#       notebook_interactive_run_enabled = optional(bool, true)
+#     }), {})
+#     pool = optional(object({
+#       customize_compute_enabled = optional(bool, true)
+#       default_pool_enabled      = optional(bool, false)
+#       default_pool_config = optional(object({
+#         node_family = optional(string, "MemoryOptimized")
+#         node_size   = optional(string, "Small")
+
+#       }), {})
+#     }), {})
+#   })
+#   sensitive = false
+#   nullable  = false
+#   default   = {}
+#   validation {
+#     condition     = contains(["1.2", "1.3"], var.workspace_settings.environment.runtime_version)
+#     error_message = "Please specify a valid runtime version. Version 1.1 should no longer be used."
+#   }
+# }
+
 variable "workspace_git" {
-  description = "Specifies git config of the fabric workspace."
+  description = "Specifies git config of the fabric workspace. Not supported when deploying with service principal."
   type = object({
     git_provider_type = optional(string, "AzureDevOps")
     organization_name = string

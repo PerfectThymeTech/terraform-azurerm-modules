@@ -20,12 +20,11 @@ jobs:
     name: "Dev"
     with:
       environment: "dev"
+      runner_label: "ubuntu-latest"
       config: "fabricworkspace"
       terraform_version: "1.9.6"
       node_version: 20
       tenant_id: "37963dd4-f4e6-40f8-a7d6-24b97919e452"
       subscription_id: "1fdab118-1638-419a-8b12-06c9543714a0"
-      run_test: false
-      log_level_test: "DEBUG"
     secrets:
       CLIENT_ID: ${{ secrets.CLIENT_ID }}

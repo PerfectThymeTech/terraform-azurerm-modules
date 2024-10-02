@@ -14,7 +14,7 @@ The following requirements are needed by this module:
 
 - <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) (>= 1.14.0)
 
-- <a name="requirement_fabric"></a> [fabric](#requirement\_fabric) (0.1.0-beta.2)
+- <a name="requirement_fabric"></a> [fabric](#requirement\_fabric) (0.1.0-beta.3)
 
 ## Modules
 
@@ -36,9 +36,9 @@ Type: `string`
 
 The following input variables are optional (have default values):
 
-### <a name="input_workspace_capacity_id"></a> [workspace\_capacity\_id](#input\_workspace\_capacity\_id)
+### <a name="input_workspace_capacity_name"></a> [workspace\_capacity\_name](#input\_workspace\_capacity\_name)
 
-Description: Specifies the resource id of a fabric capacity hosted in Azure to assign to the fabric workspace.
+Description: Specifies the name of a fabric capacity hosted in Azure to assign to the fabric workspace.
 
 Type: `string`
 
@@ -54,7 +54,7 @@ Default: `""`
 
 ### <a name="input_workspace_git"></a> [workspace\_git](#input\_workspace\_git)
 
-Description: Specifies git config of the fabric workspace.
+Description: Specifies git config of the fabric workspace. Not supported when deploying with service principal.
 
 Type:
 
@@ -106,16 +106,11 @@ object({
     automatic_log = optional(object({
       enabled = optional(bool, true)
     }), {})
-    environment = optional(object({
-      default_environment_name = optional(string, "")
-      runtime_version          = optional(string, "1.3")
-    }), {})
     high_concurrency = optional(object({
       notebook_interactive_run_enabled = optional(bool, true)
     }), {})
     pool = optional(object({
       customize_compute_enabled = optional(bool, true)
-      default_pool_name         = optional(string, "defaultpool")
     }), {})
   })
 ```
