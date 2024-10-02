@@ -89,7 +89,7 @@ run "create_fabric_workspace" {
       }
       pool = {
         customize_compute_enabled = true
-        default_pool_name         = "StarterPool"
+        default_pool_name         = "starterPool"
       }
     }
     workspace_git              = null
