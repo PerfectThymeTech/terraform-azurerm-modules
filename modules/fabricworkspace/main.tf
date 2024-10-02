@@ -1,11 +1,11 @@
-# resource "fabric_workspace" "workspace" {
-#   display_name = var.workspace_display_name
-#   description  = var.workspace_description
-#   capacity_id  = data.fabric_capacity.capacitiy.id
-#   identity = var.workspace_identity_enabled ? {
-#     type = "SystemAssigned"
-#   } : null
-# }
+resource "fabric_workspace" "workspace" {
+  display_name = var.workspace_display_name
+  description  = var.workspace_description
+  capacity_id  = data.fabric_capacity.capacity.id
+  identity = var.workspace_identity_enabled ? {
+    type = "SystemAssigned"
+  } : null
+}
 
 # Not enabled as other workspaces not in the list would be removed from the domain
 # resource "fabric_domain_workspace_assignments" "domain_workspace_assignments" {

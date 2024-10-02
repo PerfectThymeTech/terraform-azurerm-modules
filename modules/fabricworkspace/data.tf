@@ -1,7 +1,3 @@
-data "fabric_capacity" "capacitiy" {
-  display_name = "mabutst" # var.workspace_capacity_name
-}
-
 data "fabric_capacity" "capacity" {
   display_name = var.workspace_capacity_name
 }
