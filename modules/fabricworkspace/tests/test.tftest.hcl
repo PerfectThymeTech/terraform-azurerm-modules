@@ -80,16 +80,16 @@ run "create_fabric_workspace" {
       automatic_log = {
         enabled = true
       }
-      environment = {
-        default_environment_name = ""
-        runtime_version          = "1.3"
-      }
+      # environment = {
+      #   default_environment_name = ""
+      #   runtime_version          = "1.3"
+      # }
       high_concurrency = {
         notebook_interactive_run_enabled = true
       }
       pool = {
         customize_compute_enabled = true
-        default_pool_name         = "starterPool"
+        # default_pool_name         = "starterPool"
       }
     }
     workspace_git = null
