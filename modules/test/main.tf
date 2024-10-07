@@ -85,7 +85,7 @@ module "setup" {
 
   location                                       = local.location
   environment                                    = "int"
-  prefix                                         = "mabussprj"
+  prefix                                         = "mbussprj"
   resource_group_name                            = local.resource_group_name
   tags                                           = local.tags
   log_analytics_workspace_id                     = "/subscriptions/e82c5267-9dc4-4f45-ac13-abdd5e130d27/resourceGroups/ptt-dev-logging-rg/providers/Microsoft.OperationalInsights/workspaces/ptt-dev-log001"
@@ -112,7 +112,7 @@ module "ai_studio_project" {
   location                      = "northeurope"
   resource_group_name           = "tfmodule-test-rg"
   tags                          = local.tags
-  ai_studio_project_name        = "mabussprj001"
+  ai_studio_project_name        = "mbussprj001"
   ai_studio_hub_id              = module.setup.ai_studio_hub_id
   ai_studio_project_connections = {}
   diagnostics_configurations    = []
