@@ -75,7 +75,7 @@ locals {
 }
 
 module "setup" {
-  source = "../aistudioproject/tests/setup"
+  source = "./setup"
 
   providers = {
     azurerm = azurerm
@@ -88,7 +88,7 @@ module "setup" {
   prefix                                         = "mabussprj"
   resource_group_name                            = local.resource_group_name
   tags                                           = local.tags
-  log_analytics_workspace_id                     = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-8f171ff9-2b5b-4f0f-aed5-7fa360a1d094-WEU"
+  log_analytics_workspace_id                     = "/subscriptions/e82c5267-9dc4-4f45-ac13-abdd5e130d27/resourceGroups/ptt-dev-logging-rg/providers/Microsoft.OperationalInsights/workspaces/ptt-dev-log001"
   subnet_id                                      = local.subnet_id
   connectivity_delay_in_seconds                  = local.connectivity_delay_in_seconds
   private_dns_zone_id_container_registry         = "/subscriptions/e82c5267-9dc4-4f45-ac13-abdd5e130d27/resourceGroups/ptt-dev-privatedns-rg/providers/Microsoft.Network/privateDnsZones/privatelink.azurecr.io"
@@ -107,7 +107,6 @@ module "ai_studio_project" {
   providers = {
     azurerm = azurerm
     azapi   = azapi
-    time    = time
   }
 
   location                      = "northeurope"
