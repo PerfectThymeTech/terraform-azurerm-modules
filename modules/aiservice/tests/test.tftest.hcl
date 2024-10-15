@@ -26,4 +26,8 @@ run "create_ai_service" {
     condition     = azurerm_cognitive_account.cognitive_account.resource_group_name == "tfmodule-test-rg"
     error_message = "Failed to deploy."
   }
+  assert {
+    condition     = length(azurerm_cognitive_account.cognitive_account.identity[0].principal_id) > 0
+    error_message = "Failed to deploy."
+  }
 }

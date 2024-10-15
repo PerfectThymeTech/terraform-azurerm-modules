@@ -195,6 +195,10 @@ Description: The name of the cognitive service account.
 
 Description: The primary access key of the cognitive service account.
 
+### <a name="output_cognitive_account_principal_id"></a> [cognitive\_account\_principal\_id](#output\_cognitive\_account\_principal\_id)
+
+Description: The principal id of the cognitive service account.
+
 ### <a name="output_cognitive_account_setup_completed"></a> [cognitive\_account\_setup\_completed](#output\_cognitive\_account\_setup\_completed)
 
 Description: Specifies whether the connectivity and identity has been successfully configured.
