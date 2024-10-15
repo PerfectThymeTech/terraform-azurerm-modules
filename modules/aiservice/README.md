@@ -187,6 +187,10 @@ Description: The base URL of the cognitive service account.
 
 Description: The ID of the cognitive service account.
 
+### <a name="output_cognitive_account_name"></a> [cognitive\_account\_name](#output\_cognitive\_account\_name)
+
+Description: The name of the cognitive service account.
+
 ### <a name="output_cognitive_account_primary_access_key"></a> [cognitive\_account\_primary\_access\_key](#output\_cognitive\_account\_primary\_access\_key)
 
 Description: The primary access key of the cognitive service account.

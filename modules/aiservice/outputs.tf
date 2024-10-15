@@ -4,6 +4,12 @@ output "cognitive_account_id" {
   sensitive   = false
 }
 
+output "cognitive_account_name" {
+  description = "The name of the cognitive service account."
+  value       = azurerm_cognitive_account.cognitive_account.name
+  sensitive   = false
+}
+
 output "cognitive_account_endpoint" {
   description = "The base URL of the cognitive service account."
   value       = azurerm_cognitive_account.cognitive_account.endpoint
