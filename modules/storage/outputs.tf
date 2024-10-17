@@ -16,6 +16,12 @@ output "storage_account_primary_access_key" {
   sensitive   = true
 }
 
+output "storage_account_primary_blob_connection_string" {
+  description = "Specifies the primary blob connection string of the storage account."
+  value       = azurerm_storage_account.storage_account.primary_blob_connection_string
+  sensitive   = true
+}
+
 output "storage_account_primary_blob_endpoint" {
   description = "Specifies the primary blob endpoint of the storage account."
   value       = azurerm_storage_account.storage_account.primary_blob_endpoint

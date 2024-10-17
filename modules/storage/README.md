@@ -353,6 +353,10 @@ Description: Specifies the resource name of the storage account.
 
 Description: Specifies the primary access key of the storage account.
 
+### <a name="output_storage_account_primary_blob_connection_string"></a> [storage\_account\_primary\_blob\_connection\_string](#output\_storage\_account\_primary\_blob\_connection\_string)
+
+Description: Specifies the primary blob connection string of the storage account.
+
 ### <a name="output_storage_account_primary_blob_endpoint"></a> [storage\_account\_primary\_blob\_endpoint](#output\_storage\_account\_primary\_blob\_endpoint)
 
 Description: Specifies the primary blob endpoint of the storage account.
