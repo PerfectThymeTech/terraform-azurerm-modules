@@ -164,13 +164,13 @@ module "ai_studio_hub_outbound_rules" {
     null  = null
   }
 
-  ai_studio_hub_id                               = module.setup.ai_studio_hub_id
-  ai_studio_hub_storage_account_id               = module.setup.ai_studio_hub_storage_account_id
-  ai_studio_hub_outbound_rules_fqdns             = {}
+  ai_studio_hub_id                   = module.setup.ai_studio_hub_id
+  ai_studio_hub_storage_account_id   = module.setup.ai_studio_hub_storage_account_id
+  ai_studio_hub_outbound_rules_fqdns = {}
   ai_studio_hub_outbound_rules_private_endpoints = {
     aoai = {
       private_connection_resource_id = module.ai_service.cognitive_account_id
-      subresource_name = "account"
+      subresource_name               = "account"
     }
   }
   ai_studio_hub_outbound_rules_service_endpoints = {}
