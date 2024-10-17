@@ -1,5 +1,5 @@
 resource "azapi_resource" "ai_studio_hub" {
-  type      = "Microsoft.MachineLearningServices/workspaces@2024-04-01"
+  type      = "Microsoft.MachineLearningServices/workspaces@2024-07-01-preview"
   name      = var.ai_studio_hub_name
   location  = var.location
   parent_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${var.resource_group_name}"
@@ -23,6 +23,7 @@ resource "azapi_resource" "ai_studio_hub" {
   body = {
     kind = "Hub"
     properties = {
+      allowRoleAssignmentOnRG         = false
       applicationInsights             = var.application_insights_id
       containerRegistry               = var.container_registry_id
       keyVault                        = var.key_vault_id
@@ -46,7 +47,6 @@ resource "azapi_resource" "ai_studio_hub" {
       primaryUserAssignedIdentity = null
       publicNetworkAccess         = "Disabled"
       softDeleteRetentionInDays   = 7
-      systemDatastoresAuthMode    = "identity"
       v1LegacyMode                = false
 
       # TODO: Evaluate adding below properties
@@ -60,6 +60,7 @@ resource "azapi_resource" "ai_studio_hub" {
       #   offlineStoreConnectionName = ""
       #   onlineStoreConnectionName = ""
       # }
+      # systemDatastoresAuthMode    = "identity"
       # workspaceHubConfig = {
       #   additionalWorkspaceStorageAccounts = []
       #   defaultWorkspaceResourceGroup = ""
@@ -72,7 +73,7 @@ resource "azapi_resource" "ai_studio_hub" {
   }
 
   response_export_values    = []
-  schema_validation_enabled = false # Can be reverted once this is closed: https://github.com/Azure/terraform-provider-azapi/issues/524
+  schema_validation_enabled = true # Can be reverted once this is closed: https://github.com/Azure/terraform-provider-azapi/issues/524
   locks                     = []
   ignore_casing             = false
   ignore_missing_property   = true
