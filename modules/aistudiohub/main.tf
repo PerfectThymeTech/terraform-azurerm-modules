@@ -47,7 +47,6 @@ resource "azapi_resource" "ai_studio_hub" {
       primaryUserAssignedIdentity = null
       publicNetworkAccess         = "Disabled"
       softDeleteRetentionInDays   = 7
-      systemDatastoresAuthMode    = "identity"
       v1LegacyMode                = false
 
       # TODO: Evaluate adding below properties
@@ -61,6 +60,7 @@ resource "azapi_resource" "ai_studio_hub" {
       #   offlineStoreConnectionName = ""
       #   onlineStoreConnectionName = ""
       # }
+      # systemDatastoresAuthMode    = "identity"
       # workspaceHubConfig = {
       #   additionalWorkspaceStorageAccounts = []
       #   defaultWorkspaceResourceGroup = ""

@@ -94,7 +94,7 @@ module "setup" {
 
   location                                       = local.location
   environment                                    = "int"
-  prefix                                         = "mbprj"
+  prefix                                         = "mbprj002"
   resource_group_name                            = local.resource_group_name
   tags                                           = local.tags
   log_analytics_workspace_id                     = "/subscriptions/e82c5267-9dc4-4f45-ac13-abdd5e130d27/resourceGroups/ptt-dev-logging-rg/providers/Microsoft.OperationalInsights/workspaces/ptt-dev-log001"
@@ -121,10 +121,39 @@ module "ai_studio_project" {
   location                      = "northeurope"
   resource_group_name           = "tfmodule-test-rg"
   tags                          = local.tags
-  ai_studio_project_name        = "mbprj001"
+  ai_studio_project_name        = "mbprj002"
   ai_studio_hub_id              = module.setup.ai_studio_hub_id
   ai_studio_project_connections = {}
   diagnostics_configurations    = []
+}
+
+module "ai_service" {
+  source = "../aiservice"
+
+  providers = {
+    azurerm = azurerm
+    azapi   = azapi
+    time    = time
+  }
+
+  location                  = "swedencentral"
+  location_private_endpoint = "northeurope"
+  resource_group_name       = "tfmodule-test-rg"
+  tags = {
+    test = "aiservice"
+  }
+  cognitive_account_name                                  = "mbprj002-aoai001"
+  cognitive_account_kind                                  = "OpenAI"
+  cognitive_account_sku                                   = "S0"
+  cognitive_account_firewall_bypass_azure_services        = true
+  cognitive_account_outbound_network_access_restricted    = true
+  cognitive_account_outbound_network_access_allowed_fqdns = ["microsoft.com"]
+  cognitive_account_deployments                           = {}
+  diagnostics_configurations                              = []
+  subnet_id                                               = "/subscriptions/1fdab118-1638-419a-8b12-06c9543714a0/resourceGroups/ptt-dev-networking-rg/providers/Microsoft.Network/virtualNetworks/spoke-ptt-dev-vnet001/subnets/TerraformTestSubnet"
+  connectivity_delay_in_seconds                           = 0
+  private_dns_zone_id_cognitive_account                   = "/subscriptions/e82c5267-9dc4-4f45-ac13-abdd5e130d27/resourceGroups/ptt-dev-privatedns-rg/providers/Microsoft.Network/privateDnsZones/privatelink.cognitiveservices.azure.com"
+  customer_managed_key                                    = null
 }
 
 module "ai_studio_hub_outbound_rules" {
@@ -138,7 +167,12 @@ module "ai_studio_hub_outbound_rules" {
   ai_studio_hub_id                               = module.setup.ai_studio_hub_id
   ai_studio_hub_storage_account_id               = module.setup.ai_studio_hub_storage_account_id
   ai_studio_hub_outbound_rules_fqdns             = {}
-  ai_studio_hub_outbound_rules_private_endpoints = {}
+  ai_studio_hub_outbound_rules_private_endpoints = {
+    aoai = {
+      private_connection_resource_id = module.ai_service.cognitive_account_id
+      subresource_name = "account"
+    }
+  }
   ai_studio_hub_outbound_rules_service_endpoints = {}
   ai_studio_hub_provision_managed_network        = true
   ai_studio_hub_approve_private_endpoints        = true
