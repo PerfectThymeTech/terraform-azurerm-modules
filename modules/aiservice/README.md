@@ -95,6 +95,14 @@ Type: `bool`
 
 Default: `false`
 
+### <a name="input_cognitive_account_local_auth_enabled"></a> [cognitive\_account\_local\_auth\_enabled](#input\_cognitive\_account\_local\_auth\_enabled)
+
+Description: Specifies whether key-based acces should be enabled for the cognitive service.
+
+Type: `bool`
+
+Default: `false`
+
 ### <a name="input_cognitive_account_outbound_network_access_allowed_fqdns"></a> [cognitive\_account\_outbound\_network\_access\_allowed\_fqdns](#input\_cognitive\_account\_outbound\_network\_access\_allowed\_fqdns)
 
 Description: Specifies the outbound network allowed fqdns of the cognitive service.

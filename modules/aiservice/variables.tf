@@ -92,6 +92,14 @@ variable "cognitive_account_outbound_network_access_allowed_fqdns" {
   }
 }
 
+variable "cognitive_account_local_auth_enabled" {
+  description = "Specifies whether key-based acces should be enabled for the cognitive service."
+  type        = bool
+  sensitive   = false
+  nullable    = false
+  default     = false
+}
+
 variable "cognitive_account_deployments" {
   description = "Specifies the models that should be deployed within your ai service. Only applicable to ai services of kind openai."
   type = map(object({
