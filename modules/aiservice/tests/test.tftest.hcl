@@ -14,6 +14,7 @@ run "create_ai_service" {
     cognitive_account_firewall_bypass_azure_services        = true
     cognitive_account_outbound_network_access_restricted    = true
     cognitive_account_outbound_network_access_allowed_fqdns = ["microsoft.com"]
+    cognitive_account_local_auth_enabled                    = false
     cognitive_account_deployments                           = {}
     diagnostics_configurations                              = []
     subnet_id                                               = "/subscriptions/1fdab118-1638-419a-8b12-06c9543714a0/resourceGroups/ptt-dev-networking-rg/providers/Microsoft.Network/virtualNetworks/spoke-ptt-dev-vnet001/subnets/TerraformTestSubnet"
