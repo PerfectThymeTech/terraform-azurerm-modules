@@ -47,7 +47,7 @@ resource "azapi_update_resource" "cognitive_account_bypass_azureservices" {
   type        = "Microsoft.CognitiveServices/accounts@2023-05-01"
   resource_id = azurerm_cognitive_account.cognitive_account.id
 
-  body = jsonencode({
+  body = {
     properties = {
       networkAcls = {
         bypass              = "AzureServices"
@@ -57,7 +57,7 @@ resource "azapi_update_resource" "cognitive_account_bypass_azureservices" {
       }
       publicNetworkAccess = "Disabled"
     }
-  })
+  }
 
   response_export_values  = []
   locks                   = []
