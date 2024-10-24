@@ -12,6 +12,7 @@ run "create_storage" {
     storage_account_type                            = "StorageV2"
     storage_account_tier                            = "Standard"
     storage_account_replication_type                = "ZRS"
+    storage_account_allowed_copy_scope              = "AAD"
     storage_blob_change_feed_enabled                = false
     storage_blob_container_delete_retention_in_days = 7
     storage_blob_delete_retention_in_days           = 7

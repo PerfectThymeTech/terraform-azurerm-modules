@@ -162,6 +162,14 @@ Type: `string`
 
 Default: `"Hot"`
 
+### <a name="input_storage_account_allowed_copy_scope"></a> [storage\_account\_allowed\_copy\_scope](#input\_storage\_account\_allowed\_copy\_scope)
+
+Description: Specifies the allowed copy scope of the storage account.
+
+Type: `string`
+
+Default: `"AAD"`
+
 ### <a name="input_storage_account_replication_type"></a> [storage\_account\_replication\_type](#input\_storage\_account\_replication\_type)
 
 Description: Specifies the replication type of the storage account.
