@@ -8,7 +8,7 @@ terraform {
     }
     azapi = {
       source  = "Azure/azapi"
-      version = "~> 2.x"
+      version = "~> 2.0"
     }
     time = {
       source  = "hashicorp/time"
