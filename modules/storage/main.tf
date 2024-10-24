@@ -18,7 +18,7 @@ resource "azurerm_storage_account" "storage_account" {
   account_tier                    = var.storage_account_tier
   account_replication_type        = var.storage_account_replication_type
   allow_nested_items_to_be_public = false
-  allowed_copy_scope              = "AAD"
+  allowed_copy_scope              = var.storage_account_allowed_copy_scope == "All" ? null : var.storage_account_allowed_copy_scope
   dynamic "static_website" {
     for_each = var.storage_static_website
     content {
