@@ -85,6 +85,18 @@ variable "storage_account_replication_type" {
   }
 }
 
+variable "storage_account_allowed_copy_scope" {
+  description = "Specifies the allowed copy scope of the storage account."
+  type        = string
+  sensitive   = false
+  nullable    = false
+  default     = "AAD"
+  validation {
+    condition     = contains(["All", "AAD", "PrivateLink"], var.storage_account_allowed_copy_scope)
+    error_message = "Please specify a valid allowed copy scope. Allowed values are: [ 'All', 'AAD', 'PrivateLink' ]"
+  }
+}
+
 variable "storage_blob_change_feed_enabled" {
   description = "Specifies whether the blob change feed should be enabled."
   type        = bool
