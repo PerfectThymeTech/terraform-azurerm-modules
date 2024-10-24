@@ -8,7 +8,7 @@ terraform {
     }
     azapi = {
       source  = "Azure/azapi"
-      version = ">= 1.14.0"
+      version = "~> 2.0"
     }
     null = {
       source  = "hashicorp/null"
@@ -64,6 +64,7 @@ provider "azapi" {
   default_location               = local.location
   default_tags                   = local.tags
   disable_correlation_request_id = false
+  enable_preflight               = true
   environment                    = "public"
   skip_provider_registration     = false
   use_oidc                       = true
