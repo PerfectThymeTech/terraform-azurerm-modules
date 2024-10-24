@@ -94,7 +94,7 @@ module "setup" {
 
   location                                       = local.location
   environment                                    = "int"
-  prefix                                         = "mbprj002"
+  prefix                                         = "mbprj003"
   resource_group_name                            = local.resource_group_name
   tags                                           = local.tags
   log_analytics_workspace_id                     = "/subscriptions/e82c5267-9dc4-4f45-ac13-abdd5e130d27/resourceGroups/ptt-dev-logging-rg/providers/Microsoft.OperationalInsights/workspaces/ptt-dev-log001"
