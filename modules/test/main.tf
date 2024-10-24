@@ -121,7 +121,7 @@ module "ai_studio_project" {
   location                      = "northeurope"
   resource_group_name           = "tfmodule-test-rg"
   tags                          = local.tags
-  ai_studio_project_name        = "mbprj002"
+  ai_studio_project_name        = "mbprj003"
   ai_studio_hub_id              = module.setup.ai_studio_hub_id
   ai_studio_project_connections = {}
   diagnostics_configurations    = []
