@@ -40,7 +40,7 @@ provider "azapi" {
   default_location               = var.location
   default_tags                   = var.tags
   disable_correlation_request_id = false
-  enable_preflight = true
+  enable_preflight               = true
   environment                    = "public"
   skip_provider_registration     = false
   use_oidc                       = true
