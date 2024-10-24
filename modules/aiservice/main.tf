@@ -32,7 +32,7 @@ resource "azurerm_cognitive_account" "cognitive_account" {
     "${reverse(split(var.customer_managed_key.key_vault_id, "/"))[0]}.vault.azure.net",
   ], var.cognitive_account_outbound_network_access_allowed_fqdns) : setunion([], var.cognitive_account_outbound_network_access_allowed_fqdns)
   kind               = var.cognitive_account_kind
-  local_auth_enabled = false
+  local_auth_enabled = var.cognitive_account_local_auth_enabled
   network_acls {
     default_action = "Deny"
     ip_rules       = []
