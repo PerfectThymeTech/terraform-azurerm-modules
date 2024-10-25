@@ -106,7 +106,7 @@ module "storage_account" {
 }
 
 module "ai_studio_hub" {
-  source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/aistudiohub?ref=main"
+  source = "../../aistudiohub"
   providers = {
     azurerm = azurerm
     azapi   = azapi
