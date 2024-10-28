@@ -58,6 +58,8 @@ module "key_vault" {
   private_dns_zone_id_vault            = var.private_dns_zone_id_vault
 }
 
+data "azurerm_client_config" "current" {}
+
 module "storage_account" {
   source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/storage?ref=main"
   providers = {
@@ -73,6 +75,7 @@ module "storage_account" {
   storage_account_type                            = "StorageV2"
   storage_account_tier                            = "Standard"
   storage_account_replication_type                = "LRS"
+  storage_account_allowed_copy_scope              = "All"
   storage_blob_change_feed_enabled                = false
   storage_blob_container_delete_retention_in_days = 7
   storage_blob_delete_retention_in_days           = 7
@@ -88,8 +91,12 @@ module "storage_account" {
   storage_blob_last_access_time_enabled = false
   storage_is_hns_enabled                = false
   storage_network_bypass                = ["AzureServices"]
-  storage_network_private_link_access   = []
-  storage_public_network_access_enabled = false
+  storage_network_private_link_access = [
+    "/subscriptions/${data.azurerm_client_config.current.subscription_id}/providers/Microsoft.Security/datascanners/StorageDataScanner",
+    "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourcegroups/*/providers/Microsoft.MachineLearningServices/workspaces/*",
+    "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourcegroups/*/providers/Microsoft.MachineLearningServices/registries/*",
+  ]
+  storage_public_network_access_enabled = true
   storage_nfsv3_enabled                 = false
   storage_sftp_enabled                  = false
   storage_shared_access_key_enabled     = true

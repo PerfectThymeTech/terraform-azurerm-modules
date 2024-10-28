@@ -47,6 +47,7 @@ resource "azapi_resource" "ai_studio_hub" {
       primaryUserAssignedIdentity = null
       publicNetworkAccess         = "Disabled"
       softDeleteRetentionInDays   = 7
+      systemDatastoresAuthMode    = "identity" # "accesskey"
       v1LegacyMode                = false
 
       # TODO: Evaluate adding below properties
