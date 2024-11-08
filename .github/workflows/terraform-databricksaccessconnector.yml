@@ -1,0 +1,29 @@
+name: databricksaccessconnector tests
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "modules/databricksaccessconnector/**"
+      - ".github/workflows/terraform-databricksaccessconnector.yml"
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "modules/databricksaccessconnector/**"
+      - ".github/workflows/terraform-databricksaccessconnector.yml"
+
+jobs:
+  terraform_dev:
+    uses: ./.github/workflows/_terraformTestTemplate.yml
+    name: "Dev"
+    with:
+      environment: "dev"
+      config: "databricksaccessconnector"
+      terraform_version: "1.9.8"
+      node_version: 20
+      tenant_id: "37963dd4-f4e6-40f8-a7d6-24b97919e452"
+      subscription_id: "1fdab118-1638-419a-8b12-06c9543714a0"
+    secrets:
+      CLIENT_ID: ${{ secrets.CLIENT_ID }}
