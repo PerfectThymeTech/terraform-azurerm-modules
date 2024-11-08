@@ -10,6 +10,7 @@ exclude: |
     modules/containerregistry/README.md|
     modules/cosmosdb/README.md|
     modules/databricksaccessconnector/README.md|
+    modules/databricksworkspace/README.md|
     modules/datafactory/README.md|
     modules/fabriccapacity/README.md|
     modules/fabricworkspace/README.md|
@@ -52,6 +53,8 @@ repos:
       args: ["-c", "./.terraform-docs.yml", "./modules/cosmosdb"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/databricksaccessconnector"]
+    - id: terraform-docs-go
+      args: ["-c", "./.terraform-docs.yml", "./modules/databricksworkspace"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/datafactory"]
     - id: terraform-docs-go
