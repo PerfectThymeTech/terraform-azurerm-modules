@@ -80,7 +80,7 @@ variable "service_plan_worker_count" {
   nullable    = false
   default     = 1
   validation {
-    condition     = var.service_plan_worker_count > 0
+    condition     = var.service_plan_worker_count >= 0
     error_message = "Please specify a valid worker count larger than 0."
   }
 }
