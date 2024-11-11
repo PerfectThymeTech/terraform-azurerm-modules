@@ -69,8 +69,8 @@ run "setup" {
     environment        = "int"
     prefix             = "tfmdladb"
     virtual_network_id = local.virtual_network_id
-    nsg_id = local.nsg_id
-    route_table_id = local.route_table_id
+    nsg_id             = local.nsg_id
+    route_table_id     = local.route_table_id
     subnets = {
       local.databricks_workspace_private_subnet_name = {
         address_prefix = ""

@@ -58,11 +58,11 @@ variable "virtual_network_id" {
 
 variable "subnets" {
   description = "Specifies the subnets configurations."
-  type        = map(object({
+  type = map(object({
     address_prefix = string
   }))
-  sensitive   = false
-  nullable    = false
+  sensitive = false
+  nullable  = false
 }
 
 variable "nsg_id" {
