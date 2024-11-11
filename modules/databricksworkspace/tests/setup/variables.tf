@@ -45,6 +45,46 @@ variable "tags" {
 }
 
 # Service variables
+variable "virtual_network_id" {
+  description = "Specifies the id of the vnet in which the subnets will be created."
+  type        = string
+  sensitive   = false
+  nullable    = false
+  validation {
+    condition     = length(split("/", var.virtual_network_id)) == 9
+    error_message = "Please specify a valid resource id."
+  }
+}
+
+variable "subnets" {
+  description = "Specifies the subnets configurations."
+  type        = map(object({
+    address_prefix = string
+  }))
+  sensitive   = false
+  nullable    = false
+}
+
+variable "nsg_id" {
+  description = "Specifies the resource ID of the default network security group for the Azure Function."
+  type        = string
+  sensitive   = false
+  validation {
+    condition     = length(split("/", var.nsg_id)) == 9
+    error_message = "Please specify a valid resource ID."
+  }
+}
+
+variable "route_table_id" {
+  description = "Specifies the resource ID of the default route table for the Azure Function."
+  type        = string
+  sensitive   = false
+  validation {
+    condition     = length(split("/", var.route_table_id)) == 9
+    error_message = "Please specify a valid resource ID."
+  }
+}
+
 variable "log_analytics_workspace_id" {
   description = "Specifies the log analytics workspace of the application insights service."
   type        = string

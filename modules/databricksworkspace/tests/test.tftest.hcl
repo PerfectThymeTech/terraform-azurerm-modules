@@ -4,11 +4,20 @@ variables {
   tags = {
     test = "dtaabricksworkspace"
   }
-  virtual_network_id                       = ""
+  virtual_network_id                       = "/subscriptions/1fdab118-1638-419a-8b12-06c9543714a0/resourceGroups/ptt-dev-networking-rg/providers/Microsoft.Network/virtualNetworks/spoke-ptt-dev-vnet001"
+  nsg_id                                   = "/subscriptions/1fdab118-1638-419a-8b12-06c9543714a0/resourceGroups/ptt-dev-networking-rg/providers/Microsoft.Network/networkSecurityGroups/ptt-dev-default-nsg001"
+  route_table_id                           = "/subscriptions/1fdab118-1638-419a-8b12-06c9543714a0/resourceGroups/ptt-dev-networking-rg/providers/Microsoft.Network/routeTables/ptt-dev-default-rt001"
   subnet_id                                = "/subscriptions/1fdab118-1638-419a-8b12-06c9543714a0/resourceGroups/ptt-dev-networking-rg/providers/Microsoft.Network/virtualNetworks/spoke-ptt-dev-vnet001/subnets/TerraformTestSubnet"
   databricks_workspace_private_subnet_name = "DatabricksPrivateSubnet"
   databricks_workspace_public_subnet_name  = "DatabricksPublicSubnet"
   connectivity_delay_in_seconds            = 0
+  log_analytics_workspace_id               = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-8f171ff9-2b5b-4f0f-aed5-7fa360a1d094-WEU"
+  diagnostics_configurations = local.log_analytics_workspace_id == "" ? [] : [
+    {
+      log_analytics_workspace_id = local.log_analytics_workspace_id
+      storage_account_id         = ""
+    }
+  ]
 }
 
 provider "azurerm" {
@@ -60,6 +69,8 @@ run "setup" {
     environment        = "int"
     prefix             = "tfmdladb"
     virtual_network_id = local.virtual_network_id
+    nsg_id = local.nsg_id
+    route_table_id = local.route_table_id
     subnets = {
       local.databricks_workspace_private_subnet_name = {
         address_prefix = ""
@@ -68,6 +79,7 @@ run "setup" {
         address_prefix = ""
       }
     }
+    log_analytics_workspace_id = local.log_analytics_workspace_id
   }
 }
 
@@ -92,7 +104,7 @@ run "create_databricksworkspace" {
     databricks_workspace_public_subnet_name                                   = local.databricks_workspace_public_subnet_name
     databricks_workspace_public_subnet_network_security_group_association_id  = run.setup.databricks_workspace_public_subnet_network_security_group_association_id
     databricks_workspace_storage_account_sku_name                             = "Standard_LRS"
-    diagnostics_configurations                                                = []
+    diagnostics_configurations                                                = local.diagnostics_configurations
     subnet_id                                                                 = local.subnet_id
     connectivity_delay_in_seconds                                             = local.connectivity_delay_in_seconds
     private_endpoint_subresource_names                                        = ["databricks_ui_api", "browser_authentication"]
