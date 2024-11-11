@@ -11,7 +11,7 @@ variables {
   databricks_workspace_private_subnet_name = "DatabricksPrivateSubnet"
   databricks_workspace_public_subnet_name  = "DatabricksPublicSubnet"
   connectivity_delay_in_seconds            = 0
-  log_analytics_workspace_id               = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-8f171ff9-2b5b-4f0f-aed5-7fa360a1d094-WEU"
+  log_analytics_workspace_id               = "/subscriptions/1fdab118-1638-419a-8b12-06c9543714a0/resourceGroups/DefaultResourceGroup-NEU/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-1fdab118-1638-419a-8b12-06c9543714a0-NEU"
 }
 
 provider "azurerm" {
