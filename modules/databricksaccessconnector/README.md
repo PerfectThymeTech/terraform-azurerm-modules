@@ -44,21 +44,6 @@ Type: `string`
 
 The following input variables are optional (have default values):
 
-### <a name="input_diagnostics_configurations"></a> [diagnostics\_configurations](#input\_diagnostics\_configurations)
-
-Description: Specifies the diagnostic configuration for the service.
-
-Type:
-
-```hcl
-list(object({
-    log_analytics_workspace_id = optional(string, ""),
-    storage_account_id         = optional(string, "")
-  }))
-```
-
-Default: `[]`
-
 ### <a name="input_tags"></a> [tags](#input\_tags)
 
 Description: Specifies a key value map of tags to set on every taggable resources.

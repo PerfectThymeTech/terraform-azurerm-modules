@@ -44,5 +44,4 @@ module "databricks_access_connector" {
   resource_group_name              = var.resource_group_name
   tags                             = var.tags
   databricks_access_connector_name = "${local.prefix}-dbac001"
-  diagnostics_configurations       = []
 }

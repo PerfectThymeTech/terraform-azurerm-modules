@@ -1,11 +1,5 @@
 locals {
   prefix = "${lower(var.prefix)}-${var.environment}"
-  diagnostics_configurations = var.log_analytics_workspace_id == "" ? [] : [
-    {
-      log_analytics_workspace_id = var.log_analytics_workspace_id
-      storage_account_id         = ""
-    }
-  ]
 
   # Resource id's
   virtual_network = {
