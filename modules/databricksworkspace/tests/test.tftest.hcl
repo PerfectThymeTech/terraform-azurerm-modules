@@ -73,10 +73,10 @@ run "setup" {
     route_table_id     = var.route_table_id
     subnets = {
       "${var.databricks_workspace_private_subnet_name}" = {
-        address_prefix = ""
+        address_prefix = "10.3.6.0/26"
       }
       "${var.databricks_workspace_public_subnet_name}" = {
-        address_prefix = ""
+        address_prefix = "10.3.6.64/26"
       }
     }
     log_analytics_workspace_id = var.log_analytics_workspace_id
