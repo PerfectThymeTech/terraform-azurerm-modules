@@ -42,7 +42,7 @@ output "databricks_workspace_managed_storage_account_name" {
 
 output "databricks_workspace_storage_account_identity_principal_id" {
   description = "Specifies the principal id of the managed dbfs storage account of the Azure Databricks workspace."
-  value       = azurerm_databricks_workspace.databricks_workspace.storage_account_identity.principal_id
+  value       = azurerm_databricks_workspace.databricks_workspace.storage_account_identity[0].principal_id
   sensitive   = false
 }
 
