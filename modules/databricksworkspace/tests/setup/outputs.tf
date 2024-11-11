@@ -8,7 +8,7 @@ output "subnets_id" {
   description = "Specifies the id's of the subnets."
   value = {
     for key, value in var.subnets :
-    key => azurerm_subnet.subnet[key].id
+    key => azurerm_subnet.subnets[key].id
   }
   sensitive = false
 }
