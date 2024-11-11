@@ -36,7 +36,7 @@ output "databricks_workspace_managed_resource_group_name" {
 
 output "databricks_workspace_managed_storage_account_name" {
   description = "Specifies the name of the managed dbfs storage account of the Azure Databricks workspace."
-  value       = azurerm_databricks_workspace.databricks_workspace.custom_parameters.storage_account_name
+  value       = azurerm_databricks_workspace.databricks_workspace.custom_parameters[0].storage_account_name
   sensitive   = false
 }
 
