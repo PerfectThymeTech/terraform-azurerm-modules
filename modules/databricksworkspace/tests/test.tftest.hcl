@@ -72,10 +72,10 @@ run "setup" {
     nsg_id             = var.nsg_id
     route_table_id     = var.route_table_id
     subnets = {
-      var.databricks_workspace_private_subnet_name = {
+      "${var.databricks_workspace_private_subnet_name}" = {
         address_prefix = ""
       }
-      var.databricks_workspace_public_subnet_name = {
+      "${var.databricks_workspace_public_subnet_name}" = {
         address_prefix = ""
       }
     }
