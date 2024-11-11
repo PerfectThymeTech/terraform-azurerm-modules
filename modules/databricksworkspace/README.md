@@ -186,9 +186,25 @@ Description: Specifies whether the connectivity and identity has been successful
 
 Description: Specifies the resource id of the Azure Databricks workspace.
 
+### <a name="output_databricks_workspace_managed_resource_group_id"></a> [databricks\_workspace\_managed\_resource\_group\_id](#output\_databricks\_workspace\_managed\_resource\_group\_id)
+
+Description: Specifies the id of the managed resource group of the Azure Databricks workspace.
+
+### <a name="output_databricks_workspace_managed_resource_group_name"></a> [databricks\_workspace\_managed\_resource\_group\_name](#output\_databricks\_workspace\_managed\_resource\_group\_name)
+
+Description: Specifies the name of the managed resource group of the Azure Databricks workspace.
+
+### <a name="output_databricks_workspace_managed_storage_account_name"></a> [databricks\_workspace\_managed\_storage\_account\_name](#output\_databricks\_workspace\_managed\_storage\_account\_name)
+
+Description: Specifies the name of the managed dbfs storage account of the Azure Databricks workspace.
+
 ### <a name="output_databricks_workspace_name"></a> [databricks\_workspace\_name](#output\_databricks\_workspace\_name)
 
 Description: Specifies the resource name of the Azure Databricks workspace.
+
+### <a name="output_databricks_workspace_storage_account_identity_principal_id"></a> [databricks\_workspace\_storage\_account\_identity\_principal\_id](#output\_databricks\_workspace\_storage\_account\_identity\_principal\_id)
+
+Description: Specifies the principal id of the managed dbfs storage account of the Azure Databricks workspace.
 
 ### <a name="output_databricks_workspace_workspace_id"></a> [databricks\_workspace\_workspace\_id](#output\_databricks\_workspace\_workspace\_id)
 
