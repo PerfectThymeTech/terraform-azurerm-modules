@@ -55,7 +55,7 @@ variable "databricks_workspace_machine_learning_workspace_id" {
   nullable    = true
   default     = null
   validation {
-    condition     = var.databricks_workspace_machine_learning_workspace_id == null || ((length(split("/", var.databricks_workspace_machine_learning_workspace_id)) == 9)) # && can(provider::azurerm::parse_resource_id(var.databricks_workspace_machine_learning_workspace_id))
+    condition     = var.databricks_workspace_machine_learning_workspace_id == null || ((length(split("/", try(var.databricks_workspace_machine_learning_workspace_id, ""))) == 9)) # && can(provider::azurerm::parse_resource_id(var.databricks_workspace_machine_learning_workspace_id))
     error_message = "Please specify a valid resource id."
   }
 }
