@@ -89,7 +89,7 @@ run "create_databricksworkspace" {
     location                                                                  = "northeurope"
     resource_group_name                                                       = "tfmodule-test-rg"
     tags                                                                      = var.tags
-    databricks_workspace_name                                                 = "tftst-adb001"
+    databricks_workspace_name                                                 = "tftst-dbptt001"
     databricks_workspace_access_connector_id                                  = run.setup.databricks_access_connector_id
     databricks_workspace_machine_learning_workspace_id                        = null
     databricks_workspace_virtual_network_id                                   = var.virtual_network_id
