@@ -14,10 +14,10 @@ resource "azurerm_databricks_workspace" "databricks_workspace" {
     public_ip_name                                       = null
     public_subnet_name                                   = var.databricks_workspace_public_subnet_name
     public_subnet_network_security_group_association_id  = var.databricks_workspace_public_subnet_network_security_group_association_id
-    storage_account_name                                 = "${replace(var.databricks_workspace_name, "-", "")}stg"
     storage_account_sku_name                             = var.databricks_workspace_storage_account_sku_name
     virtual_network_id                                   = var.databricks_workspace_virtual_network_id
     vnet_address_prefix                                  = null
+    # storage_account_name                                 = "${replace(var.databricks_workspace_name, "-", "")}stg"
   }
   customer_managed_key_enabled                        = var.customer_managed_key == null ? false : true
   default_storage_firewall_enabled                    = true
