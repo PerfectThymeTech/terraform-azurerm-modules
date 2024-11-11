@@ -43,7 +43,7 @@ variable "databricks_workspace_access_connector_id" {
   sensitive   = false
   nullable    = false
   validation {
-    condition     = can(provider::azurerm::parse_resource_id(var.databricks_workspace_access_connector_id)) && (length(split("/", var.databricks_workspace_access_connector_id)) == 9)
+    condition     = (length(split("/", var.databricks_workspace_access_connector_id)) == 9) # && can(provider::azurerm::parse_resource_id(var.databricks_workspace_access_connector_id))
     error_message = "Please specify a valid resource id."
   }
 }
@@ -55,7 +55,7 @@ variable "databricks_workspace_machine_learning_workspace_id" {
   nullable    = true
   default     = null
   validation {
-    condition     = var.databricks_workspace_machine_learning_workspace_id == null || (can(provider::azurerm::parse_resource_id(var.databricks_workspace_machine_learning_workspace_id)) && (length(split("/", var.databricks_workspace_machine_learning_workspace_id)) == 9))
+    condition     = var.databricks_workspace_machine_learning_workspace_id == null || ((length(split("/", var.databricks_workspace_machine_learning_workspace_id)) == 9)) # && can(provider::azurerm::parse_resource_id(var.databricks_workspace_machine_learning_workspace_id))
     error_message = "Please specify a valid resource id."
   }
 }
@@ -66,7 +66,7 @@ variable "databricks_workspace_virtual_network_id" {
   sensitive   = false
   nullable    = false
   validation {
-    condition     = can(provider::azurerm::parse_resource_id(var.databricks_workspace_virtual_network_id)) && (length(split("/", var.databricks_workspace_virtual_network_id)) == 9)
+    condition     = (length(split("/", var.databricks_workspace_virtual_network_id)) == 9) # && can(provider::azurerm::parse_resource_id(var.databricks_workspace_virtual_network_id))
     error_message = "Please specify a valid resource id."
   }
 }
@@ -87,10 +87,10 @@ variable "databricks_workspace_private_subnet_network_security_group_association
   type        = string
   sensitive   = false
   nullable    = false
-  validation {
-    condition     = can(provider::azurerm::parse_resource_id(var.databricks_workspace_private_subnet_network_security_group_association_id))
-    error_message = "Please specify a valid resource id."
-  }
+  # validation {
+  #   condition     = can(provider::azurerm::parse_resource_id(var.databricks_workspace_private_subnet_network_security_group_association_id))
+  #   error_message = "Please specify a valid resource id."
+  # }
 }
 
 variable "databricks_workspace_public_subnet_name" {
@@ -109,10 +109,10 @@ variable "databricks_workspace_public_subnet_network_security_group_association_
   type        = string
   sensitive   = false
   nullable    = false
-  validation {
-    condition     = can(provider::azurerm::parse_resource_id(var.databricks_workspace_public_subnet_network_security_group_association_id))
-    error_message = "Please specify a valid resource id."
-  }
+  # validation {
+  #   condition     = can(provider::azurerm::parse_resource_id(var.databricks_workspace_public_subnet_network_security_group_association_id))
+  #   error_message = "Please specify a valid resource id."
+  # }
 }
 
 variable "databricks_workspace_storage_account_sku_name" {
@@ -151,7 +151,7 @@ variable "subnet_id" {
   type        = string
   sensitive   = false
   validation {
-    condition     = can(provider::azurerm::parse_resource_id(var.subnet_id)) && length(split("/", var.subnet_id)) == 11
+    condition     = length(split("/", var.subnet_id)) == 11 # && can(provider::azurerm::parse_resource_id(var.subnet_id))
     error_message = "Please specify a valid subnet id."
   }
 }
@@ -188,7 +188,7 @@ variable "private_dns_zone_id_databricks" {
   sensitive   = false
   default     = ""
   validation {
-    condition     = var.private_dns_zone_id_databricks == "" || (can(provider::azurerm::parse_resource_id(var.private_dns_zone_id_databricks)) && length(split("/", var.private_dns_zone_id_databricks)) == 9 && endswith(var.private_dns_zone_id_databricks, "privatelink.azuredatabricks.net"))
+    condition     = var.private_dns_zone_id_databricks == "" || (length(split("/", var.private_dns_zone_id_databricks)) == 9 && endswith(var.private_dns_zone_id_databricks, "privatelink.azuredatabricks.net")) # && can(provider::azurerm::parse_resource_id(var.private_dns_zone_id_databricks))
     error_message = "Please specify a valid resource ID for the private DNS Zone."
   }
 }
