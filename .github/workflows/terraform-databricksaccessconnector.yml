@@ -1,18 +1,18 @@
-name: appserviceplan tests
+name: databricksaccessconnector tests
 on:
   push:
     branches:
       - main
     paths:
-      - "modules/appserviceplan/**"
-      - ".github/workflows/terraform-appserviceplan.yml"
+      - "modules/databricksaccessconnector/**"
+      - ".github/workflows/terraform-databricksaccessconnector.yml"
 
   pull_request:
     branches:
       - main
     paths:
-      - "modules/appserviceplan/**"
-      - ".github/workflows/terraform-appserviceplan.yml"
+      - "modules/databricksaccessconnector/**"
+      - ".github/workflows/terraform-databricksaccessconnector.yml"
 
 jobs:
   terraform_dev:
@@ -20,7 +20,7 @@ jobs:
     name: "Dev"
     with:
       environment: "dev"
-      config: "appserviceplan"
+      config: "databricksaccessconnector"
       terraform_version: "1.9.8"
       node_version: 20
       tenant_id: "37963dd4-f4e6-40f8-a7d6-24b97919e452"

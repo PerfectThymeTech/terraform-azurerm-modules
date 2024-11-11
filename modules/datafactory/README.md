@@ -14,7 +14,9 @@ The following requirements are needed by this module:
 
 - <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) (~> 2.0)
 
-- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (>= 4.0.0)
+- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 4.0)
+
+- <a name="requirement_time"></a> [time](#requirement\_time) (~> 0.9)
 
 ## Modules
 
@@ -238,9 +240,13 @@ The following outputs are exported:
 
 Description: Specifies the id of the data factory.
 
-### <a name="output_fabric_capacity_name"></a> [fabric\_capacity\_name](#output\_fabric\_capacity\_name)
+### <a name="output_data_factory_name"></a> [data\_factory\_name](#output\_data\_factory\_name)
 
 Description: Specifies the name of the data factory.
+
+### <a name="output_data_factory_principal_id"></a> [data\_factory\_principal\_id](#output\_data\_factory\_principal\_id)
+
+Description: Specifies the principal id of the data factory.
 
 <!-- markdownlint-enable -->
 
