@@ -12,12 +12,6 @@ variables {
   databricks_workspace_public_subnet_name  = "DatabricksPublicSubnet"
   connectivity_delay_in_seconds            = 0
   log_analytics_workspace_id               = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-8f171ff9-2b5b-4f0f-aed5-7fa360a1d094-WEU"
-  diagnostics_configurations = var.log_analytics_workspace_id == "" ? [] : [
-    {
-      log_analytics_workspace_id = var.log_analytics_workspace_id
-      storage_account_id         = ""
-    }
-  ]
 }
 
 provider "azurerm" {
@@ -104,12 +98,17 @@ run "create_databricksworkspace" {
     databricks_workspace_public_subnet_name                                   = var.databricks_workspace_public_subnet_name
     databricks_workspace_public_subnet_network_security_group_association_id  = run.setup.subnets_network_security_group_association[var.databricks_workspace_public_subnet_name]
     databricks_workspace_storage_account_sku_name                             = "Standard_LRS"
-    diagnostics_configurations                                                = var.diagnostics_configurations
-    subnet_id                                                                 = var.subnet_id
-    connectivity_delay_in_seconds                                             = var.connectivity_delay_in_seconds
-    private_endpoint_subresource_names                                        = ["databricks_ui_api", "browser_authentication"]
-    private_dns_zone_id_databricks                                            = "/subscriptions/e82c5267-9dc4-4f45-ac13-abdd5e130d27/resourceGroups/ptt-dev-privatedns-rg/providers/Microsoft.Network/privateDnsZones/privatelink.azuredatabricks.net"
-    customer_managed_key                                                      = null
+    diagnostics_configurations = [
+      {
+        log_analytics_workspace_id = var.log_analytics_workspace_id
+        storage_account_id         = ""
+      }
+    ]
+    subnet_id                          = var.subnet_id
+    connectivity_delay_in_seconds      = var.connectivity_delay_in_seconds
+    private_endpoint_subresource_names = ["databricks_ui_api", "browser_authentication"]
+    private_dns_zone_id_databricks     = "/subscriptions/e82c5267-9dc4-4f45-ac13-abdd5e130d27/resourceGroups/ptt-dev-privatedns-rg/providers/Microsoft.Network/privateDnsZones/privatelink.azuredatabricks.net"
+    customer_managed_key               = null
   }
 
   assert {
