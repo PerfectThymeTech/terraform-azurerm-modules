@@ -12,9 +12,9 @@ variables {
   databricks_workspace_public_subnet_name  = "DatabricksPublicSubnet"
   connectivity_delay_in_seconds            = 0
   log_analytics_workspace_id               = "/subscriptions/8f171ff9-2b5b-4f0f-aed5-7fa360a1d094/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-8f171ff9-2b5b-4f0f-aed5-7fa360a1d094-WEU"
-  diagnostics_configurations = local.log_analytics_workspace_id == "" ? [] : [
+  diagnostics_configurations = var.log_analytics_workspace_id == "" ? [] : [
     {
-      log_analytics_workspace_id = local.log_analytics_workspace_id
+      log_analytics_workspace_id = var.log_analytics_workspace_id
       storage_account_id         = ""
     }
   ]
@@ -68,18 +68,18 @@ run "setup" {
     location           = var.location
     environment        = "int"
     prefix             = "tfmdladb"
-    virtual_network_id = local.virtual_network_id
-    nsg_id             = local.nsg_id
-    route_table_id     = local.route_table_id
+    virtual_network_id = var.virtual_network_id
+    nsg_id             = var.nsg_id
+    route_table_id     = var.route_table_id
     subnets = {
-      local.databricks_workspace_private_subnet_name = {
+      var.databricks_workspace_private_subnet_name = {
         address_prefix = ""
       }
-      local.databricks_workspace_public_subnet_name = {
+      var.databricks_workspace_public_subnet_name = {
         address_prefix = ""
       }
     }
-    log_analytics_workspace_id = local.log_analytics_workspace_id
+    log_analytics_workspace_id = var.log_analytics_workspace_id
   }
 }
 
@@ -96,17 +96,17 @@ run "create_databricksworkspace" {
     resource_group_name                                                       = "tfmodule-test-rg"
     tags                                                                      = var.tags
     databricks_workspace_name                                                 = "tftst-adb001"
-    databricks_workspace_access_connector_id                                  = run.setup.databricks_workspace_access_connector_id
+    databricks_workspace_access_connector_id                                  = run.setup.databricks_access_connector_id
     databricks_workspace_machine_learning_workspace_id                        = null
-    databricks_workspace_virtual_network_id                                   = local.virtual_network_id
-    databricks_workspace_private_subnet_name                                  = local.databricks_workspace_private_subnet_name
-    databricks_workspace_private_subnet_network_security_group_association_id = run.setup.databricks_workspace_private_subnet_network_security_group_association_id
-    databricks_workspace_public_subnet_name                                   = local.databricks_workspace_public_subnet_name
-    databricks_workspace_public_subnet_network_security_group_association_id  = run.setup.databricks_workspace_public_subnet_network_security_group_association_id
+    databricks_workspace_virtual_network_id                                   = var.virtual_network_id
+    databricks_workspace_private_subnet_name                                  = var.databricks_workspace_private_subnet_name
+    databricks_workspace_private_subnet_network_security_group_association_id = run.setup.subnets_network_security_group_association[var.databricks_workspace_private_subnet_name]
+    databricks_workspace_public_subnet_name                                   = var.databricks_workspace_public_subnet_name
+    databricks_workspace_public_subnet_network_security_group_association_id  = run.setup.subnets_network_security_group_association[var.databricks_workspace_public_subnet_name]
     databricks_workspace_storage_account_sku_name                             = "Standard_LRS"
-    diagnostics_configurations                                                = local.diagnostics_configurations
-    subnet_id                                                                 = local.subnet_id
-    connectivity_delay_in_seconds                                             = local.connectivity_delay_in_seconds
+    diagnostics_configurations                                                = var.diagnostics_configurations
+    subnet_id                                                                 = var.subnet_id
+    connectivity_delay_in_seconds                                             = var.connectivity_delay_in_seconds
     private_endpoint_subresource_names                                        = ["databricks_ui_api", "browser_authentication"]
     private_dns_zone_id_databricks                                            = "/subscriptions/e82c5267-9dc4-4f45-ac13-abdd5e130d27/resourceGroups/ptt-dev-privatedns-rg/providers/Microsoft.Network/privateDnsZones/privatelink.azuredatabricks.net"
     customer_managed_key                                                      = null
