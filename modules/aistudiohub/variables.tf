@@ -33,26 +33,6 @@ variable "ai_studio_hub_name" {
   nullable    = false
 }
 
-variable "ai_studio_hub_provision_managed_network" {
-  description = "Specifies whether the managed vnet should be providioned as part of the ai studio hub deployment."
-  type        = bool
-  sensitive   = false
-  nullable    = false
-  default     = false
-}
-
-variable "ai_studio_hub_firewall_sku" {
-  description = "Specifies the firewall sku deployed in the managed vnet of the ai studio hub deployment."
-  type        = string
-  sensitive   = false
-  nullable    = false
-  default     = "Basic"
-  validation {
-    condition     = contains(["Basic", "Standard"], var.ai_studio_hub_firewall_sku)
-    error_message = "Please specify a valid sku. Allowed values are: [ 'Basic', 'Standard' ]."
-  }
-}
-
 variable "application_insights_id" {
   description = "Specifies the id of application insights that will be connected to the ai studio hub."
   type        = string
@@ -95,6 +75,26 @@ variable "storage_account_id" {
     condition     = length(split("/", var.storage_account_id)) == 9
     error_message = "Please specify a valid resource id."
   }
+}
+
+variable "ai_studio_hub_firewall_sku" {
+  description = "Specifies the firewall sku deployed in the managed vnet of the ai studio hub deployment."
+  type        = string
+  sensitive   = false
+  nullable    = false
+  default     = "Basic"
+  validation {
+    condition     = contains(["Basic", "Standard"], var.ai_studio_hub_firewall_sku)
+    error_message = "Please specify a valid sku. Allowed values are: [ 'Basic', 'Standard' ]."
+  }
+}
+
+variable "ai_studio_hub_provision_managed_network" {
+  description = "Specifies whether the managed vnet should be providioned as part of the ai studio hub deployment."
+  type        = bool
+  sensitive   = false
+  nullable    = false
+  default     = false
 }
 
 # variable "ai_studio_hub_outbound_rules_fqdns" { # Will be managed using a separate module due to service limitations: https://github.com/PerfectThymeTech/terraform-azurerm-modules/tree/main/modules/aistudiooutboundrules
