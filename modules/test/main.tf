@@ -165,8 +165,8 @@ module "ai_studio_hub_outbound_rules" {
     null  = null
   }
 
-  ai_studio_hub_id                   = module.setup.ai_studio_hub_id
-  ai_studio_hub_storage_account_id   = module.setup.ai_studio_hub_storage_account_id
+  ai_studio_hub_id                 = module.setup.ai_studio_hub_id
+  ai_studio_hub_storage_account_id = module.setup.ai_studio_hub_storage_account_id
   ai_studio_hub_outbound_rules_fqdns = {
     test = "microsoft.com"
   }
