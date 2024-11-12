@@ -95,7 +95,7 @@ module "setup" {
 
   location                                       = local.location
   environment                                    = "int"
-  prefix                                         = "mbprj002"
+  prefix                                         = "mbprj004"
   resource_group_name                            = local.resource_group_name
   tags                                           = local.tags
   log_analytics_workspace_id                     = "/subscriptions/e82c5267-9dc4-4f45-ac13-abdd5e130d27/resourceGroups/ptt-dev-logging-rg/providers/Microsoft.OperationalInsights/workspaces/ptt-dev-log001"
@@ -122,7 +122,7 @@ module "ai_studio_project" {
   location                      = "northeurope"
   resource_group_name           = "tfmodule-test-rg"
   tags                          = local.tags
-  ai_studio_project_name        = "mbprj002"
+  ai_studio_project_name        = "mbprj004"
   ai_studio_hub_id              = module.setup.ai_studio_hub_id
   ai_studio_project_connections = {}
   diagnostics_configurations    = []
@@ -165,9 +165,11 @@ module "ai_studio_hub_outbound_rules" {
     null  = null
   }
 
-  ai_studio_hub_id                   = module.setup.ai_studio_hub_id
-  ai_studio_hub_storage_account_id   = module.setup.ai_studio_hub_storage_account_id
-  ai_studio_hub_outbound_rules_fqdns = {}
+  ai_studio_hub_id                 = module.setup.ai_studio_hub_id
+  ai_studio_hub_storage_account_id = module.setup.ai_studio_hub_storage_account_id
+  ai_studio_hub_outbound_rules_fqdns = {
+    test = "microsoft.com"
+  }
   ai_studio_hub_outbound_rules_private_endpoints = {
     aoai = {
       private_connection_resource_id = module.ai_service.cognitive_account_id
