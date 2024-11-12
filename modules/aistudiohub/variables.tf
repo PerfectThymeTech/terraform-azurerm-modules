@@ -41,6 +41,18 @@ variable "ai_studio_hub_provision_managed_network" {
   default     = false
 }
 
+variable "ai_studio_hub_firewall_sku" {
+  description = "Specifies the firewall sku deployed in the managed vnet of the ai studio hub deployment."
+  type        = string
+  sensitive   = false
+  nullable    = false
+  default     = "Basic"
+  validation {
+    condition     = contains(["Basic", "Standard"], var.ai_studio_hub_firewall_sku)
+    error_message = "Please specify a valid sku. Allowed values are: [ 'Basic', 'Standard' ]."
+  }
+}
+
 variable "application_insights_id" {
   description = "Specifies the id of application insights that will be connected to the ai studio hub."
   type        = string

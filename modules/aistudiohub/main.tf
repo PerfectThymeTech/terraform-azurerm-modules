@@ -1,5 +1,5 @@
 resource "azapi_resource" "ai_studio_hub" {
-  type      = "Microsoft.MachineLearningServices/workspaces@2024-07-01-preview"
+  type      = "Microsoft.MachineLearningServices/workspaces@2024-10-01-preview"
   name      = var.ai_studio_hub_name
   location  = var.location
   parent_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${var.resource_group_name}"
@@ -43,6 +43,7 @@ resource "azapi_resource" "ai_studio_hub" {
           sparkReady = true
           status     = "Active"
         }
+        firewallSku = var.ai_studio_hub_firewall_sku
       }
       primaryUserAssignedIdentity = null
       publicNetworkAccess         = "Disabled"
