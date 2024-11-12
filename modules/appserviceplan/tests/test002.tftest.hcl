@@ -7,7 +7,7 @@ run "create_appserviceplan" {
     tags = {
       test = "appserviceplan"
     }
-    service_plan_name                         = "tftstr-asp001"
+    service_plan_name                         = "tftstr-asp002"
     service_plan_maximum_elastic_worker_count = null
     service_plan_os_type                      = "Linux"
     service_plan_per_site_scaling_enabled     = false
