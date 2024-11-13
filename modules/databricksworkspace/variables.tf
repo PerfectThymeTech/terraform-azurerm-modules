@@ -87,10 +87,10 @@ variable "databricks_workspace_private_subnet_network_security_group_association
   type        = string
   sensitive   = false
   nullable    = false
-  # validation {
-  #   condition     = can(provider::azurerm::parse_resource_id(var.databricks_workspace_private_subnet_network_security_group_association_id))
-  #   error_message = "Please specify a valid resource id."
-  # }
+  validation {
+    condition     = length(split("/", var.databricks_workspace_private_subnet_network_security_group_association_id)) == 11 # && can(provider::azurerm::parse_resource_id(var.databricks_workspace_private_subnet_network_security_group_association_id))
+    error_message = "Please specify a valid subnet nsg association id."
+  }
 }
 
 variable "databricks_workspace_public_subnet_name" {
@@ -109,10 +109,10 @@ variable "databricks_workspace_public_subnet_network_security_group_association_
   type        = string
   sensitive   = false
   nullable    = false
-  # validation {
-  #   condition     = can(provider::azurerm::parse_resource_id(var.databricks_workspace_public_subnet_network_security_group_association_id))
-  #   error_message = "Please specify a valid resource id."
-  # }
+  validation {
+    condition     = length(split("/", var.databricks_workspace_public_subnet_network_security_group_association_id)) == 11 # && can(provider::azurerm::parse_resource_id(var.databricks_workspace_public_subnet_network_security_group_association_id))
+    error_message = "Please specify a valid subnet nsg association id."
+  }
 }
 
 variable "databricks_workspace_storage_account_sku_name" {
