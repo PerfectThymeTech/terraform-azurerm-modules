@@ -27,9 +27,6 @@ resource "azurerm_private_endpoint" "private_endpoint_databricks_workspace_datab
       private_dns_zone_group
     ]
   }
-  # depends_on = [
-  #   time_sleep.sleep_workspace
-  # ]
 }
 
 resource "azurerm_private_endpoint" "private_endpoint_databricks_workspace_browser_authentication" {
