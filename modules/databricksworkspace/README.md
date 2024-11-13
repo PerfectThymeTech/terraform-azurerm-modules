@@ -113,6 +113,14 @@ object({
 
 Default: `null`
 
+### <a name="input_databricks_workspace_browser_authentication_private_endpoint_enabled"></a> [databricks\_workspace\_browser\_authentication\_private\_endpoint\_enabled](#input\_databricks\_workspace\_browser\_authentication\_private\_endpoint\_enabled)
+
+Description: Specifies whether the 'browser\_authentication' private endpoint should be deployed for the Azure Databricks workspace.
+
+Type: `bool`
+
+Default: `false`
+
 ### <a name="input_databricks_workspace_machine_learning_workspace_id"></a> [databricks\_workspace\_machine\_learning\_workspace\_id](#input\_databricks\_workspace\_machine\_learning\_workspace\_id)
 
 Description: Specifies the id of the databricks access connector used for accessing the dbfs.
@@ -151,20 +159,6 @@ Description: Specifies the resource ID of the private DNS zone for Azure Databri
 Type: `string`
 
 Default: `""`
-
-### <a name="input_private_endpoint_subresource_names"></a> [private\_endpoint\_subresource\_names](#input\_private\_endpoint\_subresource\_names)
-
-Description: Specifies a list of group ids for which private endpoints will be created (e.g. 'databricks\_ui\_api', 'browser\_authentication'). If sub resource is defined a private endpoint will be created.
-
-Type: `set(string)`
-
-Default:
-
-```json
-[
-  "databricks_ui_api"
-]
-```
 
 ### <a name="input_tags"></a> [tags](#input\_tags)
 

@@ -99,10 +99,10 @@ run "create_databricksworkspace" {
     databricks_workspace_public_subnet_name                                   = run.setup.databricks_public_subnet_name
     databricks_workspace_public_subnet_network_security_group_association_id  = run.setup.databricks_public_subnet_network_security_group_association_id
     databricks_workspace_storage_account_sku_name                             = "Standard_LRS"
+    databricks_workspace_browser_authentication_private_endpoint_enabled      = true
     diagnostics_configurations                                                = []
     subnet_id                                                                 = var.subnet_id
     connectivity_delay_in_seconds                                             = var.connectivity_delay_in_seconds
-    private_endpoint_subresource_names                                        = ["databricks_ui_api", "browser_authentication"]
     private_dns_zone_id_databricks                                            = "/subscriptions/e82c5267-9dc4-4f45-ac13-abdd5e130d27/resourceGroups/ptt-dev-privatedns-rg/providers/Microsoft.Network/privateDnsZones/privatelink.azuredatabricks.net"
     customer_managed_key                                                      = null
   }

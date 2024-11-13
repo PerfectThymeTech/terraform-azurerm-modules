@@ -127,6 +127,14 @@ variable "databricks_workspace_storage_account_sku_name" {
   }
 }
 
+variable "databricks_workspace_browser_authentication_private_endpoint_enabled" {
+  description = "Specifies whether the 'browser_authentication' private endpoint should be deployed for the Azure Databricks workspace."
+  type        = bool
+  sensitive   = false
+  nullable    = false
+  default     = false
+}
+
 # Diagnostics variables
 variable "diagnostics_configurations" {
   description = "Specifies the diagnostic configuration for the service."
@@ -165,20 +173,6 @@ variable "connectivity_delay_in_seconds" {
   validation {
     condition     = var.connectivity_delay_in_seconds >= 0
     error_message = "Please specify a valid non-negative number."
-  }
-}
-
-variable "private_endpoint_subresource_names" {
-  description = "Specifies a list of group ids for which private endpoints will be created (e.g. 'databricks_ui_api', 'browser_authentication'). If sub resource is defined a private endpoint will be created."
-  type        = set(string)
-  sensitive   = false
-  nullable    = false
-  default     = ["databricks_ui_api"]
-  validation {
-    condition = alltrue([
-      length([for private_endpoint_subresource_name in var.private_endpoint_subresource_names : private_endpoint_subresource_name if !contains(["databricks_ui_api", "browser_authentication"], private_endpoint_subresource_name)]) <= 0
-    ])
-    error_message = "Please specify a valid group id."
   }
 }
 
