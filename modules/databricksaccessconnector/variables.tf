@@ -38,19 +38,3 @@ variable "databricks_access_connector_name" {
 }
 
 # Diagnostics variables
-variable "diagnostics_configurations" {
-  description = "Specifies the diagnostic configuration for the service."
-  type = list(object({
-    log_analytics_workspace_id = optional(string, ""),
-    storage_account_id         = optional(string, "")
-  }))
-  sensitive = false
-  nullable  = false
-  default   = []
-  validation {
-    condition = alltrue([
-      length([for diagnostics_configuration in toset(var.diagnostics_configurations) : diagnostics_configuration if diagnostics_configuration.log_analytics_workspace_id == "" && diagnostics_configuration.storage_account_id == ""]) <= 0
-    ])
-    error_message = "Please specify a valid resource ID."
-  }
-}
