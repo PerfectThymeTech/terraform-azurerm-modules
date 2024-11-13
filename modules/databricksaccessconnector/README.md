@@ -1,5 +1,5 @@
 <!-- BEGIN_TF_DOCS -->
-# Azure Databricks Terraform Module
+# Azure Databricks Access Connector Terraform Module
 
 ## Documentation
 <!-- markdownlint-disable MD033 -->

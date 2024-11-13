@@ -1,1 +1,1 @@
-# Azure Databricks Terraform Module
+# Azure Databricks Workspace Terraform Module

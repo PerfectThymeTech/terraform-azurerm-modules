@@ -1,1 +1,1 @@
-# Azure Databricks Terraform Module
+# Azure Databricks Access Connector Terraform Module
