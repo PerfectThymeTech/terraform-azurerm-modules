@@ -14,6 +14,7 @@ This repository contains secure by default Terraform modules for Azure Services.
 - [Azure Cosmos DB](/modules/cosmosdb/)
 - [Azure Data Factory](/modules/datafactory/)
 - [Azure Databricks Access Connector](/modules/databricksaccessconnector/)
+- [Azure Databricks Workspace](/modules/databricksworkspace/)
 - [Azure Key Vault](/modules/keyvault/)
 - [Azure Log Analytics Workspace](/modules/loganalytics/)
 - [Azure Storage Account](/modules/storage/)
