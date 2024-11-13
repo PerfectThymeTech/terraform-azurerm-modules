@@ -4,29 +4,26 @@ output "databricks_access_connector_id" {
   sensitive   = false
 }
 
-output "subnets_id" {
-  description = "Specifies the id's of the subnets."
-  value = {
-    for key, value in var.subnets :
-    key => azurerm_subnet.subnets[key].id
-  }
-  sensitive = false
+output "databricks_private_subnet_name" {
+  description = "Specifies the name of the databricks private subnets."
+  value       = azapi_resource.databricks_private_subnet.name
+  sensitive   = false
 }
 
-output "subnets_network_security_group_association" {
-  description = "Specifies the id's of the subnet nsg associations."
-  value = {
-    for key, value in var.subnets :
-    key => azurerm_subnet_network_security_group_association.subnets_network_security_group_association[key].id
-  }
-  sensitive = false
+output "databricks_private_subnet_network_security_group_association_id" {
+  description = "Specifies the id of the databricks private subnets nsg association."
+  value       = azapi_resource.databricks_private_subnet.id
+  sensitive   = false
 }
 
-output "subnets_route_table_association" {
-  description = "Specifies the id's of the subnet route table associations."
-  value = {
-    for key, value in var.subnets :
-    key => azurerm_subnet_route_table_association.subnets_route_table_association[key].id
-  }
-  sensitive = false
+output "databricks_public_subnet_name" {
+  description = "Specifies the name of the databricks public subnets."
+  value       = azapi_resource.databricks_public_subnet.name
+  sensitive   = false
+}
+
+output "databricks_public_subnet_network_security_group_association_id" {
+  description = "Specifies the id of the databricks public subnets nsg association."
+  value       = azapi_resource.databricks_public_subnet.id
+  sensitive   = false
 }

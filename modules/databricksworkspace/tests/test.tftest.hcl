@@ -58,20 +58,14 @@ run "setup" {
   }
 
   variables {
-    location           = var.location
-    environment        = "int"
-    prefix             = "tfmdladb"
-    virtual_network_id = var.virtual_network_id
-    nsg_id             = var.nsg_id
-    route_table_id     = var.route_table_id
-    subnets = {
-      "${var.databricks_workspace_private_subnet_name}" = {
-        address_prefix = "10.3.6.0/26"
-      }
-      "${var.databricks_workspace_public_subnet_name}" = {
-        address_prefix = "10.3.6.64/26"
-      }
-    }
+    location                                 = var.location
+    environment                              = "int"
+    prefix                                   = "tfmdladb"
+    virtual_network_id                       = var.virtual_network_id
+    nsg_id                                   = var.nsg_id
+    route_table_id                           = var.route_table_id
+    databricks_private_subnet_address_prefix = "10.3.6.0/26"
+    databricks_public_subnet_address_prefix  = "10.3.6.64/26"
   }
 }
 
@@ -91,10 +85,10 @@ run "create_databricksworkspace" {
     databricks_workspace_access_connector_id                                  = run.setup.databricks_access_connector_id
     databricks_workspace_machine_learning_workspace_id                        = null
     databricks_workspace_virtual_network_id                                   = var.virtual_network_id
-    databricks_workspace_private_subnet_name                                  = var.databricks_workspace_private_subnet_name
-    databricks_workspace_private_subnet_network_security_group_association_id = run.setup.subnets_network_security_group_association[var.databricks_workspace_private_subnet_name]
-    databricks_workspace_public_subnet_name                                   = var.databricks_workspace_public_subnet_name
-    databricks_workspace_public_subnet_network_security_group_association_id  = run.setup.subnets_network_security_group_association[var.databricks_workspace_public_subnet_name]
+    databricks_workspace_private_subnet_name                                  = var.setup.databricks_private_subnet_name
+    databricks_workspace_private_subnet_network_security_group_association_id = run.setup.databricks_private_subnet_network_security_group_association_id
+    databricks_workspace_public_subnet_name                                   = run.setup.databricks_public_subnet_name
+    databricks_workspace_public_subnet_network_security_group_association_id  = run.setup.databricks_public_subnet_network_security_group_association_id
     databricks_workspace_storage_account_sku_name                             = "Standard_LRS"
     diagnostics_configurations                                                = []
     subnet_id                                                                 = var.subnet_id

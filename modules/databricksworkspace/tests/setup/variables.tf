@@ -56,15 +56,6 @@ variable "virtual_network_id" {
   }
 }
 
-variable "subnets" {
-  description = "Specifies the subnets configurations."
-  type = map(object({
-    address_prefix = string
-  }))
-  sensitive = false
-  nullable  = false
-}
-
 variable "nsg_id" {
   description = "Specifies the resource ID of the default network security group for the Azure Function."
   type        = string
@@ -83,6 +74,20 @@ variable "route_table_id" {
     condition     = length(split("/", var.route_table_id)) == 9
     error_message = "Please specify a valid resource ID."
   }
+}
+
+variable "databricks_private_subnet_address_prefix" {
+  description = "Specifies the address prefix of the databricks private subnet."
+  type        = string
+  sensitive   = false
+  nullable    = false
+}
+
+variable "databricks_public_subnet_address_prefix" {
+  description = "Specifies the address prefix of the databricks public subnet."
+  type        = string
+  sensitive   = false
+  nullable    = false
 }
 
 # Network variables

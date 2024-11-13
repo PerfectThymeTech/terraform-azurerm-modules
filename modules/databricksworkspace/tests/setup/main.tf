@@ -1,38 +1,69 @@
-resource "azurerm_subnet" "subnets" {
-  for_each = var.subnets
+resource "azapi_resource" "databricks_private_subnet" {
+  type      = "Microsoft.Network/virtualNetworks/subnets@2022-07-01"
+  name      = "DatabricksPrivateSubnetTfTest"
+  parent_id = var.virtual_network_id
 
-  name                 = each.key
-  virtual_network_name = local.virtual_network.name
-  resource_group_name  = local.virtual_network.resource_group_name
-
-  address_prefixes = [
-    each.value.address_prefix
-  ]
-  delegation {
-    name = "DatabricksDelegation"
-    service_delegation {
-      name = "Microsoft.Databricks/workspaces"
+  body = {
+    properties = {
+      addressPrefix = var.databricks_private_subnet_address_prefix
+      delegations = [
+        {
+          name = "DatabricksSubnetDelegation"
+          properties = {
+            serviceName = "Microsoft.Databricks/workspaces"
+          }
+        }
+      ]
+      ipAllocations = []
+      networkSecurityGroup = {
+        id = var.nsg_id
+      }
+      privateEndpointNetworkPolicies    = "Enabled"
+      privateLinkServiceNetworkPolicies = "Enabled"
+      routeTable = {
+        id = var.route_table_id
+      }
+      serviceEndpointPolicies = []
+      serviceEndpoints        = []
     }
   }
-  private_endpoint_network_policies             = "Enabled"
-  private_link_service_network_policies_enabled = true
-  service_endpoint_policy_ids                   = []
-  service_endpoints                             = []
 }
 
-resource "azurerm_subnet_network_security_group_association" "subnets_network_security_group_association" {
-  for_each = var.subnets
+resource "azapi_resource" "databricks_public_subnet" {
+  type      = "Microsoft.Network/virtualNetworks/subnets@2022-07-01"
+  name      = "DatabricksPublicSubnetTfTest"
+  parent_id = var.virtual_network_id
 
-  subnet_id                 = azurerm_subnet.subnets[each.key].id
-  network_security_group_id = var.nsg_id
+  body = {
+    properties = {
+      addressPrefix = var.databricks_public_subnet_address_prefix
+      delegations = [
+        {
+          name = "DatabricksSubnetDelegation"
+          properties = {
+            serviceName = "Microsoft.Databricks/workspaces"
+          }
+        }
+      ]
+      ipAllocations = []
+      networkSecurityGroup = {
+        id = var.nsg_id
+      }
+      privateEndpointNetworkPolicies    = "Enabled"
+      privateLinkServiceNetworkPolicies = "Enabled"
+      routeTable = {
+        id = var.route_table_id
+      }
+      serviceEndpointPolicies = []
+      serviceEndpoints        = []
+    }
+  }
+
+  depends_on = [
+    azapi_resource.databricks_private_subnet_001
+  ]
 }
 
-resource "azurerm_subnet_route_table_association" "subnets_route_table_association" {
-  for_each = var.subnets
-
-  subnet_id      = azurerm_subnet.subnets[each.key].id
-  route_table_id = var.route_table_id
-}
 
 module "databricks_access_connector" {
   source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/databricksaccessconnector?ref=main"
