@@ -60,10 +60,9 @@ resource "azapi_resource" "databricks_public_subnet" {
   }
 
   depends_on = [
-    azapi_resource.databricks_private_subnet_001
+    azapi_resource.databricks_private_subnet
   ]
 }
-
 
 module "databricks_access_connector" {
   source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/databricksaccessconnector?ref=main"
