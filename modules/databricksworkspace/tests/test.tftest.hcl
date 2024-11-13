@@ -94,7 +94,7 @@ run "create_databricksworkspace" {
     databricks_workspace_access_connector_id                                  = run.setup.databricks_access_connector_id
     databricks_workspace_machine_learning_workspace_id                        = null
     databricks_workspace_virtual_network_id                                   = var.virtual_network_id
-    databricks_workspace_private_subnet_name                                  = var.setup.databricks_private_subnet_name
+    databricks_workspace_private_subnet_name                                  = run.setup.databricks_private_subnet_name
     databricks_workspace_private_subnet_network_security_group_association_id = run.setup.databricks_private_subnet_network_security_group_association_id
     databricks_workspace_public_subnet_name                                   = run.setup.databricks_public_subnet_name
     databricks_workspace_public_subnet_network_security_group_association_id  = run.setup.databricks_public_subnet_network_security_group_association_id
