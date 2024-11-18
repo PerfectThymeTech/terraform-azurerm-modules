@@ -9,6 +9,7 @@ resource "azurerm_private_endpoint" "private_endpoint_purview_account_platform" 
     name                           = "${azapi_resource.purview_account.name}-platform-svc"
     is_manual_connection           = false
     private_connection_resource_id = azapi_resource.purview_account.id
+    request_message                = "Required for private connection."
     subresource_names              = ["platform"]
   }
   subnet_id = var.subnet_id
@@ -40,6 +41,7 @@ resource "azurerm_private_endpoint" "private_endpoint_purview_account_ingestion_
     name                           = "${azapi_resource.purview_account.name}-ing-blob-svc"
     is_manual_connection           = true
     private_connection_resource_id = azapi_resource.purview_account.output.properties.ingestionStorage.id
+    request_message                = "Required for private connection."
     subresource_names              = ["blob"]
   }
   subnet_id = var.subnet_id
@@ -71,6 +73,7 @@ resource "azurerm_private_endpoint" "private_endpoint_purview_account_ingestion_
     name                           = "${azapi_resource.purview_account.name}-ing-queue-svc"
     is_manual_connection           = true
     private_connection_resource_id = azapi_resource.purview_account.output.properties.ingestionStorage.id
+    request_message                = "Required for private connection."
     subresource_names              = ["queue"]
   }
   subnet_id = var.subnet_id
