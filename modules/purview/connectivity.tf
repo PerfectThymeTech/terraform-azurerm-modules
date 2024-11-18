@@ -9,7 +9,6 @@ resource "azurerm_private_endpoint" "private_endpoint_purview_account_platform" 
     name                           = "${azapi_resource.purview_account.name}-platform-svc"
     is_manual_connection           = false
     private_connection_resource_id = azapi_resource.purview_account.id
-    request_message                = "Required for private connection."
     subresource_names              = ["platform"]
   }
   subnet_id = var.subnet_id
