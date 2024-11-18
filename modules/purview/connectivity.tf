@@ -38,7 +38,7 @@ resource "azurerm_private_endpoint" "private_endpoint_purview_account_ingestion_
   custom_network_interface_name = "${azapi_resource.purview_account.name}-ing-blob-nic"
   private_service_connection {
     name                           = "${azapi_resource.purview_account.name}-ing-blob-svc"
-    is_manual_connection           = false
+    is_manual_connection           = true
     private_connection_resource_id = azapi_resource.purview_account.output.properties.ingestionStorage.id
     subresource_names              = ["blob"]
   }
@@ -69,7 +69,7 @@ resource "azurerm_private_endpoint" "private_endpoint_purview_account_ingestion_
   custom_network_interface_name = "${azapi_resource.purview_account.name}-ing-queue-nic"
   private_service_connection {
     name                           = "${azapi_resource.purview_account.name}-ing-queue-svc"
-    is_manual_connection           = false
+    is_manual_connection           = true
     private_connection_resource_id = azapi_resource.purview_account.output.properties.ingestionStorage.id
     subresource_names              = ["queue"]
   }
