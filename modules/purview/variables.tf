@@ -50,7 +50,7 @@ variable "purview_account_root_collection_admins" {
   default   = {}
   validation {
     condition = alltrue([
-      length([for root_collection_admin in toset(var.purview_account_root_collection_admins) : true if length(root_collection_admin.object_id) <= 2]) <= 0
+      length([for root_collection_admin in var.purview_account_root_collection_admins : true if length(root_collection_admin.object_id) <= 2]) <= 0
     ])
     error_message = "Please specify a valid object id."
   }
