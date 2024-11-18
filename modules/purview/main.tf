@@ -5,10 +5,10 @@ resource "azapi_resource" "purview_account" {
   parent_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${var.resource_group_name}"
   tags      = var.tags
   identity {
-    type = "SystemAssigned"
+    type         = "SystemAssigned"
     identity_ids = []
   }
-  
+
   body = {
     sku = {
       name     = "Standard"

@@ -1,5 +1,5 @@
 <!-- BEGIN_TF_DOCS -->
-# Azure Key Vault Terraform Module
+# Microsoft Purview Terraform Module
 
 ## Documentation
 <!-- markdownlint-disable MD033 -->
@@ -24,15 +24,15 @@ No modules.
 
 The following input variables are required:
 
-### <a name="input_key_vault_name"></a> [key\_vault\_name](#input\_key\_vault\_name)
-
-Description: Specifies the name of the Key Vault. Changing this forces a new resource to be created.
-
-Type: `string`
-
 ### <a name="input_location"></a> [location](#input\_location)
 
 Description: Specifies the location of all resources.
+
+Type: `string`
+
+### <a name="input_purview_account_name"></a> [purview\_account\_name](#input\_purview\_account\_name)
+
+Description: Specifies the name of the Purview account.
 
 Type: `string`
 
@@ -75,29 +75,51 @@ list(object({
 
 Default: `[]`
 
-### <a name="input_key_vault_sku_name"></a> [key\_vault\_sku\_name](#input\_key\_vault\_sku\_name)
+### <a name="input_location_private_endpoint"></a> [location\_private\_endpoint](#input\_location\_private\_endpoint)
 
-Description: Specifies the name of the SKU used for this Key Vault. Possible values are standard and premium.
+Description: Specifies the location of the private endpoint. Use this variables only if the private endpoint(s) should reside in a different location than the service itself.
 
 Type: `string`
 
-Default: `"standard"`
+Default: `null`
 
-### <a name="input_key_vault_soft_delete_retention_days"></a> [key\_vault\_soft\_delete\_retention\_days](#input\_key\_vault\_soft\_delete\_retention\_days)
+### <a name="input_private_dns_zone_id_blob"></a> [private\_dns\_zone\_id\_blob](#input\_private\_dns\_zone\_id\_blob)
 
-Description: Specifies the number of days that items should be retained for once soft-deleted. This value can be between 7 and 90 (the default) days.
+Description: Specifies the resource ID of the private DNS zone for Azure Storage blob endpoints. Not required if DNS A-records get created via Azure Policy.
 
-Type: `number`
+Type: `string`
 
-Default: `7`
+Default: `""`
 
-### <a name="input_private_dns_zone_id_vault"></a> [private\_dns\_zone\_id\_vault](#input\_private\_dns\_zone\_id\_vault)
+### <a name="input_private_dns_zone_id_purview_platform"></a> [private\_dns\_zone\_id\_purview\_platform](#input\_private\_dns\_zone\_id\_purview\_platform)
 
 Description: Specifies the resource ID of the private DNS zone for Azure Key Vault. Not required if DNS A-records get created via Azure Policy.
 
 Type: `string`
 
 Default: `""`
+
+### <a name="input_private_dns_zone_id_queue"></a> [private\_dns\_zone\_id\_queue](#input\_private\_dns\_zone\_id\_queue)
+
+Description: Specifies the resource ID of the private DNS zone for Azure Storage queue endpoints. Not required if DNS A-records get created via Azure Policy.
+
+Type: `string`
+
+Default: `""`
+
+### <a name="input_purview_account_root_collection_admins"></a> [purview\_account\_root\_collection\_admins](#input\_purview\_account\_root\_collection\_admins)
+
+Description: Specifies the root collection admins of the Purview account.
+
+Type:
+
+```hcl
+map(object({
+    object_id = string
+  }))
+```
+
+Default: `{}`
 
 ### <a name="input_tags"></a> [tags](#input\_tags)
 
@@ -111,21 +133,37 @@ Default: `{}`
 
 The following outputs are exported:
 
-### <a name="output_key_vault_id"></a> [key\_vault\_id](#output\_key\_vault\_id)
+### <a name="output_purview_account_endpoints_catalog"></a> [purview\_account\_endpoints\_catalog](#output\_purview\_account\_endpoints\_catalog)
 
-Description: Specifies the key vault resource id.
+Description: Specifies the purview account catalog endpoint.
 
-### <a name="output_key_vault_name"></a> [key\_vault\_name](#output\_key\_vault\_name)
+### <a name="output_purview_account_endpoints_scan"></a> [purview\_account\_endpoints\_scan](#output\_purview\_account\_endpoints\_scan)
 
-Description: Specifies the key vault resource name.
+Description: Specifies the purview account scan endpoint.
 
-### <a name="output_key_vault_setup_completed"></a> [key\_vault\_setup\_completed](#output\_key\_vault\_setup\_completed)
+### <a name="output_purview_account_id"></a> [purview\_account\_id](#output\_purview\_account\_id)
+
+Description: Specifies the purview account id.
+
+### <a name="output_purview_account_ingestion_storage_id"></a> [purview\_account\_ingestion\_storage\_id](#output\_purview\_account\_ingestion\_storage\_id)
+
+Description: Specifies the purview account ingestion storage id.
+
+### <a name="output_purview_account_ingestion_storage_primary_endpoint"></a> [purview\_account\_ingestion\_storage\_primary\_endpoint](#output\_purview\_account\_ingestion\_storage\_primary\_endpoint)
+
+Description: Specifies the purview account ingestion storage id.
+
+### <a name="output_purview_account_name"></a> [purview\_account\_name](#output\_purview\_account\_name)
+
+Description: Specifies the purview account name.
+
+### <a name="output_purview_account_principal_id"></a> [purview\_account\_principal\_id](#output\_purview\_account\_principal\_id)
+
+Description: Specifies the purview account name.
+
+### <a name="output_purview_account_setup_completed"></a> [purview\_account\_setup\_completed](#output\_purview\_account\_setup\_completed)
 
 Description: Specifies whether the connectivity and identity has been successfully configured.
-
-### <a name="output_key_vault_uri"></a> [key\_vault\_uri](#output\_key\_vault\_uri)
-
-Description: Specifies the key vault resource vault uri.
 
 <!-- markdownlint-enable -->
 
