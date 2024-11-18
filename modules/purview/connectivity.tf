@@ -1,6 +1,6 @@
 resource "azurerm_private_endpoint" "private_endpoint_purview_account_platform" {
   name                = "${azapi_resource.purview_account.name}-platform-pe"
-  location            = azapi_resource.purview_account.location
+  location            = var.location_private_endpoint != null ? var.location_private_endpoint : var.location
   resource_group_name = var.resource_group_name
   tags                = var.tags
 
@@ -31,7 +31,7 @@ resource "azurerm_private_endpoint" "private_endpoint_purview_account_platform" 
 
 resource "azurerm_private_endpoint" "private_endpoint_purview_account_ingestion_storage_blob" {
   name                = "${azapi_resource.purview_account.name}-ing-blob-pe"
-  location            = azapi_resource.purview_account.location
+  location            = var.location_private_endpoint != null ? var.location_private_endpoint : var.location
   resource_group_name = var.resource_group_name
   tags                = var.tags
 
@@ -62,7 +62,7 @@ resource "azurerm_private_endpoint" "private_endpoint_purview_account_ingestion_
 
 resource "azurerm_private_endpoint" "private_endpoint_purview_account_ingestion_storage_queue" {
   name                = "${azapi_resource.purview_account.name}-ing-queue-pe"
-  location            = azapi_resource.purview_account.location
+  location            = var.location_private_endpoint != null ? var.location_private_endpoint : var.location
   resource_group_name = var.resource_group_name
   tags                = var.tags
 
