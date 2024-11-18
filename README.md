@@ -19,5 +19,6 @@ This repository contains secure by default Terraform modules for Azure Services.
 - [Azure Log Analytics Workspace](/modules/loganalytics/)
 - [Azure Storage Account](/modules/storage/)
 - [Azure User Assigned Identity](/modules/userassignedidentity/)
+- [Azure Synapse Private Link Hub](/modules/synapseprivetlinkhub/)
 - [Microsoft Fabric Capacity](/modules/fabriccapacity/)
 - [Microsoft Fabric Workspace](/modules/fabricworkspace/)
