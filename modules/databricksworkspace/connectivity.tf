@@ -1,6 +1,6 @@
 resource "azurerm_private_endpoint" "private_endpoint_databricks_workspace_databricks_ui_api" {
   name                = "${azurerm_databricks_workspace.databricks_workspace.name}-uiapi-pe"
-  location            = var.location
+  location            = var.location_private_endpoint != null ? var.location_private_endpoint : var.location
   resource_group_name = azurerm_databricks_workspace.databricks_workspace.resource_group_name
   tags                = var.tags
 
@@ -33,7 +33,7 @@ resource "azurerm_private_endpoint" "private_endpoint_databricks_workspace_brows
   count = var.databricks_workspace_browser_authentication_private_endpoint_enabled ? 1 : 0
 
   name                = "${azurerm_databricks_workspace.databricks_workspace.name}-auth-pe"
-  location            = var.location
+  location            = var.location_private_endpoint != null ? var.location_private_endpoint : var.location
   resource_group_name = azurerm_databricks_workspace.databricks_workspace.resource_group_name
   tags                = var.tags
 

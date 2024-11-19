@@ -88,6 +88,7 @@ run "create_databricksworkspace" {
 
   variables {
     location                                                                  = "northeurope"
+    location_private_endpoint                                                 = "northeurope"
     resource_group_name                                                       = "tfmodule-test-rg"
     tags                                                                      = var.tags
     databricks_workspace_name                                                 = "tftst-dbptt001"
