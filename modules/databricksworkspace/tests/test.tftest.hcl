@@ -68,6 +68,7 @@ run "setup" {
 
   variables {
     location                                 = var.location
+    location_private_endpoint                = var.location
     environment                              = "int"
     prefix                                   = "tfmdladb"
     virtual_network_id                       = var.virtual_network_id
