@@ -13,7 +13,7 @@ output "databricks_workspace_name" {
 output "databricks_workspace_workspace_id" {
   description = "Specifies the workspace id of the Azure Databricks workspace."
   value       = azurerm_databricks_workspace.databricks_workspace.workspace_id
-  sensitive   = true
+  sensitive   = false
 }
 
 output "databricks_workspace_workspace_url" {

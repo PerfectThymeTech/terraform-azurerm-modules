@@ -160,9 +160,25 @@ Type: `string`
 
 Default: `null`
 
+### <a name="input_private_dns_zone_id_blob"></a> [private\_dns\_zone\_id\_blob](#input\_private\_dns\_zone\_id\_blob)
+
+Description: Specifies the resource ID of the private DNS zone for Azure Storage blob endpoints. Not required if DNS A-records get created via Azure Policy.
+
+Type: `string`
+
+Default: `""`
+
 ### <a name="input_private_dns_zone_id_databricks"></a> [private\_dns\_zone\_id\_databricks](#input\_private\_dns\_zone\_id\_databricks)
 
 Description: Specifies the resource ID of the private DNS zone for Azure Databricks. Not required if DNS A-records get created via Azure Policy.
+
+Type: `string`
+
+Default: `""`
+
+### <a name="input_private_dns_zone_id_dfs"></a> [private\_dns\_zone\_id\_dfs](#input\_private\_dns\_zone\_id\_dfs)
+
+Description: Specifies the resource ID of the private DNS zone for Azure Storage dfs endpoints. Not required if DNS A-records get created via Azure Policy.
 
 Type: `string`
 
