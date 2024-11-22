@@ -76,7 +76,7 @@ resource "azurerm_private_endpoint" "private_endpoint_databricks_workspace_dbfs_
   private_service_connection {
     name                           = "${azurerm_databricks_workspace.databricks_workspace.name}-blob-svc"
     is_manual_connection           = false
-    private_connection_resource_id = "${azurerm_databricks_workspace.databricks.managed_resource_group_id}/providers/Microsoft.Storage/storageAccounts/${azurerm_databricks_workspace.databricks_workspace.custom_parameters[0].storage_account_name}"
+    private_connection_resource_id = "${azurerm_databricks_workspace.databricks_workspace.managed_resource_group_id}/providers/Microsoft.Storage/storageAccounts/${azurerm_databricks_workspace.databricks_workspace.custom_parameters[0].storage_account_name}"
     subresource_names              = ["blob"]
   }
   subnet_id = var.subnet_id
@@ -107,7 +107,7 @@ resource "azurerm_private_endpoint" "private_endpoint_databricks_workspace_dbfs_
   private_service_connection {
     name                           = "${azurerm_databricks_workspace.databricks_workspace.name}-dfs-svc"
     is_manual_connection           = false
-    private_connection_resource_id = "${azurerm_databricks_workspace.databricks.managed_resource_group_id}/providers/Microsoft.Storage/storageAccounts/${azurerm_databricks_workspace.databricks_workspace.custom_parameters[0].storage_account_name}"
+    private_connection_resource_id = "${azurerm_databricks_workspace.databricks_workspace.managed_resource_group_id}/providers/Microsoft.Storage/storageAccounts/${azurerm_databricks_workspace.databricks_workspace.custom_parameters[0].storage_account_name}"
     subresource_names              = ["dfs"]
   }
   subnet_id = var.subnet_id
