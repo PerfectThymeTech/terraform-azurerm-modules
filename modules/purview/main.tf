@@ -15,7 +15,7 @@ resource "azapi_resource" "purview_account" {
       capacity = 1
     }
     properties = {
-      cloudConnectors = null
+      # cloudConnectors = null # Causes plan issues
       ingestionStorage = {
         publicNetworkAccess = "Disabled"
       }
