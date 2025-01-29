@@ -143,6 +143,20 @@ variable "databricks_workspace_browser_authentication_private_endpoint_enabled" 
   default     = false
 }
 
+variable "databricks_workspace_compliance_security_profile_standards" {
+  description = "Specifies which enhanced compliance security profiles ('HIPAA', 'PCI_DSS') should be enabled for the Azure Databricks workspace."
+  type        = list(string)
+  sensitive   = false
+  nullable    = false
+  default     = []
+  validation {
+    condition = alltrue([
+      length([for compliance_security_profile_standard in toset(var.databricks_workspace_compliance_security_profile_standards) : compliance_security_profile_standard if !contains(["HIPAA", "PCI_DSS"], compliance_security_profile_standard)]) <= 0
+    ])
+    error_message = "Please specify a valid compliance security profile."
+  }
+}
+
 # Diagnostics variables
 variable "diagnostics_configurations" {
   description = "Specifies the diagnostic configuration for the service."

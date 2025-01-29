@@ -18,8 +18,14 @@ resource "azurerm_databricks_workspace" "databricks_workspace" {
     virtual_network_id                                   = var.databricks_workspace_virtual_network_id
     vnet_address_prefix                                  = null
   }
-  customer_managed_key_enabled                        = var.customer_managed_key == null ? false : true
-  default_storage_firewall_enabled                    = true
+  customer_managed_key_enabled     = var.customer_managed_key == null ? false : true
+  default_storage_firewall_enabled = true
+  enhanced_security_compliance {
+    automatic_cluster_update_enabled      = true
+    compliance_security_profile_enabled   = true
+    compliance_security_profile_standards = var.databricks_workspace_compliance_security_profile_standards
+    enhanced_security_monitoring_enabled  = true
+  }
   infrastructure_encryption_enabled                   = true
   load_balancer_backend_address_pool_id               = null
   managed_disk_cmk_key_vault_id                       = var.customer_managed_key == null ? null : var.customer_managed_key.key_vault_id
