@@ -121,6 +121,14 @@ Type: `bool`
 
 Default: `false`
 
+### <a name="input_databricks_workspace_compliance_security_profile_standards"></a> [databricks\_workspace\_compliance\_security\_profile\_standards](#input\_databricks\_workspace\_compliance\_security\_profile\_standards)
+
+Description: Specifies which enhanced compliance security profiles ('HIPAA', 'PCI\_DSS') should be enabled for the Azure Databricks workspace.
+
+Type: `list(string)`
+
+Default: `[]`
+
 ### <a name="input_databricks_workspace_machine_learning_workspace_id"></a> [databricks\_workspace\_machine\_learning\_workspace\_id](#input\_databricks\_workspace\_machine\_learning\_workspace\_id)
 
 Description: Specifies the id of the databricks access connector used for accessing the dbfs.
