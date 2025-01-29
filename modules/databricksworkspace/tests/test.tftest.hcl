@@ -101,6 +101,7 @@ run "create_databricksworkspace" {
     databricks_workspace_public_subnet_network_security_group_association_id  = run.setup.databricks_public_subnet_network_security_group_association_id
     databricks_workspace_storage_account_sku_name                             = "Standard_LRS"
     databricks_workspace_browser_authentication_private_endpoint_enabled      = true
+    databricks_workspace_compliance_security_profile_standards                = []
     diagnostics_configurations                                                = []
     subnet_id                                                                 = var.subnet_id
     connectivity_delay_in_seconds                                             = var.connectivity_delay_in_seconds
