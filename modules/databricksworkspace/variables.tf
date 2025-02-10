@@ -6,6 +6,14 @@ variable "location" {
   nullable    = false
 }
 
+variable "location_private_endpoint" {
+  description = "Specifies the location of the private endpoint. Use this variables only if the private endpoint(s) should reside in a different location than the service itself."
+  type        = string
+  sensitive   = false
+  nullable    = true
+  default     = null
+}
+
 variable "resource_group_name" {
   description = "Specifies the resource group name in which all resources will get deployed."
   type        = string
@@ -55,7 +63,7 @@ variable "databricks_workspace_machine_learning_workspace_id" {
   nullable    = true
   default     = null
   validation {
-    condition     = var.databricks_workspace_machine_learning_workspace_id == null || ((length(try(split("/", var.databricks_workspace_machine_learning_workspace_id)), []) == 9)) # && can(provider::azurerm::parse_resource_id(var.databricks_workspace_machine_learning_workspace_id))
+    condition     = var.databricks_workspace_machine_learning_workspace_id == null || (length(try(split("/", var.databricks_workspace_machine_learning_workspace_id), [])) == 9) # && can(provider::azurerm::parse_resource_id(var.databricks_workspace_machine_learning_workspace_id))
     error_message = "Please specify a valid resource id."
   }
 }
@@ -87,10 +95,10 @@ variable "databricks_workspace_private_subnet_network_security_group_association
   type        = string
   sensitive   = false
   nullable    = false
-  # validation {
-  #   condition     = can(provider::azurerm::parse_resource_id(var.databricks_workspace_private_subnet_network_security_group_association_id))
-  #   error_message = "Please specify a valid resource id."
-  # }
+  validation {
+    condition     = length(split("/", var.databricks_workspace_private_subnet_network_security_group_association_id)) == 11 # && can(provider::azurerm::parse_resource_id(var.databricks_workspace_private_subnet_network_security_group_association_id))
+    error_message = "Please specify a valid subnet nsg association id."
+  }
 }
 
 variable "databricks_workspace_public_subnet_name" {
@@ -109,10 +117,10 @@ variable "databricks_workspace_public_subnet_network_security_group_association_
   type        = string
   sensitive   = false
   nullable    = false
-  # validation {
-  #   condition     = can(provider::azurerm::parse_resource_id(var.databricks_workspace_public_subnet_network_security_group_association_id))
-  #   error_message = "Please specify a valid resource id."
-  # }
+  validation {
+    condition     = length(split("/", var.databricks_workspace_public_subnet_network_security_group_association_id)) == 11 # && can(provider::azurerm::parse_resource_id(var.databricks_workspace_public_subnet_network_security_group_association_id))
+    error_message = "Please specify a valid subnet nsg association id."
+  }
 }
 
 variable "databricks_workspace_storage_account_sku_name" {
@@ -124,6 +132,28 @@ variable "databricks_workspace_storage_account_sku_name" {
   validation {
     condition     = contains(["Standard_LRS", "Standard_GRS", "Standard_RAGRS", "Standard_GZRS", "Standard_RAGZRS", "Standard_ZRS", "Premium_LRS", "Premium_ZRS"], var.databricks_workspace_storage_account_sku_name)
     error_message = "Please specify a valid storage account sku name."
+  }
+}
+
+variable "databricks_workspace_browser_authentication_private_endpoint_enabled" {
+  description = "Specifies whether the 'browser_authentication' private endpoint should be deployed for the Azure Databricks workspace."
+  type        = bool
+  sensitive   = false
+  nullable    = false
+  default     = false
+}
+
+variable "databricks_workspace_compliance_security_profile_standards" {
+  description = "Specifies which enhanced compliance security profiles ('HIPAA', 'PCI_DSS') should be enabled for the Azure Databricks workspace."
+  type        = list(string)
+  sensitive   = false
+  nullable    = false
+  default     = []
+  validation {
+    condition = alltrue([
+      length([for compliance_security_profile_standard in toset(var.databricks_workspace_compliance_security_profile_standards) : compliance_security_profile_standard if !contains(["HIPAA", "PCI_DSS"], compliance_security_profile_standard)]) <= 0
+    ])
+    error_message = "Please specify a valid compliance security profile."
   }
 }
 
@@ -168,20 +198,6 @@ variable "connectivity_delay_in_seconds" {
   }
 }
 
-variable "private_endpoint_subresource_names" {
-  description = "Specifies a list of group ids for which private endpoints will be created (e.g. 'databricks_ui_api', 'browser_authentication'). If sub resource is defined a private endpoint will be created."
-  type        = set(string)
-  sensitive   = false
-  nullable    = false
-  default     = ["databricks_ui_api"]
-  validation {
-    condition = alltrue([
-      length([for private_endpoint_subresource_name in var.private_endpoint_subresource_names : private_endpoint_subresource_name if !contains(["databricks_ui_api", "browser_authentication"], private_endpoint_subresource_name)]) <= 0
-    ])
-    error_message = "Please specify a valid group id."
-  }
-}
-
 variable "private_dns_zone_id_databricks" {
   description = "Specifies the resource ID of the private DNS zone for Azure Databricks. Not required if DNS A-records get created via Azure Policy."
   type        = string
@@ -189,6 +205,28 @@ variable "private_dns_zone_id_databricks" {
   default     = ""
   validation {
     condition     = var.private_dns_zone_id_databricks == "" || (length(split("/", var.private_dns_zone_id_databricks)) == 9 && endswith(var.private_dns_zone_id_databricks, "privatelink.azuredatabricks.net")) # && can(provider::azurerm::parse_resource_id(var.private_dns_zone_id_databricks))
+    error_message = "Please specify a valid resource ID for the private DNS Zone."
+  }
+}
+
+variable "private_dns_zone_id_blob" {
+  description = "Specifies the resource ID of the private DNS zone for Azure Storage blob endpoints. Not required if DNS A-records get created via Azure Policy."
+  type        = string
+  sensitive   = false
+  default     = ""
+  validation {
+    condition     = var.private_dns_zone_id_blob == "" || (length(split("/", var.private_dns_zone_id_blob)) == 9 && endswith(var.private_dns_zone_id_blob, "privatelink.blob.core.windows.net"))
+    error_message = "Please specify a valid resource ID for the private DNS Zone."
+  }
+}
+
+variable "private_dns_zone_id_dfs" {
+  description = "Specifies the resource ID of the private DNS zone for Azure Storage dfs endpoints. Not required if DNS A-records get created via Azure Policy."
+  type        = string
+  sensitive   = false
+  default     = ""
+  validation {
+    condition     = var.private_dns_zone_id_dfs == "" || (length(split("/", var.private_dns_zone_id_dfs)) == 9 && endswith(var.private_dns_zone_id_dfs, "privatelink.dfs.core.windows.net"))
     error_message = "Please specify a valid resource ID for the private DNS Zone."
   }
 }

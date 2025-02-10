@@ -1,5 +1,5 @@
 <!-- BEGIN_TF_DOCS -->
-# Azure Databricks Terraform Module
+# Azure Databricks Access Connector Terraform Module
 
 ## Documentation
 <!-- markdownlint-disable MD033 -->
@@ -43,21 +43,6 @@ Type: `string`
 ## Optional Inputs
 
 The following input variables are optional (have default values):
-
-### <a name="input_diagnostics_configurations"></a> [diagnostics\_configurations](#input\_diagnostics\_configurations)
-
-Description: Specifies the diagnostic configuration for the service.
-
-Type:
-
-```hcl
-list(object({
-    log_analytics_workspace_id = optional(string, ""),
-    storage_account_id         = optional(string, "")
-  }))
-```
-
-Default: `[]`
 
 ### <a name="input_tags"></a> [tags](#input\_tags)
 

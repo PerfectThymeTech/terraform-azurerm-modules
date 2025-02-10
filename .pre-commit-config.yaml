@@ -10,14 +10,17 @@ exclude: |
     modules/containerregistry/README.md|
     modules/cosmosdb/README.md|
     modules/databricksaccessconnector/README.md|
+    modules/databricksworkspace/README.md|
     modules/datafactory/README.md|
     modules/fabriccapacity/README.md|
     modules/fabricworkspace/README.md|
     modules/keyvault/README.md|
     modules/loganalytics/README.md|
+    modules/purview/README.md|
     modules/storage/README.md|
     modules/userassignedidentity/README.md|
-    modules/aistudiooutboundrules/README.md
+    modules/aistudiooutboundrules/README.md|
+    modules/synapseprivetlinkhub/README.md
   )$
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -53,6 +56,8 @@ repos:
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/databricksaccessconnector"]
     - id: terraform-docs-go
+      args: ["-c", "./.terraform-docs.yml", "./modules/databricksworkspace"]
+    - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/datafactory"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/fabriccapacity"]
@@ -63,11 +68,15 @@ repos:
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/loganalytics"]
     - id: terraform-docs-go
+      args: ["-c", "./.terraform-docs.yml", "./modules/purview"]
+    - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/storage"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/userassignedidentity"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/aistudiooutboundrules"]
+    - id: terraform-docs-go
+      args: ["-c", "./.terraform-docs.yml", "./modules/synapseprivetlinkhub"]
 - repo: local
   hooks:
     - id: terraform-fmt
