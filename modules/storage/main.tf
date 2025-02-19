@@ -57,7 +57,7 @@ resource "azurerm_storage_account" "storage_account" {
   network_rules {
     default_action             = "Deny"
     bypass                     = var.storage_network_bypass
-    ip_rules                   = []
+    ip_rules                   = var.storage_ip_rules
     virtual_network_subnet_ids = []
     dynamic "private_link_access" {
       for_each = var.storage_network_private_link_access
