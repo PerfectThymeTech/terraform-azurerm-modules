@@ -169,11 +169,11 @@ Description: Specifies the maintenance window for the postgresql flexible server
 Type:
 
 ```hcl
-optional(object({
+object({
     day_of_week  = optional(number, 6)
     start_hour   = optional(number, 0)
     start_minute = optional(number, 0)
-  }), {})
+  })
 ```
 
 Default: `{}`
