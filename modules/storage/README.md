@@ -260,6 +260,14 @@ Type: `list(string)`
 
 Default: `[]`
 
+### <a name="input_storage_ip_rules"></a> [storage\_ip\_rules](#input\_storage\_ip\_rules)
+
+Description: Specifies ip rule option for the storage account network rules. List can include any IP address.
+
+Type: `set(string)`
+
+Default: `[]`
+
 ### <a name="input_storage_is_hns_enabled"></a> [storage\_is\_hns\_enabled](#input\_storage\_is\_hns\_enabled)
 
 Description: Specifies whetehr hierarchical namespace (Data Lake) should be enabled.
