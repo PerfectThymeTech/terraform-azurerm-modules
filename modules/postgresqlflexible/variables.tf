@@ -87,11 +87,11 @@ variable "postgresql_high_availability_mode" {
 
 variable "postgresql_maintenance_window" {
   description = "Specifies the maintenance window for the postgresql flexible server."
-  type = optional(object({
+  type = object({
     day_of_week  = optional(number, 6)
     start_hour   = optional(number, 0)
     start_minute = optional(number, 0)
-  }), {})
+  })
   sensitive = false
   nullable  = false
   default   = {}
