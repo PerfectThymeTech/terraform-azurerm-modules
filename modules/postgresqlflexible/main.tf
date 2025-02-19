@@ -70,6 +70,8 @@ resource "azurerm_postgresql_flexible_server_database" "postgresql_flexible_serv
 }
 
 resource "azurerm_postgresql_flexible_server_active_directory_administrator" "postgresql_flexible_server_active_directory_administrator" {
+  count = var.postgresql_active_directory_administrator.object_id != "" && var.postgresql_active_directory_administrator.group_name != "" ? 1 : 0
+
   server_name         = azurerm_postgresql_flexible_server.postgresql_flexible_server.name
   resource_group_name = azurerm_postgresql_flexible_server.postgresql_flexible_server.resource_group_name
 
