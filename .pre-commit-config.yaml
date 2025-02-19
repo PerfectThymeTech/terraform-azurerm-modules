@@ -16,6 +16,7 @@ exclude: |
     modules/fabricworkspace/README.md|
     modules/keyvault/README.md|
     modules/loganalytics/README.md|
+    modules/postgresqlflexible/README.md|
     modules/purview/README.md|
     modules/storage/README.md|
     modules/userassignedidentity/README.md|
@@ -67,6 +68,8 @@ repos:
       args: ["-c", "./.terraform-docs.yml", "./modules/keyvault"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/loganalytics"]
+    - id: terraform-docs-go
+      args: ["-c", "./.terraform-docs.yml", "./modules/postgresqlflexible"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/purview"]
     - id: terraform-docs-go
