@@ -96,15 +96,15 @@ variable "postgresql_maintenance_window" {
   nullable  = false
   default   = {}
   validation {
-    condition = var.postgresql_maintenance_window.day_of_week >= 0 && var.postgresql_maintenance_window.day_of_week <= 6
+    condition     = var.postgresql_maintenance_window.day_of_week >= 0 && var.postgresql_maintenance_window.day_of_week <= 6
     error_message = "Please specify a valid maintenance window."
   }
   validation {
-    condition = var.postgresql_maintenance_window.start_hour >= 0 && var.postgresql_maintenance_window.start_hour <= 23
+    condition     = var.postgresql_maintenance_window.start_hour >= 0 && var.postgresql_maintenance_window.start_hour <= 23
     error_message = "Please specify a valid maintenance window."
   }
   validation {
-    condition = var.postgresql_maintenance_window.start_minute >= 0 && var.postgresql_maintenance_window.start_minute <= 59
+    condition     = var.postgresql_maintenance_window.start_minute >= 0 && var.postgresql_maintenance_window.start_minute <= 59
     error_message = "Please specify a valid maintenance window."
   }
 }
