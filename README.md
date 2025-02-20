@@ -17,6 +17,7 @@ This repository contains secure by default Terraform modules for Azure Services.
 - [Azure Databricks Workspace](/modules/databricksworkspace/)
 - [Azure Key Vault](/modules/keyvault/)
 - [Azure Log Analytics Workspace](/modules/loganalytics/)
+- [Azure Postgresql Flexible Server](/modules/postgresqlflexible/)
 - [Azure Storage Account](/modules/storage/)
 - [Azure User Assigned Identity](/modules/userassignedidentity/)
 - [Azure Synapse Private Link Hub](/modules/synapseprivetlinkhub/)
