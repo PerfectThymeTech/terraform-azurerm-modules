@@ -1,4 +1,6 @@
 resource "azurerm_private_endpoint" "container_registry_private_endpoint" {
+  count = var.subnet_id == "" ? 0 : 1
+
   name                = "${azurerm_container_registry.container_registry.name}-registry-pe"
   location            = var.location
   resource_group_name = azurerm_container_registry.container_registry.resource_group_name
