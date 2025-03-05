@@ -16,7 +16,7 @@ run "create_containerregistry" {
     container_registry_retention_policy_in_days  = 7
     container_registry_trust_policy_enabled      = false
     container_registry_zone_redundancy_enabled   = false
-    container_registry_ip_rules                  = ["0.0.0.0/5", "8.0.0.0/7", "11.0.0.0/8", "12.0.0.0/6", "16.0.0.0/4", "32.0.0.0/3", "128.0.0.0/3", "160.0.0.0/5", "168.0.0.0/6", "172.0.0.0/12"]
+    container_registry_ip_rules                  = ["8.0.0.0/7", "11.0.0.0/8", "12.0.0.0/6", "16.0.0.0/4", "32.0.0.0/3", "128.0.0.0/3", "160.0.0.0/5", "168.0.0.0/6", "172.0.0.0/12"]
     diagnostics_configurations                   = []
     subnet_id                                    = "" # "/subscriptions/1fdab118-1638-419a-8b12-06c9543714a0/resourceGroups/ptt-dev-networking-rg/providers/Microsoft.Network/virtualNetworks/spoke-ptt-dev-vnet001/subnets/TerraformTestSubnet"
     connectivity_delay_in_seconds                = 0
