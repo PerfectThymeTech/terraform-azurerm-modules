@@ -181,6 +181,20 @@ variable "storage_network_bypass" {
   }
 }
 
+variable "storage_network_rules_virtual_network_subnet_ids" {
+  description = "Specifies teh virtual network subnet ID options for the storage account network rules. List can include any subnet resource IDs."
+  type        = set(string)
+  sensitive   = false
+  nullable    = false
+  default     = ["None"]
+  validation {
+    condition = alltrue([
+      length([for value in toset(var.storage_network_rules_virtual_network_subnet_ids) : value if length(split("/", value)) != 11]) <= 0
+    ])
+    error_message = "Please provide a valid subnet resource id."
+  }
+}
+
 variable "storage_network_private_link_access" {
   description = "Specifies resource instance rules of the storage account."
   type        = set(string)

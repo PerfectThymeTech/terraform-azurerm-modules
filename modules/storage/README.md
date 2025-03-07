@@ -290,6 +290,20 @@ Type: `set(string)`
 
 Default: `[]`
 
+### <a name="input_storage_network_rules_virtual_network_subnet_ids"></a> [storage\_network\_rules\_virtual\_network\_subnet\_ids](#input\_storage\_network\_rules\_virtual\_network\_subnet\_ids)
+
+Description: Specifies teh virtual network subnet ID options for the storage account network rules. List can include any subnet resource IDs.
+
+Type: `set(string)`
+
+Default:
+
+```json
+[
+  "None"
+]
+```
+
 ### <a name="input_storage_nfsv3_enabled"></a> [storage\_nfsv3\_enabled](#input\_storage\_nfsv3\_enabled)
 
 Description: Specifies whether NFSv3 should be enabled.
