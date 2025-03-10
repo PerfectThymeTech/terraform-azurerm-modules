@@ -169,47 +169,43 @@ Default: `{}`
 
 The following outputs are exported:
 
-### <a name="output_storage_account_id"></a> [storage\_account\_id](#output\_storage\_account\_id)
+### <a name="output_eventhub_namespace_default_primary_connection_string"></a> [eventhub\_namespace\_default\_primary\_connection\_string](#output\_eventhub\_namespace\_default\_primary\_connection\_string)
 
-Description: Specifies the resource id of the storage account.
+Description: Specifies the default primary connection string of the eventhub namespace.
 
-### <a name="output_storage_account_name"></a> [storage\_account\_name](#output\_storage\_account\_name)
+### <a name="output_eventhub_namespace_default_primary_connection_string_alias"></a> [eventhub\_namespace\_default\_primary\_connection\_string\_alias](#output\_eventhub\_namespace\_default\_primary\_connection\_string\_alias)
 
-Description: Specifies the resource name of the storage account.
+Description: Specifies the default primary connection string alias of the eventhub namespace.
 
-### <a name="output_storage_account_primary_access_key"></a> [storage\_account\_primary\_access\_key](#output\_storage\_account\_primary\_access\_key)
+### <a name="output_eventhub_namespace_default_primary_key"></a> [eventhub\_namespace\_default\_primary\_key](#output\_eventhub\_namespace\_default\_primary\_key)
 
-Description: Specifies the primary access key of the storage account.
+Description: Specifies the default primary key of the eventhub namespace.
 
-### <a name="output_storage_account_primary_blob_connection_string"></a> [storage\_account\_primary\_blob\_connection\_string](#output\_storage\_account\_primary\_blob\_connection\_string)
+### <a name="output_eventhub_namespace_default_secondary_connection_string"></a> [eventhub\_namespace\_default\_secondary\_connection\_string](#output\_eventhub\_namespace\_default\_secondary\_connection\_string)
 
-Description: Specifies the primary blob connection string of the storage account.
+Description: Specifies the default secondary connection string of the eventhub namespace.
 
-### <a name="output_storage_account_primary_blob_endpoint"></a> [storage\_account\_primary\_blob\_endpoint](#output\_storage\_account\_primary\_blob\_endpoint)
+### <a name="output_eventhub_namespace_default_secondary_connection_string_alias"></a> [eventhub\_namespace\_default\_secondary\_connection\_string\_alias](#output\_eventhub\_namespace\_default\_secondary\_connection\_string\_alias)
 
-Description: Specifies the primary blob endpoint of the storage account.
+Description: Specifies the default secondary connection string alias of the eventhub namespace.
 
-### <a name="output_storage_account_primary_dfs_endpoint"></a> [storage\_account\_primary\_dfs\_endpoint](#output\_storage\_account\_primary\_dfs\_endpoint)
+### <a name="output_eventhub_namespace_default_secondary_key"></a> [eventhub\_namespace\_default\_secondary\_key](#output\_eventhub\_namespace\_default\_secondary\_key)
 
-Description: Specifies the primary dfs endpoint of the storage account.
+Description: Specifies the default secondary key of the eventhub namespace.
 
-### <a name="output_storage_account_primary_file_endpoint"></a> [storage\_account\_primary\_file\_endpoint](#output\_storage\_account\_primary\_file\_endpoint)
+### <a name="output_eventhub_namespace_id"></a> [eventhub\_namespace\_id](#output\_eventhub\_namespace\_id)
 
-Description: Specifies the primary file endpoint of the storage account.
+Description: Specifies the resource id of the eventhub namespace.
 
-### <a name="output_storage_account_primary_queue_endpoint"></a> [storage\_account\_primary\_queue\_endpoint](#output\_storage\_account\_primary\_queue\_endpoint)
+### <a name="output_eventhub_namespace_name"></a> [eventhub\_namespace\_name](#output\_eventhub\_namespace\_name)
 
-Description: Specifies the primary queue endpoint of the storage account.
+Description: Specifies the resource name of the eventhub namespace.
 
-### <a name="output_storage_account_primary_table_endpoint"></a> [storage\_account\_primary\_table\_endpoint](#output\_storage\_account\_primary\_table\_endpoint)
+### <a name="output_eventhub_namespace_principal_id"></a> [eventhub\_namespace\_principal\_id](#output\_eventhub\_namespace\_principal\_id)
 
-Description: Specifies the primary table endpoint of the storage account.
+Description: Specifies the principal id of the eventhub namespace.
 
-### <a name="output_storage_account_primary_web_endpoint"></a> [storage\_account\_primary\_web\_endpoint](#output\_storage\_account\_primary\_web\_endpoint)
-
-Description: Specifies the primary web endpoint of the storage account.
-
-### <a name="output_storage_setup_completed"></a> [storage\_setup\_completed](#output\_storage\_setup\_completed)
+### <a name="output_eventhub_namespace_setup_completed"></a> [eventhub\_namespace\_setup\_completed](#output\_eventhub\_namespace\_setup\_completed)
 
 Description: Specifies whether the connectivity and identity has been successfully configured.
 
