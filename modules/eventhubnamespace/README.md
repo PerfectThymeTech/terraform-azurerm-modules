@@ -50,7 +50,7 @@ Type:
 
 ```hcl
 map(object({
-    partition_count = optional(number, 1)
+    partition_count   = optional(number, 1)
     message_retention = optional(number, 1)
   }))
 ```
