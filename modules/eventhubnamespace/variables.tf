@@ -64,7 +64,7 @@ variable "event_hub_namespace_dedicated_cluster_id" {
   nullable    = true
   default     = null
   validation {
-    condition     = var.event_hub_namespace_dedicated_cluster_id == null || length(try(split("/", var.event_hub_namespace_dedicated_cluster_id))) == 9
+    condition     = var.event_hub_namespace_dedicated_cluster_id == null || length(try(split("/", var.event_hub_namespace_dedicated_cluster_id), "")) == 9
     error_message = "Please provide a valid resource id."
   }
 }
