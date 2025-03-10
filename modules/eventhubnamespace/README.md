@@ -40,11 +40,11 @@ Type: `string`
 
 Description: Specifies the sku of the eventhub namespace.
 
-Type: `number`
+Type: `string`
 
 ### <a name="input_event_hubs"></a> [event\_hubs](#input\_event\_hubs)
 
-Description: Specifies the sku of the eventhub namespace.
+Description: Specifies the the eventhub details.
 
 Type:
 
