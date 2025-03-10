@@ -1,70 +1,63 @@
-output "storage_account_id" {
-  description = "Specifies the resource id of the storage account."
-  value       = azurerm_storage_account.storage_account.id
+output "eventhub_namespace_id" {
+  description = "Specifies the resource id of the eventhub namespace."
+  value       = azurerm_eventhub_namespace.eventhub_namespace.id
   sensitive   = false
 }
 
-output "storage_account_name" {
-  description = "Specifies the resource name of the storage account."
-  value       = azurerm_storage_account.storage_account.name
+output "eventhub_namespace_name" {
+  description = "Specifies the resource name of the eventhub namespace."
+  value       = azurerm_eventhub_namespace.eventhub_namespace.name
   sensitive   = false
 }
 
-output "storage_account_primary_access_key" {
-  description = "Specifies the primary access key of the storage account."
-  value       = azurerm_storage_account.storage_account.primary_access_key
+output "eventhub_namespace_default_primary_connection_string" {
+  description = "Specifies the default primary connection string of the eventhub namespace."
+  value       = azurerm_eventhub_namespace.eventhub_namespace.default_primary_connection_string
   sensitive   = true
 }
 
-output "storage_account_primary_blob_connection_string" {
-  description = "Specifies the primary blob connection string of the storage account."
-  value       = azurerm_storage_account.storage_account.primary_blob_connection_string
+output "eventhub_namespace_default_primary_key" {
+  description = "Specifies the default primary key of the eventhub namespace."
+  value       = azurerm_eventhub_namespace.eventhub_namespace.default_primary_key
   sensitive   = true
 }
 
-output "storage_account_primary_blob_endpoint" {
-  description = "Specifies the primary blob endpoint of the storage account."
-  value       = azurerm_storage_account.storage_account.primary_blob_endpoint
+output "eventhub_namespace_default_primary_connection_string_alias" {
+  description = "Specifies the default primary connection string alias of the eventhub namespace."
+  value       = azurerm_eventhub_namespace.eventhub_namespace.default_primary_connection_string_alias
   sensitive   = false
 }
 
-output "storage_account_primary_file_endpoint" {
-  description = "Specifies the primary file endpoint of the storage account."
-  value       = azurerm_storage_account.storage_account.primary_file_endpoint
+output "eventhub_namespace_default_secondary_connection_string" {
+  description = "Specifies the default secondary connection string of the eventhub namespace."
+  value       = azurerm_eventhub_namespace.eventhub_namespace.default_secondary_connection_string
+  sensitive   = true
+}
+
+output "eventhub_namespace_default_secondary_key" {
+  description = "Specifies the default secondary key of the eventhub namespace."
+  value       = azurerm_eventhub_namespace.eventhub_namespace.default_secondary_key
+  sensitive   = true
+}
+
+output "eventhub_namespace_default_secondary_connection_string_alias" {
+  description = "Specifies the default secondary connection string alias of the eventhub namespace."
+  value       = azurerm_eventhub_namespace.eventhub_namespace.default_secondary_connection_string_alias
   sensitive   = false
 }
 
-output "storage_account_primary_queue_endpoint" {
-  description = "Specifies the primary queue endpoint of the storage account."
-  value       = azurerm_storage_account.storage_account.primary_queue_endpoint
+output "eventhub_namespace_principal_id" {
+  description = "Specifies the principal id of the eventhub namespace."
+  value       = azurerm_eventhub_namespace.eventhub_namespace.identity[0].principal_id
   sensitive   = false
 }
 
-output "storage_account_primary_table_endpoint" {
-  description = "Specifies the primary table endpoint of the storage account."
-  value       = azurerm_storage_account.storage_account.primary_table_endpoint
-  sensitive   = false
-}
-
-output "storage_account_primary_web_endpoint" {
-  description = "Specifies the primary web endpoint of the storage account."
-  value       = azurerm_storage_account.storage_account.primary_web_endpoint
-  sensitive   = false
-}
-
-output "storage_account_primary_dfs_endpoint" {
-  description = "Specifies the primary dfs endpoint of the storage account."
-  value       = azurerm_storage_account.storage_account.primary_dfs_endpoint
-  sensitive   = false
-}
-
-output "storage_setup_completed" {
+output "eventhub_namespace_setup_completed" {
   description = "Specifies whether the connectivity and identity has been successfully configured."
   value       = true
   sensitive   = false
 
   depends_on = [
-    azurerm_role_assignment.current_roleassignment_storage_blob_data_owner,
     time_sleep.sleep_connectivity,
   ]
 }
