@@ -109,8 +109,8 @@ variable "event_hubs" {
   nullable  = false
   validation {
     condition = alltrue([
-      length([for partition_count in values(var.event_hubs)[*].partition_count : partition_count if partition_count >= 1 && partition_count <= 1024]) <= 0,
-      length([for message_retention in values(var.event_hubs)[*].message_retention : message_retention if message_retention >= 1 && message_retention <= 90]) <= 0,
+      length([for partition_count in values(var.event_hubs)[*].partition_count : partition_count if !(partition_count >= 1 && partition_count <= 1024)]) <= 0,
+      length([for message_retention in values(var.event_hubs)[*].message_retention : message_retention if !(message_retention >= 1 && message_retention <= 90)]) <= 0,
     ])
     error_message = "Please specify a valid event hub configuration."
   }
