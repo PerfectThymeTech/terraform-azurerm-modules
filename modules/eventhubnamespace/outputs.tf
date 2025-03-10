@@ -25,7 +25,7 @@ output "eventhub_namespace_default_primary_key" {
 output "eventhub_namespace_default_primary_connection_string_alias" {
   description = "Specifies the default primary connection string alias of the eventhub namespace."
   value       = azurerm_eventhub_namespace.eventhub_namespace.default_primary_connection_string_alias
-  sensitive   = false
+  sensitive   = true
 }
 
 output "eventhub_namespace_default_secondary_connection_string" {
@@ -43,7 +43,7 @@ output "eventhub_namespace_default_secondary_key" {
 output "eventhub_namespace_default_secondary_connection_string_alias" {
   description = "Specifies the default secondary connection string alias of the eventhub namespace."
   value       = azurerm_eventhub_namespace.eventhub_namespace.default_secondary_connection_string_alias
-  sensitive   = false
+  sensitive   = true
 }
 
 output "eventhub_namespace_principal_id" {
