@@ -32,7 +32,7 @@ variable "event_hub_namespace_name" {
   sensitive   = false
   nullable    = false
   validation {
-    condition     = length(var.event_hub_name) >= 2 && length(regexall("[^[:alnum:]]", var.event_hub_name)) <= 0
+    condition     = length(var.event_hub_namespace_name) >= 2 && length(var.event_hub_namespace_name) >= 6
     error_message = "Please specify a valid name."
   }
 }
@@ -83,7 +83,7 @@ variable "event_hub_namespace_maximum_throughput_units" {
   sensitive   = false
   nullable    = false
   validation {
-    condition     = var.event_hub_namespace_capacity >= 1 && var.event_hub_namespace_capacity <= 20
+    condition     = var.event_hub_namespace_maximum_throughput_units >= 1 && var.event_hub_namespace_maximum_throughput_units <= 20
     error_message = "Please provide a valid maximum throughput."
   }
 }
@@ -162,7 +162,7 @@ variable "private_dns_zone_id_servicebus" {
   sensitive   = false
   default     = ""
   validation {
-    condition     = var.private_dns_zone_id_dfs == "" || (length(split("/", var.private_dns_zone_id_dfs)) == 9 && endswith(var.private_dns_zone_id_dfs, "privatelink.servicebus.windows.net"))
+    condition     = var.private_dns_zone_id_servicebus == "" || (length(split("/", var.private_dns_zone_id_servicebus)) == 9 && endswith(var.private_dns_zone_id_servicebus, "privatelink.servicebus.windows.net"))
     error_message = "Please specify a valid resource ID for the private DNS Zone."
   }
 }
