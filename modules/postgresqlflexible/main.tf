@@ -13,11 +13,11 @@ resource "azurerm_postgresql_flexible_server" "postgresql_flexible_server" {
     }
   }
 
-  administrator_login    = null
-  administrator_password = null
+  administrator_login    = var.postgresql_administrator_login
+  administrator_password = var.postgresql_administrator_password
   authentication {
     active_directory_auth_enabled = true
-    password_auth_enabled         = false
+    password_auth_enabled         = true
     tenant_id                     = data.azurerm_client_config.current.tenant_id
   }
   auto_grow_enabled     = var.postgresql_auto_grow_enabled

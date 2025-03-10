@@ -8,6 +8,8 @@ run "create_postgresql_flexible_server" {
       test = "postgresqlflexibleserver"
     }
     postgresql_name                         = "tftstr-001"
+    postgresql_administrator_login          = "DbMainUser"
+    postgresql_administrator_password       = "g!7hVLy$Yq~82`4SU6<w+C"
     postgresql_auto_grow_enabled            = false
     postgresql_backup_retention_days        = 30
     postgresql_geo_redundant_backup_enabled = true
