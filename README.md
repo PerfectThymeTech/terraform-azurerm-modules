@@ -13,6 +13,7 @@ This repository contains secure by default Terraform modules for Azure Services.
 - [Azure Container Registry](/modules/containerregistry/)
 - [Azure Cosmos DB](/modules/cosmosdb/)
 - [Azure Data Factory](/modules/datafactory/)
+- [Azure Event Hub Namespace](/modules/eventhubnamespace/)
 - [Azure Databricks Access Connector](/modules/databricksaccessconnector/)
 - [Azure Databricks Workspace](/modules/databricksworkspace/)
 - [Azure Key Vault](/modules/keyvault/)
