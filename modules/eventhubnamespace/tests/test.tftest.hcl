@@ -14,6 +14,13 @@ run "create_eventhubnamespace" {
     event_hub_namespace_local_authentication_enabled = true
     event_hub_namespace_maximum_throughput_units     = 10
     event_hub_namespace_sku                          = "Standard"
+    eventhub_namespace_authorization_rules = {
+      ar01 = {
+        listen = true
+        manage = false
+        send   = false
+      }
+    }
     event_hubs = {
       eh001 = {
         partition_count   = 1

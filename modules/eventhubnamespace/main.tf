@@ -24,6 +24,18 @@ resource "azurerm_eventhub_namespace" "eventhub_namespace" {
   sku                           = var.event_hub_namespace_sku
 }
 
+resource "azurerm_eventhub_namespace_authorization_rule" "eventhub_namespace_authorization_rule" {
+  for_each = var.eventhub_namespace_authorization_rules
+
+  name                = each.key
+  namespace_name      = azurerm_eventhub_namespace.eventhub_namespace.name
+  resource_group_name = azurerm_eventhub_namespace.eventhub_namespace.resource_group_name
+
+  listen = each.value.listen
+  manage = each.value.manage
+  send   = each.value.send
+}
+
 resource "azurerm_eventhub" "eventhub" {
   for_each = var.event_hubs
 

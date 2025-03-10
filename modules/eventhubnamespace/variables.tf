@@ -99,6 +99,17 @@ variable "event_hub_namespace_sku" {
   }
 }
 
+variable "eventhub_namespace_authorization_rules" {
+  description = "Specifies the the eventhub namespace authorization rules."
+  type = map(object({
+    listen = optional(bool, true)
+    manage = optional(bool, false)
+    send   = optional(bool, false)
+  }))
+  sensitive = false
+  nullable  = false
+}
+
 variable "event_hubs" {
   description = "Specifies the the eventhub details."
   type = map(object({

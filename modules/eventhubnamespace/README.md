@@ -55,6 +55,20 @@ map(object({
   }))
 ```
 
+### <a name="input_eventhub_namespace_authorization_rules"></a> [eventhub\_namespace\_authorization\_rules](#input\_eventhub\_namespace\_authorization\_rules)
+
+Description: Specifies the the eventhub namespace authorization rules.
+
+Type:
+
+```hcl
+map(object({
+    listen = optional(bool, true)
+    manage = optional(bool, false)
+    send   = optional(bool, false)
+  }))
+```
+
 ### <a name="input_location"></a> [location](#input\_location)
 
 Description: Specifies the location of all resources.
