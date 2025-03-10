@@ -1,4 +1,4 @@
-run "create_storage" {
+run "create_eventhubnamespace" {
   command = apply
 
   variables {

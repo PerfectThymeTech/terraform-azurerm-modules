@@ -90,7 +90,7 @@ variable "event_hub_namespace_maximum_throughput_units" {
 
 variable "event_hub_namespace_sku" {
   description = "Specifies the sku of the eventhub namespace."
-  type        = number
+  type        = string
   sensitive   = false
   nullable    = false
   validation {
@@ -100,7 +100,7 @@ variable "event_hub_namespace_sku" {
 }
 
 variable "event_hubs" {
-  description = "Specifies the sku of the eventhub namespace."
+  description = "Specifies the the eventhub details."
   type = map(object({
     partition_count   = optional(number, 1)
     message_retention = optional(number, 1)
