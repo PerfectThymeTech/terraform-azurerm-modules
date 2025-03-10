@@ -30,6 +30,18 @@ Description: Specifies the location of all resources.
 
 Type: `string`
 
+### <a name="input_postgresql_administrator_login"></a> [postgresql\_administrator\_login](#input\_postgresql\_administrator\_login)
+
+Description: Specifies the administrator name of the postgresql flexible server.
+
+Type: `string`
+
+### <a name="input_postgresql_administrator_password"></a> [postgresql\_administrator\_password](#input\_postgresql\_administrator\_password)
+
+Description: Specifies the administrator password of the postgresql flexible server.
+
+Type: `string`
+
 ### <a name="input_postgresql_name"></a> [postgresql\_name](#input\_postgresql\_name)
 
 Description: Specifies the name of the postgresql flexible server.
