@@ -12,13 +12,13 @@ output "fabric_workspace_name" {
 
 output "fabric_workspace_principal_id" {
   description = "Specifies the principal id of the fabric workspace."
-  value       = fabric_workspace.workspace.identity.service_principal_id
+  value       = var.workspace_identity_enabled ? fabric_workspace.workspace.identity.service_principal_id : ""
   sensitive   = false
 }
 
 output "fabric_workspace_application_id" {
   description = "Specifies the application id of the fabric workspace."
-  value       = fabric_workspace.workspace.identity.application_id
+  value       = var.workspace_identity_enabled ? fabric_workspace.workspace.identity.application_id : ""
   sensitive   = false
 }
 
