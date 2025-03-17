@@ -18,24 +18,24 @@ resource "fabric_workspace" "workspace" {
 # }
 
 resource "fabric_spark_workspace_settings" "workspace_settings" {
-  count = var.workspace_capacity_name == null ? 0 : 1
+  count = var.workspace_spark_settings.enabled ? 1 : 0
 
   workspace_id = fabric_workspace.workspace.id
 
   automatic_log = {
-    enabled = var.workspace_settings.automatic_log.enabled
+    enabled = var.workspace_spark_settings.automatic_log.enabled
   }
   # environment = {
-  #   name            = var.workspace_settings.environment.default_environment_name
-  #   runtime_version = var.workspace_settings.environment.runtime_version
+  #   name            = var.workspace_spark_settings.environment.default_environment_name
+  #   runtime_version = var.workspace_spark_settings.environment.runtime_version
   # }
   high_concurrency = {
-    notebook_interactive_run_enabled = var.workspace_settings.high_concurrency.notebook_interactive_run_enabled
+    notebook_interactive_run_enabled = var.workspace_spark_settings.high_concurrency.notebook_interactive_run_enabled
   }
   pool = {
-    customize_compute_enabled = var.workspace_settings.pool.customize_compute_enabled
+    customize_compute_enabled = var.workspace_spark_settings.pool.customize_compute_enabled
     # default_pool = {
-    #   name = var.workspace_settings.pool.default_pool_name
+    #   name = var.workspace_spark_settings.pool.default_pool_name
     #   type = var.workspace_capacity_name == null ? "Workspace" : "Capacity"
     # }
     # starter_pool = {

@@ -57,9 +57,10 @@ variable "workspace_identity_enabled" {
   }
 }
 
-variable "workspace_settings" {
+variable "workspace_spark_settings" {
   description = "Specifies settings of the fabric workspace."
   type = object({
+    enabled = optional(bool, false)
     automatic_log = optional(object({
       enabled = optional(bool, true)
     }), {})
@@ -133,7 +134,7 @@ variable "workspace_git" {
   nullable  = true
   default   = null
   validation {
-    condition     = var.workspace_git == null || can(contains(["AzureDevOps"], var.workspace_settings.environment.runtime_version))
+    condition     = var.workspace_git == null || can(contains(["AzureDevOps"], var.workspace_git.git_provider_type))
     error_message = "Please specify a valid git provider. Valid values today include: [ 'AzureDevOps' ]."
   }
 }
