@@ -42,12 +42,6 @@ Description: Specifies the resource group name in which all resources will get d
 
 Type: `string`
 
-### <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id)
-
-Description: Specifies the resource id of a subnet in which the private endpoints get created.
-
-Type: `string`
-
 ## Optional Inputs
 
 The following input variables are optional (have default values):
@@ -91,6 +85,14 @@ Description: Specifies whether export policy should be enabled for the container
 Type: `bool`
 
 Default: `false`
+
+### <a name="input_container_registry_ip_rules"></a> [container\_registry\_ip\_rules](#input\_container\_registry\_ip\_rules)
+
+Description: Specifies ip rule option for the container registry network rules. List can include any IP address.
+
+Type: `set(string)`
+
+Default: `[]`
 
 ### <a name="input_container_registry_quarantine_policy_enabled"></a> [container\_registry\_quarantine\_policy\_enabled](#input\_container\_registry\_quarantine\_policy\_enabled)
 
@@ -159,6 +161,14 @@ Default: `[]`
 ### <a name="input_private_dns_zone_id_container_registry"></a> [private\_dns\_zone\_id\_container\_registry](#input\_private\_dns\_zone\_id\_container\_registry)
 
 Description: Specifies the resource ID of the private DNS zone for the container registry. Not required if DNS A-records get created via Azure Policy.
+
+Type: `string`
+
+Default: `""`
+
+### <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id)
+
+Description: Specifies the resource id of a subnet in which the private endpoints get created.
 
 Type: `string`
 
