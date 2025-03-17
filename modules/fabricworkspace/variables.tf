@@ -57,9 +57,10 @@ variable "workspace_identity_enabled" {
   }
 }
 
-variable "workspace_settings" {
+variable "workspace_spark_settings" {
   description = "Specifies settings of the fabric workspace."
   type = object({
+    enabled = optional(bool, false)
     automatic_log = optional(object({
       enabled = optional(bool, true)
     }), {})
