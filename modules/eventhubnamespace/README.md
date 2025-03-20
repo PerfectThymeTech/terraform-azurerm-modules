@@ -81,12 +81,6 @@ Description: Specifies the resource group name in which all resources will get d
 
 Type: `string`
 
-### <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id)
-
-Description: Specifies the resource id of a subnet in which the private endpoints get created.
-
-Type: `string`
-
 ## Optional Inputs
 
 The following input variables are optional (have default values):
@@ -163,9 +157,25 @@ Type: `bool`
 
 Default: `false`
 
+### <a name="input_eventhub_namespace_ip_rules"></a> [eventhub\_namespace\_ip\_rules](#input\_eventhub\_namespace\_ip\_rules)
+
+Description: Specifies ip rule option for the event hub namespace network rules. List can include any IP address.
+
+Type: `set(string)`
+
+Default: `[]`
+
 ### <a name="input_private_dns_zone_id_servicebus"></a> [private\_dns\_zone\_id\_servicebus](#input\_private\_dns\_zone\_id\_servicebus)
 
 Description: Specifies the resource ID of the private DNS zone for Azure service bus endpoints. Not required if DNS A-records get created via Azure Policy.
+
+Type: `string`
+
+Default: `""`
+
+### <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id)
+
+Description: Specifies the resource id of a subnet in which the private endpoints get created.
 
 Type: `string`
 

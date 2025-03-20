@@ -14,8 +14,14 @@ resource "azurerm_eventhub_namespace" "eventhub_namespace" {
   maximum_throughput_units     = var.event_hub_namespace_maximum_throughput_units
   minimum_tls_version          = "1.2"
   network_rulesets {
-    default_action                 = "Deny"
-    ip_rule                        = []
+    default_action = "Deny"
+    ip_rule = [
+      for item in var.eventhub_namespace_ip_rules :
+      {
+        action  = "Allow"
+        ip_mask = item
+      }
+    ]
     public_network_access_enabled  = false
     trusted_service_access_enabled = true
     virtual_network_rule           = []

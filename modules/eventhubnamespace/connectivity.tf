@@ -1,4 +1,6 @@
 resource "azurerm_private_endpoint" "private_endpoint_eventhub_namespace_namespace" {
+  count = var.subnet_id == "" ? 0 : 1
+
   name                = "${azurerm_eventhub_namespace.eventhub_namespace.name}-datafactory-pe"
   location            = var.location
   resource_group_name = azurerm_eventhub_namespace.eventhub_namespace.resource_group_name
