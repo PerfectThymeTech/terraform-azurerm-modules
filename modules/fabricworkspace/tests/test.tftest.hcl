@@ -76,8 +76,9 @@ run "create_fabric_workspace" {
     workspace_capacity_name    = run.setup.fabric_capacity_name
     workspace_display_name     = "MyTestWs"
     workspace_description      = "My Test Workspace"
-    workspace_identity_enabled = false
-    workspace_settings = {
+    workspace_identity_enabled = true
+    workspace_spark_settings = {
+      enabled = true
       automatic_log = {
         enabled = true
       }

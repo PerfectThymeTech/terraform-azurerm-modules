@@ -12,7 +12,7 @@ The following requirements are needed by this module:
 
 - <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (~> 1.8)
 
-- <a name="requirement_fabric"></a> [fabric](#requirement\_fabric) (0.1.0-beta.4)
+- <a name="requirement_fabric"></a> [fabric](#requirement\_fabric) (0.1.0-rc.1)
 
 ## Modules
 
@@ -93,7 +93,7 @@ map(object({
 
 Default: `{}`
 
-### <a name="input_workspace_settings"></a> [workspace\_settings](#input\_workspace\_settings)
+### <a name="input_workspace_spark_settings"></a> [workspace\_spark\_settings](#input\_workspace\_spark\_settings)
 
 Description: Specifies settings of the fabric workspace.
 
@@ -101,6 +101,7 @@ Type:
 
 ```hcl
 object({
+    enabled = optional(bool, false)
     automatic_log = optional(object({
       enabled = optional(bool, true)
     }), {})
@@ -117,7 +118,31 @@ Default: `{}`
 
 ## Outputs
 
-No outputs.
+The following outputs are exported:
+
+### <a name="output_fabric_workspace_application_id"></a> [fabric\_workspace\_application\_id](#output\_fabric\_workspace\_application\_id)
+
+Description: Specifies the application id of the fabric workspace.
+
+### <a name="output_fabric_workspace_blob_endpoint"></a> [fabric\_workspace\_blob\_endpoint](#output\_fabric\_workspace\_blob\_endpoint)
+
+Description: Specifies the blob enpoint of the fabric workspace.
+
+### <a name="output_fabric_workspace_dfs_endpoint"></a> [fabric\_workspace\_dfs\_endpoint](#output\_fabric\_workspace\_dfs\_endpoint)
+
+Description: Specifies the dfs enpoint of the fabric workspace.
+
+### <a name="output_fabric_workspace_id"></a> [fabric\_workspace\_id](#output\_fabric\_workspace\_id)
+
+Description: Specifies the id of the fabric workspace.
+
+### <a name="output_fabric_workspace_name"></a> [fabric\_workspace\_name](#output\_fabric\_workspace\_name)
+
+Description: Specifies the name of the fabric workspace.
+
+### <a name="output_fabric_workspace_principal_id"></a> [fabric\_workspace\_principal\_id](#output\_fabric\_workspace\_principal\_id)
+
+Description: Specifies the principal id of the fabric workspace.
 
 <!-- markdownlint-enable -->
 

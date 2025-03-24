@@ -1,18 +1,18 @@
-name: fabriccapacity tests
+name: eventhubnamespace tests
 on:
   push:
     branches:
       - main
     paths:
-      - "modules/fabriccapacity/**"
-      - ".github/workflows/terraform-fabriccapacity.yml"
+      - "modules/eventhubnamespace/**"
+      - ".github/workflows/terraform-eventhubnamespace.yml"
 
   pull_request:
     branches:
       - main
     paths:
-      - "modules/fabriccapacity/**"
-      - ".github/workflows/terraform-fabriccapacity.yml"
+      - "modules/eventhubnamespace/**"
+      - ".github/workflows/terraform-eventhubnamespace.yml"
 
 jobs:
   terraform_dev:
@@ -20,8 +20,8 @@ jobs:
     name: "Dev"
     with:
       environment: "dev"
-      config: "fabriccapacity"
-      terraform_version: "1.11.2"
+      config: "eventhubnamespace"
+      terraform_version: "1.11.0"
       node_version: 20
       tenant_id: "37963dd4-f4e6-40f8-a7d6-24b97919e452"
       subscription_id: "1fdab118-1638-419a-8b12-06c9543714a0"
