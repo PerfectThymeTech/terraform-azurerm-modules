@@ -277,7 +277,7 @@ variable "subnet_id" {
   type        = string
   sensitive   = false
   validation {
-    condition     = length(split("/", var.subnet_id)) == 11
+    condition     = var.subnet_id == "" || length(split("/", var.subnet_id)) == 11
     error_message = "Please specify a valid subnet id."
   }
 }
