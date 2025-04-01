@@ -78,7 +78,7 @@ run "create_fabric_workspace" {
     workspace_description      = "My Test Workspace"
     workspace_identity_enabled = true
     workspace_spark_settings = {
-      enabled = true
+      enabled = false
       automatic_log = {
         enabled = true
       }
