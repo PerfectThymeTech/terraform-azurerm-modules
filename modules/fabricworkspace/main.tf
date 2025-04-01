@@ -70,5 +70,5 @@ resource "fabric_workspace_role_assignment" "example" {
     id   = each.value.principal_id
     type = each.value.principal_type
   }
-  role           = each.value.role
+  role = each.value.role
 }
