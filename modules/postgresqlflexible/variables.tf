@@ -37,6 +37,28 @@ variable "postgresql_name" {
   }
 }
 
+variable "postgresql_administrator_login" {
+  description = "Specifies the administrator name of the postgresql flexible server."
+  type        = string
+  sensitive   = false
+  nullable    = false
+  validation {
+    condition     = length(var.postgresql_administrator_login) >= 2
+    error_message = "Please specify a valid administrator name."
+  }
+}
+
+variable "postgresql_administrator_password" {
+  description = "Specifies the administrator password of the postgresql flexible server."
+  type        = string
+  sensitive   = true
+  nullable    = false
+  validation {
+    condition     = length(var.postgresql_administrator_password) >= 2
+    error_message = "Please specify a valid administrator password."
+  }
+}
+
 variable "postgresql_auto_grow_enabled" {
   description = "Specifies whether auto grow is enabled for the postgresql flexible server."
   type        = bool
