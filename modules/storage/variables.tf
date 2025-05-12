@@ -112,7 +112,7 @@ variable "storage_blob_container_delete_retention_in_days" {
   nullable    = true
   default     = 7
   validation {
-    condition     = var.storage_blob_container_delete_retention_in_days == null || var.storage_blob_container_delete_retention_in_days >= 7
+    condition     = var.storage_blob_container_delete_retention_in_days == null ? true : var.storage_blob_container_delete_retention_in_days >= 7
     error_message = "Please specify a valid storage account blob container delete retention policy."
   }
 }
