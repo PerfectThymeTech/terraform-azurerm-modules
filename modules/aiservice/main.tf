@@ -15,7 +15,7 @@ resource "azurerm_cognitive_account" "cognitive_account" {
   kind               = var.cognitive_account_kind
   local_auth_enabled = var.cognitive_account_local_auth_enabled
   network_acls {
-    bypass         = "AzureServices"
+    bypass         = var.cognitive_account_firewall_bypass_azure_services ? "AzureServices" : "None"
     default_action = "Deny"
     ip_rules       = []
   }
