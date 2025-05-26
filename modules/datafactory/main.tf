@@ -19,7 +19,7 @@ resource "azurerm_data_factory" "data_factory" {
     }
   }
 
-  customer_managed_key_id          = var.customer_managed_key == null ? null : var.customer_managed_key.key_vault_key_versionless_id
+  customer_managed_key_id          = var.customer_managed_key == null ? null : var.customer_managed_key.key_vault_key_id
   customer_managed_key_identity_id = var.customer_managed_key == null ? null : var.customer_managed_key.user_assigned_identity_id
   managed_virtual_network_enabled  = true
   purview_id                       = var.data_factory_purview_id

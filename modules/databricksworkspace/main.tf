@@ -29,11 +29,11 @@ resource "azurerm_databricks_workspace" "databricks_workspace" {
   infrastructure_encryption_enabled                   = true
   load_balancer_backend_address_pool_id               = null
   managed_disk_cmk_key_vault_id                       = var.customer_managed_key == null ? null : var.customer_managed_key.key_vault_id
-  managed_disk_cmk_key_vault_key_id                   = var.customer_managed_key == null ? null : var.customer_managed_key.key_vault_key_versionless_id
+  managed_disk_cmk_key_vault_key_id                   = var.customer_managed_key == null ? null : var.customer_managed_key.key_vault_key_id
   managed_disk_cmk_rotation_to_latest_version_enabled = var.customer_managed_key == null ? null : true
   managed_resource_group_name                         = "${var.databricks_workspace_name}-rg"
   managed_services_cmk_key_vault_id                   = var.customer_managed_key == null ? null : var.customer_managed_key.key_vault_id
-  managed_services_cmk_key_vault_key_id               = var.customer_managed_key == null ? null : var.customer_managed_key.key_vault_key_versionless_id
+  managed_services_cmk_key_vault_key_id               = var.customer_managed_key == null ? null : var.customer_managed_key.key_vault_key_id
   network_security_group_rules_required               = "NoAzureDatabricksRules"
   public_network_access_enabled                       = false
   sku                                                 = "premium"
