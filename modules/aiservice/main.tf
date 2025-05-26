@@ -3,66 +3,31 @@ resource "azurerm_cognitive_account" "cognitive_account" {
   location            = var.location
   resource_group_name = var.resource_group_name
   tags                = var.tags
-  dynamic "identity" {
-    for_each = var.customer_managed_key != null ? [{
-      type = "SystemAssigned, UserAssigned"
-      identity_ids = [
-        var.customer_managed_key.user_assigned_identity_id
-      ]
-      }] : [{
-      type         = "SystemAssigned"
-      identity_ids = null
-    }]
-    content {
-      type         = identity.value.type
-      identity_ids = identity.value.identity_ids
-    }
+  identity {
+    type = "SystemAssigned"
   }
 
-  custom_subdomain_name = var.cognitive_account_name
-  dynamic "customer_managed_key" {
-    for_each = var.customer_managed_key != null ? [1] : []
-    content {
-      identity_client_id = var.customer_managed_key.user_assigned_identity_client_id
-      key_vault_key_id   = var.customer_managed_key.key_vault_key_versionless_id
-    }
-  }
+  custom_subdomain_name      = var.cognitive_account_name
   dynamic_throttling_enabled = false
   fqdns = var.customer_managed_key != null && var.cognitive_account_outbound_network_access_restricted ? setunion([
-    "${reverse(split(var.customer_managed_key.key_vault_id, "/"))[0]}.vault.azure.net",
+    "${reverse(split("/", var.customer_managed_key.key_vault_id))[0]}.vault.azure.net",
   ], var.cognitive_account_outbound_network_access_allowed_fqdns) : setunion([], var.cognitive_account_outbound_network_access_allowed_fqdns)
   kind               = var.cognitive_account_kind
   local_auth_enabled = var.cognitive_account_local_auth_enabled
   network_acls {
+    bypass         = var.cognitive_account_firewall_bypass_azure_services ? "AzureServices" : null
     default_action = "Deny"
     ip_rules       = []
   }
   outbound_network_access_restricted = var.cognitive_account_outbound_network_access_restricted
   public_network_access_enabled      = false
   sku_name                           = var.cognitive_account_sku
-}
 
-resource "azapi_update_resource" "cognitive_account_bypass_azureservices" {
-  count       = var.cognitive_account_firewall_bypass_azure_services ? 1 : 0
-  type        = "Microsoft.CognitiveServices/accounts@2023-05-01"
-  resource_id = azurerm_cognitive_account.cognitive_account.id
-
-  body = {
-    properties = {
-      networkAcls = {
-        bypass              = "AzureServices"
-        defaultAction       = "Deny"
-        ipRules             = []
-        virtualNetworkRules = []
-      }
-      publicNetworkAccess = "Disabled"
-    }
+  lifecycle {
+    ignore_changes = [
+      customer_managed_key
+    ]
   }
-
-  response_export_values  = []
-  locks                   = []
-  ignore_casing           = false
-  ignore_missing_property = false
 }
 
 resource "azurerm_cognitive_deployment" "cognitive_deployments" {
@@ -83,4 +48,15 @@ resource "azurerm_cognitive_deployment" "cognitive_deployments" {
     family   = each.value.sku_family
     capacity = each.value.sku_capacity
   }
+}
+
+resource "azurerm_cognitive_account_customer_managed_key" "cognitive_account_customer_managed_key" {
+  count = var.customer_managed_key != null ? 1 : 0
+
+  cognitive_account_id = azurerm_cognitive_account.cognitive_account.id
+  key_vault_key_id     = var.customer_managed_key.key_vault_key_id
+
+  depends_on = [
+    azurerm_role_assignment.role_assignment_key_vault_crypto_encryption_user_cognitive_account,
+  ]
 }

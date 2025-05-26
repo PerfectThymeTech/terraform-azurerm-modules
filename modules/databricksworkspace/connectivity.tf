@@ -27,6 +27,10 @@ resource "azurerm_private_endpoint" "private_endpoint_databricks_workspace_datab
       private_dns_zone_group
     ]
   }
+
+  depends_on = [
+    time_sleep.sleep_cmk,
+  ]
 }
 
 resource "azurerm_private_endpoint" "private_endpoint_databricks_workspace_browser_authentication" {
@@ -62,6 +66,7 @@ resource "azurerm_private_endpoint" "private_endpoint_databricks_workspace_brows
   }
 
   depends_on = [
+    time_sleep.sleep_cmk,
     azurerm_private_endpoint.private_endpoint_databricks_workspace_databricks_ui_api,
   ]
 }
@@ -95,6 +100,10 @@ resource "azurerm_private_endpoint" "private_endpoint_databricks_workspace_dbfs_
       private_dns_zone_group
     ]
   }
+
+  depends_on = [
+    time_sleep.sleep_cmk,
+  ]
 }
 
 resource "azurerm_private_endpoint" "private_endpoint_databricks_workspace_dbfs_dfs" {
@@ -126,6 +135,10 @@ resource "azurerm_private_endpoint" "private_endpoint_databricks_workspace_dbfs_
       private_dns_zone_group
     ]
   }
+
+  depends_on = [
+    time_sleep.sleep_cmk,
+  ]
 }
 
 resource "time_sleep" "sleep_connectivity" {

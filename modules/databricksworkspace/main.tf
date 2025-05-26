@@ -45,5 +45,5 @@ resource "azurerm_databricks_workspace_root_dbfs_customer_managed_key" "databric
   workspace_id = azurerm_databricks_workspace.databricks_workspace.id
 
   key_vault_id     = var.customer_managed_key.key_vault_id
-  key_vault_key_id = var.customer_managed_key.key_vault_key_versionless_id
+  key_vault_key_id = var.customer_managed_key.key_vault_key_id
 }
