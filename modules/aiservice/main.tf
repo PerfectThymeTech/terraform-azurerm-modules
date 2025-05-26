@@ -24,7 +24,7 @@ resource "azurerm_cognitive_account" "cognitive_account" {
     for_each = var.customer_managed_key != null ? [1] : []
     content {
       identity_client_id = var.customer_managed_key.user_assigned_identity_client_id
-      key_vault_key_id   = var.customer_managed_key.key_vault_key_versionless_id
+      key_vault_key_id   = var.customer_managed_key.key_vault_key_id
     }
   }
   dynamic_throttling_enabled = false
