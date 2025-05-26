@@ -10,7 +10,7 @@ resource "azurerm_cognitive_account" "cognitive_account" {
   custom_subdomain_name      = var.cognitive_account_name
   dynamic_throttling_enabled = false
   fqdns = var.customer_managed_key != null && var.cognitive_account_outbound_network_access_restricted ? setunion([
-    "${reverse(split(var.customer_managed_key.key_vault_id, "/"))[0]}.vault.azure.net",
+    "${reverse(split("/", var.customer_managed_key.key_vault_id))[0]}.vault.azure.net",
   ], var.cognitive_account_outbound_network_access_allowed_fqdns) : setunion([], var.cognitive_account_outbound_network_access_allowed_fqdns)
   kind               = var.cognitive_account_kind
   local_auth_enabled = var.cognitive_account_local_auth_enabled
