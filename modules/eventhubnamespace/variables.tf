@@ -127,6 +127,14 @@ variable "event_hubs" {
   }
 }
 
+variable "eventhub_namespace_ip_rules" {
+  description = "Specifies ip rule option for the event hub namespace network rules. List can include any IP address."
+  type        = set(string)
+  sensitive   = false
+  nullable    = false
+  default     = []
+}
+
 # Diagnostics variables
 variable "diagnostics_configurations" {
   description = "Specifies the diagnostic configuration for the service."
@@ -149,8 +157,9 @@ variable "subnet_id" {
   description = "Specifies the resource id of a subnet in which the private endpoints get created."
   type        = string
   sensitive   = false
+  default     = ""
   validation {
-    condition     = length(split("/", var.subnet_id)) == 11
+    condition     = var.subnet_id == "" || length(split("/", var.subnet_id)) == 11
     error_message = "Please specify a valid subnet id."
   }
 }
