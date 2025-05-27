@@ -181,6 +181,14 @@ variable "storage_network_bypass" {
   }
 }
 
+variable "storage_ip_rules" {
+  description = "Specifies ip rule option for the storage account network rules. List can include any IP address."
+  type        = set(string)
+  sensitive   = false
+  nullable    = false
+  default     = []
+}
+
 variable "storage_network_private_link_access" {
   description = "Specifies resource instance rules of the storage account."
   type        = set(string)
@@ -269,7 +277,7 @@ variable "subnet_id" {
   type        = string
   sensitive   = false
   validation {
-    condition     = length(split("/", var.subnet_id)) == 11
+    condition     = var.subnet_id == "" || length(split("/", var.subnet_id)) == 11
     error_message = "Please specify a valid subnet id."
   }
 }

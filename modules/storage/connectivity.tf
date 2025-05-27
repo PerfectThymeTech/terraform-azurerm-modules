@@ -1,5 +1,5 @@
 resource "azurerm_private_endpoint" "private_endpoint_storage_account" {
-  for_each = var.private_endpoint_subresource_names
+  for_each = var.subnet_id == "" ? toset([]) : var.private_endpoint_subresource_names
 
   name                = "${azurerm_storage_account.storage_account.name}-${each.value}-pe"
   location            = var.location
