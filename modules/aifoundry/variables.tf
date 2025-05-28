@@ -129,7 +129,7 @@ variable "ai_services_storage_accounts" {
   sensitive = false
   default   = {}
   validation {
-    condition = length([for target in values(var.ai_services_storage_accounts)[*].target : true if !(startswith(target, "https://") && endswith(target, ".blob.core.windows.net"))]) <= 0
+    condition = length([for target in values(var.ai_services_storage_accounts)[*].target : true if !(startswith(target, "https://") && endswith(target, ".blob.core.windows.net/"))]) <= 0
     error_message = "Please specify a valid target for the storage account connection."
   }
   validation {
@@ -246,6 +246,16 @@ variable "subnet_id" {
   sensitive   = false
   validation {
     condition     = length(split("/", var.subnet_id)) == 11
+    error_message = "Please specify a valid subnet id."
+  }
+}
+
+variable "subnet_id_capability_hosts" {
+  description = "Specifies the resource id of a subnet in which the capability hosts get created."
+  type        = string
+  sensitive   = false
+  validation {
+    condition     = length(split("/", var.subnet_id_capability_hosts)) == 11
     error_message = "Please specify a valid subnet id."
   }
 }

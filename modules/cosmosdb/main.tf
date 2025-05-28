@@ -78,9 +78,9 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
   minimal_tls_version                   = "Tls12"
   mongo_server_version                  = null
   multiple_write_locations_enabled      = var.cosmosdb_account_mongo_server_version
-  network_acl_bypass_for_azure_services = false
+  network_acl_bypass_for_azure_services = true
   network_acl_bypass_ids                = []
   offer_type                            = "Standard"
   partition_merge_enabled               = var.cosmosdb_account_partition_merge_enabled
-  public_network_access_enabled         = false
+  public_network_access_enabled         = true
 }

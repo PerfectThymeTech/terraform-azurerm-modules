@@ -23,10 +23,48 @@ resource "azurerm_ai_services" "ai_services" {
 
   lifecycle {
     ignore_changes = [
-      customer_managed_key
+      customer_managed_key,
     ]
   }
 }
+
+resource "azapi_resource_action" "ai_services" {
+  type        = "Microsoft.CognitiveServices/accounts@2025-04-01-preview"
+  resource_id = azurerm_ai_services.ai_services.id
+
+  action = null
+  method = "PATCH"
+  body = {
+    properties = {
+      allowProjectManagement = true
+    }
+  }
+  when = "apply"
+
+  response_export_values = ["properties.internalId"]
+  locks                  = []
+}
+
+# resource "azapi_update_resource" "ai_services" {
+#   type        = "Microsoft.CognitiveServices/accounts@2025-04-01-preview"
+#   resource_id = azurerm_ai_services.ai_services.id
+
+#   body = {
+#     properties = {
+#       allowProjectManagement = true
+#       # networkInjections = {
+#       #   scenario                   = "agent"
+#       #   subnetArmId                = var.subnet_id_capability_hosts
+#       #   useMicrosoftManagedNetwork = false
+#       # }
+#     }
+#   }
+
+#   response_export_values  = []
+#   locks                   = []
+#   ignore_casing           = false
+#   ignore_missing_property = true
+# }
 
 resource "azapi_resource" "ai_services_project" {
   for_each = var.ai_services_projects
@@ -47,36 +85,15 @@ resource "azapi_resource" "ai_services_project" {
     }
   }
 
-  response_export_values    = []
+  response_export_values    = ["properties.internalId"]
   schema_validation_enabled = true
   locks                     = []
   ignore_casing             = false
   ignore_missing_property   = true
-}
 
-resource "azapi_resource" "ai_services_capability_hosts" {
-  type      = "Microsoft.CognitiveServices/accounts/capabilityHosts@2025-04-01-preview"
-  name      = "capability-host-account"
-  parent_id = azurerm_ai_services.ai_services.id
-
-  body = {
-    properties = {
-      aiServicesConnections = []
-      capabilityHostKind = "Agents"
-      # customerSubnet = ""
-      description = "Capability host - account"
-      storageConnections = []
-      # tags = var.tags
-      threadStorageConnections = []
-      vectorStoreConnections = []
-    }
-  }
-
-  response_export_values    = []
-  schema_validation_enabled = false
-  locks                     = []
-  ignore_casing             = false
-  ignore_missing_property   = true
+  depends_on = [
+    azapi_resource_action.ai_services,
+  ]
 }
 
 resource "azurerm_cognitive_deployment" "ai_services_deployments" {
