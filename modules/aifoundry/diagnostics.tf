@@ -6,7 +6,7 @@ resource "azurerm_monitor_diagnostic_setting" "diagnostic_setting_ai_services" {
     }
   }
   name                       = "applicationLogs-${each.key}"
-  target_resource_id         = azurerm_ai_services.ai_services.id
+  target_resource_id         = azapi_resource.ai_services.id
   log_analytics_workspace_id = each.value.log_analytics_workspace_id == "" ? null : each.value.log_analytics_workspace_id
   storage_account_id         = each.value.storage_account_id == "" ? null : each.value.storage_account_id
 

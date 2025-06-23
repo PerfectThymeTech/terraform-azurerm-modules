@@ -1,7 +1,7 @@
 data "azurerm_client_config" "current" {}
 
 data "azurerm_monitor_diagnostic_categories" "diagnostic_categories_ai_services" {
-  resource_id = azurerm_ai_services.ai_services.id
+  resource_id = azapi_resource.ai_services.id
 }
 
 data "azurerm_cosmosdb_sql_role_definition" "cosmosdb_sql_role_definition" {
@@ -10,4 +10,9 @@ data "azurerm_cosmosdb_sql_role_definition" "cosmosdb_sql_role_definition" {
   resource_group_name = split("/", each.value.resource_id)[4]
   account_name        = reverse(split("/", each.value.resource_id))[0]
   role_definition_id  = "00000000-0000-0000-0000-000000000002"
+}
+
+data "azurerm_cognitive_account" "ai_services" {
+  resource_group_name = var.resource_group_name
+  name                = azapi_resource.ai_services.name
 }

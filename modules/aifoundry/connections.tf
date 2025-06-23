@@ -3,7 +3,7 @@ resource "azapi_resource" "ai_services_connection_cosmosdb_account" {
 
   type      = "Microsoft.CognitiveServices/accounts/connections@2025-04-01-preview"
   name      = "cosmosdb-${each.key}"
-  parent_id = azurerm_ai_services.ai_services.id
+  parent_id = azapi_resource.ai_services.id
 
   body = {
     properties = {
@@ -17,7 +17,7 @@ resource "azapi_resource" "ai_services_connection_cosmosdb_account" {
         ResourceId = each.value.resource_id
         location   = each.value.location
       }
-      peRequirement               = "Required"
+      peRequirement               = "NotRequired" # "Required"
       target                      = each.value.target
       useWorkspaceManagedIdentity = true
       # peStatus                    = "Active"
@@ -30,10 +30,6 @@ resource "azapi_resource" "ai_services_connection_cosmosdb_account" {
   locks                     = []
   ignore_casing             = false
   ignore_missing_property   = true
-
-  depends_on = [
-    azapi_resource_action.ai_services,
-  ]
 }
 
 resource "azapi_resource" "ai_services_connection_storage_account" {
@@ -41,7 +37,7 @@ resource "azapi_resource" "ai_services_connection_storage_account" {
 
   type      = "Microsoft.CognitiveServices/accounts/connections@2025-04-01-preview"
   name      = "azurestorageaccount-${each.key}"
-  parent_id = azurerm_ai_services.ai_services.id
+  parent_id = azapi_resource.ai_services.id
 
   body = {
     properties = {
@@ -55,7 +51,7 @@ resource "azapi_resource" "ai_services_connection_storage_account" {
         ResourceId = each.value.resource_id
         location   = each.value.location
       }
-      peRequirement               = "Required"
+      peRequirement               = "NotRequired" # "Required"
       target                      = each.value.target
       useWorkspaceManagedIdentity = true
       # peStatus                    = "Active"
@@ -68,18 +64,14 @@ resource "azapi_resource" "ai_services_connection_storage_account" {
   locks                     = []
   ignore_casing             = false
   ignore_missing_property   = true
-
-  depends_on = [
-    azapi_resource_action.ai_services,
-  ]
 }
 
-resource "azapi_resource" "ai_services_connection_aisearch_accounts" {
+resource "azapi_resource" "ai_services_connection_aisearch_account" {
   for_each = var.ai_services_aisearch_accounts
 
   type      = "Microsoft.CognitiveServices/accounts/connections@2025-04-01-preview"
   name      = "cognitivesearch-${each.key}"
-  parent_id = azurerm_ai_services.ai_services.id
+  parent_id = azapi_resource.ai_services.id
 
   body = {
     properties = {
@@ -93,7 +85,7 @@ resource "azapi_resource" "ai_services_connection_aisearch_accounts" {
         ResourceId = each.value.resource_id
         location   = each.value.location
       }
-      peRequirement               = "Required"
+      peRequirement               = "NotRequired" # "Required"
       target                      = each.value.target
       useWorkspaceManagedIdentity = true
       # peStatus                    = "Active"
@@ -106,10 +98,6 @@ resource "azapi_resource" "ai_services_connection_aisearch_accounts" {
   locks                     = []
   ignore_casing             = false
   ignore_missing_property   = true
-
-  depends_on = [
-    azapi_resource_action.ai_services,
-  ]
 }
 
 resource "azapi_resource" "ai_services_connections_account" {
@@ -117,7 +105,7 @@ resource "azapi_resource" "ai_services_connections_account" {
 
   type      = "Microsoft.CognitiveServices/accounts/connections@2025-04-01-preview"
   name      = each.key
-  parent_id = azurerm_ai_services.ai_services.id
+  parent_id = azapi_resource.ai_services.id
 
   body = {
     properties = {
@@ -151,8 +139,4 @@ resource "azapi_resource" "ai_services_connections_account" {
   locks                     = []
   ignore_casing             = false
   ignore_missing_property   = true
-
-  depends_on = [
-    azapi_resource_action.ai_services,
-  ]
 }

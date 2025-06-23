@@ -110,11 +110,11 @@ variable "ai_services_cosmosdb_accounts" {
   sensitive = false
   default   = {}
   validation {
-    condition = length([for target in values(var.ai_services_cosmosdb_accounts)[*].target : true if !(startswith(target, "https://") && endswith(target, ".documents.azure.com:443/"))]) <= 0
+    condition     = length([for target in values(var.ai_services_cosmosdb_accounts)[*].target : true if !(startswith(target, "https://") && endswith(target, ".documents.azure.com:443/"))]) <= 0
     error_message = "Please specify a valid target for the storage account connection."
   }
   validation {
-    condition = length([for resource_id in values(var.ai_services_cosmosdb_accounts)[*].resource_id : true if !(length(split("/", resource_id)) == 9)]) <= 0
+    condition     = length([for resource_id in values(var.ai_services_cosmosdb_accounts)[*].resource_id : true if !(length(split("/", resource_id)) == 9)]) <= 0
     error_message = "Please specify a valid resource id for the storage account connection."
   }
 }
@@ -129,11 +129,11 @@ variable "ai_services_storage_accounts" {
   sensitive = false
   default   = {}
   validation {
-    condition = length([for target in values(var.ai_services_storage_accounts)[*].target : true if !(startswith(target, "https://") && endswith(target, ".blob.core.windows.net/"))]) <= 0
+    condition     = length([for target in values(var.ai_services_storage_accounts)[*].target : true if !(startswith(target, "https://") && endswith(target, ".blob.core.windows.net/"))]) <= 0
     error_message = "Please specify a valid target for the storage account connection."
   }
   validation {
-    condition = length([for resource_id in values(var.ai_services_storage_accounts)[*].resource_id : true if !(length(split("/", resource_id)) == 9)]) <= 0
+    condition     = length([for resource_id in values(var.ai_services_storage_accounts)[*].resource_id : true if !(length(split("/", resource_id)) == 9)]) <= 0
     error_message = "Please specify a valid resource id for the storage account connection."
   }
 }
@@ -148,11 +148,11 @@ variable "ai_services_aisearch_accounts" {
   sensitive = false
   default   = {}
   validation {
-    condition = length([for target in values(var.ai_services_aisearch_accounts)[*].target : true if !(startswith(target, "https://") && endswith(target, ".search.windows.net"))]) <= 0
+    condition     = length([for target in values(var.ai_services_aisearch_accounts)[*].target : true if !(startswith(target, "https://") && endswith(target, ".search.windows.net"))]) <= 0
     error_message = "Please specify a valid target for the ai search connection."
   }
   validation {
-    condition = length([for resource_id in values(var.ai_services_aisearch_accounts)[*].resource_id : true if !(length(split("/", resource_id)) == 9)]) <= 0
+    condition     = length([for resource_id in values(var.ai_services_aisearch_accounts)[*].resource_id : true if !(length(split("/", resource_id)) == 9)]) <= 0
     error_message = "Please specify a valid resource id for the ai search connection."
   }
 }
