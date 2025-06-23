@@ -34,7 +34,13 @@ resource "azurerm_container_registry" "container_registry" {
   network_rule_set = [
     {
       default_action = "Deny"
-      ip_rule        = []
+      ip_rule = [
+        for item in var.container_registry_ip_rules :
+        {
+          action   = "Allow"
+          ip_range = item
+        }
+      ]
     }
   ]
   public_network_access_enabled = false
