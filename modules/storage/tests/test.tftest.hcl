@@ -14,8 +14,8 @@ run "create_storage" {
     storage_account_replication_type                = "ZRS"
     storage_account_allowed_copy_scope              = "AAD"
     storage_blob_change_feed_enabled                = false
-    storage_blob_container_delete_retention_in_days = 7
-    storage_blob_delete_retention_in_days           = 7
+    storage_blob_container_delete_retention_in_days = null
+    storage_blob_delete_retention_in_days           = null
     storage_blob_cors_rules                         = {}
     storage_blob_last_access_time_enabled           = false
     storage_blob_versioning_enabled                 = false
