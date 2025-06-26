@@ -24,7 +24,7 @@ locals {
         project_value         = project_value
         storage_account_key   = storage_account_key
         storage_account_value = storage_account_value
-        project_principal_id = azapi_resource.ai_services_project[project_key].identity[0].principal_id
+        project_principal_id  = azapi_resource.ai_services_project[project_key].identity[0].principal_id
       }
     }
   ]...)
@@ -37,7 +37,7 @@ locals {
         project_value          = project_value
         cosmosdb_account_key   = cosmosdb_account_key
         cosmosdb_account_value = cosmosdb_account_value
-        project_principal_id = azapi_resource.ai_services_project[project_key].identity[0].principal_id
+        project_principal_id   = azapi_resource.ai_services_project[project_key].identity[0].principal_id
       }
     }
   ]...)
@@ -50,7 +50,7 @@ locals {
         project_value          = project_value
         aisearch_account_key   = aisearch_account_key
         aisearch_account_value = aisearch_account_value
-        project_principal_id = azapi_resource.ai_services_project[project_key].identity[0].principal_id
+        project_principal_id   = azapi_resource.ai_services_project[project_key].identity[0].principal_id
       }
     }
   ]...)
@@ -65,9 +65,9 @@ locals {
   #   key => azapi_resource.ai_services_connection_cosmosdb_project[key].name
   # }
   connections_cosmosdb_account_project = {
-    for project_key, project_value in var.ai_services_projects : 
+    for project_key, project_value in var.ai_services_projects :
     project_key => [
-      for key, value in local.map_projects_cosmosdb_accounts:
+      for key, value in local.map_projects_cosmosdb_accounts :
       azapi_resource.ai_services_connection_cosmosdb_project[key].name if value.project_key == project_key
     ]
   }
@@ -81,9 +81,9 @@ locals {
   #   key => azapi_resource.ai_services_connection_storage_project[key].name
   # }
   connections_storage_account_project = {
-    for project_key, project_value in var.ai_services_projects : 
+    for project_key, project_value in var.ai_services_projects :
     project_key => [
-      for key, value in local.map_projects_storage_accounts:
+      for key, value in local.map_projects_storage_accounts :
       azapi_resource.ai_services_connection_storage_project[key].name if value.project_key == project_key
     ]
   }
@@ -97,9 +97,9 @@ locals {
   #   key => azapi_resource.ai_services_connection_aisearch_project[key].name
   # }
   connections_aisearch_account_project = {
-    for project_key, project_value in var.ai_services_projects : 
+    for project_key, project_value in var.ai_services_projects :
     project_key => [
-      for key, value in local.map_projects_aisearch_accounts:
+      for key, value in local.map_projects_aisearch_accounts :
       azapi_resource.ai_services_connection_aisearch_project[key].name if value.project_key == project_key
     ]
   }

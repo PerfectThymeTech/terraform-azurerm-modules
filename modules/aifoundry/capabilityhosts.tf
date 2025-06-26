@@ -32,7 +32,7 @@
 resource "time_sleep" "sleep_ai_services_capability_hosts_account" {
   create_duration = "5m"
 
-  depends_on = [ azapi_resource.ai_services ]
+  depends_on = [azapi_resource.ai_services]
 }
 
 resource "azapi_resource" "ai_services_capability_hosts_project" {

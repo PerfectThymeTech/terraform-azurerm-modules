@@ -1,5 +1,5 @@
 <!-- BEGIN_TF_DOCS -->
-# Azure AI Services Terraform Module
+# Azure AI Foundry Terraform Module
 
 ## Documentation
 <!-- markdownlint-disable MD033 -->
@@ -26,19 +26,13 @@ No modules.
 
 The following input variables are required:
 
-### <a name="input_cognitive_account_kind"></a> [cognitive\_account\_kind](#input\_cognitive\_account\_kind)
-
-Description: Specifies the kind of the cognitive service.
-
-Type: `string`
-
-### <a name="input_cognitive_account_name"></a> [cognitive\_account\_name](#input\_cognitive\_account\_name)
+### <a name="input_ai_services_name"></a> [ai\_services\_name](#input\_ai\_services\_name)
 
 Description: Specifies the name of the cognitive service.
 
 Type: `string`
 
-### <a name="input_cognitive_account_sku"></a> [cognitive\_account\_sku](#input\_cognitive\_account\_sku)
+### <a name="input_ai_services_sku"></a> [ai\_services\_sku](#input\_ai\_services\_sku)
 
 Description: Specifies the sku of the cognitive service.
 
@@ -62,11 +56,79 @@ Description: Specifies the resource id of a subnet in which the private endpoint
 
 Type: `string`
 
+### <a name="input_subnet_id_capability_hosts"></a> [subnet\_id\_capability\_hosts](#input\_subnet\_id\_capability\_hosts)
+
+Description: Specifies the resource id of a subnet in which the capability hosts get created.
+
+Type: `string`
+
 ## Optional Inputs
 
 The following input variables are optional (have default values):
 
-### <a name="input_cognitive_account_deployments"></a> [cognitive\_account\_deployments](#input\_cognitive\_account\_deployments)
+### <a name="input_ai_services_aisearch_accounts"></a> [ai\_services\_aisearch\_accounts](#input\_ai\_services\_aisearch\_accounts)
+
+Description: Specifies the ai search account that should be used for your ai service (agent service).
+
+Type:
+
+```hcl
+map(object({
+    target      = string
+    resource_id = string
+    location    = string
+  }))
+```
+
+Default: `{}`
+
+### <a name="input_ai_services_connections_account"></a> [ai\_services\_connections\_account](#input\_ai\_services\_connections\_account)
+
+Description: Specifies the connections that should be created within your ai service account.
+
+Type:
+
+```hcl
+map(object({
+    auth_type = optional(string, "AAD")
+    credentials = optional(object({
+      access_key_id     = optional(string, "")
+      secret_access_key = optional(string, "")
+      key               = optional(string, "")
+      client_id         = optional(string, "")
+      resource_id       = optional(string, "")
+      client_secret     = optional(string, "")
+      tenant_id         = optional(string, "")
+      pat               = optional(string, "")
+      sas               = optional(string, "")
+    }), {})
+    category                       = string
+    target                         = string
+    metadata                       = map(string)
+    private_endpoint_requirement   = optional(string, "Required")
+    use_workspace_managed_identity = optional(bool, true)
+  }))
+```
+
+Default: `{}`
+
+### <a name="input_ai_services_cosmosdb_accounts"></a> [ai\_services\_cosmosdb\_accounts](#input\_ai\_services\_cosmosdb\_accounts)
+
+Description: Specifies the cosmos db account that should be used for your ai service (agent service).
+
+Type:
+
+```hcl
+map(object({
+    target      = string
+    resource_id = string
+    location    = string
+  }))
+```
+
+Default: `{}`
+
+### <a name="input_ai_services_deployments"></a> [ai\_services\_deployments](#input\_ai\_services\_deployments)
 
 Description: Specifies the models that should be deployed within your ai service. Only applicable to ai services of kind openai.
 
@@ -87,7 +149,7 @@ map(object({
 
 Default: `{}`
 
-### <a name="input_cognitive_account_firewall_bypass_azure_services"></a> [cognitive\_account\_firewall\_bypass\_azure\_services](#input\_cognitive\_account\_firewall\_bypass\_azure\_services)
+### <a name="input_ai_services_firewall_bypass_azure_services"></a> [ai\_services\_firewall\_bypass\_azure\_services](#input\_ai\_services\_firewall\_bypass\_azure\_services)
 
 Description: Specifies whether Azure Services should be allowed to bypass the firewall of the cognitive service. This is required for some common integration sceanrios but not supported by all ai services.
 
@@ -95,7 +157,7 @@ Type: `bool`
 
 Default: `false`
 
-### <a name="input_cognitive_account_local_auth_enabled"></a> [cognitive\_account\_local\_auth\_enabled](#input\_cognitive\_account\_local\_auth\_enabled)
+### <a name="input_ai_services_local_auth_enabled"></a> [ai\_services\_local\_auth\_enabled](#input\_ai\_services\_local\_auth\_enabled)
 
 Description: Specifies whether key-based acces should be enabled for the cognitive service.
 
@@ -103,7 +165,7 @@ Type: `bool`
 
 Default: `false`
 
-### <a name="input_cognitive_account_outbound_network_access_allowed_fqdns"></a> [cognitive\_account\_outbound\_network\_access\_allowed\_fqdns](#input\_cognitive\_account\_outbound\_network\_access\_allowed\_fqdns)
+### <a name="input_ai_services_outbound_network_access_allowed_fqdns"></a> [ai\_services\_outbound\_network\_access\_allowed\_fqdns](#input\_ai\_services\_outbound\_network\_access\_allowed\_fqdns)
 
 Description: Specifies the outbound network allowed fqdns of the cognitive service.
 
@@ -111,13 +173,44 @@ Type: `list(string)`
 
 Default: `[]`
 
-### <a name="input_cognitive_account_outbound_network_access_restricted"></a> [cognitive\_account\_outbound\_network\_access\_restricted](#input\_cognitive\_account\_outbound\_network\_access\_restricted)
+### <a name="input_ai_services_outbound_network_access_restricted"></a> [ai\_services\_outbound\_network\_access\_restricted](#input\_ai\_services\_outbound\_network\_access\_restricted)
 
 Description: Specifies the outbound network restrictions of the cognitive service.
 
 Type: `bool`
 
 Default: `true`
+
+### <a name="input_ai_services_projects"></a> [ai\_services\_projects](#input\_ai\_services\_projects)
+
+Description: Specifies the projects that should be deployed within your ai service.
+
+Type:
+
+```hcl
+map(object({
+    description  = optional(string, "")
+    display_name = optional(string, "")
+  }))
+```
+
+Default: `{}`
+
+### <a name="input_ai_services_storage_accounts"></a> [ai\_services\_storage\_accounts](#input\_ai\_services\_storage\_accounts)
+
+Description: Specifies the storage account that should be used for your ai service (agent service).
+
+Type:
+
+```hcl
+map(object({
+    target      = string
+    resource_id = string
+    location    = string
+  }))
+```
+
+Default: `{}`
 
 ### <a name="input_connectivity_delay_in_seconds"></a> [connectivity\_delay\_in\_seconds](#input\_connectivity\_delay\_in\_seconds)
 
@@ -168,9 +261,25 @@ Type: `string`
 
 Default: `null`
 
+### <a name="input_private_dns_zone_id_ai_services"></a> [private\_dns\_zone\_id\_ai\_services](#input\_private\_dns\_zone\_id\_ai\_services)
+
+Description: Specifies the resource ID of the private DNS zone for Azure Foundry (AI Services). Not required if DNS A-records get created via Azure Policy.
+
+Type: `string`
+
+Default: `""`
+
 ### <a name="input_private_dns_zone_id_cognitive_account"></a> [private\_dns\_zone\_id\_cognitive\_account](#input\_private\_dns\_zone\_id\_cognitive\_account)
 
 Description: Specifies the resource ID of the private DNS zone for Azure Cognitive Services. Not required if DNS A-records get created via Azure Policy.
+
+Type: `string`
+
+Default: `""`
+
+### <a name="input_private_dns_zone_id_open_ai"></a> [private\_dns\_zone\_id\_open\_ai](#input\_private\_dns\_zone\_id\_open\_ai)
+
+Description: Specifies the resource ID of the private DNS zone for Azure Open AI. Not required if DNS A-records get created via Azure Policy.
 
 Type: `string`
 
@@ -188,29 +297,33 @@ Default: `{}`
 
 The following outputs are exported:
 
-### <a name="output_cognitive_account_endpoint"></a> [cognitive\_account\_endpoint](#output\_cognitive\_account\_endpoint)
+### <a name="output_ai_services_endpoint"></a> [ai\_services\_endpoint](#output\_ai\_services\_endpoint)
 
 Description: The base URL of the cognitive service account.
 
-### <a name="output_cognitive_account_id"></a> [cognitive\_account\_id](#output\_cognitive\_account\_id)
+### <a name="output_ai_services_id"></a> [ai\_services\_id](#output\_ai\_services\_id)
 
 Description: The ID of the cognitive service account.
 
-### <a name="output_cognitive_account_name"></a> [cognitive\_account\_name](#output\_cognitive\_account\_name)
+### <a name="output_ai_services_name"></a> [ai\_services\_name](#output\_ai\_services\_name)
 
 Description: The name of the cognitive service account.
 
-### <a name="output_cognitive_account_primary_access_key"></a> [cognitive\_account\_primary\_access\_key](#output\_cognitive\_account\_primary\_access\_key)
+### <a name="output_ai_services_primary_access_key"></a> [ai\_services\_primary\_access\_key](#output\_ai\_services\_primary\_access\_key)
 
 Description: The primary access key of the cognitive service account.
 
-### <a name="output_cognitive_account_principal_id"></a> [cognitive\_account\_principal\_id](#output\_cognitive\_account\_principal\_id)
+### <a name="output_ai_services_principal_id"></a> [ai\_services\_principal\_id](#output\_ai\_services\_principal\_id)
 
 Description: The principal id of the cognitive service account.
 
-### <a name="output_cognitive_account_setup_completed"></a> [cognitive\_account\_setup\_completed](#output\_cognitive\_account\_setup\_completed)
+### <a name="output_ai_services_setup_completed"></a> [ai\_services\_setup\_completed](#output\_ai\_services\_setup\_completed)
 
 Description: Specifies whether the connectivity and identity has been successfully configured.
+
+### <a name="output_test"></a> [test](#output\_test)
+
+Description: n/a
 
 <!-- markdownlint-enable -->
 
