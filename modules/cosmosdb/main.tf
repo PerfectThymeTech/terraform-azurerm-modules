@@ -82,5 +82,5 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
   network_acl_bypass_ids                = []
   offer_type                            = "Standard"
   partition_merge_enabled               = var.cosmosdb_account_partition_merge_enabled
-  public_network_access_enabled         = true
+  public_network_access_enabled         = false
 }

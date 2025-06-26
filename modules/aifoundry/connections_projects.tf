@@ -30,6 +30,10 @@ resource "azapi_resource" "ai_services_connection_cosmosdb_project" {
   locks                     = []
   ignore_casing             = false
   ignore_missing_property   = true
+
+  depends_on = [
+    time_sleep.sleep_ai_services_capability_hosts_account,
+  ]
 }
 
 resource "azapi_resource" "ai_services_connection_storage_project" {
@@ -64,6 +68,10 @@ resource "azapi_resource" "ai_services_connection_storage_project" {
   locks                     = []
   ignore_casing             = false
   ignore_missing_property   = true
+
+  depends_on = [
+    time_sleep.sleep_ai_services_capability_hosts_account,
+  ]
 }
 
 resource "azapi_resource" "ai_services_connection_aisearch_project" {
@@ -98,4 +106,8 @@ resource "azapi_resource" "ai_services_connection_aisearch_project" {
   locks                     = []
   ignore_casing             = false
   ignore_missing_property   = true
+
+  depends_on = [
+    time_sleep.sleep_ai_services_capability_hosts_account,
+  ]
 }
