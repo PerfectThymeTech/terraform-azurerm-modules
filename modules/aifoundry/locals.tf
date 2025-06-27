@@ -55,15 +55,24 @@ locals {
     }
   ]...)
 
+  map_projects_openai_accounts = merge([
+    for project_key, project_value in var.ai_services_projects : {
+      for openai_account_key, openai_account_value in var.ai_services_openai_accounts :
+      "${project_key}_${openai_account_key}" => {
+        project_key          = project_key
+        project_value        = project_value
+        openai_account_key   = openai_account_key
+        openai_account_value = openai_account_value
+        project_principal_id = azapi_resource.ai_services_project[project_key].identity[0].principal_id
+      }
+    }
+  ]...)
+
   # Connection name list
   connections_cosmosdb_account = [
     for key, value in var.ai_services_cosmosdb_accounts :
     azapi_resource.ai_services_connection_cosmosdb_account[key].name
   ]
-  # connections_cosmosdb_account_project = {
-  #   for key, value in local.map_projects_cosmosdb_accounts :
-  #   key => azapi_resource.ai_services_connection_cosmosdb_project[key].name
-  # }
   connections_cosmosdb_account_project = {
     for project_key, project_value in var.ai_services_projects :
     project_key => [
@@ -76,10 +85,6 @@ locals {
     for key, value in var.ai_services_storage_accounts :
     azapi_resource.ai_services_connection_storage_account[key].name
   ]
-  # connections_storage_account_project = {
-  #   for key, value in local.map_projects_storage_accounts :
-  #   key => azapi_resource.ai_services_connection_storage_project[key].name
-  # }
   connections_storage_account_project = {
     for project_key, project_value in var.ai_services_projects :
     project_key => [
@@ -92,15 +97,20 @@ locals {
     for key, value in var.ai_services_aisearch_accounts :
     azapi_resource.ai_services_connection_aisearch_account[key].name
   ]
-  # connections_aisearch_account_project = {
-  #   for key, value in local.map_projects_aisearch_accounts :
-  #   key => azapi_resource.ai_services_connection_aisearch_project[key].name
-  # }
   connections_aisearch_account_project = {
     for project_key, project_value in var.ai_services_projects :
     project_key => [
       for key, value in local.map_projects_aisearch_accounts :
       azapi_resource.ai_services_connection_aisearch_project[key].name if value.project_key == project_key
+    ]
+  }
+
+
+  connections_openai_account_project = {
+    for project_key, project_value in var.ai_services_projects :
+    project_key => [
+      for key, value in local.map_projects_openai_accounts :
+      azapi_resource.ai_services_connection_openai_project[key].name if value.project_key == project_key
     ]
   }
 }

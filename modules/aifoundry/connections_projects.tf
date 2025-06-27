@@ -111,3 +111,41 @@ resource "azapi_resource" "ai_services_connection_aisearch_project" {
     time_sleep.sleep_ai_services_capability_hosts_account,
   ]
 }
+
+resource "azapi_resource" "ai_services_connection_openai_project" {
+  for_each = local.map_projects_openai_accounts
+
+  type      = "Microsoft.CognitiveServices/accounts/projects/connections@2025-04-01-preview"
+  name      = "openai-${each.key}"
+  parent_id = azapi_resource.ai_services_project[each.value.project_key].id
+
+  body = {
+    properties = {
+      authType      = "AAD"
+      category      = "AzureOpenAI"
+      error         = null
+      expiryTime    = null
+      isSharedToAll = false
+      metadata = {
+        ApiType    = "Azure"
+        ResourceId = each.value.openai_account_value.resource_id
+        location   = each.value.openai_account_value.location
+      }
+      peRequirement               = "NotRequired" # "Required"
+      target                      = each.value.openai_account_value.target
+      useWorkspaceManagedIdentity = true
+      # peStatus                    = "Active"
+      # sharedUserList              = []
+    }
+  }
+
+  response_export_values    = []
+  schema_validation_enabled = false
+  locks                     = []
+  ignore_casing             = false
+  ignore_missing_property   = true
+
+  depends_on = [
+    time_sleep.sleep_ai_services_capability_hosts_account,
+  ]
+}

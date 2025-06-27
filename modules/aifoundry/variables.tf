@@ -157,6 +157,25 @@ variable "ai_services_aisearch_accounts" {
   }
 }
 
+variable "ai_services_openai_accounts" {
+  description = "Specifies the open ai accounts that should be used for your ai service (agent service)."
+  type = map(object({
+    target      = string
+    resource_id = string
+    location    = string
+  }))
+  sensitive = false
+  default   = {}
+  validation {
+    condition     = length([for target in values(var.ai_services_openai_accounts)[*].target : true if !(startswith(target, "https://") && endswith(target, ".openai.azure.com"))]) <= 0
+    error_message = "Please specify a valid target for the ai search connection."
+  }
+  validation {
+    condition     = length([for resource_id in values(var.ai_services_openai_accounts)[*].resource_id : true if !(length(split("/", resource_id)) == 9)]) <= 0
+    error_message = "Please specify a valid resource id for the ai search connection."
+  }
+}
+
 variable "ai_services_connections_account" {
   description = "Specifies the connections that should be created within your ai service account."
   type = map(object({

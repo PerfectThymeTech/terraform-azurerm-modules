@@ -165,6 +165,22 @@ Type: `bool`
 
 Default: `false`
 
+### <a name="input_ai_services_openai_accounts"></a> [ai\_services\_openai\_accounts](#input\_ai\_services\_openai\_accounts)
+
+Description: Specifies the open ai accounts that should be used for your ai service (agent service).
+
+Type:
+
+```hcl
+map(object({
+    target      = string
+    resource_id = string
+    location    = string
+  }))
+```
+
+Default: `{}`
+
 ### <a name="input_ai_services_outbound_network_access_allowed_fqdns"></a> [ai\_services\_outbound\_network\_access\_allowed\_fqdns](#input\_ai\_services\_outbound\_network\_access\_allowed\_fqdns)
 
 Description: Specifies the outbound network allowed fqdns of the cognitive service.
