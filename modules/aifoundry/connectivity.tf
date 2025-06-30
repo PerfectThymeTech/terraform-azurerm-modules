@@ -35,6 +35,6 @@ resource "time_sleep" "sleep_connectivity" {
   create_duration = "${var.connectivity_delay_in_seconds}s"
 
   depends_on = [
-    # azurerm_private_endpoint.private_endpoint_ai_services
+    azurerm_private_endpoint.private_endpoint_ai_services,
   ]
 }

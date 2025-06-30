@@ -18,8 +18,8 @@ resource "azapi_resource" "ai_services" {
       customSubDomainName    = var.ai_services_name
       disableLocalAuth       = !var.ai_services_local_auth_enabled
       networkAcls = {
-        # bypass              = var.ai_services_firewall_bypass_azure_services ? "AzureServices" : null
-        defaultAction       = "Allow" # "Deny"
+        bypass              = var.ai_services_firewall_bypass_azure_services ? "AzureServices" : null
+        defaultAction       = "Allow" # "Deny" # Flip to "Deny" for final module
         ipRules             = []
         virtualNetworkRules = []
       }
@@ -27,10 +27,10 @@ resource "azapi_resource" "ai_services" {
         {
           scenario    = "agent"
           subnetArmId = var.subnet_id_capability_hosts
-          # useMicrosoftManagedNetwork = true
+          # useMicrosoftManagedNetwork = true # Not yet supported
         }
       ]
-      publicNetworkAccess           = "Enabled" # "Disabled"
+      publicNetworkAccess           = "Enabled" # "Disabled" # Flip to "Disabled" for final module
       restrictOutboundNetworkAccess = false     # var.ai_services_outbound_network_access_restricted # Not yet supported and causes deployment failures
     }
     sku = {
@@ -76,10 +76,6 @@ resource "azapi_resource" "ai_services_project" {
   locks                     = []
   ignore_casing             = false
   ignore_missing_property   = true
-
-  # depends_on = [
-  #   azapi_resource_action.ai_services,
-  # ]
 }
 
 resource "azurerm_cognitive_deployment" "ai_services_deployments" {

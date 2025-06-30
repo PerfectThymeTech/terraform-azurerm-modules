@@ -30,7 +30,6 @@ resource "azapi_resource" "ai_services_capability_hosts_project" {
   ignore_missing_property   = true
 
   depends_on = [
-    # azapi_resource.ai_services_capability_hosts_account,
     azapi_resource.ai_services_connection_aisearch_account,
     azapi_resource.ai_services_connection_cosmosdb_account,
     azapi_resource.ai_services_connection_storage_account,

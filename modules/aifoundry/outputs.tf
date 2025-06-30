@@ -35,9 +35,8 @@ output "ai_services_setup_completed" {
 
   depends_on = [
     time_sleep.sleep_connectivity,
+    azurerm_cosmosdb_sql_role_assignment.cosmosdb_sql_role_assignment_agent_entity_store_ai_services_project,
+    azurerm_cosmosdb_sql_role_assignment.cosmosdb_sql_role_assignment_thread_message_store_ai_services_project,
+    azurerm_cosmosdb_sql_role_assignment.cosmosdb_sql_role_assignment_system_thread_message_store_ai_services_project,
   ]
-}
-
-output "test" {
-  value = local.connections_aisearch_account_project
 }

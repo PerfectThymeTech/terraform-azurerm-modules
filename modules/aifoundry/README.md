@@ -337,10 +337,6 @@ Description: The principal id of the cognitive service account.
 
 Description: Specifies whether the connectivity and identity has been successfully configured.
 
-### <a name="output_test"></a> [test](#output\_test)
-
-Description: n/a
-
 <!-- markdownlint-enable -->
 
 <!-- END_TF_DOCS -->
