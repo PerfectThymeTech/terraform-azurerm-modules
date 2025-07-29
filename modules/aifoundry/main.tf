@@ -72,7 +72,7 @@ resource "azapi_resource" "ai_services_project" {
   }
 
   response_export_values    = ["properties.internalId"]
-  schema_validation_enabled = true
+  schema_validation_enabled = false
   locks                     = []
   ignore_casing             = false
   ignore_missing_property   = true
