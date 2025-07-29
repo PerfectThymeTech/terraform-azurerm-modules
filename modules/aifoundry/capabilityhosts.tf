@@ -7,7 +7,7 @@ resource "time_sleep" "sleep_ai_services_capability_hosts_account" {
 resource "azapi_resource" "ai_services_capability_hosts_project" {
   for_each = var.ai_services_projects
 
-  type      = "Microsoft.CognitiveServices/accounts/projects/capabilityHosts@2025-04-01-preview"
+  type      = "Microsoft.CognitiveServices/accounts/projects/capabilityHosts@2025-06-01"
   name      = "default-project-${each.key}"
   parent_id = azapi_resource.ai_services_project[each.key].id
 

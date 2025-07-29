@@ -105,7 +105,6 @@ locals {
     ]
   }
 
-
   connections_openai_account_project = {
     for project_key, project_value in var.ai_services_projects :
     project_key => [

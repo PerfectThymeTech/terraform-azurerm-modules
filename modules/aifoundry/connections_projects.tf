@@ -1,7 +1,7 @@
 resource "azapi_resource" "ai_services_connection_cosmosdb_project" {
   for_each = local.map_projects_cosmosdb_accounts
 
-  type      = "Microsoft.CognitiveServices/accounts/projects/connections@2025-04-01-preview"
+  type      = "Microsoft.CognitiveServices/accounts/projects/connections@2025-06-01"
   name      = "cosmosdb-${each.key}"
   parent_id = azapi_resource.ai_services_project[each.value.project_key].id
 
@@ -39,7 +39,7 @@ resource "azapi_resource" "ai_services_connection_cosmosdb_project" {
 resource "azapi_resource" "ai_services_connection_storage_project" {
   for_each = local.map_projects_storage_accounts
 
-  type      = "Microsoft.CognitiveServices/accounts/projects/connections@2025-04-01-preview"
+  type      = "Microsoft.CognitiveServices/accounts/projects/connections@2025-06-01"
   name      = "azurestorageaccount-${each.key}"
   parent_id = azapi_resource.ai_services_project[each.value.project_key].id
 
@@ -77,7 +77,7 @@ resource "azapi_resource" "ai_services_connection_storage_project" {
 resource "azapi_resource" "ai_services_connection_aisearch_project" {
   for_each = local.map_projects_aisearch_accounts
 
-  type      = "Microsoft.CognitiveServices/accounts/projects/connections@2025-04-01-preview"
+  type      = "Microsoft.CognitiveServices/accounts/projects/connections@2025-06-01"
   name      = "cognitivesearch-${each.key}"
   parent_id = azapi_resource.ai_services_project[each.value.project_key].id
 
@@ -115,7 +115,7 @@ resource "azapi_resource" "ai_services_connection_aisearch_project" {
 resource "azapi_resource" "ai_services_connection_openai_project" {
   for_each = local.map_projects_openai_accounts
 
-  type      = "Microsoft.CognitiveServices/accounts/projects/connections@2025-04-01-preview"
+  type      = "Microsoft.CognitiveServices/accounts/projects/connections@2025-06-01"
   name      = "openai-${each.key}"
   parent_id = azapi_resource.ai_services_project[each.value.project_key].id
 

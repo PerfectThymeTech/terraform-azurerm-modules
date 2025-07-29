@@ -1,5 +1,5 @@
 resource "azapi_resource" "ai_services" {
-  type      = "Microsoft.CognitiveServices/accounts@2025-04-01-preview"
+  type      = "Microsoft.CognitiveServices/accounts@2025-06-01"
   name      = var.ai_services_name
   location  = var.location
   parent_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${var.resource_group_name}"
@@ -55,7 +55,7 @@ resource "azapi_resource" "ai_services" {
 resource "azapi_resource" "ai_services_project" {
   for_each = var.ai_services_projects
 
-  type      = "Microsoft.CognitiveServices/accounts/projects@2025-04-01-preview"
+  type      = "Microsoft.CognitiveServices/accounts/projects@2025-06-01"
   name      = each.key
   location  = var.location
   parent_id = azapi_resource.ai_services.id
