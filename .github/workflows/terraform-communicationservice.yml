@@ -1,0 +1,29 @@
+name: communicationservice tests
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "modules/communicationservice/**"
+      - ".github/workflows/terraform-communicationservice.yml"
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "modules/communicationservice/**"
+      - ".github/workflows/terraform-communicationservice.yml"
+
+jobs:
+  terraform_dev:
+    uses: ./.github/workflows/_terraformTestTemplate.yml
+    name: "Dev"
+    with:
+      environment: "dev"
+      config: "communicationservice"
+      terraform_version: "1.13.3"
+      node_version: 24
+      tenant_id: "37963dd4-f4e6-40f8-a7d6-24b97919e452"
+      subscription_id: "1fdab118-1638-419a-8b12-06c9543714a0"
+    secrets:
+      CLIENT_ID: ${{ secrets.CLIENT_ID }}
