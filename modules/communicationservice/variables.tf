@@ -28,7 +28,7 @@ variable "communication_service_name" {
   type        = string
   sensitive   = false
   validation {
-    condition     = length(var.key_vault_name) >= 2
+    condition     = length(var.communication_service_name) >= 2
     error_message = "Please specify a valid name."
   }
 }
@@ -39,7 +39,7 @@ variable "communication_service_data_location" {
   sensitive   = false
   default     = "United States"
   validation {
-    condition     = contains(["Africa", "Asia Pacific", "Australia", "Brazil", "Canada", "Europe", "France", "Germany", "India", "Japan", "Korea", "Norway", "Switzerland", "UAE", "UK", "usgov", "United States"], var.key_vault_sku_name)
+    condition     = contains(["Africa", "Asia Pacific", "Australia", "Brazil", "Canada", "Europe", "France", "Germany", "India", "Japan", "Korea", "Norway", "Switzerland", "UAE", "UK", "usgov", "United States"], var.communication_service_data_location)
     error_message = "Please specify a valid commmunication service data location."
   }
 }
