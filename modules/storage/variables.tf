@@ -109,10 +109,10 @@ variable "storage_blob_container_delete_retention_in_days" {
   description = "Specifies the blob container delete retention policy in days (soft-delete)."
   type        = number
   sensitive   = false
-  nullable    = false
+  nullable    = true
   default     = 7
   validation {
-    condition     = var.storage_blob_container_delete_retention_in_days >= 7
+    condition     = var.storage_blob_container_delete_retention_in_days == null ? true : var.storage_blob_container_delete_retention_in_days >= 7
     error_message = "Please specify a valid storage account blob container delete retention policy."
   }
 }
@@ -121,10 +121,10 @@ variable "storage_blob_delete_retention_in_days" {
   description = "Specifies the blob delete retention policy in days (soft-delete)."
   type        = number
   sensitive   = false
-  nullable    = false
+  nullable    = true
   default     = 7
   validation {
-    condition     = var.storage_blob_delete_retention_in_days >= 7
+    condition     = var.storage_blob_delete_retention_in_days == null ? true : var.storage_blob_delete_retention_in_days >= 7
     error_message = "Please specify a valid storage account blob delete retention policy."
   }
 }
