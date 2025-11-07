@@ -58,6 +58,14 @@ Type: `bool`
 
 Default: `false`
 
+### <a name="input_ai_studio_hub_firewall_sku"></a> [ai\_studio\_hub\_firewall\_sku](#input\_ai\_studio\_hub\_firewall\_sku)
+
+Description: Specifies the firewall sku deployed in the managed vnet of the ai studio hub deployment.
+
+Type: `string`
+
+Default: `"Basic"`
+
 ### <a name="input_ai_studio_hub_outbound_rules_fqdns"></a> [ai\_studio\_hub\_outbound\_rules\_fqdns](#input\_ai\_studio\_hub\_outbound\_rules\_fqdns)
 
 Description: Specifies the outbound FQDN rules that should be added to the AI Studio Hub. Only provide FQDNs without specific paths such as 'microsoft.com' or '*.microsoft.com' but NOT 'microsoft.com/mypath'.
