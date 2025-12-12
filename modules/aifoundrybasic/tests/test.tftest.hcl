@@ -15,8 +15,10 @@ run "create_ai_foundry" {
     ai_services_outbound_network_access_allowed_fqdns = []
     ai_services_local_auth_enabled                    = false
     ai_services_projects = {
-      description  = "first-project"
-      display_name = "first-project"
+      firstproject = {
+        description  = "first-project"
+        display_name = "first-project"
+      }
     }
     ai_services_deployments               = {}
     diagnostics_configurations            = []
