@@ -1,0 +1,29 @@
+name: aifoundrybasic tests
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "modules/aifoundrybasic/**"
+      - ".github/workflows/terraform-aifoundrybasic.yml"
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "modules/aifoundrybasic/**"
+      - ".github/workflows/terraform-aifoundrybasic.yml"
+
+jobs:
+  terraform_dev:
+    uses: ./.github/workflows/_terraformTestTemplate.yml
+    name: "Dev"
+    with:
+      environment: "dev"
+      config: "aifoundrybasic"
+      terraform_version: "1.14.1"
+      node_version: 24
+      tenant_id: "37963dd4-f4e6-40f8-a7d6-24b97919e452"
+      subscription_id: "1fdab118-1638-419a-8b12-06c9543714a0"
+    secrets:
+      CLIENT_ID: ${{ secrets.CLIENT_ID }}
