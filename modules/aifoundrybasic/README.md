@@ -1,5 +1,5 @@
 <!-- BEGIN_TF_DOCS -->
-# Azure AI Foundry Terraform Module
+# Azure AI Foundry (Basic) Terraform Module
 
 ## Documentation
 <!-- markdownlint-disable MD033 -->
@@ -56,77 +56,9 @@ Description: Specifies the resource id of a subnet in which the private endpoint
 
 Type: `string`
 
-### <a name="input_subnet_id_capability_hosts"></a> [subnet\_id\_capability\_hosts](#input\_subnet\_id\_capability\_hosts)
-
-Description: Specifies the resource id of a subnet in which the capability hosts get created.
-
-Type: `string`
-
 ## Optional Inputs
 
 The following input variables are optional (have default values):
-
-### <a name="input_ai_services_aisearch_accounts"></a> [ai\_services\_aisearch\_accounts](#input\_ai\_services\_aisearch\_accounts)
-
-Description: Specifies the ai search account that should be used for your ai service (agent service).
-
-Type:
-
-```hcl
-map(object({
-    target      = string
-    resource_id = string
-    location    = string
-  }))
-```
-
-Default: `{}`
-
-### <a name="input_ai_services_connections_account"></a> [ai\_services\_connections\_account](#input\_ai\_services\_connections\_account)
-
-Description: Specifies the connections that should be created within your ai service account.
-
-Type:
-
-```hcl
-map(object({
-    auth_type = optional(string, "AAD")
-    credentials = optional(object({
-      access_key_id     = optional(string, "")
-      secret_access_key = optional(string, "")
-      key               = optional(string, "")
-      client_id         = optional(string, "")
-      resource_id       = optional(string, "")
-      client_secret     = optional(string, "")
-      tenant_id         = optional(string, "")
-      pat               = optional(string, "")
-      sas               = optional(string, "")
-    }), {})
-    category                       = string
-    target                         = string
-    metadata                       = map(string)
-    private_endpoint_requirement   = optional(string, "Required")
-    use_workspace_managed_identity = optional(bool, true)
-  }))
-```
-
-Default: `{}`
-
-### <a name="input_ai_services_cosmosdb_accounts"></a> [ai\_services\_cosmosdb\_accounts](#input\_ai\_services\_cosmosdb\_accounts)
-
-Description: Specifies the cosmos db account that should be used for your ai service (agent service).
-
-Type:
-
-```hcl
-map(object({
-    target      = string
-    resource_id = string
-    location    = string
-  }))
-```
-
-Default: `{}`
 
 ### <a name="input_ai_services_deployments"></a> [ai\_services\_deployments](#input\_ai\_services\_deployments)
 
@@ -165,22 +97,6 @@ Type: `bool`
 
 Default: `false`
 
-### <a name="input_ai_services_openai_accounts"></a> [ai\_services\_openai\_accounts](#input\_ai\_services\_openai\_accounts)
-
-Description: Specifies the open ai accounts that should be used for your ai service (agent service).
-
-Type:
-
-```hcl
-map(object({
-    target      = string
-    resource_id = string
-    location    = string
-  }))
-```
-
-Default: `{}`
-
 ### <a name="input_ai_services_outbound_network_access_allowed_fqdns"></a> [ai\_services\_outbound\_network\_access\_allowed\_fqdns](#input\_ai\_services\_outbound\_network\_access\_allowed\_fqdns)
 
 Description: Specifies the outbound network allowed fqdns of the cognitive service.
@@ -207,22 +123,6 @@ Type:
 map(object({
     description  = optional(string, "")
     display_name = optional(string, "")
-  }))
-```
-
-Default: `{}`
-
-### <a name="input_ai_services_storage_accounts"></a> [ai\_services\_storage\_accounts](#input\_ai\_services\_storage\_accounts)
-
-Description: Specifies the storage account that should be used for your ai service (agent service).
-
-Type:
-
-```hcl
-map(object({
-    target      = string
-    resource_id = string
-    location    = string
   }))
 ```
 

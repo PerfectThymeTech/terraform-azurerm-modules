@@ -4,7 +4,7 @@ data "azurerm_monitor_diagnostic_categories" "diagnostic_categories_ai_services"
   resource_id = azapi_resource.ai_services.id
 }
 
-data "azurerm_monitor_diagnostic_categories" "diagnostic_categories_ai_services_project" {  
+data "azurerm_monitor_diagnostic_categories" "diagnostic_categories_ai_services_project" {
   for_each = var.ai_services_projects
 
   resource_id = azapi_resource.ai_services_project[each.key].id
