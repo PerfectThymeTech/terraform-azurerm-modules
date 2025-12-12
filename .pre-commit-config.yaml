@@ -8,6 +8,7 @@ exclude: |
     modules/applicationinsights/README.md|
     modules/appserviceplan/README.md|
     modules/botservice/README.md|
+    modules/communicationservice/README.md|
     modules/containerregistry/README.md|
     modules/cosmosdb/README.md|
     modules/databricksaccessconnector/README.md|
@@ -54,6 +55,8 @@ repos:
       args: ["-c", "./.terraform-docs.yml", "./modules/appserviceplan"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/botservice"]
+    - id: terraform-docs-go
+      args: ["-c", "./.terraform-docs.yml", "./modules/communicationservice"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/containerregistry"]
     - id: terraform-docs-go

@@ -14,25 +14,25 @@ jobs:
     continue-on-error: false
 
     steps:
-      # Setup Python 3.11
-      - name: Setup Python 3.11
+      # Setup Python
+      - name: Setup Python
         id: python_setup
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
         with:
-          python-version: "3.11"
+          python-version: "3.12"
 
       # Setup Terraform
       - name: Setup Terraform
         id: terraform_setup
-        uses: hashicorp/setup-terraform@v3
+        uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3.1.2
         with:
-          terraform_version: "1.6.6"
+          terraform_version: "1.14.1"
           terraform_wrapper: true
 
       # Checkout repository
       - name: Check Out Repository
         id: checkout_repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
       # Run Linting
       - name: Run Linting
