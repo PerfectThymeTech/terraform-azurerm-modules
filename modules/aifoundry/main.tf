@@ -1,5 +1,5 @@
 resource "azapi_resource" "ai_services" {
-  type      = "Microsoft.CognitiveServices/accounts@2025-06-01"
+  type      = "Microsoft.CognitiveServices/accounts@2025-09-01"
   name      = var.ai_services_name
   location  = var.location
   parent_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${var.resource_group_name}"
@@ -14,12 +14,13 @@ resource "azapi_resource" "ai_services" {
       allowedFqdnList = var.customer_managed_key != null && var.ai_services_outbound_network_access_restricted ? setunion([
         "${reverse(split("/", var.customer_managed_key.key_vault_id))[0]}.vault.azure.net",
       ], var.ai_services_outbound_network_access_allowed_fqdns) : setunion([], var.ai_services_outbound_network_access_allowed_fqdns)
-      allowProjectManagement = true
-      customSubDomainName    = var.ai_services_name
-      disableLocalAuth       = !var.ai_services_local_auth_enabled
+      allowProjectManagement     = true
+      customSubDomainName        = var.ai_services_name
+      disableLocalAuth           = !var.ai_services_local_auth_enabled
+      dynamic_throttling_enabled = false
       networkAcls = {
         bypass              = var.ai_services_firewall_bypass_azure_services ? "AzureServices" : null
-        defaultAction       = "Allow" # "Deny" # Flip to "Deny" for final module
+        defaultAction       = "Deny"
         ipRules             = []
         virtualNetworkRules = []
       }
@@ -30,8 +31,8 @@ resource "azapi_resource" "ai_services" {
           # useMicrosoftManagedNetwork = true # Not yet supported
         }
       ]
-      publicNetworkAccess           = "Enabled" # "Disabled" # Flip to "Disabled" for final module
-      restrictOutboundNetworkAccess = false     # var.ai_services_outbound_network_access_restricted # Not yet supported and causes deployment failures
+      publicNetworkAccess           = "Disabled"
+      restrictOutboundNetworkAccess = false # var.ai_services_outbound_network_access_restricted # Not yet supported and causes deployment failures
     }
     sku = {
       name = "S0"
@@ -55,7 +56,7 @@ resource "azapi_resource" "ai_services" {
 resource "azapi_resource" "ai_services_project" {
   for_each = var.ai_services_projects
 
-  type      = "Microsoft.CognitiveServices/accounts/projects@2025-06-01"
+  type      = "Microsoft.CognitiveServices/accounts/projects@2025-09-01"
   name      = each.key
   location  = var.location
   parent_id = azapi_resource.ai_services.id

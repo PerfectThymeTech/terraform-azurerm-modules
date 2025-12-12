@@ -1,4 +1,4 @@
-run "create_ai_service" {
+run "create_ai_foundry" {
   command = apply
 
   variables {
@@ -6,16 +6,23 @@ run "create_ai_service" {
     location_private_endpoint = "northeurope"
     resource_group_name       = "tfmodule-test-rg"
     tags = {
-      test = "aiservice"
+      test = "aifoundry"
     }
-    cognitive_account_name                                  = "tftstr-001"
-    cognitive_account_kind                                  = "OpenAI"
-    cognitive_account_sku                                   = "S0"
-    cognitive_account_firewall_bypass_azure_services        = true
-    cognitive_account_outbound_network_access_restricted    = true
-    cognitive_account_outbound_network_access_allowed_fqdns = ["microsoft.com"]
-    cognitive_account_local_auth_enabled                    = false
-    cognitive_account_deployments                           = {}
+    ai_services_name                                  = "tftstr-001"
+    ai_services_sku                                   = "S0"
+    ai_services_firewall_bypass_azure_services        = true
+    ai_services_outbound_network_access_restricted    = true
+    ai_services_outbound_network_access_allowed_fqdns = []
+    ai_services_local_auth_enabled                    = false
+    ai_services_projects = {
+      description = "first-project"
+      display_name = "first-project"
+    }
+    ai_services_cosmosdb_accounts                           = {
+      target      = ""
+      resource_id = ""
+      location    = ""
+    }
     diagnostics_configurations                              = []
     subnet_id                                               = "/subscriptions/1fdab118-1638-419a-8b12-06c9543714a0/resourceGroups/ptt-dev-networking-rg/providers/Microsoft.Network/virtualNetworks/spoke-ptt-dev-vnet001/subnets/TerraformTestSubnet"
     connectivity_delay_in_seconds                           = 0
