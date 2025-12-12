@@ -31,7 +31,7 @@ run "create_ai_foundry" {
   }
 
   assert {
-    condition     = azapi_resource.ai_services.resource_group_name == "tfmodule-test-rg"
+    condition     = azapi_resource.ai_services.name == "tftstr-001"
     error_message = "Failed to deploy."
   }
   assert {
