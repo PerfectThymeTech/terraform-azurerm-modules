@@ -2,6 +2,7 @@
 
 This repository contains secure by default Terraform modules for Azure Services. Modules for the following services are available today:
 
+- [Azure AI Foundry Basic](/modules/aifoundrybasic/)
 - [Azure AI Search](/modules/aisearch/)
 - [Azure AI Service](/modules/aiservice/)
 - [Azure AI Studio Hub](/modules/aistudiohub/)
