@@ -31,11 +31,11 @@ run "create_ai_foundry" {
   }
 
   assert {
-    condition     = azapi_resource.ai_services.name == "tftstr-001"
+    condition     = azurerm_cognitive_account.cognitive_account.name == "tftstr-001"
     error_message = "Failed to deploy."
   }
   assert {
-    condition     = length(azapi_resource.ai_services.identity[0].principal_id) > 0
+    condition     = length(azurerm_cognitive_account.cognitive_account.identity[0].principal_id) > 0
     error_message = "Failed to deploy."
   }
 }
