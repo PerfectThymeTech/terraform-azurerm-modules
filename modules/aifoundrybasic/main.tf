@@ -75,10 +75,3 @@ resource "azurerm_cognitive_account_customer_managed_key" "cognitive_account_cus
     azurerm_role_assignment.role_assignment_key_vault_crypto_encryption_user_cognitive_account,
   ]
 }
-
-variable "cognitive_account_rai_blocklist_items" {
-  type = map(object({
-    is_regex = bool
-    pattern  = string
-  }))
-}
