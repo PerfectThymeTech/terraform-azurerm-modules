@@ -1,21 +1,21 @@
 resource "azurerm_private_endpoint" "private_endpoint_ai_services" {
-  name                = "${azapi_resource.ai_services.name}-account-pe"
+  name                = "${azurerm_cognitive_account.cognitive_account.name}-account-pe"
   location            = var.location_private_endpoint != null ? var.location_private_endpoint : var.location
   resource_group_name = var.resource_group_name
   tags                = var.tags
 
-  custom_network_interface_name = "${azapi_resource.ai_services.name}-account-nic"
+  custom_network_interface_name = "${azurerm_cognitive_account.cognitive_account.name}-account-nic"
   private_service_connection {
-    name                           = "${azapi_resource.ai_services.name}-account-svc"
+    name                           = "${azurerm_cognitive_account.cognitive_account.name}-account-svc"
     is_manual_connection           = false
-    private_connection_resource_id = azapi_resource.ai_services.id
+    private_connection_resource_id = azurerm_cognitive_account.cognitive_account.id
     subresource_names              = ["account"]
   }
   subnet_id = var.subnet_id
   dynamic "private_dns_zone_group" {
     for_each = var.private_dns_zone_id_ai_services != "" && var.private_dns_zone_id_cognitive_account != "" && var.private_dns_zone_id_open_ai != "" ? [1] : [0]
     content {
-      name = "${azapi_resource.ai_services.name}-arecord"
+      name = "${azurerm_cognitive_account.cognitive_account.name}-arecord"
       private_dns_zone_ids = [
         var.private_dns_zone_id_ai_services,
         var.private_dns_zone_id_cognitive_account,

@@ -1,30 +1,30 @@
 output "ai_services_id" {
   description = "The ID of the cognitive service account."
-  value       = azapi_resource.ai_services.id
+  value       = azurerm_cognitive_account.cognitive_account.id
   sensitive   = false
 }
 
 output "ai_services_name" {
   description = "The name of the cognitive service account."
-  value       = azapi_resource.ai_services.name
+  value       = azurerm_cognitive_account.cognitive_account.name
   sensitive   = false
 }
 
 output "ai_services_principal_id" {
   description = "The principal id of the cognitive service account."
-  value       = azapi_resource.ai_services.identity[0].principal_id
+  value       = azurerm_cognitive_account.cognitive_account.identity[0].principal_id
   sensitive   = false
 }
 
 output "ai_services_endpoint" {
   description = "The base URL of the cognitive service account."
-  value       = data.azurerm_cognitive_account.ai_services.endpoint
+  value       = azurerm_cognitive_account.cognitive_account.endpoint
   sensitive   = false
 }
 
 output "ai_services_primary_access_key" {
   description = "The primary access key of the cognitive service account."
-  value       = data.azurerm_cognitive_account.ai_services.primary_access_key
+  value       = azurerm_cognitive_account.cognitive_account.primary_access_key
   sensitive   = true
 }
 
