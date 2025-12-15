@@ -20,6 +20,7 @@ resource "azurerm_cognitive_account" "cognitive_account" {
     ip_rules       = []
   }
   outbound_network_access_restricted = var.ai_services_outbound_network_access_restricted
+  project_management_enabled         = true
   public_network_access_enabled      = false
   sku_name                           = var.ai_services_sku
 
