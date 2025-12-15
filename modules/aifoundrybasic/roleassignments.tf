@@ -1,5 +1,5 @@
 # Key Vault Role Assignments
-resource "azurerm_role_assignment" "role_assignment_key_vault_crypto_encryption_user_ai_services" {
+resource "azurerm_role_assignment" "role_assignment_key_vault_crypto_encryption_user_cognitive_account" {
   count = var.customer_managed_key == null ? 0 : 1
 
   description          = "Role assignment to allow key read operations."
