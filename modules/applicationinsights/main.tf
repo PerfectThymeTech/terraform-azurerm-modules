@@ -8,10 +8,10 @@ resource "azurerm_application_insights" "application_insights" {
   daily_data_cap_notifications_disabled = false
   disable_ip_masking                    = false
   force_customer_storage_for_profiler   = false
-  internet_ingestion_enabled            = true
-  internet_query_enabled                = true
-  local_authentication_disabled         = false # Can be switched once AAD auth is supported
-  retention_in_days                     = 90
-  sampling_percentage                   = 100
+  internet_ingestion_enabled            = var.application_insights_internet_ingestion_enabled
+  internet_query_enabled                = var.application_insights_internet_query_enabled
+  local_authentication_disabled         = var.application_insights_local_authentication_disabled
+  retention_in_days                     = var.application_insights_retention_in_days
+  sampling_percentage                   = var.application_insights_sampling_percentage
   workspace_id                          = var.application_insights_log_analytics_workspace_id
 }

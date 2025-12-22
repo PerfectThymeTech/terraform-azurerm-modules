@@ -58,6 +58,46 @@ Type: `string`
 
 Default: `"web"`
 
+### <a name="input_application_insights_internet_ingestion_enabled"></a> [application\_insights\_internet\_ingestion\_enabled](#input\_application\_insights\_internet\_ingestion\_enabled)
+
+Description: Specifies whether internet ingestion is enabled for the application insights service.
+
+Type: `bool`
+
+Default: `true`
+
+### <a name="input_application_insights_internet_query_enabled"></a> [application\_insights\_internet\_query\_enabled](#input\_application\_insights\_internet\_query\_enabled)
+
+Description: Specifies whether internet query is enabled for the application insights service.
+
+Type: `bool`
+
+Default: `true`
+
+### <a name="input_application_insights_local_authentication_disabled"></a> [application\_insights\_local\_authentication\_disabled](#input\_application\_insights\_local\_authentication\_disabled)
+
+Description: Specifies whether local authentication is disabled for the application insights service.
+
+Type: `bool`
+
+Default: `false`
+
+### <a name="input_application_insights_retention_in_days"></a> [application\_insights\_retention\_in\_days](#input\_application\_insights\_retention\_in\_days)
+
+Description: Specifies the retention in days for the application insights service.
+
+Type: `number`
+
+Default: `90`
+
+### <a name="input_application_insights_sampling_percentage"></a> [application\_insights\_sampling\_percentage](#input\_application\_insights\_sampling\_percentage)
+
+Description: Specifies the sampling percentage for the application insights service.
+
+Type: `number`
+
+Default: `100`
+
 ### <a name="input_diagnostics_configurations"></a> [diagnostics\_configurations](#input\_diagnostics\_configurations)
 
 Description: Specifies the diagnostic configuration for the service.
