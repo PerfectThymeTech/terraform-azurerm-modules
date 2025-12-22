@@ -41,6 +41,54 @@ variable "application_insights_application_type" {
   default     = "web"
 }
 
+variable "application_insights_internet_ingestion_enabled" {
+  description = "Specifies whether internet ingestion is enabled for the application insights service."
+  type        = bool
+  sensitive   = false
+  nullable    = false
+  default     = true
+}
+
+variable "application_insights_internet_query_enabled" {
+  description = "Specifies whether internet query is enabled for the application insights service."
+  type        = bool
+  sensitive   = false
+  nullable    = false
+  default     = true
+}
+
+variable "application_insights_local_authentication_disabled" {
+  description = "Specifies whether local authentication is disabled for the application insights service."
+  type        = bool
+  sensitive   = false
+  nullable    = false
+  default     = false
+}
+
+variable "application_insights_retention_in_days" {
+  description = "Specifies the retention in days for the application insights service."
+  type        = number
+  sensitive   = false
+  nullable    = false
+  default     = 90
+  validation {
+    condition     = var.application_insights_retention_in_days >= 30 && var.application_insights_retention_in_days <= 730
+    error_message = "Please specify a valid retention in days between 30 and 730 days."
+  }
+}
+
+variable "application_insights_sampling_percentage" {
+  description = "Specifies the sampling percentage for the application insights service."
+  type        = number
+  sensitive   = false
+  nullable    = false
+  default     = 100
+  validation {
+    condition     = var.application_insights_sampling_percentage >= 0 && var.application_insights_sampling_percentage <= 100
+    error_message = "Please specify a valid sampling percentage between 0 and 100."
+  }
+}
+
 variable "application_insights_log_analytics_workspace_id" {
   description = "Specifies the log analytics workspace of the application insights service."
   type        = string
