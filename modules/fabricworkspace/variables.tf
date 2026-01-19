@@ -66,6 +66,11 @@ variable "workspace_spark_settings" {
     }), {})
     high_concurrency = optional(object({
       notebook_interactive_run_enabled = optional(bool, true)
+      notebook_pipeline_run_enabled    = optional(bool, true)
+    }), {})
+    job = optional(object({
+      conservative_job_admission_enabled = optional(bool, false)
+      session_timeout_in_minutes         = optional(number, 60)
     }), {})
     pool = optional(object({
       customize_compute_enabled = optional(bool, true)
@@ -74,6 +79,10 @@ variable "workspace_spark_settings" {
   sensitive = false
   nullable  = false
   default   = {}
+  validation {
+    condition     = var.workspace_spark_settings.job.session_timeout_in_minutes >= 0 && var.workspace_spark_settings.job.session_timeout_in_minutes <= 20160
+    error_message = "Please specify a valid timeout in minutes between 0 and 20160."
+  }
 }
 
 # variable "workspace_settings" {
@@ -134,8 +143,8 @@ variable "workspace_git" {
   nullable  = true
   default   = null
   validation {
-    condition     = var.workspace_git == null || can(contains(["AzureDevOps"], var.workspace_git.git_provider_type))
-    error_message = "Please specify a valid git provider. Valid values today include: [ 'AzureDevOps' ]."
+    condition     = var.workspace_git == null || can(contains(["AzureDevOps", "GitHub"], var.workspace_git.git_provider_type))
+    error_message = "Please specify a valid git provider. Valid values today include: [ 'AzureDevOps', 'GitHub' ]."
   }
 }
 

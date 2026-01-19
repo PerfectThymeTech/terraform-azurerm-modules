@@ -31,6 +31,11 @@ resource "fabric_spark_workspace_settings" "workspace_settings" {
   # }
   high_concurrency = {
     notebook_interactive_run_enabled = var.workspace_spark_settings.high_concurrency.notebook_interactive_run_enabled
+    notebook_pipeline_run_enabled    = var.workspace_spark_settings.high_concurrency.notebook_pipeline_run_enabled
+  }
+  job = {
+    conservative_job_admission_enabled = var.workspace_spark_settings.job.conservative_job_admission_enabled
+    session_timeout_in_minutes         = var.workspace_spark_settings.job.session_timeout_in_minutes
   }
   pool = {
     customize_compute_enabled = var.workspace_spark_settings.pool.customize_compute_enabled
@@ -57,6 +62,10 @@ resource "fabric_workspace_git" "workspace_git" {
     repository_name   = var.workspace_git.repository_name
     branch_name       = var.workspace_git.branch_name
     directory_name    = var.workspace_git.directory_name
+  }
+  git_credentials = {
+    connection_id = ""
+    source        = "ConfiguredConnection" # "Automatic"
   }
   initialization_strategy = "PreferWorkspace"
 }
