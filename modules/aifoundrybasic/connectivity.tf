@@ -29,6 +29,11 @@ resource "azurerm_private_endpoint" "private_endpoint_ai_services" {
       private_dns_zone_group
     ]
   }
+
+  depends_on = [
+    azurerm_cognitive_account_project.cognitive_account_project,
+    azurerm_cognitive_account_customer_managed_key.cognitive_account_customer_managed_key,
+  ]
 }
 
 resource "time_sleep" "sleep_connectivity" {
