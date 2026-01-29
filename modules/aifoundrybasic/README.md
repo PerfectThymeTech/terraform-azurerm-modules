@@ -213,9 +213,21 @@ Default: `{}`
 
 The following outputs are exported:
 
+### <a name="output_ai_services_cognitive_endpoint"></a> [ai\_services\_cognitive\_endpoint](#output\_ai\_services\_cognitive\_endpoint)
+
+Description: The base URL of the cognitive service endpoint.
+
 ### <a name="output_ai_services_endpoint"></a> [ai\_services\_endpoint](#output\_ai\_services\_endpoint)
 
 Description: The base URL of the cognitive service account.
+
+### <a name="output_ai_services_foundry_endpoint"></a> [ai\_services\_foundry\_endpoint](#output\_ai\_services\_foundry\_endpoint)
+
+Description: The base URL of the foundry endpoint.
+
+### <a name="output_ai_services_foundry_project_endpoints"></a> [ai\_services\_foundry\_project\_endpoints](#output\_ai\_services\_foundry\_project\_endpoints)
+
+Description: The endpoints of the ai foundry projects.
 
 ### <a name="output_ai_services_id"></a> [ai\_services\_id](#output\_ai\_services\_id)
 
@@ -224,6 +236,10 @@ Description: The ID of the cognitive service account.
 ### <a name="output_ai_services_name"></a> [ai\_services\_name](#output\_ai\_services\_name)
 
 Description: The name of the cognitive service account.
+
+### <a name="output_ai_services_openai_endpoint"></a> [ai\_services\_openai\_endpoint](#output\_ai\_services\_openai\_endpoint)
+
+Description: The base URL of the open ai endpoint.
 
 ### <a name="output_ai_services_primary_access_key"></a> [ai\_services\_primary\_access\_key](#output\_ai\_services\_primary\_access\_key)
 

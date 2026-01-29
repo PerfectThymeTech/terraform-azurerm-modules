@@ -42,11 +42,11 @@ output "ai_services_foundry_endpoint" {
 
 output "ai_services_foundry_project_endpoints" {
   description = "The endpoints of the ai foundry projects."
-  value       = {
-    for key, value in var.ai_services_projects:
+  value = {
+    for key, value in var.ai_services_projects :
     key => azurerm_cognitive_account_project.cognitive_account_project[key].endpoints
   }
-  sensitive   = false
+  sensitive = false
 }
 
 output "ai_services_primary_access_key" {
