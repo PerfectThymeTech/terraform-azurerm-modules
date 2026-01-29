@@ -40,7 +40,25 @@ output "ai_services_foundry_endpoint" {
   sensitive   = false
 }
 
-output "ai_services_foundry_project_endpoints" {
+output "ai_services_project_ids" {
+  description = "The id of the ai foundry projects."
+  value = {
+    for key, value in var.ai_services_projects :
+    key => azurerm_cognitive_account_project.cognitive_account_project[key].id
+  }
+  sensitive = false
+}
+
+output "ai_services_project_names" {
+  description = "The name of the ai foundry projects."
+  value = {
+    for key, value in var.ai_services_projects :
+    key => azurerm_cognitive_account_project.cognitive_account_project[key].name
+  }
+  sensitive = false
+}
+
+output "ai_services_project_endpoints" {
   description = "The endpoints of the ai foundry projects."
   value = {
     for key, value in var.ai_services_projects :
