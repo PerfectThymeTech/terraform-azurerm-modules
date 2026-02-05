@@ -1,0 +1,65 @@
+name: Lint and Test
+
+trigger:
+  branches:
+    include:
+      - main
+pr:
+  branches:
+    include:
+      - main
+
+variables:
+  python_version: "3.13"
+  terraform_version: "1.14.4"
+
+jobs:
+  - job: lint
+    displayName: Lint and Test
+    continueOnError: false
+    workspace:
+      clean: all
+
+    steps:
+      # Setup Python
+      - displayName: sSetup Python
+        name: python_setup 
+        task: UsePythonVersion@0
+        inputs:
+          versionSpec: $(python_version)
+          disableDownloadFromRegistry: false
+          allowUnstable: false
+          addToPath: true
+          architecture: 'x64'
+      
+      # Setup Terraform
+      - displayName: Setup Terraform
+        name: terraform_setup
+        task: TerraformInstaller@1
+        inputs:
+          terraformVersion: $(terraform_version)
+      
+      # Checkout repository
+      - displayName: Checkout repository
+        name: checkout_repository
+        checkout: self
+        submodules: true
+        lfs: false
+        clean: true
+        continueOnError: false
+        enabled: true
+
+      # Run Linting
+      - displayName: Run Linting
+        name: linting
+        bash: |
+          echo "Install Dependencies"
+          python3 -m pip install -r requirements.txt -q
+
+          echo "Initialize Git"
+          git init
+          git add *
+
+          echo "Run pre-commit"
+          python3 -m pre_commit install --install-hooks
+          python3 -m pre_commit run --all-files --verbose
