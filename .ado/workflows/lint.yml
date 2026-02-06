@@ -10,7 +10,7 @@ pr:
       - main
 
 variables:
-  python_version: "3.13"
+  python_version: "3.13.x"
   terraform_version: "1.14.4"
 
 jobs:
