@@ -65,4 +65,3 @@ jobs:
           python3 -m pre_commit run --all-files --verbose
         displayName: Run Linting
         name: linting
-        

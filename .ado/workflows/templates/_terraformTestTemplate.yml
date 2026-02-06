@@ -35,7 +35,7 @@ jobs:
   displayName: Lint & Test
   continueOnError: false
   workspace:
-    clean: all    
+    clean: all
   pool:
     vmImage: ubuntu-latest
 
@@ -56,7 +56,7 @@ jobs:
       clean: true
       continueOnError: false
       enabled: true
-    
+
     # Terraform Format
     - displayName: Terraform Format
       name: terraform_format
@@ -80,7 +80,7 @@ jobs:
       task: TerraformInstaller@1
       inputs:
         terraformVersion: ${{ parameters.terraform_version }}
-  
+
     # Checkout repository
     - displayName: Checkout repository
       name: checkout_repository
@@ -90,7 +90,7 @@ jobs:
       clean: true
       continueOnError: false
       enabled: true
-    
+
     # Terraform Override
     - displayName: Terraform Override
       name: terraform_override
@@ -98,7 +98,7 @@ jobs:
         mv code/utilities/terraform_override.tf modules/$CONFIG
       env:
         CONFIG: ${{ parameters.config }}
-    
+
     # Azure login
     - displayName: Azure login
       name: azure_login
