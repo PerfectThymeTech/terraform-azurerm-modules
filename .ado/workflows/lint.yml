@@ -39,7 +39,7 @@ jobs:
         displayName: Setup Terraform
         name: terraform_setup
         inputs:
-          terraformVersion: ${{ variables.terraform_version }}
+          terraformVersion: "ador-prd-pool001"
 
       # Checkout repository
       - checkout: self
