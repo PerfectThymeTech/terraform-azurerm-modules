@@ -24,8 +24,7 @@ jobs:
 
     steps:
       # Setup Python
-      - displayName: Setup Python
-        name: python_setup
+      - name: Setup Python
         task: UsePythonVersion@0
         inputs:
           versionSpec: ${{ variables.python_version }}
@@ -35,15 +34,13 @@ jobs:
           architecture: 'x64'
 
       # Setup Terraform
-      - displayName: Setup Terraform
-        name: terraform_setup
+      - name: Setup Terraform
         task: TerraformInstaller@1
         inputs:
           terraformVersion: ${{ variables.terraform_version }}
 
       # Checkout repository
-      - displayName: Checkout repository
-        name: checkout_repository
+      - name: Checkout repository
         checkout: self
         submodules: true
         lfs: false
@@ -52,8 +49,7 @@ jobs:
         enabled: true
 
       # Run Linting
-      - displayName: Run Linting
-        name: linting
+      - name: Run Linting
         bash: |
           echo "Install Dependencies"
           python3 -m pip install -r requirements.txt -q
