@@ -16,8 +16,8 @@ jobs:
   - job: lint
     displayName: Lint and Test
     continueOnError: false
-    workspace:
-      clean: all
+    # workspace:
+    #   clean: all
     pool:
       name: "ador-prd-pool001"
 
