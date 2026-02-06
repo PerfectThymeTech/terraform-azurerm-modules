@@ -28,5 +28,6 @@ jobs:
       config: "keyvault"
       terraform_version: ${{ variables.terraform_version }}
       node_version: ${{ variables.node_version }}
-      tenant_id: "37963dd4-f4e6-40f8-a7d6-24b97919e452"
-      subscription_id: "1fdab118-1638-419a-8b12-06c9543714a0"
+      service_connection_name: "mabuss1"
+      run_test: true
+      log_level_test: "ERROR"
