@@ -20,7 +20,7 @@ jobs:
     workspace:
       clean: all
     pool:
-      vmImage: ubuntu-latest
+      name: "ador-prd-pool001"
 
     steps:
       # Setup Python
@@ -39,7 +39,7 @@ jobs:
         displayName: Setup Terraform
         name: terraform_setup
         inputs:
-          terraformVersion: "ador-prd-pool001"
+          terraformVersion: ${{ variables.terraform_version }}
 
       # Checkout repository
       - checkout: self
