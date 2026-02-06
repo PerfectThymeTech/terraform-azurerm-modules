@@ -19,26 +19,28 @@ jobs:
     continueOnError: false
     workspace:
       clean: all
+    pool:
+      vmImage: ubuntu-latest
 
     steps:
       # Setup Python
-      - displayName: sSetup Python
-        name: python_setup 
+      - displayName: Setup Python
+        name: python_setup
         task: UsePythonVersion@0
         inputs:
-          versionSpec: $(python_version)
+          versionSpec: ${{ variables.python_version }}
           disableDownloadFromRegistry: false
           allowUnstable: false
           addToPath: true
           architecture: 'x64'
-      
+
       # Setup Terraform
       - displayName: Setup Terraform
         name: terraform_setup
         task: TerraformInstaller@1
         inputs:
-          terraformVersion: $(terraform_version)
-      
+          terraformVersion: ${{ variables.terraform_version }}
+
       # Checkout repository
       - displayName: Checkout repository
         name: checkout_repository

@@ -1,0 +1,32 @@
+name: keyvault tests
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - "modules/keyvault/**"
+      - ".ado/workflows/terraform-keyvault.yml"
+pr:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - "modules/keyvault/**"
+      - ".ado/workflows/terraform-keyvault.yml"
+
+variables:
+  - template: templates/_defaultVariables.yml
+  - template: templates/_defaultVariablesDev.yml
+
+jobs:
+  - template: templates/_terraformTestTemplate.yml
+    parameters:
+      environment: ${{ variables.environment_dev }}
+      runner_name: ${{ variables.runner_name_dev }}
+      config: "keyvault"
+      terraform_version: ${{ variables.terraform_version }}
+      node_version: ${{ variables.node_version }}
+      tenant_id: "37963dd4-f4e6-40f8-a7d6-24b97919e452"
+      subscription_id: "1fdab118-1638-419a-8b12-06c9543714a0"

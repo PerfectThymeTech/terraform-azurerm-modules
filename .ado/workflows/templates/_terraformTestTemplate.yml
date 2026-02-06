@@ -1,0 +1,132 @@
+parameters:
+- name: environment
+  displayName: Environment
+  type: string
+- name: runner_name
+  displayName: Runner Name
+  type: string
+- name: config
+  displayName: Configuration
+  type: string
+- name: terraform_version
+  displayName: Terraform Version
+  type: string
+- name: node_version
+  displayName: Node Version
+  type: string
+- name: service_connection_name
+  displayName: Service Connection Name
+  type: string
+- name: run_test
+  displayName: Run Test
+  type: boolean
+- name: log_level_test
+  displayName: Test Log Level
+  type: string
+  values:
+    - "TRACE"
+    - "DEBUG"
+    - "INFO"
+    - "WARN"
+    - "ERROR"
+
+jobs:
+- job: lint
+  displayName: Lint & Test
+  continueOnError: false
+  workspace:
+    clean: all    
+  pool:
+    vmImage: ubuntu-latest
+
+  steps:
+    # Setup Terraform
+    - displayName: Setup Terraform
+      name: terraform_setup
+      task: TerraformInstaller@1
+      inputs:
+        terraformVersion: ${{ parameters.terraform_version }}
+
+    # Checkout repository
+    - displayName: Checkout repository
+      name: checkout_repository
+      checkout: self
+      submodules: true
+      lfs: false
+      clean: true
+      continueOnError: false
+      enabled: true
+    
+    # Terraform Format
+    - displayName: Terraform Format
+      name: terraform_format
+      workingDirectory: "./modules/${{ parameters.config }}"
+      bash: |
+        terraform fmt -check -recursive
+
+- job: test
+  displayName: Terraform Test
+  continueOnError: false
+  condition: ${{ parameters.run_test }}
+  workspace:
+    clean: all
+  pool:
+    name: ${{ parameters.runner_name }}
+
+  steps:
+    # Setup Terraform
+    - displayName: Setup Terraform
+      name: terraform_setup
+      task: TerraformInstaller@1
+      inputs:
+        terraformVersion: ${{ parameters.terraform_version }}
+  
+    # Checkout repository
+    - displayName: Checkout repository
+      name: checkout_repository
+      checkout: self
+      submodules: true
+      lfs: false
+      clean: true
+      continueOnError: false
+      enabled: true
+    
+    # Terraform Override
+    - displayName: Terraform Override
+      name: terraform_override
+      bash: |
+        mv code/utilities/terraform_override.tf modules/$CONFIG
+      env:
+        CONFIG: ${{ parameters.config }}
+    
+    # Azure login
+    - displayName: Azure login
+      name: azure_login
+      task: AzureCLI@3
+      inputs:
+        connectionType: "Azure Resource Manager"
+        connectedServiceNameARM: ${{ parameters.service_connection_name }}
+        scriptType: "bash"
+        scriptLocation: "inlineScript"
+        addSpnToEnvironment: false
+        useGlobalConfig: true
+        keepAzSessionActive: false
+        visibleAzLogin: true
+        inlineScript: |
+          echo "Azure Login Succeeded"
+
+    # Terraform Init
+    - displayName: Terraform Init
+      name: terraform_init
+      workingDirectory: "./modules/${{ parameters.config }}"
+      bash: |
+        terraform init
+
+    # Terraform Test
+    - displayName: Terraform Test
+      name: terraform_test
+      workingDirectory: "./modules/${{ parameters.config }}"
+      bash: |
+        terraform test
+      env:
+        TF_LOG: ${{ parameters.log_level_test }}
