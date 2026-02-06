@@ -10,8 +10,7 @@ pr:
       - main
 
 variables:
-  python_version: "3.13.x"
-  terraform_version: "1.14.4"
+  - template: templates/_defaultVariables.yml
 
 jobs:
   - job: lint
@@ -32,7 +31,7 @@ jobs:
           disableDownloadFromRegistry: false
           allowUnstable: false
           addToPath: true
-          architecture: 'x64'
+          # architecture: 'x64'
 
       # Setup Terraform
       - task: TerraformInstaller@1
