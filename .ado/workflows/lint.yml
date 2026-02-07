@@ -22,15 +22,15 @@ jobs:
       name: "ador-prd-pool001"
 
     steps:
-      # Configure Python - Symlink Python Tools Directory to Agent Tools Directory
-      - task: Bash@3
-        displayName: Configure Python
-        name: python_configure
-        inputs:
-          targetType: "inline"
-          script: |
-            mkdir -p /azp/_work/_tool
-            ln -s /azp/_work/_tool /opt/hostedtoolcache
+      # # Configure Python - Symlink Python Tools Directory to Agent Tools Directory
+      # - task: Bash@3
+      #   displayName: Configure Python
+      #   name: python_configure
+      #   inputs:
+      #     targetType: "inline"
+      #     script: |
+      #       mkdir -p /azp/_work/_tool
+      #       ln -s /azp/_work/_tool /opt/hostedtoolcache
 
       # echo "##vso[task.setvariable variable=LD_LIBRARY_PATH;]:azp/_work/_tool/Python/3.11.8/x64/lib/"
 
