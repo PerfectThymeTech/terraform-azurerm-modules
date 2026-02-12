@@ -112,40 +112,6 @@ jobs:
         ARM_OIDC_AZURE_SERVICE_CONNECTION_ID: ${{ parameters.service_connection_id }}
         ARM_OIDC_REQUEST_TOKEN: $(System.AccessToken)
 
-    # # Terraform Test
-    # - task: TerraformTask@5
-    #   displayName: Terraform Test
-    #   name: terraform_test
-    #   inputs:
-    #     provider: "azurerm"
-    #     command: "custom"
-    #     customCommand: "test"
-    #     commandOptions: ""
-    #     environmentServiceNameAzureRM: ${{ parameters.service_connection_name }}
-    #     # environmentAzureRmOverrideSubscriptionID: ""
-    #     # fileName: ""
-    #     outputTo: "console"
-    #     outputFormat: "default"
-    #     workingDirectory: "./modules/${{ parameters.config }}"
-    #   env:
-    #     ARM_OIDC_REQUEST_TOKEN: $(System.AccessToken)
-    #     ARM_OIDC_REQUEST_URL: $(System.OidcRequestUri)
-    #     ARM_ADO_PIPELINE_SERVICE_CONNECTION_ID: $(SERVICE_CONNECTION_ID)
-    #     ARM_USE_OIDC: true
-    #     TF_LOG: ${{ parameters.log_level_test }}
-
-    # # Terraform Test
-    # - bash: |
-    #     terraform test
-    #   displayName: Terraform Test
-    #   name: terraform_test
-    #   workingDirectory: "./modules/${{ parameters.config }}"
-    #   env:
-    #     ARM_CLIENT_ID: 
-    #     ARM_OIDC_AZURE_SERVICE_CONNECTION_ID: ${{ parameters.service_connection_id }}
-    #     ARM_OIDC_REQUEST_TOKEN: $(System.AccessToken)
-    #     TF_LOG: ${{ parameters.log_level_test }}
-
     # Terraform Test
     - task: AzureCLI@2
       displayName: Terraform Test
@@ -165,11 +131,8 @@ jobs:
           $env:ARM_TENANT_ID = $env:tenantId
           $env:ARM_SUBSCRIPTION_ID = $(az account show --query "id" --output tsv)
           $env:ARM_CLIENT_ID = $env:servicePrincipalId
+          $env:FABRIC_USE_CLI = $true
     
           terraform test
       env:
-        # ARM_OIDC_REQUEST_TOKEN: $(System.AccessToken)
-        # ARM_OIDC_REQUEST_URL: $(System.OidcRequestUri)
-        # ARM_ADO_PIPELINE_SERVICE_CONNECTION_ID: $(SERVICE_CONNECTION_ID)
-        # ARM_USE_OIDC: true
         TF_LOG: ${{ parameters.log_level_test }}
