@@ -17,6 +17,9 @@ parameters:
 - name: service_connection_name
   displayName: Service Connection Name
   type: string
+- name: service_connection_id
+  displayName: Service Connection Id
+  type: string
 - name: run_test
   displayName: Run Test
   type: boolean
@@ -99,30 +102,36 @@ jobs:
       env:
         CONFIG: ${{ parameters.config }}
 
-    # Azure login
-    - task: AzureCLI@2
-      displayName: Azure login
-      name: azure_login
-      inputs:
-        # connectionType: "Azure Resource Manager" # Only supported in v3
-        connectedServiceNameARM: ${{ parameters.service_connection_name }}
-        scriptType: "bash"
-        scriptLocation: "inlineScript"
-        addSpnToEnvironment: false
-        useGlobalConfig: true
-        keepAzSessionActive: true
-        visibleAzLogin: true
-        inlineScript: |
-          echo "Azure Login Succeeded"
+    # # Azure login
+    # - task: AzureCLI@2
+    #   displayName: Azure login
+    #   name: azure_login
+    #   inputs:
+    #     # connectionType: "Azure Resource Manager" # Only supported in v3
+    #     connectedServiceNameARM: ${{ parameters.service_connection_name }}
+    #     scriptType: "bash"
+    #     scriptLocation: "inlineScript"
+    #     addSpnToEnvironment: true
+    #     useGlobalConfig: true
+    #     keepAzSessionActive: false
+    #     visibleAzLogin: true
+    #     inlineScript: |
+    #       echo "Azure Login Succeeded"
 
-    # Test
-    - bash: |
-        az account show
-      displayName: Test
-      name: az_test
-      workingDirectory: "./modules/${{ parameters.config }}"
-      env:
-        TF_LOG: ${{ parameters.log_level_test }}
+    #       echo "Set environment variables"
+    #       export ARM_TENANT_ID=$tenantId
+    #       export ARM_CLIENT_ID=$servicePrincipalId
+    #       export ARM_OIDC_TOKEN=$idToken
+    #       export ARM_USE_OIDC='true'
+
+    # # Test
+    # - bash: |
+    #     az account show
+    #   displayName: Test
+    #   name: az_test
+    #   workingDirectory: "./modules/${{ parameters.config }}"
+    #   env:
+    #     TF_LOG: ${{ parameters.log_level_test }}
 
     # Terraform Init
     - bash: |
@@ -130,6 +139,8 @@ jobs:
       displayName: Terraform Init
       name: terraform_init
       workingDirectory: "./modules/${{ parameters.config }}"
+      env:
+        ARM_OIDC_AZURE_SERVICE_CONNECTION_ID: ${{ parameters.service_connection_id }}
 
     # Terraform Test
     - bash: |
@@ -138,4 +149,5 @@ jobs:
       name: terraform_test
       workingDirectory: "./modules/${{ parameters.config }}"
       env:
+        ARM_OIDC_AZURE_SERVICE_CONNECTION_ID: ${{ parameters.service_connection_id }}
         TF_LOG: ${{ parameters.log_level_test }}

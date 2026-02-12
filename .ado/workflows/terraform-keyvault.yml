@@ -29,5 +29,6 @@ jobs:
       terraform_version: ${{ variables.terraform_version }}
       node_version: ${{ variables.node_version }}
       service_connection_name: ${{ variables.service_connection_name_dev }}
+      service_connection_id: ${{ variables.service_connection_id_dev }}
       run_test: true
       log_level_test: "ERROR"
