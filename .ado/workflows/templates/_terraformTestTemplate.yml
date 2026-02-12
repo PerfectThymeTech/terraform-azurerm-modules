@@ -41,16 +41,16 @@ jobs:
 
   steps:
     # Setup Terraform
-    - displayName: Setup Terraform
+    - task: TerraformInstaller@1
+      displayName: Setup Terraform
       name: terraform_setup
-      task: TerraformInstaller@1
       inputs:
         terraformVersion: ${{ parameters.terraform_version }}
 
     # Checkout repository
-    - displayName: Checkout repository
+    - checkout: self
+      displayName: Checkout repository
       name: checkout_repository
-      checkout: self
       submodules: true
       lfs: false
       clean: true
@@ -58,11 +58,11 @@ jobs:
       enabled: true
 
     # Terraform Format
-    - displayName: Terraform Format
+    - bash: |
+        terraform fmt -check -recursive
+      displayName: Terraform Format
       name: terraform_format
       workingDirectory: "./modules/${{ parameters.config }}"
-      bash: |
-        terraform fmt -check -recursive
 
 - job: test
   displayName: Terraform Test
@@ -75,16 +75,16 @@ jobs:
 
   steps:
     # Setup Terraform
-    - displayName: Setup Terraform
+    - task: TerraformInstaller@1
+      displayName: Setup Terraform
       name: terraform_setup
-      task: TerraformInstaller@1
       inputs:
         terraformVersion: ${{ parameters.terraform_version }}
 
     # Checkout repository
-    - displayName: Checkout repository
+    - checkout: self
+      displayName: Checkout repository
       name: checkout_repository
-      checkout: self
       submodules: true
       lfs: false
       clean: true
@@ -92,17 +92,17 @@ jobs:
       enabled: true
 
     # Terraform Override
-    - displayName: Terraform Override
-      name: terraform_override
-      bash: |
+    - bash: |
         mv code/utilities/terraform_override.tf modules/$CONFIG
+      displayName: Terraform Override
+      name: terraform_override
       env:
         CONFIG: ${{ parameters.config }}
 
     # Azure login
-    - displayName: Azure login
+    - task: AzureCLI@3
+      displayName: Azure login
       name: azure_login
-      task: AzureCLI@3
       inputs:
         connectionType: "Azure Resource Manager"
         connectedServiceNameARM: ${{ parameters.service_connection_name }}
@@ -116,17 +116,17 @@ jobs:
           echo "Azure Login Succeeded"
 
     # Terraform Init
-    - displayName: Terraform Init
+    - bash: |
+        terraform init
+      displayName: Terraform Init
       name: terraform_init
       workingDirectory: "./modules/${{ parameters.config }}"
-      bash: |
-        terraform init
-
+      
     # Terraform Test
-    - displayName: Terraform Test
+    - bash: |
+        terraform test
+      displayName: Terraform Test
       name: terraform_test
       workingDirectory: "./modules/${{ parameters.config }}"
-      bash: |
-        terraform test
       env:
         TF_LOG: ${{ parameters.log_level_test }}
