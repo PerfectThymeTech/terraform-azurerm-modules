@@ -141,6 +141,7 @@ jobs:
       workingDirectory: "./modules/${{ parameters.config }}"
       env:
         ARM_OIDC_AZURE_SERVICE_CONNECTION_ID: ${{ parameters.service_connection_id }}
+        ARM_OIDC_REQUEST_TOKEN: $(System.AccessToken)
 
     # Terraform Test
     - bash: |
@@ -150,4 +151,5 @@ jobs:
       workingDirectory: "./modules/${{ parameters.config }}"
       env:
         ARM_OIDC_AZURE_SERVICE_CONNECTION_ID: ${{ parameters.service_connection_id }}
+        ARM_OIDC_REQUEST_TOKEN: $(System.AccessToken)
         TF_LOG: ${{ parameters.log_level_test }}
