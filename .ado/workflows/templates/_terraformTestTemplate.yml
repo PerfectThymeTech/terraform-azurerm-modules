@@ -115,13 +115,22 @@ jobs:
         inlineScript: |
           echo "Azure Login Succeeded"
 
+    # Test
+    - bash: |
+        az account show
+      displayName: Test
+      name: az_test
+      workingDirectory: "./modules/${{ parameters.config }}"
+      env:
+        TF_LOG: ${{ parameters.log_level_test }}
+
     # Terraform Init
     - bash: |
         terraform init
       displayName: Terraform Init
       name: terraform_init
       workingDirectory: "./modules/${{ parameters.config }}"
-      
+
     # Terraform Test
     - bash: |
         terraform test
