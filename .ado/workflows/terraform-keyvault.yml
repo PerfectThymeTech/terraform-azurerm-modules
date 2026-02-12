@@ -20,15 +20,21 @@ variables:
   - template: templates/_defaultVariables.yml
   - template: templates/_defaultVariablesDev.yml
 
-jobs:
-  - template: templates/_terraformTestTemplate.yml
-    parameters:
-      environment: ${{ variables.environment_dev }}
-      runner_name: ${{ variables.runner_name_dev }}
-      config: "keyvault"
-      terraform_version: ${{ variables.terraform_version }}
-      node_version: ${{ variables.node_version }}
-      service_connection_name: ${{ variables.service_connection_name_dev }}
-      service_connection_id: ${{ variables.service_connection_id_dev }}
-      run_test: true
-      log_level_test: "ERROR"
+stages:
+- stage: ${{ variables.environment_dev }}
+  displayName: "Stage - ${{ variables.environment_dev }}"
+  pool:
+    name: ${{ variables.runner_name_dev }}
+
+  jobs:
+    - template: templates/_terraformTestTemplate.yml
+      parameters:
+        environment: ${{ variables.environment_dev }}
+        runner_name: ${{ variables.runner_name_dev }}
+        config: "keyvault"
+        terraform_version: ${{ variables.terraform_version }}
+        node_version: ${{ variables.node_version }}
+        service_connection_name: ${{ variables.service_connection_name_dev }}
+        service_connection_id: ${{ variables.service_connection_id_dev }}
+        run_test: true
+        log_level_test: "ERROR"
