@@ -110,7 +110,7 @@ jobs:
         scriptLocation: "inlineScript"
         addSpnToEnvironment: false
         useGlobalConfig: true
-        keepAzSessionActive: false
+        keepAzSessionActive: true
         visibleAzLogin: true
         inlineScript: |
           echo "Azure Login Succeeded"
