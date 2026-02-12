@@ -28,6 +28,6 @@ jobs:
       config: "keyvault"
       terraform_version: ${{ variables.terraform_version }}
       node_version: ${{ variables.node_version }}
-      service_connection_name: "mabuss1"
+      service_connection_name: ${{ variables.service_connection_name_dev }}
       run_test: true
       log_level_test: "ERROR"
