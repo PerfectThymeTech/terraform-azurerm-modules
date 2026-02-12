@@ -112,28 +112,27 @@ jobs:
         ARM_OIDC_AZURE_SERVICE_CONNECTION_ID: ${{ parameters.service_connection_id }}
         ARM_OIDC_REQUEST_TOKEN: $(System.AccessToken)
 
-    # Terraform Test
-    - task: AzureCLI@2
-      displayName: Terraform Test
-      name: terraform_test
-      inputs:
-        # connectionType: "Azure Resource Manager" # Only supported in v3
-        connectedServiceNameARM: ${{ parameters.service_connection_name }}
-        scriptType: "bash"
-        scriptLocation: "inlineScript"
-        addSpnToEnvironment: true
-        useGlobalConfig: true
-        keepAzSessionActive: false
-        visibleAzLogin: true
-        workingDirectory: "./modules/${{ parameters.config }}"
-        inlineScript: |
-          terraform test
-      env:
-        # SYSTEM_ACCESSTOKEN: $(System.AccessToken)
-        # SYSTEM_OIDCREQUESTURI: $(System.OidcRequestUri)
-        ARM_ADO_PIPELINE_SERVICE_CONNECTION_ID: $(SERVICE_CONNECTION_ID)
-        ARM_USE_OIDC: true
-        TF_LOG: ${{ parameters.log_level_test }}
+    # # Terraform Test
+    # - task: TerraformTask@5
+    #   displayName: Terraform Test
+    #   name: terraform_test
+    #   inputs:
+    #     provider: "azurerm"
+    #     command: "custom"
+    #     customCommand: "test"
+    #     commandOptions: ""
+    #     environmentServiceNameAzureRM: ${{ parameters.service_connection_name }}
+    #     # environmentAzureRmOverrideSubscriptionID: ""
+    #     # fileName: ""
+    #     outputTo: "console"
+    #     outputFormat: "default"
+    #     workingDirectory: "./modules/${{ parameters.config }}"
+    #   env:
+    #     ARM_OIDC_REQUEST_TOKEN: $(System.AccessToken)
+    #     ARM_OIDC_REQUEST_URL: $(System.OidcRequestUri)
+    #     ARM_ADO_PIPELINE_SERVICE_CONNECTION_ID: $(SERVICE_CONNECTION_ID)
+    #     ARM_USE_OIDC: true
+    #     TF_LOG: ${{ parameters.log_level_test }}
 
     # # Terraform Test
     # - bash: |
@@ -146,3 +145,31 @@ jobs:
     #     ARM_OIDC_AZURE_SERVICE_CONNECTION_ID: ${{ parameters.service_connection_id }}
     #     ARM_OIDC_REQUEST_TOKEN: $(System.AccessToken)
     #     TF_LOG: ${{ parameters.log_level_test }}
+
+    # Terraform Test
+    - task: AzureCLI@2
+      displayName: Terraform Test
+      name: terraform_test
+      inputs:
+        # connectionType: "Azure Resource Manager" # Only supported in v3
+        connectedServiceNameARM: ${{ parameters.service_connection_name }}
+        scriptType: "pscore"
+        scriptLocation: "inlineScript"
+        addSpnToEnvironment: true
+        useGlobalConfig: true
+        keepAzSessionActive: false
+        visibleAzLogin: true
+        workingDirectory: "./modules/${{ parameters.config }}"
+        inlineScript: |
+          # Set environment variables
+          $env:ARM_TENANT_ID = $env:tenantId
+          $env:ARM_SUBSCRIPTION_ID = $(az account show --query "id" --output tsv)
+          $env:ARM_CLIENT_ID = $env:servicePrincipalId
+    
+          terraform test
+      env:
+        # ARM_OIDC_REQUEST_TOKEN: $(System.AccessToken)
+        # ARM_OIDC_REQUEST_URL: $(System.OidcRequestUri)
+        # ARM_ADO_PIPELINE_SERVICE_CONNECTION_ID: $(SERVICE_CONNECTION_ID)
+        # ARM_USE_OIDC: true
+        TF_LOG: ${{ parameters.log_level_test }}
