@@ -1,3 +1,4 @@
 variables:
   environment_dev: "dev"
   runner_name_dev: "ador-prd-pool001"
+  service_connection_name_dev: "mabuss-4"

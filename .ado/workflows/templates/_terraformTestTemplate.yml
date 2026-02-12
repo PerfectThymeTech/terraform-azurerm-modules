@@ -37,7 +37,7 @@ jobs:
   workspace:
     clean: all
   pool:
-    vmImage: ubuntu-latest
+    name: ${{ parameters.runner_name }}
 
   steps:
     # Setup Terraform
