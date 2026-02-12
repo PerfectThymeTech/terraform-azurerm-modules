@@ -102,15 +102,6 @@ jobs:
       env:
         CONFIG: ${{ parameters.config }}
 
-    # # Test
-    # - bash: |
-    #     az account show
-    #   displayName: Test
-    #   name: az_test
-    #   workingDirectory: "./modules/${{ parameters.config }}"
-    #   env:
-    #     TF_LOG: ${{ parameters.log_level_test }}
-
     # Terraform Init
     - bash: |
         terraform init
@@ -137,6 +128,12 @@ jobs:
         workingDirectory: "./modules/${{ parameters.config }}"
         inlineScript: |
           terraform test
+      env:
+        # SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+        # SYSTEM_OIDCREQUESTURI: $(System.OidcRequestUri)
+        ARM_ADO_PIPELINE_SERVICE_CONNECTION_ID: $(SERVICE_CONNECTION_ID)
+        ARM_USE_OIDC: true
+        TF_LOG: ${{ parameters.log_level_test }}
 
     # # Terraform Test
     # - bash: |
