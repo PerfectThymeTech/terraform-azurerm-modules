@@ -102,28 +102,6 @@ jobs:
       env:
         CONFIG: ${{ parameters.config }}
 
-    # # Azure login
-    # - task: AzureCLI@2
-    #   displayName: Azure login
-    #   name: azure_login
-    #   inputs:
-    #     # connectionType: "Azure Resource Manager" # Only supported in v3
-    #     connectedServiceNameARM: ${{ parameters.service_connection_name }}
-    #     scriptType: "bash"
-    #     scriptLocation: "inlineScript"
-    #     addSpnToEnvironment: true
-    #     useGlobalConfig: true
-    #     keepAzSessionActive: false
-    #     visibleAzLogin: true
-    #     inlineScript: |
-    #       echo "Azure Login Succeeded"
-
-    #       echo "Set environment variables"
-    #       export ARM_TENANT_ID=$tenantId
-    #       export ARM_CLIENT_ID=$servicePrincipalId
-    #       export ARM_OIDC_TOKEN=$idToken
-    #       export ARM_USE_OIDC='true'
-
     # # Test
     # - bash: |
     #     az account show
@@ -144,12 +122,30 @@ jobs:
         ARM_OIDC_REQUEST_TOKEN: $(System.AccessToken)
 
     # Terraform Test
-    - bash: |
-        terraform test
+    - task: AzureCLI@2
       displayName: Terraform Test
       name: terraform_test
-      workingDirectory: "./modules/${{ parameters.config }}"
-      env:
-        ARM_OIDC_AZURE_SERVICE_CONNECTION_ID: ${{ parameters.service_connection_id }}
-        ARM_OIDC_REQUEST_TOKEN: $(System.AccessToken)
-        TF_LOG: ${{ parameters.log_level_test }}
+      inputs:
+        # connectionType: "Azure Resource Manager" # Only supported in v3
+        connectedServiceNameARM: ${{ parameters.service_connection_name }}
+        scriptType: "bash"
+        scriptLocation: "inlineScript"
+        addSpnToEnvironment: true
+        useGlobalConfig: true
+        keepAzSessionActive: false
+        visibleAzLogin: true
+        workingDirectory: "./modules/${{ parameters.config }}"
+        inlineScript: |
+          terraform test
+
+    # # Terraform Test
+    # - bash: |
+    #     terraform test
+    #   displayName: Terraform Test
+    #   name: terraform_test
+    #   workingDirectory: "./modules/${{ parameters.config }}"
+    #   env:
+    #     ARM_CLIENT_ID: 
+    #     ARM_OIDC_AZURE_SERVICE_CONNECTION_ID: ${{ parameters.service_connection_id }}
+    #     ARM_OIDC_REQUEST_TOKEN: $(System.AccessToken)
+    #     TF_LOG: ${{ parameters.log_level_test }}
