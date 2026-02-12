@@ -100,11 +100,11 @@ jobs:
         CONFIG: ${{ parameters.config }}
 
     # Azure login
-    - task: AzureCLI@3
+    - task: AzureCLI@2
       displayName: Azure login
       name: azure_login
       inputs:
-        connectionType: "Azure Resource Manager"
+        # connectionType: "Azure Resource Manager" # Only supported in v3
         connectedServiceNameARM: ${{ parameters.service_connection_name }}
         scriptType: "bash"
         scriptLocation: "inlineScript"
