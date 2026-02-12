@@ -132,7 +132,7 @@ jobs:
           $env:ARM_SUBSCRIPTION_ID = $(az account show --query "id" --output tsv)
           $env:ARM_CLIENT_ID = $env:servicePrincipalId
           $env:FABRIC_USE_CLI = $true
-    
+
           terraform test
       env:
         TF_LOG: ${{ parameters.log_level_test }}
