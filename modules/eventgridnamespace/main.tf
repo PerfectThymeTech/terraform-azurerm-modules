@@ -15,7 +15,7 @@ resource "azurerm_eventgrid_namespace" "eventgrid_namespace" {
 resource "azapi_resource" "eventgrid_namespace_topics" {
   for_each = var.eventgrid_topics
 
-  type      = "Microsoft.EventGrid/namespaces/topics@2025-07-15-preview"
+  type      = "Microsoft.EventGrid/namespaces/topics@2025-04-01-preview"
   name      = each.key
   parent_id = azurerm_eventgrid_namespace.eventgrid_namespace.id
 
