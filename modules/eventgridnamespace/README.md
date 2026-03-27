@@ -101,7 +101,7 @@ Type:
 
 ```hcl
 map(object({
-    event_retention_in_days = optional(int, 1)
+    event_retention_in_days = optional(number, 1)
     input_schema            = optional(string, "CloudEventSchemaV1_0")
     publisher_type          = optional(string, "Custom")
   }))
