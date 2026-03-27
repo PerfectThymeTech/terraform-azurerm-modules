@@ -60,3 +60,164 @@ resource "azurerm_cognitive_account_customer_managed_key" "cognitive_account_cus
     azurerm_role_assignment.role_assignment_key_vault_crypto_encryption_user_cognitive_account,
   ]
 }
+
+# variable "cognitive_account_rai_blocklist_items" {
+#   type = map(object({
+#     is_regex = bool
+#     pattern  = string
+#   }))
+# }
+
+# resource "azapi_resource" "cognitive_account_rai_policy" {
+#   type      = "Microsoft.CognitiveServices/cognitiveAccounts/raiPolicies@2025-09-01"
+#   name      = "DefaultRaiPolicy"
+#   parent_id = azurerm_cognitive_account.cognitive_account.id
+
+#   body = {
+#     properties = {
+#       basePolicyName = "Microsoft.DefaultV2"
+#       contentFilters = [
+#         {
+#           name              = "Violence"
+#           blockEnabled      = false
+#           filterEnabled     = false
+#           severityThreshold = "Medium"
+#           source            = "Prompt"
+#         },
+#         {
+#           name              = "Hate"
+#           blockEnabled      = false
+#           filterEnabled     = false
+#           severityThreshold = "Medium"
+#           source            = "Prompt"
+#         },
+#         {
+#           name              = "Sexual"
+#           blockEnabled      = false
+#           filterEnabled     = false
+#           severityThreshold = "Medium"
+#           source            = "Prompt"
+#         },
+#         {
+#           name              = "Selfharm"
+#           blockEnabled      = false
+#           filterEnabled     = false
+#           severityThreshold = "Medium"
+#           source            = "Prompt"
+#         },
+#         {
+#           name          = "Jailbreak"
+#           blockEnabled  = true
+#           filterEnabled = true
+#           source        = "Prompt"
+#         },
+#         {
+#           name          = "Indirect Attack"
+#           blockEnabled  = true
+#           filterEnabled = true
+#           source        = "Prompt"
+#         },
+#         {
+#           name          = "Indirect Attack Spotlighting"
+#           blockEnabled  = true
+#           filterEnabled = true
+#           source        = "Prompt"
+#         },
+#         {
+#           name              = "Violence"
+#           blockEnabled      = true
+#           filterEnabled     = true
+#           severityThreshold = "Medium"
+#           source            = "Completion"
+#         },
+#         {
+#           name              = "Hate"
+#           blockEnabled      = true
+#           filterEnabled     = true
+#           severityThreshold = "Medium"
+#           source            = "Completion"
+#         },
+#         {
+#           name              = "Sexual"
+#           blockEnabled      = true
+#           filterEnabled     = true
+#           severityThreshold = "Medium"
+#           source            = "Completion"
+#         },
+#         {
+#           name              = "Selfharm"
+#           blockEnabled      = true
+#           filterEnabled     = true
+#           severityThreshold = "Medium"
+#           source            = "Completion"
+#         },
+#         {
+#           name          = "Protected Material Text"
+#           blockEnabled  = true
+#           filterEnabled = true
+#           source        = "Completion"
+#         },
+#         {
+#           name          = "Protected Material Code"
+#           blockEnabled  = true
+#           filterEnabled = true
+#           source        = "Completion"
+#         }
+#       ]
+#       customBlocklists = [
+#         {
+#           blocking      = true
+#           blocklistName = "string"
+#           source        = "Completion"
+#         }
+#       ]
+#       customTopics = []
+#       mode         = "Asynchronous_filter"
+#     }
+#   }
+
+#   response_export_values    = []
+#   schema_validation_enabled = true
+#   locks                     = []
+#   ignore_casing             = false
+#   ignore_missing_property   = true
+# }
+
+# resource "azapi_resource" "cognitive_account_rai_blocklist" {
+#   type      = "Microsoft.CognitiveServices/cognitiveAccounts/raiBlocklists@2025-09-01"
+#   name      = "DefaultRaiBlocklist"
+#   parent_id = azurerm_cognitive_account.cognitive_account.id
+
+#   body = {
+#     properties = {
+#       description = "Default RAI Blocklist"
+#     }
+#   }
+
+#   response_export_values    = []
+#   schema_validation_enabled = true
+#   locks                     = []
+#   ignore_casing             = false
+#   ignore_missing_property   = true
+# }
+
+# resource "azapi_resource" "cognitive_account_rai_blocklist_items" {
+#   for_each = var.cognitive_account_rai_blocklist_items
+
+#   type      = "Microsoft.CognitiveServices/cognitiveAccounts/raiBlocklists/raiBlocklistItems@2025-09-01"
+#   name      = each.key
+#   parent_id = azapi_resource.cognitive_account_rai_blocklist.id
+
+#   body = {
+#     properties = {
+#       isRegex = each.value.is_regex
+#       pattern = each.value.pattern
+#     }
+#   }
+
+#   response_export_values    = []
+#   schema_validation_enabled = true
+#   locks                     = []
+#   ignore_casing             = false
+#   ignore_missing_property   = true
+# }

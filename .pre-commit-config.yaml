@@ -14,6 +14,7 @@ exclude: |
     modules/databricksaccessconnector/README.md|
     modules/databricksworkspace/README.md|
     modules/datafactory/README.md|
+    modules/eventgridnamespace/README.md|
     modules/eventhubnamespace/README.md|
     modules/fabriccapacity/README.md|
     modules/fabricworkspace/README.md|
@@ -67,6 +68,8 @@ repos:
       args: ["-c", "./.terraform-docs.yml", "./modules/databricksworkspace"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/datafactory"]
+    - id: terraform-docs-go
+      args: ["-c", "./.terraform-docs.yml", "./modules/eventgridnamespace"]
     - id: terraform-docs-go
       args: ["-c", "./.terraform-docs.yml", "./modules/eventhubnamespace"]
     - id: terraform-docs-go
