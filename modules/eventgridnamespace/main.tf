@@ -8,7 +8,7 @@ resource "azurerm_eventgrid_namespace" "eventgrid_namespace" {
   }
 
   capacity              = var.eventgrid_namespace_capacity
-  public_network_access = false
+  public_network_access = "Disabled"
   sku                   = var.eventgrid_namespace_sku
 }
 
