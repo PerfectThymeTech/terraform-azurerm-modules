@@ -22,7 +22,7 @@ function Get-AccessToken {
     param (
         [Parameter(Mandatory = $false)]
         [string]
-        $Scope = "https://api.fabric.microsoft.com/.default"
+        $Scope = "https://api.fabric.microsoft.com/"
     )
 
     # Write message to host
@@ -76,7 +76,7 @@ function Set-WorkspaceTags {
         Write-Host $schemas
     }
     catch {
-        $message = "REST API call to apply tags to workpace failed with error: $_"
+        $message = "REST API call to apply tags to workspace failed with error: $_"
         Write-Error $message
         throw $message
         exit 1

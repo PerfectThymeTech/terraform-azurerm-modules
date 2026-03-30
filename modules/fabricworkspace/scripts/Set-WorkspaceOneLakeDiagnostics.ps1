@@ -26,7 +26,7 @@ function Get-AccessToken {
     param (
         [Parameter(Mandatory = $false)]
         [string]
-        $Scope = "https://api.fabric.microsoft.com/.default"
+        $Scope = "https://api.fabric.microsoft.com/"
     )
 
     # Write message to host
