@@ -50,6 +50,14 @@ Type: `string`
 
 Default: `""`
 
+### <a name="input_workspace_domain_id"></a> [workspace\_domain\_id](#input\_workspace\_domain\_id)
+
+Description: Specifies the fabric domain id to which the fabric workspace should be assigned.
+
+Type: `string`
+
+Default: `null`
+
 ### <a name="input_workspace_git"></a> [workspace\_git](#input\_workspace\_git)
 
 Description: Specifies git config of the fabric workspace. Not supported when deploying with service principal.
@@ -76,6 +84,38 @@ Description: Specifies whether the workspace identity should be enabled for the 
 Type: `bool`
 
 Default: `true`
+
+### <a name="input_workspace_managed_private_endpoints"></a> [workspace\_managed\_private\_endpoints](#input\_workspace\_managed\_private\_endpoints)
+
+Description: Specifies the map of managed private endpoints to be created at the fabric workspace level.
+
+Type:
+
+```hcl
+map(object({
+    target_private_link_resource_id = string
+    target_subresource_type         = string
+    approve                         = bool
+  }))
+```
+
+Default: `{}`
+
+### <a name="input_workspace_onelake_diagnostics"></a> [workspace\_onelake\_diagnostics](#input\_workspace\_onelake\_diagnostics)
+
+Description: Specifies the target workspace id and lakehouse id to which onelake events should be sent.
+
+Type:
+
+```hcl
+object({
+    enabled      = optional(bool, false)
+    workspace_id = optional(string, "")
+    lakehouse_id = optional(string, "")
+  })
+```
+
+Default: `{}`
 
 ### <a name="input_workspace_role_assignments"></a> [workspace\_role\_assignments](#input\_workspace\_role\_assignments)
 
@@ -115,6 +155,14 @@ object({
 ```
 
 Default: `{}`
+
+### <a name="input_workspace_tag_ids"></a> [workspace\_tag\_ids](#input\_workspace\_tag\_ids)
+
+Description: Specifies the tag ids which must be assigned to the fabric workspace.
+
+Type: `list(string)`
+
+Default: `[]`
 
 ## Outputs
 
