@@ -15,7 +15,7 @@ resource "azapi_resource" "fabric_private_link_service" {
   }
 
   response_export_values    = []
-  schema_validation_enabled = true
+  schema_validation_enabled = false
   locks                     = []
   ignore_casing             = false
   ignore_missing_property   = true
