@@ -103,7 +103,7 @@ function Set-OneLakeDiagnostics {
 }
 
 # Configure OneLake Diagnostic settings
-_ = Set-OneLakeDiagnostics `
+$null = Set-OneLakeDiagnostics `
     -WorkspaceId $WorkspaceId `
     -OneLakeDiagnosticsWorkspaceId $OneLakeDiagnosticsWorkspaceId `
     -OneLakeDiagnosticsLakehouseId $OneLakeDiagnosticsLakehouseId

@@ -17,6 +17,8 @@ resource "null_resource" "workspace_managed_private_endpoint_approval" {
     name               = fabric_workspace_managed_private_endpoint.workspace_managed_private_endpoint[each.key].name
     subresource_type   = fabric_workspace_managed_private_endpoint.workspace_managed_private_endpoint[each.key].target_subresource_type
     target_resource_id = fabric_workspace_managed_private_endpoint.workspace_managed_private_endpoint[each.key].target_private_link_resource_id
+    connection_state   = fabric_workspace_managed_private_endpoint.workspace_managed_private_endpoint[each.key].connection_state
+    provisioning_state = fabric_workspace_managed_private_endpoint.workspace_managed_private_endpoint[each.key].provisioning_state
   }
   provisioner "local-exec" {
     interpreter = ["pwsh", "-Command"]

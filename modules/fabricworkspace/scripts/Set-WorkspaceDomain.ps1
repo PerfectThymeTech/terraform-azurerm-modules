@@ -86,6 +86,6 @@ function Set-WorkspaceDomain {
 }
 
 # Configure workspace domain
-_ = Set-WorkspaceDomain `
+$null = Set-WorkspaceDomain `
     -WorkspaceId $WorkspaceId `
     -DomainId $DomainId

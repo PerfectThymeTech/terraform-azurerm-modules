@@ -86,6 +86,6 @@ function Set-WorkspaceTags {
 }
 
 # Apply workspace Tags
-_ = Set-WorkspaceTags `
+$null = Set-WorkspaceTags `
     -WorkspaceId $WorkspaceId `
     -TagIds $TagIds
