@@ -50,6 +50,10 @@ resource "fabric_workspace_git" "workspace_git" {
 
   workspace_id = fabric_workspace.workspace.id
 
+  git_credentials = {
+    connection_id = var.workspace_git.git_credentials_connection_id == "" ? null : var.workspace_git.git_credentials_connection_id
+    source        = var.workspace_git.git_credentials_connection_id == "" ? "Automatic" : "ConfiguredConnection"
+  }
   git_provider_details = {
     git_provider_type = var.workspace_git.git_provider_type
     organization_name = var.workspace_git.organization_name
@@ -59,4 +63,7 @@ resource "fabric_workspace_git" "workspace_git" {
     directory_name    = var.workspace_git.directory_name
   }
   initialization_strategy = "PreferWorkspace"
+  options = {
+    allow_override_items = true
+  }
 }
