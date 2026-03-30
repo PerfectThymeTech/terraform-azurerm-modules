@@ -1,3 +1,13 @@
+# Not enabled as other workspaces not in the list would be removed from the domain. Use null_resource with local-exec provisioner to assign the workspace to the domain instead.
+# resource "fabric_domain_workspace_assignments" "domain_workspace_assignments" {
+#   count = var.workspace_domain_id == null ? 0 : 1
+
+#   domain_id = one(data.fabric_domain.domain[*].id)
+#   workspace_ids = [
+#     fabric_workspace.workspace.id
+#   ]
+# }
+
 resource "null_resource" "workspace_domain" {
   count = var.workspace_domain_id == null ? 0 : 1
   triggers = {

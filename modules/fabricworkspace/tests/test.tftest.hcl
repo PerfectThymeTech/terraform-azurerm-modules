@@ -92,6 +92,11 @@ run "create_fabric_workspace" {
       # }
       high_concurrency = {
         notebook_interactive_run_enabled = true
+        notebook_pipeline_run_enabled    = true
+      }
+      job = {
+        conservative_job_admission_enabled = true
+        session_timeout_in_minutes         = 30
       }
       pool = {
         customize_compute_enabled = true
