@@ -1,10 +1,11 @@
 resource "azapi_resource" "fabric_private_link_service" {
   count = var.workspace_private_endpoint_enabled ? 1 : 0
 
-  type     = "Microsoft.Fabric/privateLinkServicesForFabric@2024-06-01"
-  name     = "${fabric_workspace.workspace.id}-pls"
-  location = "global"
-  tags     = var.tags
+  type      = "Microsoft.Fabric/privateLinkServicesForFabric@2024-06-01"
+  name      = "${fabric_workspace.workspace.id}-pls"
+  location  = "global"
+  parent_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${var.resource_group_name}"
+  tags      = var.tags
 
   body = {
     properties = {
