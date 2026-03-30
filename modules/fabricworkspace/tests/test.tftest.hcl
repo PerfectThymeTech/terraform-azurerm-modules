@@ -46,7 +46,9 @@ provider "azapi" {
   use_oidc                       = true
 }
 
-provider "fabric" {}
+provider "fabric" {
+  preview = true
+}
 
 run "setup" {
   command = apply
