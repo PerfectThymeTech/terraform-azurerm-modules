@@ -40,7 +40,7 @@ variable "workspace_domain_id" {
   nullable    = true
   default     = null
   validation {
-    condition     = var.workspace_domain == null || can(length(var.workspace_domain_id) > 2)
+    condition     = var.workspace_domain_id == null || can(length(var.workspace_domain_id) > 2)
     error_message = "Please specify a valid capacity id."
   }
 }
@@ -131,12 +131,13 @@ variable "workspace_spark_settings" {
 variable "workspace_git" {
   description = "Specifies git config of the fabric workspace. Not supported when deploying with service principal."
   type = object({
-    git_provider_type = optional(string, "AzureDevOps")
-    organization_name = string
-    project_name      = string
-    repository_name   = string
-    branch_name       = optional(string, "main")
-    directory_name    = optional(string, "code/fabric")
+    git_provider_type             = optional(string, "AzureDevOps")
+    git_credentials_connection_id = optional(string, "")
+    organization_name             = string
+    project_name                  = string
+    repository_name               = string
+    branch_name                   = optional(string, "main")
+    directory_name                = optional(string, "code/fabric")
   })
   sensitive = false
   nullable  = true
