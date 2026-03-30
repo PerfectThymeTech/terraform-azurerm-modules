@@ -66,12 +66,13 @@ Type:
 
 ```hcl
 object({
-    git_provider_type = optional(string, "AzureDevOps")
-    organization_name = string
-    project_name      = string
-    repository_name   = string
-    branch_name       = optional(string, "main")
-    directory_name    = optional(string, "code/fabric")
+    git_provider_type             = optional(string, "AzureDevOps")
+    git_credentials_connection_id = optional(string, "")
+    organization_name             = string
+    project_name                  = string
+    repository_name               = string
+    branch_name                   = optional(string, "main")
+    directory_name                = optional(string, "code/fabric")
   })
 ```
 
