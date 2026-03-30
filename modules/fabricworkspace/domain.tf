@@ -15,7 +15,7 @@ resource "null_resource" "workspace_domain" {
   }
   provisioner "local-exec" {
     interpreter = ["pwsh", "-Command"]
-    command     = "./Set-WorkspaceDomain.ps1 -WorkspaceId '${fabric_workspace.workspace.id}' -DomainId '${var.workspace_domain_id}' -Unassign $true"
+    command     = "./Set-WorkspaceDomain.ps1 -WorkspaceId '${self.triggers.workspace_id}' -DomainId '${self.triggers.domain_id}' -Unassign $true"
     on_failure  = fail
     quiet       = false
     when        = destroy

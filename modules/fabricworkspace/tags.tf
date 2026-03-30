@@ -17,7 +17,7 @@ resource "null_resource" "workspace_tags" {
   }
   provisioner "local-exec" {
     interpreter = ["pwsh", "-Command"]
-    command     = "./Set-WorkspaceTags.ps1 -WorkspaceId '${fabric_workspace.workspace.id}' -TagIds '${each.value}' -Unassign $true"
+    command     = "./Set-WorkspaceTags.ps1 -WorkspaceId '${self.triggers.workspace_id}' -TagIds '${each.value}' -Unassign $true"
     on_failure  = fail
     quiet       = false
     when        = destroy
