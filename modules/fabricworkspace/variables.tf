@@ -269,7 +269,7 @@ variable "workspace_outbound_gateway_rules" {
   nullable  = false
   default   = {}
   validation {
-    condition = var.workspace_outbound_gateway_rules.default_action == "Allow" || var.workspace_outbound_gateway_rules.default_action == "Deny"
+    condition     = var.workspace_outbound_gateway_rules.default_action == "Allow" || var.workspace_outbound_gateway_rules.default_action == "Deny"
     error_message = "Please specify a valid default action for the outbound gateway rules. Valid values are: ['Allow', 'Deny']"
   }
 }

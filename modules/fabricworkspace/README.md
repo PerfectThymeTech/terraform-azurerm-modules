@@ -24,6 +24,24 @@ No modules.
 
 The following input variables are required:
 
+### <a name="input_location"></a> [location](#input\_location)
+
+Description: Specifies the location of all resources.
+
+Type: `string`
+
+### <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name)
+
+Description: Specifies the resource group name in which all resources will get deployed.
+
+Type: `string`
+
+### <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id)
+
+Description: Specifies the resource id of a subnet in which the private endpoints get created.
+
+Type: `string`
+
 ### <a name="input_workspace_display_name"></a> [workspace\_display\_name](#input\_workspace\_display\_name)
 
 Description: Specifies the display name of the fabric workspace.
@@ -33,6 +51,30 @@ Type: `string`
 ## Optional Inputs
 
 The following input variables are optional (have default values):
+
+### <a name="input_connectivity_delay_in_seconds"></a> [connectivity\_delay\_in\_seconds](#input\_connectivity\_delay\_in\_seconds)
+
+Description: Specifies the delay in seconds after the private endpoint deployment (required for the DNS automation via Policies).
+
+Type: `number`
+
+Default: `120`
+
+### <a name="input_private_dns_zone_id_workspace"></a> [private\_dns\_zone\_id\_workspace](#input\_private\_dns\_zone\_id\_workspace)
+
+Description: Specifies the resource ID of the private DNS zone for the fabric workspace. Not required if DNS A-records get created via Azure Policy.
+
+Type: `string`
+
+Default: `""`
+
+### <a name="input_tags"></a> [tags](#input\_tags)
+
+Description: Specifies a key value map of tags to set on every taggable resources.
+
+Type: `map(string)`
+
+Default: `{}`
 
 ### <a name="input_workspace_capacity_name"></a> [workspace\_capacity\_name](#input\_workspace\_capacity\_name)
 
@@ -102,6 +144,29 @@ map(object({
 
 Default: `{}`
 
+### <a name="input_workspace_network_communication_policy"></a> [workspace\_network\_communication\_policy](#input\_workspace\_network\_communication\_policy)
+
+Description: Specifies the network communication policy for the fabric workspace. If not specified, the default 'Allow' policy will be applied.
+
+Type:
+
+```hcl
+object({
+    inbound = optional(object({
+      public_access_rules = optional(object({
+        default_action = optional(string, "Allow")
+      }), {})
+    }), {})
+    outbound = optional(object({
+      public_access_rules = optional(object({
+        default_action = optional(string, "Allow")
+      }), {})
+    }), {})
+  })
+```
+
+Default: `{}`
+
 ### <a name="input_workspace_onelake_diagnostics"></a> [workspace\_onelake\_diagnostics](#input\_workspace\_onelake\_diagnostics)
 
 Description: Specifies the target workspace id and lakehouse id to which onelake events should be sent.
@@ -117,6 +182,29 @@ object({
 ```
 
 Default: `{}`
+
+### <a name="input_workspace_outbound_gateway_rules"></a> [workspace\_outbound\_gateway\_rules](#input\_workspace\_outbound\_gateway\_rules)
+
+Description: Specifies the outbound gateway rules for the fabric workspace.
+
+Type:
+
+```hcl
+object({
+    allowed_gateway_ids = optional(list(string), [])
+    default_action      = optional(string, "Allow")
+  })
+```
+
+Default: `{}`
+
+### <a name="input_workspace_private_endpoint_enabled"></a> [workspace\_private\_endpoint\_enabled](#input\_workspace\_private\_endpoint\_enabled)
+
+Description: Specifies whether the private endpoints are enabled for the workspace.
+
+Type: `bool`
+
+Default: `false`
 
 ### <a name="input_workspace_role_assignments"></a> [workspace\_role\_assignments](#input\_workspace\_role\_assignments)
 
