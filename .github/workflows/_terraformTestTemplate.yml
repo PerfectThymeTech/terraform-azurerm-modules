@@ -67,7 +67,7 @@ jobs:
       # Setup Terraform
       - name: Setup Terraform
         id: terraform_setup
-        uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3.1.2
+        uses: hashicorp/setup-terraform@5e8dbf3c6d9deaf4193ca7a8fb23f2ac83bb6c85 # v4.0.0
         with:
           terraform_version: ${{ inputs.terraform_version }}
           terraform_wrapper: true
@@ -75,7 +75,7 @@ jobs:
       # Check Out Repository
       - name: Check Out Repository
         id: checkout_repository
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       # Terraform Format
       - name: Terraform Format
@@ -128,14 +128,14 @@ jobs:
       # Setup Node
       - name: Setup Node
         id: node_setup
-        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version: ${{ inputs.node_version }}
 
       # Setup Terraform
       - name: Setup Terraform
         id: terraform_setup
-        uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3.1.2
+        uses: hashicorp/setup-terraform@5e8dbf3c6d9deaf4193ca7a8fb23f2ac83bb6c85 # v4.0.0
         with:
           terraform_version: ${{ inputs.terraform_version }}
           terraform_wrapper: true
@@ -143,12 +143,12 @@ jobs:
       # Check Out Repository
       - name: Check Out Repository
         id: checkout_repository
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       # Azure login
       - name: Azure login
         id: azure_login
-        uses: azure/login@a457da9ea143d694b1b9c7c869ebb04ebe844ef5 # v2.3.0
+        uses: azure/login@532459ea530d8321f2fb9bb10d1e0bcf23869a43 # v3.0.0
         if: inputs.run_azure_login
         with:
           client-id: ${{ secrets.CLIENT_ID }}

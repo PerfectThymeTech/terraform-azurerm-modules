@@ -7,16 +7,6 @@ resource "fabric_workspace" "workspace" {
   } : null
 }
 
-# Not enabled as other workspaces not in the list would be removed from the domain
-# resource "fabric_domain_workspace_assignments" "domain_workspace_assignments" {
-#   count = var.workspace_domain_id == null ? 0 : 1
-
-#   domain_id = one(data.fabric_domain.domain[*].id)
-#   workspace_ids = [
-#     fabric_workspace.workspace.id
-#   ]
-# }
-
 resource "fabric_spark_workspace_settings" "workspace_settings" {
   count = var.workspace_spark_settings.enabled ? 1 : 0
 
@@ -31,6 +21,11 @@ resource "fabric_spark_workspace_settings" "workspace_settings" {
   # }
   high_concurrency = {
     notebook_interactive_run_enabled = var.workspace_spark_settings.high_concurrency.notebook_interactive_run_enabled
+    notebook_pipeline_run_enabled    = var.workspace_spark_settings.high_concurrency.notebook_pipeline_run_enabled
+  }
+  job = {
+    conservative_job_admission_enabled = var.workspace_spark_settings.job.conservative_job_admission_enabled
+    session_timeout_in_minutes         = var.workspace_spark_settings.job.session_timeout_in_minutes
   }
   pool = {
     customize_compute_enabled = var.workspace_spark_settings.pool.customize_compute_enabled
@@ -50,6 +45,10 @@ resource "fabric_workspace_git" "workspace_git" {
 
   workspace_id = fabric_workspace.workspace.id
 
+  git_credentials = {
+    connection_id = var.workspace_git.git_credentials_connection_id == "" ? null : var.workspace_git.git_credentials_connection_id
+    source        = var.workspace_git.git_credentials_connection_id == "" ? "Automatic" : "ConfiguredConnection"
+  }
   git_provider_details = {
     git_provider_type = var.workspace_git.git_provider_type
     organization_name = var.workspace_git.organization_name
@@ -59,16 +58,7 @@ resource "fabric_workspace_git" "workspace_git" {
     directory_name    = var.workspace_git.directory_name
   }
   initialization_strategy = "PreferWorkspace"
-}
-
-resource "fabric_workspace_role_assignment" "example" {
-  for_each = var.workspace_role_assignments
-
-  workspace_id = fabric_workspace.workspace.id
-
-  principal = {
-    id   = each.value.principal_id
-    type = each.value.principal_type
+  options = {
+    allow_override_items = true
   }
-  role = each.value.role
 }

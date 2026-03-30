@@ -1,3 +1,5 @@
+data "azurerm_client_config" "current" {}
+
 data "fabric_capacity" "capacity" {
   display_name = var.workspace_capacity_name
 }
