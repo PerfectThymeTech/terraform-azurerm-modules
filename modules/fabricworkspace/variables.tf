@@ -1,31 +1,6 @@
 # General variables
 
 # Fabric workspace variables
-variable "workspace_capacity_name" {
-  description = "Specifies the name of a fabric capacity hosted in Azure to assign to the fabric workspace."
-  type        = string
-  sensitive   = false
-  nullable    = true
-  default     = null
-  validation {
-    condition     = length(var.workspace_capacity_name) >= 2 && length(regexall("[^[:alnum:]]", var.workspace_capacity_name)) <= 0
-    error_message = "Please specify a valid name."
-  }
-}
-
-# Not enabled as other workspaces not in the list would be removed from the domain
-# variable "workspace_domain_id" {
-#   description = "Specifies the fabric domain id to which the fabric workspace should be assigned."
-#   type        = string
-#   sensitive   = false
-#   nullable    = true
-#   default     = null
-#   validation {
-#     condition     = var.workspace_domain == null || can(length(var.workspace_domain_id) > 2)
-#     error_message = "Please specify a valid capacity id."
-#   }
-# }
-
 variable "workspace_display_name" {
   description = "Specifies the display name of the fabric workspace."
   type        = string
@@ -43,6 +18,39 @@ variable "workspace_description" {
   sensitive   = false
   nullable    = false
   default     = ""
+}
+
+variable "workspace_capacity_name" {
+  description = "Specifies the name of a fabric capacity hosted in Azure to assign to the fabric workspace."
+  type        = string
+  sensitive   = false
+  nullable    = true
+  default     = null
+  validation {
+    condition     = length(var.workspace_capacity_name) >= 2 && length(regexall("[^[:alnum:]]", var.workspace_capacity_name)) <= 0
+    error_message = "Please specify a valid name."
+  }
+}
+
+# Not enabled as other workspaces not in the list would be removed from the domain
+variable "workspace_domain_id" {
+  description = "Specifies the fabric domain id to which the fabric workspace should be assigned."
+  type        = string
+  sensitive   = false
+  nullable    = true
+  default     = null
+  validation {
+    condition     = var.workspace_domain == null || can(length(var.workspace_domain_id) > 2)
+    error_message = "Please specify a valid capacity id."
+  }
+}
+
+variable "workspace_tag_ids" {
+  description = "Specifies the tag ids which must be assigned to the fabric workspace."
+  type        = list(string)
+  sensitive   = false
+  nullable    = false
+  default     = []
 }
 
 variable "workspace_identity_enabled" {
@@ -163,7 +171,38 @@ variable "workspace_role_assignments" {
   }
 }
 
+variable "workspace_managed_private_endpoints" {
+  description = "Specifies the map of managed private endpoints to be created at the fabric workspace level."
+  type = map(object({
+    target_private_link_resource_id = string
+    target_subresource_type         = string
+    approve                         = bool
+  }))
+  sensitive = false
+  nullable  = false
+  default   = {}
+  validation {
+    condition = alltrue([
+      for private_endpoint in values(var.workspace_managed_private_endpoints) : (
+        length(split("/", private_endpoint.target_private_link_resource_id)) == 9
+      )
+    ])
+    error_message = "Please specify a valid target resource id."
+  }
+}
+
 # Diagnostics variables
+variable "workspace_onelake_diagnostics" {
+  description = "Specifies the target workspace id and lakehouse id to which onelake events should be sent."
+  type = object({
+    enabled      = optional(bool, false)
+    workspace_id = optional(string, "")
+    lakehouse_id = optional(string, "")
+  })
+  sensitive = false
+  nullable  = false
+  default   = {}
+}
 
 # Network variables
 

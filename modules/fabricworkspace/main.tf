@@ -60,15 +60,3 @@ resource "fabric_workspace_git" "workspace_git" {
   }
   initialization_strategy = "PreferWorkspace"
 }
-
-resource "fabric_workspace_role_assignment" "example" {
-  for_each = var.workspace_role_assignments
-
-  workspace_id = fabric_workspace.workspace.id
-
-  principal = {
-    id   = each.value.principal_id
-    type = each.value.principal_type
-  }
-  role = each.value.role
-}

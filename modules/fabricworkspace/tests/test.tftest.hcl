@@ -73,9 +73,11 @@ run "create_fabric_workspace" {
   command = apply
 
   variables {
-    workspace_capacity_name    = run.setup.fabric_capacity_name
     workspace_display_name     = "MyTestWs"
     workspace_description      = "My Test Workspace"
+    workspace_domain_id        = "3545bf73-5300-432e-8401-09a40b59c8b1"
+    workspace_capacity_name    = run.setup.fabric_capacity_name
+    workspace_tag_ids          = [ "712b09c6-4bac-4782-8002-387f354ce4b1", "83b0afef-d404-4921-9a3b-577bd7e03fbf" ]
     workspace_identity_enabled = true
     workspace_spark_settings = {
       enabled = false
@@ -101,6 +103,18 @@ run "create_fabric_workspace" {
         principal_type = "ServicePrincipal"
         role           = "Viewer"
       }
+    }
+    workspace_managed_private_endpoints = {
+      test_endpoint = {
+        target_private_link_resource_id = "/subscriptions/1fdab118-1638-419a-8b12-06c9543714a0/resourceGroups/tfmodule-test-rg/providers/Microsoft.Storage/storageAccounts/mytfteststg"
+        target_subresource_type         = "blob"
+        approve                         = true
+      }
+    }
+    workspace_onelake_diagnostics = {
+      enabled      = true
+      workspace_id = "949494f4-3616-43ea-9f2f-c19152efa3d9"
+      lakehouse_id = "2e815603-1b04-4851-84ae-3b389330e530"
     }
   }
 
