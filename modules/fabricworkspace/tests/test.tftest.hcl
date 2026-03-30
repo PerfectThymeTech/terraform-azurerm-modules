@@ -46,7 +46,9 @@ provider "azapi" {
   use_oidc                       = true
 }
 
-provider "fabric" {}
+provider "fabric" {
+  preview = true
+}
 
 run "setup" {
   command = apply
@@ -73,9 +75,16 @@ run "create_fabric_workspace" {
   command = apply
 
   variables {
-    workspace_capacity_name    = run.setup.fabric_capacity_name
+    location            = "northeurope"
+    resource_group_name = "tfmodule-test-rg"
+    tags = {
+      test = "fabricworkspace"
+    }
     workspace_display_name     = "MyTestWs"
     workspace_description      = "My Test Workspace"
+    workspace_domain_id        = "3545bf73-5300-432e-8401-09a40b59c8b1"
+    workspace_capacity_name    = "mabutst" # run.setup.fabric_capacity_name
+    workspace_tag_ids          = ["712b09c6-4bac-4782-8002-387f354ce4b1", "83b0afef-d404-4921-9a3b-577bd7e03fbf"]
     workspace_identity_enabled = true
     workspace_spark_settings = {
       enabled = false
@@ -88,6 +97,11 @@ run "create_fabric_workspace" {
       # }
       high_concurrency = {
         notebook_interactive_run_enabled = true
+        notebook_pipeline_run_enabled    = true
+      }
+      job = {
+        conservative_job_admission_enabled = true
+        session_timeout_in_minutes         = 30
       }
       pool = {
         customize_compute_enabled = true
@@ -102,10 +116,42 @@ run "create_fabric_workspace" {
         role           = "Viewer"
       }
     }
+    workspace_managed_private_endpoints = {
+      test_endpoint = {
+        target_private_link_resource_id = "/subscriptions/1fdab118-1638-419a-8b12-06c9543714a0/resourceGroups/tfmodule-test-rg/providers/Microsoft.Storage/storageAccounts/mytfteststg"
+        target_subresource_type         = "blob"
+        approve                         = true
+      }
+    }
+    workspace_onelake_diagnostics = {
+      enabled      = false # Produces internal server error when enabled, needs further investigation
+      workspace_id = "949494f4-3616-43ea-9f2f-c19152efa3d9"
+      lakehouse_id = "2e815603-1b04-4851-84ae-3b389330e530"
+    }
+    workspace_network_communication_policy = {
+      inbound = {
+        public_access_rules = {
+          default_action = "Allow"
+        }
+      }
+      outbound = {
+        public_access_rules = {
+          default_action = "Allow"
+        }
+      }
+    }
+    workspace_outbound_gateway_rules = {
+      allowed_gateway_ids = []
+      default_action      = "Allow"
+    }
+    workspace_private_endpoint_enabled = false
+    subnet_id                          = "/subscriptions/1fdab118-1638-419a-8b12-06c9543714a0/resourceGroups/ptt-dev-networking-rg/providers/Microsoft.Network/virtualNetworks/spoke-ptt-dev-vnet001/subnets/TerraformTestSubnet"
+    connectivity_delay_in_seconds      = 0
+    private_dns_zone_id_workspace      = "/subscriptions/e82c5267-9dc4-4f45-ac13-abdd5e130d27/resourceGroups/ptt-dev-privatedns-rg/providers/Microsoft.Network/privateDnsZones/privatelink.fabric.microsoft.com"
   }
 
-  # assert {
-  #   condition     = fabric_workspace.workspace.display_name == "MyTestWs"
-  #   error_message = "Failed to deploy."
-  # }
+  assert {
+    condition     = fabric_workspace.workspace.display_name == "MyTestWs"
+    error_message = "Failed to deploy."
+  }
 }
