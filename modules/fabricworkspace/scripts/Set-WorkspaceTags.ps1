@@ -9,6 +9,10 @@ param (
     [string[]]
     $TagIds,
 
+    [Parameter(Mandatory = $false)]
+    [bool]
+    $Unassign = $false,
+
     [Parameter(Mandatory = $false, ValueFromRemainingArguments = $true)]
     [string[]]
     $Remaining
@@ -85,7 +89,65 @@ function Set-WorkspaceTags {
     return $true
 }
 
-# Apply workspace Tags
-$null = Set-WorkspaceTags `
-    -WorkspaceId $WorkspaceId `
-    -TagIds $TagIds
+function Unset-WorkspaceTags {
+    param (
+        [Parameter(Mandatory = $true)]
+        [String]
+        $WorkspaceId,
+
+        [Parameter(Mandatory = $true)]
+        [string[]]
+        $TagIds
+    )
+
+    # Initialize variables
+    $uri = "$($BASE_URL)/v1/workspaces/$($WorkspaceId)/unapplyTags"
+
+    # Define headers
+    $accessToken = Get-AccessToken
+    $headers = @{
+        'Content-Type'  = 'application/json'
+        'Authorization' = "Bearer ${accessToken}"
+    }
+
+    # Create body for REST API call
+    $body = @{
+        "tags" = $TagIds
+    } | ConvertTo-Json
+
+    # Create parameters for REST API call
+    $parameters = @{
+        'Uri'         = $uri
+        'Method'      = 'Post'
+        'Headers'     = $headers
+        'Body'        = $body
+        'ContentType' = 'application/json'
+    }
+
+    # Make REST API call to apply tags
+    try {
+        $responseGetSystemSchemas = Invoke-RestMethod @parameters
+        $schemas = $responseGetSystemSchemas.schemas | ConvertTo-Json
+        Write-Host $schemas
+    }
+    catch {
+        $message = "REST API call to apply tags to workspace failed with error: $_"
+        Write-Error $message
+        throw $message
+        exit 1
+    }
+
+    return $true
+}
+
+# Apply or Unassign workspace Tags based on the $Unassign parameter
+if ($Unassign) {
+    $null = Unset-WorkspaceTags `
+        -WorkspaceId $WorkspaceId `
+        -TagIds $TagIds
+}
+else {
+    $null = Set-WorkspaceTags `
+        -WorkspaceId $WorkspaceId `
+        -TagIds $TagIds
+}

@@ -13,4 +13,12 @@ resource "null_resource" "workspace_domain" {
     when        = create
     working_dir = "${path.module}/scripts/"
   }
+  provisioner "local-exec" {
+    interpreter = ["pwsh", "-Command"]
+    command     = "./Set-WorkspaceDomain.ps1 -WorkspaceId '${fabric_workspace.workspace.id}' -DomainId '${var.workspace_domain_id}' -Unassign $true"
+    on_failure  = fail
+    quiet       = false
+    when        = destroy
+    working_dir = "${path.module}/scripts/"
+  }
 }

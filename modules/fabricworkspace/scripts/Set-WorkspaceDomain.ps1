@@ -9,6 +9,10 @@ param (
     [String]
     $DomainId,
 
+    [Parameter(Mandatory = $false)]
+    [bool]
+    $Unassign = $false,
+
     [Parameter(Mandatory = $false, ValueFromRemainingArguments = $true)]
     [string[]]
     $Remaining
@@ -85,7 +89,66 @@ function Set-WorkspaceDomain {
     return $true
 }
 
-# Configure workspace domain
-$null = Set-WorkspaceDomain `
-    -WorkspaceId $WorkspaceId `
-    -DomainId $DomainId
+function Unset-WorkspaceDomain {
+    param (
+        [Parameter(Mandatory = $true)]
+        [String]
+        $WorkspaceId,
+
+        [Parameter(Mandatory = $true)]
+        [String]
+        $DomainId
+    )
+
+    # Initialize variables
+    $uri = "$($BASE_URL)/v1/workspaces/$($WorkspaceId)/unassignFromDomain"
+
+    # Define headers
+    $accessToken = Get-AccessToken
+    $headers = @{
+        'Content-Type'  = 'application/json'
+        'Authorization' = "Bearer ${accessToken}"
+    }
+
+    # Create body for REST API call
+    $body = @{
+        "domainId" = $DomainId
+    } | ConvertTo-Json
+
+    # Create parameters for REST API call
+    $parameters = @{
+        'Uri'         = $uri
+        'Method'      = 'Post'
+        'Headers'     = $headers
+        'Body'        = $body
+        'ContentType' = 'application/json'
+    }
+
+    # Make REST API call
+    try {
+        $responseGetSystemSchemas = Invoke-RestMethod @parameters
+        $schemas = $responseGetSystemSchemas.schemas | ConvertTo-Json
+        Write-Host $schemas
+    }
+    catch {
+        $message = "REST API call to unassign workspace from domain failed with error: $_"
+        Write-Error $message
+        throw $message
+        exit 1
+    }
+
+    return $true
+}
+
+# Apply or Unassign workspace Tags based on the $Unassign parameter
+if ($Unassign) {
+    $null = Unset-WorkspaceDomain `
+        -WorkspaceId $WorkspaceId `
+        -DomainId $DomainId
+}
+else {
+    # Configure workspace domain
+    $null = Set-WorkspaceDomain `
+        -WorkspaceId $WorkspaceId `
+        -DomainId $DomainId
+}
