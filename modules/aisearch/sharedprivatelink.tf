@@ -17,6 +17,7 @@ resource "null_resource" "search_shared_private_link_service_approval" {
     name               = azurerm_search_shared_private_link_service.search_shared_private_link_service[each.key].name
     subresource_name   = azurerm_search_shared_private_link_service.search_shared_private_link_service[each.key].subresource_name
     target_resource_id = azurerm_search_shared_private_link_service.search_shared_private_link_service[each.key].target_resource_id
+    status             = azurerm_search_shared_private_link_service.search_shared_private_link_service[each.key].status
   }
   provisioner "local-exec" {
     interpreter = ["pwsh", "-Command"]
