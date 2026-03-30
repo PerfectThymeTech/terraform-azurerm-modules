@@ -3,11 +3,11 @@ resource "null_resource" "workspace_tags" {
   triggers = {
     run_once     = "true"
     workspace_id = fabric_workspace.workspace.id
-    tag_ids      = var.workspace_tag_ids
+    tag_ids      = join(",", var.workspace_tag_ids)
   }
   provisioner "local-exec" {
     interpreter = ["pwsh", "-Command"]
-    command     = "./Set-WorkspaceTags.ps1 -WorkspaceId '${fabric_workspace.workspace.id}' -TagIds '${var.workspace_tag_ids}'"
+    command     = "./Set-WorkspaceTags.ps1 -WorkspaceId '${fabric_workspace.workspace.id}' -TagIds '${join(",", var.workspace_tag_ids)}'"
     on_failure  = fail
     quiet       = false
     when        = create
