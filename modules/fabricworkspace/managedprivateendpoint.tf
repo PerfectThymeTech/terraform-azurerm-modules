@@ -10,7 +10,10 @@ resource "fabric_workspace_managed_private_endpoint" "workspace_managed_private_
 }
 
 resource "null_resource" "workspace_managed_private_endpoint_approval" {
-  for_each = var.workspace_managed_private_endpoints
+  # For each endpoint where 'approve' has been set to true, we will run the approval script
+  for_each = {
+    for key, value in var.workspace_managed_private_endpoints : key => value if value.approve
+  }
 
   triggers = {
     run_once           = "true"
