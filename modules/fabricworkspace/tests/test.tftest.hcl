@@ -75,6 +75,11 @@ run "create_fabric_workspace" {
   command = apply
 
   variables {
+    location            = "northeurope"
+    resource_group_name = "tfmodule-test-rg"
+    tags = {
+      test = "fabricworkspace"
+    }
     workspace_display_name     = "MyTestWs"
     workspace_description      = "My Test Workspace"
     workspace_domain_id        = "3545bf73-5300-432e-8401-09a40b59c8b1"
@@ -119,10 +124,30 @@ run "create_fabric_workspace" {
       }
     }
     workspace_onelake_diagnostics = {
-      enabled      = true
+      enabled      = false # Produces internal server error when enabled, needs further investigation
       workspace_id = "949494f4-3616-43ea-9f2f-c19152efa3d9"
       lakehouse_id = "2e815603-1b04-4851-84ae-3b389330e530"
     }
+    workspace_network_communication_policy = {
+      inbound = {
+        public_access_rules = {
+          default_action = "Allow"
+        }
+      }
+      outbound = {
+        public_access_rules = {
+          default_action = "Allow"
+        }
+      }
+    }
+    workspace_outbound_gateway_rules = {
+      allowed_gateway_ids = []
+      default_action      = "Allow"
+    }
+    workspace_private_endpoint_enabled = false
+    subnet_id                            = "/subscriptions/1fdab118-1638-419a-8b12-06c9543714a0/resourceGroups/ptt-dev-networking-rg/providers/Microsoft.Network/virtualNetworks/spoke-ptt-dev-vnet001/subnets/TerraformTestSubnet"
+    connectivity_delay_in_seconds        = 0
+    private_dns_zone_id_vault            = "/subscriptions/e82c5267-9dc4-4f45-ac13-abdd5e130d27/resourceGroups/ptt-dev-privatedns-rg/providers/Microsoft.Network/privateDnsZones/privatelink.fabric.microsoft.com"
   }
 
   assert {

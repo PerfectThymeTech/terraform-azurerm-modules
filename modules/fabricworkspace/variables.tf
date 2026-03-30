@@ -1,4 +1,26 @@
 # General variables
+variable "location" {
+  description = "Specifies the location of all resources."
+  type        = string
+  sensitive   = false
+}
+
+variable "resource_group_name" {
+  description = "Specifies the resource group name in which all resources will get deployed."
+  type        = string
+  sensitive   = false
+  validation {
+    condition     = length(var.resource_group_name) >= 2
+    error_message = "Please specify a valid resource group name."
+  }
+}
+
+variable "tags" {
+  description = "Specifies a key value map of tags to set on every taggable resources."
+  type        = map(string)
+  sensitive   = false
+  default     = {}
+}
 
 # Fabric workspace variables
 variable "workspace_display_name" {
@@ -211,5 +233,87 @@ variable "workspace_onelake_diagnostics" {
 }
 
 # Network variables
+variable "workspace_network_communication_policy" {
+  description = "Specifies the network communication policy for the fabric workspace. If not specified, the default 'Allow' policy will be applied."
+  type = object({
+    inbound = optional(object({
+      public_access_rules = optional(object({
+        default_action = optional(string, "Allow")
+      }), {})
+    }), {})
+    outbound = optional(object({
+      public_access_rules = optional(object({
+        default_action = optional(string, "Allow")
+      }), {})
+    }), {})
+  })
+  sensitive = false
+  nullable  = false
+  default   = {}
+  validation {
+    condition = alltrue([
+      var.workspace_network_communication_policy.inbound.public_access_rules.default_action == "Allow" || var.workspace_network_communication_policy.inbound.public_access_rules.default_action == "Deny",
+      var.workspace_network_communication_policy.outbound.public_access_rules.default_action == "Allow" || var.workspace_network_communication_policy.outbound.public_access_rules.default_action == "Deny"
+    ])
+    error_message = "Please specify a valid default action for the public access rules. Valid values are: ['Allow', 'Deny']"
+  }
+}
+
+variable "workspace_outbound_gateway_rules" {
+  description = "Specifies the outbound gateway rules for the fabric workspace."
+  type = object({
+    allowed_gateway_ids = optional(list(string), [])
+    default_action      = optional(string, "Allow")
+  })
+  sensitive = false
+  nullable  = false
+  default   = {}
+  validation {
+    condition = var.workspace_outbound_gateway_rules.default_action == "Allow" || var.workspace_outbound_gateway_rules.default_action == "Deny"
+    error_message = "Please specify a valid default action for the outbound gateway rules. Valid values are: ['Allow', 'Deny']"
+  }
+}
+
+variable "workspace_private_endpoint_enabled" {
+  description = "Specifies whether the private endpoints are enabled for the workspace."
+  type        = bool
+  sensitive   = false
+  nullable    = false
+  default     = false
+}
+
+variable "subnet_id" {
+  description = "Specifies the resource id of a subnet in which the private endpoints get created."
+  type        = string
+  sensitive   = false
+  validation {
+    condition     = length(split("/", var.subnet_id)) == 11
+    error_message = "Please specify a valid subnet id."
+  }
+}
+
+variable "connectivity_delay_in_seconds" {
+  description = "Specifies the delay in seconds after the private endpoint deployment (required for the DNS automation via Policies)."
+  type        = number
+  sensitive   = false
+  nullable    = false
+  default     = 120
+  validation {
+    condition     = var.connectivity_delay_in_seconds >= 0
+    error_message = "Please specify a valid non-negative number."
+  }
+}
+
+variable "private_dns_zone_id_workspace" {
+  description = "Specifies the resource ID of the private DNS zone for the fabric workspace. Not required if DNS A-records get created via Azure Policy."
+  type        = string
+  sensitive   = false
+  nullable    = false
+  default     = ""
+  validation {
+    condition     = var.private_dns_zone_id_workspace == "" || (length(split("/", var.private_dns_zone_id_workspace)) == 9 && endswith(var.private_dns_zone_id_workspace, "privatelink.fabric.microsoft.com"))
+    error_message = "Please specify a valid resource ID for the private DNS Zone."
+  }
+}
 
 # Customer-managed key variables
