@@ -50,7 +50,7 @@ function Set-OneLakeDiagnostics {
 
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
-        [int]
+        [String]
         $OneLakeDiagnosticsLakehouseId
     )
 
