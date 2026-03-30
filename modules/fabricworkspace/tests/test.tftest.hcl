@@ -120,8 +120,8 @@ run "create_fabric_workspace" {
     }
   }
 
-  # assert {
-  #   condition     = fabric_workspace.workspace.display_name == "MyTestWs"
-  #   error_message = "Failed to deploy."
-  # }
+  assert {
+    condition     = fabric_workspace.workspace.display_name == "MyTestWs"
+    error_message = "Failed to deploy."
+  }
 }
