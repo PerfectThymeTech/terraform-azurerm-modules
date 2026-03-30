@@ -148,6 +148,11 @@ object({
     }), {})
     high_concurrency = optional(object({
       notebook_interactive_run_enabled = optional(bool, true)
+      notebook_pipeline_run_enabled    = optional(bool, true)
+    }), {})
+    job = optional(object({
+      conservative_job_admission_enabled = optional(bool, true)
+      session_timeout_in_minutes         = optional(number, 30)
     }), {})
     pool = optional(object({
       customize_compute_enabled = optional(bool, true)
