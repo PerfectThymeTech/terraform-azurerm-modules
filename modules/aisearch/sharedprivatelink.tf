@@ -10,7 +10,9 @@ resource "azurerm_search_shared_private_link_service" "search_shared_private_lin
 }
 
 resource "null_resource" "search_shared_private_link_service_approval" {
-  for_each = var.search_service_shared_private_links
+  for_each = {
+    for key, value in var.search_service_shared_private_links : key => value if value.approve
+  }
 
   triggers = {
     run_once           = "true"
