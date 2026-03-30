@@ -1,5 +1,5 @@
 <!-- BEGIN_TF_DOCS -->
-# Azure Key Vault Terraform Module
+# Azure SQL Server Terraform Module
 
 ## Documentation
 <!-- markdownlint-disable MD033 -->
@@ -24,15 +24,15 @@ No modules.
 
 The following input variables are required:
 
-### <a name="input_key_vault_name"></a> [key\_vault\_name](#input\_key\_vault\_name)
-
-Description: Specifies the name of the Key Vault. Changing this forces a new resource to be created.
-
-Type: `string`
-
 ### <a name="input_location"></a> [location](#input\_location)
 
 Description: Specifies the location of all resources.
+
+Type: `string`
+
+### <a name="input_mssql_server_name"></a> [mssql\_server\_name](#input\_mssql\_server\_name)
+
+Description: Specifies the name of the MSSQL Server. Changing this forces a new resource to be created.
 
 Type: `string`
 
@@ -60,6 +60,24 @@ Type: `number`
 
 Default: `120`
 
+### <a name="input_customer_managed_key"></a> [customer\_managed\_key](#input\_customer\_managed\_key)
+
+Description: Specifies the customer managed key configurations.
+
+Type:
+
+```hcl
+object({
+    key_vault_id                     = string,
+    key_vault_key_id                 = string,
+    key_vault_key_versionless_id     = string,
+    user_assigned_identity_id        = string,
+    user_assigned_identity_client_id = string,
+  })
+```
+
+Default: `null`
+
 ### <a name="input_diagnostics_configurations"></a> [diagnostics\_configurations](#input\_diagnostics\_configurations)
 
 Description: Specifies the diagnostic configuration for the service.
@@ -75,25 +93,17 @@ list(object({
 
 Default: `[]`
 
-### <a name="input_key_vault_sku_name"></a> [key\_vault\_sku\_name](#input\_key\_vault\_sku\_name)
+### <a name="input_mssql_server_connection_policy"></a> [mssql\_server\_connection\_policy](#input\_mssql\_server\_connection\_policy)
 
-Description: Specifies the name of the SKU used for this Key Vault. Possible values are standard and premium.
+Description: Specifies the connection policy for the MSSQL Server. Possible values are 'Default', 'Proxy', and 'Redirect'.
 
 Type: `string`
 
-Default: `"standard"`
+Default: `"Default"`
 
-### <a name="input_key_vault_soft_delete_retention_days"></a> [key\_vault\_soft\_delete\_retention\_days](#input\_key\_vault\_soft\_delete\_retention\_days)
+### <a name="input_private_dns_zone_id_sqlserver"></a> [private\_dns\_zone\_id\_sqlserver](#input\_private\_dns\_zone\_id\_sqlserver)
 
-Description: Specifies the number of days that items should be retained for once soft-deleted. This value can be between 7 and 90 (the default) days.
-
-Type: `number`
-
-Default: `7`
-
-### <a name="input_private_dns_zone_id_vault"></a> [private\_dns\_zone\_id\_vault](#input\_private\_dns\_zone\_id\_vault)
-
-Description: Specifies the resource ID of the private DNS zone for Azure Key Vault. Not required if DNS A-records get created via Azure Policy.
+Description: Specifies the resource ID of the private DNS zone for Azure SQL Server. Not required if DNS A-records get created via Azure Policy.
 
 Type: `string`
 
