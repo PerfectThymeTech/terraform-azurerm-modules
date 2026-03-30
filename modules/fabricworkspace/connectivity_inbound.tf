@@ -26,7 +26,7 @@ resource "azurerm_private_endpoint" "private_endpoint_workspace" {
 
   name                = "${one(azapi_resource.fabric_private_link_service[*].id)}-workspace-pe"
   location            = var.location
-  resource_group_name = azurerm_data_factory.data_factory.resource_group_name
+  resource_group_name = var.resource_group_name
   tags                = var.tags
 
   custom_network_interface_name = "${one(azapi_resource.fabric_private_link_service[*].id)}-workspace-nic"
