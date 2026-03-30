@@ -14,6 +14,8 @@ resource "fabric_workspace_network_communication_policy" "workspace_network_comm
 }
 
 resource "fabric_workspace_outbound_gateway_rules" "workspace_outbound_gateway_rules" {
+  count = var.workspace_network_communication_policy.outbound.public_access_rules.default_action == "Deny" ? 1 : 0
+
   workspace_id = fabric_workspace.workspace.id
 
   allowed_gateways = [
@@ -22,4 +24,8 @@ resource "fabric_workspace_outbound_gateway_rules" "workspace_outbound_gateway_r
     }
   ]
   default_action = var.workspace_outbound_gateway_rules.default_action
+
+  depends_on = [
+    fabric_workspace_network_communication_policy.workspace_network_communication_policy
+  ]
 }
