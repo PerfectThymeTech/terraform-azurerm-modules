@@ -101,6 +101,14 @@ Type: `string`
 
 Default: `"Default"`
 
+### <a name="input_mssql_server_version"></a> [mssql\_server\_version](#input\_mssql\_server\_version)
+
+Description: Specifies the version of the MSSQL Server. Possible values are '2.0', and '12.0'.
+
+Type: `string`
+
+Default: `"12.0"`
+
 ### <a name="input_private_dns_zone_id_sqlserver"></a> [private\_dns\_zone\_id\_sqlserver](#input\_private\_dns\_zone\_id\_sqlserver)
 
 Description: Specifies the resource ID of the private DNS zone for Azure SQL Server. Not required if DNS A-records get created via Azure Policy.
@@ -121,21 +129,21 @@ Default: `{}`
 
 The following outputs are exported:
 
-### <a name="output_key_vault_id"></a> [key\_vault\_id](#output\_key\_vault\_id)
+### <a name="output_mssql_server_fqdn"></a> [mssql\_server\_fqdn](#output\_mssql\_server\_fqdn)
 
-Description: Specifies the key vault resource id.
+Description: Specifies the SQL Server fully qualified domain name.
 
-### <a name="output_key_vault_name"></a> [key\_vault\_name](#output\_key\_vault\_name)
+### <a name="output_mssql_server_id"></a> [mssql\_server\_id](#output\_mssql\_server\_id)
 
-Description: Specifies the key vault resource name.
+Description: Specifies the SQL Server resource id.
 
-### <a name="output_key_vault_setup_completed"></a> [key\_vault\_setup\_completed](#output\_key\_vault\_setup\_completed)
+### <a name="output_mssql_server_name"></a> [mssql\_server\_name](#output\_mssql\_server\_name)
+
+Description: Specifies the SQL Server resource name.
+
+### <a name="output_mssql_server_setup_completed"></a> [mssql\_server\_setup\_completed](#output\_mssql\_server\_setup\_completed)
 
 Description: Specifies whether the connectivity and identity has been successfully configured.
-
-### <a name="output_key_vault_uri"></a> [key\_vault\_uri](#output\_key\_vault\_uri)
-
-Description: Specifies the key vault resource vault uri.
 
 <!-- markdownlint-enable -->
 
