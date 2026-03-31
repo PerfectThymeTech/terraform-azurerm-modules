@@ -1,28 +1,27 @@
-output "key_vault_id" {
-  description = "Specifies the key vault resource id."
-  value       = azurerm_key_vault.key_vault.id
+output "mssql_server_id" {
+  description = "Specifies the SQL Server resource id."
+  value       = azurerm_mssql_server.mssql_server.id
   sensitive   = false
 }
 
-output "key_vault_name" {
-  description = "Specifies the key vault resource name."
-  value       = azurerm_key_vault.key_vault.name
+output "mssql_server_name" {
+  description = "Specifies the SQL Server resource name."
+  value       = azurerm_mssql_server.mssql_server.name
   sensitive   = false
 }
 
-output "key_vault_uri" {
-  description = "Specifies the key vault resource vault uri."
-  value       = azurerm_key_vault.key_vault.vault_uri
+output "mssql_server_fqdn" {
+  description = "Specifies the SQL Server fully qualified domain name."
+  value       = azurerm_mssql_server.mssql_server.fully_qualified_domain_name
   sensitive   = false
 }
 
-output "key_vault_setup_completed" {
+output "mssql_server_setup_completed" {
   description = "Specifies whether the connectivity and identity has been successfully configured."
   value       = true
   sensitive   = false
 
   depends_on = [
-    azurerm_role_assignment.current_roleassignment_key_vault,
     time_sleep.sleep_connectivity,
   ]
 }

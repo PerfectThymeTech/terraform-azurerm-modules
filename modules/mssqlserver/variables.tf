@@ -44,6 +44,17 @@ variable "mssql_server_connection_policy" {
   }
 }
 
+variable "mssql_server_version" {
+  description = "Specifies the version of the MSSQL Server. Possible values are '2.0', and '12.0'."
+  type        = string
+  sensitive   = false
+  default     = "12.0"
+  validation {
+    condition     = contains(["2.0", "12.0"], var.mssql_server_version)
+    error_message = "Please specify a valid MSSQL Server version."
+  }
+}
+
 # Diagnostics variables
 variable "diagnostics_configurations" {
   description = "Specifies the diagnostic configuration for the service."

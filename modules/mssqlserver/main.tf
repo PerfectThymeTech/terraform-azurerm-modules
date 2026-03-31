@@ -32,5 +32,5 @@ resource "azurerm_mssql_server" "mssql_server" {
   primary_user_assigned_identity_id            = var.customer_managed_key != null ? var.customer_managed_key.user_assigned_identity_id : null
   public_network_access_enabled                = false
   transparent_data_encryption_key_vault_key_id = var.customer_managed_key != null ? var.customer_managed_key.key_vault_key_id : null
-  version                                      = "12.0"
+  version                                      = var.mssql_server_version
 }
