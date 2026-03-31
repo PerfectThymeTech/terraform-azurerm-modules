@@ -13,6 +13,10 @@ param (
     [String]
     $ManagedPrivateEndpointName,
 
+    [Parameter(Mandatory = $true)]
+    [String]
+    $RequestMessage,
+
     [Parameter(Mandatory = $false)]
     [ValidateNotNullOrEmpty()]
     [int]
@@ -41,6 +45,10 @@ function Get-PrivateEndpointId {
         [String]
         $ManagedPrivateEndpointName,
 
+        [Parameter(Mandatory = $true)]
+        [String]
+        $RequestMessage,
+
         [Parameter(Mandatory = $false)]
         [ValidateNotNullOrEmpty()]
         [int]
@@ -57,7 +65,7 @@ function Get-PrivateEndpointId {
 
     # Get Private Endpoint ID
     for ($i = 0; $i -lt $CheckFrequency; $i++) {
-        $privateEndpointId = $(az network private-endpoint-connection list --id $ResourceId --query "[?contains(properties.privateEndpoint.id, '$WorkspaceName.$ManagedPrivateEndpointName')].id | [0]" -o json) | ConvertFrom-Json
+        $privateEndpointId = $(az network private-endpoint-connection list --id $ResourceId --query "[?contains(properties.privateEndpoint.id, '$ManagedPrivateEndpointName') && properties.privateLinkServiceConnectionState.description == '$RequestMessage'].id | [0]" -o json) | ConvertFrom-Json
 
         if ($privateEndpointId) {
             Write-Host "Private Endpoint found. Continuing with approval."
@@ -93,7 +101,7 @@ function Approve-PrivateEndpoint {
 
     # Check status of private endpoint
     Write-Host "Checking status of Private Endpoint"
-    $privateEndpointstatus = $(az network private-endpoint-connection list --id $ResourceId --query "[?contains(properties.privateEndpoint.id, '$WorkspaceName.$ManagedPrivateEndpointName')].properties.privateLinkServiceConnectionState.status | [0]" -o json) | ConvertFrom-Json
+    $privateEndpointstatus = $(az network private-endpoint-connection show --id $privateEndpointId --query "properties.privateLinkServiceConnectionState.status" -o json) | ConvertFrom-Json
 
     if ($privateEndpointStatus -eq "Approved") {
         # Private Endpoint Connection already approved
@@ -108,7 +116,8 @@ function Approve-PrivateEndpoint {
 
 $privateEndpointId = Get-PrivateEndpointId `
     -WorkspaceName $WorkspaceName `
-    -ManagedPrivateEndpointName $ManagedPrivateEndpointName
+    -ManagedPrivateEndpointName $ManagedPrivateEndpointName `
+    -RequestMessage $RequestMessage
 
 Approve-PrivateEndpoint `
     -WorkspaceName $WorkspaceName `

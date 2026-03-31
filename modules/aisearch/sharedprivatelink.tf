@@ -20,10 +20,11 @@ resource "null_resource" "search_shared_private_link_service_approval" {
     subresource_name   = azurerm_search_shared_private_link_service.search_shared_private_link_service[each.key].subresource_name
     target_resource_id = azurerm_search_shared_private_link_service.search_shared_private_link_service[each.key].target_resource_id
     status             = azurerm_search_shared_private_link_service.search_shared_private_link_service[each.key].status
+    request_message    = azurerm_search_shared_private_link_service.search_shared_private_link_service[each.key].request_message
   }
   provisioner "local-exec" {
     interpreter = ["pwsh", "-Command"]
-    command     = "./Approve-ManagedPrivateEndpoint.ps1 -ResourceId '${azurerm_search_shared_private_link_service.search_shared_private_link_service[each.key].target_resource_id}' -WorkspaceName '${azurerm_search_service.search_service.name}' -ManagedPrivateEndpointName '${azurerm_search_shared_private_link_service.search_shared_private_link_service[each.key].name}'"
+    command     = "./Approve-ManagedPrivateEndpoint.ps1 -ResourceId '${azurerm_search_shared_private_link_service.search_shared_private_link_service[each.key].target_resource_id}' -WorkspaceName '${azurerm_search_service.search_service.name}' -ManagedPrivateEndpointName '${azurerm_search_shared_private_link_service.search_shared_private_link_service[each.key].name}' -RequestMessage '${azurerm_search_shared_private_link_service.search_shared_private_link_service[each.key].request_message}'"
     on_failure  = fail
     quiet       = false
     when        = create
