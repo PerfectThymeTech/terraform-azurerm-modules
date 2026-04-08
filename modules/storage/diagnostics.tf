@@ -18,12 +18,11 @@ resource "azurerm_monitor_diagnostic_setting" "diagnostic_setting_storage_accoun
     }
   }
 
-  dynamic "metric" {
+  dynamic "enabled_metric" {
     iterator = entry
     for_each = data.azurerm_monitor_diagnostic_categories.diagnostic_categories_storage_account.metrics
     content {
       category = entry.value
-      enabled  = true
     }
   }
 }
