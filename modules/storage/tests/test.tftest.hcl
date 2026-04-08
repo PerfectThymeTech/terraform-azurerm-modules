@@ -30,7 +30,7 @@ run "create_storage" {
     storage_static_website                          = []
     diagnostics_configurations = [
       {
-        log_analytics_workspace_id = "/subscriptions/1fdab118-1638-419a-8b12-06c9543714a0/resourcegroups/tfmodule-test-rg/providers/Microsoft.OperationalInsights/workspaces/tftstr01"
+        log_analytics_workspace_id = "/subscriptions/1fdab118-1638-419a-8b12-06c9543714a0/resourceGroups/tfmodule-test-rg/providers/Microsoft.OperationalInsights/workspaces/tftstr01"
       }
     ]
     subnet_id                          = "/subscriptions/1fdab118-1638-419a-8b12-06c9543714a0/resourceGroups/ptt-dev-networking-rg/providers/Microsoft.Network/virtualNetworks/spoke-ptt-dev-vnet001/subnets/TerraformTestSubnet"
