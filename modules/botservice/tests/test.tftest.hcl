@@ -50,7 +50,6 @@ run "setup" {
 
   providers = {
     azurerm = azurerm
-    time    = time
   }
 
   variables {
