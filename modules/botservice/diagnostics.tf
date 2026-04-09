@@ -18,12 +18,11 @@ resource "azurerm_monitor_diagnostic_setting" "diagnostic_setting_bot_service_az
     }
   }
 
-  dynamic "metric" {
+  dynamic "enabled_metric" {
     iterator = entry
     for_each = data.azurerm_monitor_diagnostic_categories.diagnostic_categories_bot_service_azure_bot.metrics
     content {
       category = entry.value
-      enabled  = true
     }
   }
 }
