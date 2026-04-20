@@ -124,7 +124,7 @@ run "create_fabric_workspace" {
       }
     }
     workspace_onelake_diagnostics = {
-      enabled      = false # Produces internal server error when enabled, needs further investigation
+      enabled      = true # Produces internal server error when enabled, needs further investigation
       workspace_id = "949494f4-3616-43ea-9f2f-c19152efa3d9"
       lakehouse_id = "2e815603-1b04-4851-84ae-3b389330e530"
     }
