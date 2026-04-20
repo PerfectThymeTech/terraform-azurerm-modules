@@ -1,0 +1,66 @@
+name: Lint and Test
+
+trigger:
+  branches:
+    include:
+      - main
+pr:
+  branches:
+    include:
+      - main
+
+variables:
+  - template: templates/_defaultVariables.yml
+
+jobs:
+  - job: lint
+    displayName: Lint and Test
+    continueOnError: false
+    # workspace:
+    #   clean: all
+    pool:
+      name: "ador-prd-pool001"
+
+    steps:
+      # Setup Python
+      - task: UsePythonVersion@0
+        displayName: Setup Python
+        name: python_setup
+        inputs:
+          versionSpec: ${{ variables.python_version }}
+          disableDownloadFromRegistry: false
+          allowUnstable: false
+          addToPath: true
+          # architecture: 'x64'
+
+      # Setup Terraform
+      - task: TerraformInstaller@1
+        displayName: Setup Terraform
+        name: terraform_setup
+        inputs:
+          terraformVersion: ${{ variables.terraform_version }}
+
+      # Checkout repository
+      - checkout: self
+        displayName: Checkout repository
+        name: checkout_repository
+        submodules: true
+        lfs: false
+        clean: true
+        continueOnError: false
+        enabled: true
+
+      # Run Linting
+      - bash: |
+          echo "Install Dependencies"
+          python3 -m pip install -r requirements.txt -q
+
+          echo "Initialize Git"
+          git init
+          git add *
+
+          echo "Run pre-commit"
+          python3 -m pre_commit install --install-hooks
+          python3 -m pre_commit run --all-files --verbose
+        displayName: Run Linting
+        name: linting
