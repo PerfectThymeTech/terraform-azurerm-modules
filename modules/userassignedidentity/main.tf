@@ -8,9 +8,8 @@ resource "azurerm_user_assigned_identity" "user_assigned_identity" {
 resource "azurerm_federated_identity_credential" "federated_identity_credential" {
   for_each = var.user_assigned_identity_federated_identity_credentials
 
-  name                = each.key
-  resource_group_name = azurerm_user_assigned_identity.user_assigned_identity.resource_group_name
-  parent_id           = azurerm_user_assigned_identity.user_assigned_identity.id
+  name                      = each.key
+  user_assigned_identity_id = azurerm_user_assigned_identity.user_assigned_identity.id
 
   audience = [each.value.audience]
   issuer   = each.value.issuer
