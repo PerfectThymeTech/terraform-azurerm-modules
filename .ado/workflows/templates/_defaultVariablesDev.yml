@@ -1,0 +1,5 @@
+variables:
+  environment_dev: "dev"
+  runner_name_dev: "ador-prd-pool001"
+  service_connection_name_dev: "mabuss-4"
+  service_connection_id_dev: "c6c2ba01-fafb-42ee-9c25-6041306f73f9"
