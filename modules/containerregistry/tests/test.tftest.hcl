@@ -14,7 +14,6 @@ run "create_containerregistry" {
     container_registry_export_policy_enabled     = false
     container_registry_quarantine_policy_enabled = false
     container_registry_retention_policy_in_days  = 7
-    container_registry_trust_policy_enabled      = false
     container_registry_zone_redundancy_enabled   = false
     diagnostics_configurations                   = []
     subnet_id                                    = "/subscriptions/1fdab118-1638-419a-8b12-06c9543714a0/resourceGroups/ptt-dev-networking-rg/providers/Microsoft.Network/virtualNetworks/spoke-ptt-dev-vnet001/subnets/TerraformTestSubnet"
