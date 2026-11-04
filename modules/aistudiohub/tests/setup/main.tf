@@ -1,5 +1,5 @@
 module "application_insights" {
-  source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/applicationinsights?ref=main"
+  source = "../../../applicationinsights"
   providers = {
     azurerm = azurerm
   }
@@ -14,7 +14,7 @@ module "application_insights" {
 }
 
 module "container_registry" {
-  source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/containerregistry?ref=main"
+  source = "../../../containerregistry"
   providers = {
     azurerm = azurerm
     time    = time
@@ -39,7 +39,7 @@ module "container_registry" {
 }
 
 module "key_vault" {
-  source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/keyvault?ref=main"
+  source = "../../../keyvault"
   providers = {
     azurerm = azurerm
     time    = time
@@ -58,7 +58,7 @@ module "key_vault" {
 }
 
 module "storage_account" {
-  source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/storage?ref=main"
+  source = "../../../storage"
   providers = {
     azurerm = azurerm
     time    = time

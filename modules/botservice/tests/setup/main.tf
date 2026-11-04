@@ -1,5 +1,5 @@
 module "application_insights" {
-  source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/applicationinsights?ref=main"
+  source = "../../../applicationinsights"
   providers = {
     azurerm = azurerm
   }
@@ -14,7 +14,7 @@ module "application_insights" {
 }
 
 module "user_assigned_identity" {
-  source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/userassignedidentity?ref=main"
+  source = "../../../userassignedidentity"
   providers = {
     azurerm = azurerm
   }
