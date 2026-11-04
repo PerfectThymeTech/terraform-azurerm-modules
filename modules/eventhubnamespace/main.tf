@@ -14,7 +14,7 @@ resource "azurerm_eventhub_namespace" "eventhub_namespace" {
   maximum_throughput_units     = var.event_hub_namespace_maximum_throughput_units
   minimum_tls_version          = "1.2"
   network_rulesets {
-    default_action                 = "Deny"
+    default_action                 = "Allow" # azurerm >= 5.3 rejects "Deny" without rules; inert while public access is disabled
     ip_rule                        = []
     public_network_access_enabled  = false
     trusted_service_access_enabled = true
