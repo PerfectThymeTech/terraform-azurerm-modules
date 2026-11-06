@@ -244,6 +244,10 @@ variable "storage_static_website" {
   sensitive = false
   nullable  = false
   default   = []
+  validation {
+    condition     = length(var.storage_static_website) <= 1
+    error_message = "Please provide at most one static website configuration."
+  }
 }
 
 # Diagnostics variables

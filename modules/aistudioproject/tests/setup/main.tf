@@ -1,5 +1,5 @@
 module "application_insights" {
-  source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/applicationinsights?ref=main"
+  source = "../../../applicationinsights"
   providers = {
     azurerm = azurerm
   }
@@ -14,7 +14,7 @@ module "application_insights" {
 }
 
 module "container_registry" {
-  source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/containerregistry?ref=main"
+  source = "../../../containerregistry"
   providers = {
     azurerm = azurerm
     time    = time
@@ -30,7 +30,6 @@ module "container_registry" {
   container_registry_export_policy_enabled     = false
   container_registry_quarantine_policy_enabled = false
   container_registry_retention_policy_in_days  = 7
-  container_registry_trust_policy_enabled      = false
   container_registry_zone_redundancy_enabled   = false
   diagnostics_configurations                   = []
   subnet_id                                    = var.subnet_id
@@ -40,7 +39,7 @@ module "container_registry" {
 }
 
 module "key_vault" {
-  source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/keyvault?ref=main"
+  source = "../../../keyvault"
   providers = {
     azurerm = azurerm
     time    = time
@@ -59,7 +58,7 @@ module "key_vault" {
 }
 
 module "storage_account" {
-  source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/storage?ref=main"
+  source = "../../../storage"
   providers = {
     azurerm = azurerm
     time    = time
@@ -106,7 +105,7 @@ module "storage_account" {
 }
 
 module "ai_studio_hub" {
-  source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/aistudiohub?ref=main"
+  source = "../../../aistudiohub"
   providers = {
     azurerm = azurerm
     azapi   = azapi

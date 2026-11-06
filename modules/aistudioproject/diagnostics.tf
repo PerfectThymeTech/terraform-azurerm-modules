@@ -18,12 +18,11 @@ resource "azurerm_monitor_diagnostic_setting" "diagnostic_setting_ai_studio_proj
     }
   }
 
-  dynamic "metric" {
+  dynamic "enabled_metric" {
     iterator = entry
     for_each = data.azurerm_monitor_diagnostic_categories.diagnostic_categories_ai_studio_project.metrics
     content {
       category = entry.value
-      enabled  = true
     }
   }
 }
