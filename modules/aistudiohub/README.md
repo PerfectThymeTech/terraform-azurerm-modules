@@ -106,6 +106,14 @@ map(object({
 
 Default: `{}`
 
+### <a name="input_ai_studio_hub_firewall_sku"></a> [ai\_studio\_hub\_firewall\_sku](#input\_ai\_studio\_hub\_firewall\_sku)
+
+Description: Specifies the firewall sku deployed in the managed vnet of the ai studio hub deployment.
+
+Type: `string`
+
+Default: `"Basic"`
+
 ### <a name="input_ai_studio_hub_provision_managed_network"></a> [ai\_studio\_hub\_provision\_managed\_network](#input\_ai\_studio\_hub\_provision\_managed\_network)
 
 Description: Specifies whether the managed vnet should be providioned as part of the ai studio hub deployment.
