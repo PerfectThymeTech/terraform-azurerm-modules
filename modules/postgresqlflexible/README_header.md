@@ -24,15 +24,15 @@ Deploys a PostgreSQL flexible server with Microsoft Entra ID authentication only
 **Exceptions**
 
 - No input re-enables public network access or password authentication.
-- `postgresql_configuration` passes arbitrary server parameters (no validation).
+- `postgresql_configuration` passes arbitrary server parameters (no validation). *Reason:* not stated in the module code. *Mitigation:* review the parameters in code review, because the module does not validate them.
 - With the default `postgresql_active_directory_administrator = {}` no Microsoft Entra administrator is created, while password authentication is disabled. Set both `object_id` and `group_name` to create one.
-- Known issue: the customer-managed key block passes the Key Vault resource ID where a key ID is expected, so the key configuration does not receive the key ID.
+- Known issue: the customer-managed key block passes the Key Vault resource identifier (ID) where a key ID is expected, so the key configuration does not receive the key ID.
 - Known issue: the `postgresql_storage_tier` validation compares `postgresql_storage_mb` instead of the tier, so any non-null tier fails validation.
 
 **Prerequisites**
 
 - `subnet_id`: the resource ID of the subnet for the private endpoint. The server itself is not injected into the virtual network.
-- Optional private DNS zone ID in `private_dns_zone_id_postrgesql` (the variable name is spelled this way), ending in `privatelink.postgres.database.azure.com`. It is not required when DNS A-records are created through Azure Policy.
+- Optional private Domain Name System (DNS) zone ID in `private_dns_zone_id_postrgesql` (the variable name is spelled this way), ending in `privatelink.postgres.database.azure.com`. It is not required when DNS A-records are created through Azure Policy.
 - `postgresql_active_directory_administrator` needs both `object_id` and `group_name` (a Microsoft Entra group), or neither.
 
 ## 🚀 Usage

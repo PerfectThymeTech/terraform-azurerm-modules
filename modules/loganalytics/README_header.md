@@ -6,7 +6,7 @@ Deploys an Azure Log Analytics workspace with optional diagnostic settings.
 
 ## 📦 Overview
 
-- One Log Analytics workspace (`azurerm_log_analytics_workspace`, SKU `PerGB2018`).
+- One Log Analytics workspace (`azurerm_log_analytics_workspace`, SKU (pricing tier) `PerGB2018`).
 - Optional diagnostic settings that enable every log category group and metric the service offers.
 - The full list of deployed resources is in [Resources](#resources).
 
@@ -19,12 +19,12 @@ Deploys an Azure Log Analytics workspace with optional diagnostic settings.
 
 **Exceptions**
 
-- Internet ingestion and internet query access are hard-coded to `Enabled`. No variable overrides them and no code comment gives a reason.
+- Internet ingestion and internet query access are hard-coded to `Enabled`. No variable overrides them and no code comment gives a reason. *Reason:* not stated in the module code. *Mitigation:* use an Azure Monitor private link scope outside this module and control who can query with Azure role-based access control.
 - The module has no private endpoint and no network variables.
 
 **Prerequisites**
 
-- Each `diagnostics_configurations` entry needs a Log Analytics workspace ID, a storage account ID, or both.
+- Each `diagnostics_configurations` entry needs a Log Analytics workspace identifier (ID), a storage account ID, or both.
 
 ## 🚀 Usage
 

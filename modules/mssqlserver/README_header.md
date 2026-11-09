@@ -15,7 +15,7 @@ Deploys an Azure SQL logical server that is reachable only through a private end
 
 - Public network access is disabled.
 - Microsoft Entra ID authentication only; no administrator login or password is set.
-- The minimum TLS version is 1.2 and outbound network restriction is enabled.
+- The minimum Transport Layer Security (TLS) version is 1.2 and outbound network restriction is enabled.
 - Express vulnerability assessment is enabled.
 - Server auditing is enabled and sent to Azure Monitor.
 - The private endpoint uses automatic approval.
@@ -26,13 +26,13 @@ Deploys an Azure SQL logical server that is reachable only through a private end
 **Exceptions**
 
 - No input relaxes the network, TLS or authentication settings; they are hard-coded.
-- The identity that runs Terraform becomes the Microsoft Entra administrator of the server.
+- The identity that runs Terraform becomes the Microsoft Entra administrator of the server. *Reason:* not stated in the module code. *Mitigation:* limit who can run Terraform, because that identity becomes the server administrator.
 - `securityalertpolicy.tf` contains only commented-out code; no security alert policy or vulnerability assessment storage is deployed from it.
 
 **Prerequisites**
 
-- `subnet_id`: the resource ID of the subnet for the private endpoint.
-- Optional `private_dns_zone_id_sqlserver` ending in `privatelink.database.windows.net`. It is not required when DNS A-records are created through Azure Policy.
+- `subnet_id`: the resource identifier (ID) of the subnet for the private endpoint.
+- Optional `private_dns_zone_id_sqlserver` ending in `privatelink.database.windows.net`. It is not required when Domain Name System (DNS) A-records are created through Azure Policy.
 - `customer_managed_key` needs a Key Vault key ID and a user-assigned identity ID. The module creates no role assignment or access policy for that identity.
 
 ## 🚀 Usage

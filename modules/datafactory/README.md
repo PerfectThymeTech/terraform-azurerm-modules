@@ -3,13 +3,13 @@
 
 [![Test workflow](https://github.com/PerfectThymeTech/terraform-azurerm-modules/actions/workflows/terraform-datafactory.yml/badge.svg?branch=main)](https://github.com/PerfectThymeTech/terraform-azurerm-modules/actions/workflows/terraform-datafactory.yml)
 
-Deploys a managed-VNet Azure Data Factory with public access disabled, a private endpoint and optional content deployment, trigger start and pipeline run steps.
+Deploys an Azure Data Factory with a managed virtual network, with public access disabled, a private endpoint and optional content deployment, trigger start and pipeline run steps.
 
 ## 📦 Overview
 
 - An Azure Data Factory (`azurerm_data_factory`) with a system-assigned managed identity and an optional GitHub or Azure DevOps repository.
 - A private endpoint for the `dataFactory` subresource and optional diagnostic settings.
-- Optional managed private endpoints, an optional ARM template deployment of published content, and optional trigger start and pipeline run steps.
+- Optional managed private endpoints, an optional Azure Resource Manager (ARM) template deployment of published content, and optional trigger start and pipeline run steps.
 - The full list of deployed resources is in [Resources](#resources).
 
 ## 🛡️ Secure defaults
@@ -23,14 +23,14 @@ Deploys a managed-VNet Azure Data Factory with public access disabled, a private
 
 **Exceptions**
 
-- Every entry in `data_factory_managed_private_endpoints` is approved automatically by a PowerShell script at create time. There is no opt-out flag.
-- `data_factory_triggers_start` and `data_factory_pipelines_run` (default `[]`) run Azure CLI commands (`az datafactory ...`) from the machine that runs Terraform. These two steps set no interpreter, so they use the default shell of that machine.
+- Every entry in `data_factory_managed_private_endpoints` is approved automatically by a PowerShell script at create time. There is no opt-out flag. *Reason:* not stated in the module code. *Mitigation:* list only managed private endpoints to targets you trust and review them in code review.
+- `data_factory_triggers_start` and `data_factory_pipelines_run` (default `[]`) run Azure command-line interface (CLI) commands (`az datafactory ...`) from the machine that runs Terraform. These two steps set no interpreter, so they use the default shell of that machine. *Reason:* not stated in the module code. *Mitigation:* use them only from a trusted machine or pipeline whose identity has least privilege on the factory.
 - The approval step uses `pwsh` and the Azure CLI.
 
 **Prerequisites**
 
-- `subnet_id`: the resource ID of the subnet for the private endpoint.
-- Optional `private_dns_zone_id_data_factory` ending in `privatelink.datafactory.azure.net`. It is not required when DNS A-records are created through Azure Policy.
+- `subnet_id`: the resource identifier (ID) of the subnet for the private endpoint.
+- Optional `private_dns_zone_id_data_factory` ending in `privatelink.datafactory.azure.net`. It is not required when Domain Name System (DNS) A-records are created through Azure Policy.
 - `data_factory_published_content` needs both a `parameters_file` and a `template_file`; triggers and pipelines only run when published content is set.
 - `data_factory_managed_private_endpoints` entries need `subresource_name` and `target_resource_id`.
 - The Azure CLI (`az`), signed in, and `pwsh` on `PATH` on the machine that runs Terraform when you use these features.

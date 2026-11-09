@@ -15,7 +15,7 @@ Deploys a network-isolated Azure AI Hub workspace with a private endpoint, optio
 
 ## 🛡️ Secure defaults
 
-- Public network access is disabled, access when behind a virtual network is not allowed and the IP allow list is empty.
+- Public network access is disabled, access when behind a virtual network is not allowed and the Internet Protocol (IP) allow list is empty.
 - The managed network only allows approved outbound traffic (`AllowOnlyApprovedOutbound`) and starts with no outbound rules.
 - System datastores authenticate with the workspace identity.
 - Data isolation and the high business impact flag are enabled.
@@ -28,14 +28,14 @@ Deploys a network-isolated Azure AI Hub workspace with a private endpoint, optio
 
 **Exceptions**
 
-- `ai_studio_hub_connections[*].auth_type` can be set to credential-based types (for example `AccessKey`, `ApiKey` or `ServicePrincipal`) together with `credentials`. Note that `ai_studio_hub_connections` is not marked sensitive.
-- Every connection is shared with all projects of the hub (`isSharedToAll = true`, hard-coded).
-- The module has a `customer_managed_key` input, although the note below states that CMK deployments are not supported for hub workspaces today.
+- `ai_studio_hub_connections[*].auth_type` can be set to credential-based types (for example `AccessKey`, `ApiKey` or `ServicePrincipal`) together with `credentials`. Note that `ai_studio_hub_connections` is not marked sensitive. *Reason:* not stated in the module code. *Mitigation:* prefer `AAD`; if credentials are needed, pass them from a secret store and never commit them.
+- Every connection is shared with all projects of the hub (`isSharedToAll = true`, hard-coded). *Reason:* the variable description says to provide only connections that are shared with all projects at hub level. *Mitigation:* create project-specific connections with the `aistudioproject` module.
+- The module has a `customer_managed_key` input, although the note below states that customer-managed key (CMK) deployments are not supported for hub workspaces today.
 
 **Prerequisites**
 
 - Existing resources: `application_insights_id`, `container_registry_id`, `key_vault_id` and `storage_account_id`, plus `subnet_id` for the private endpoint.
-- Optional private DNS zone IDs `private_dns_zone_id_machine_learning_api` (`privatelink.api.azureml.ms`) and `private_dns_zone_id_machine_learning_notebooks` (`privatelink.notebooks.azure.net`). The DNS zone group is only created when both are set.
+- Optional private Domain Name System (DNS) zone identifiers (IDs) `private_dns_zone_id_machine_learning_api` (`privatelink.api.azureml.ms`) and `private_dns_zone_id_machine_learning_notebooks` (`privatelink.notebooks.azure.net`). The DNS zone group is only created when both are set.
 
 > [!WARNING]
 > **Info for CMK Deployments**

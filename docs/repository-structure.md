@@ -38,9 +38,9 @@ This page describes the content that is committed to the repository. It is a poi
 |------|------|
 | `README.md` | Landing page: purpose, what "secure by default" means and the list of modules. |
 | `.terraform-docs.yml` | Configuration of terraform-docs, which generates the reference part of each module page. |
-| `.pre-commit-config.yaml` | pre-commit hooks: file hygiene, JSON and YAML checks, terraform-docs regeneration and `terraform fmt`. |
+| `.pre-commit-config.yaml` | pre-commit hooks: file hygiene, JavaScript Object Notation (JSON) and YAML Ain't Markup Language (YAML) checks, terraform-docs regeneration and `terraform fmt`. |
 | `requirements.txt` | Pins the `pre-commit` version used to run the hooks. |
 | `.gitignore`, `.gitattributes` | Git ignore rules and line-ending normalization. |
 
 > [!NOTE]
-> A local `archive/` folder may exist in a clone. It is ignored by `.gitignore` (`/archive/*`), so it is not part of the repository content and is not described here.
+> The `archive/` folder is unmaintained and not authoritative; the constitution states that it is not governed by it. `.gitignore` excludes it (`/archive/*`), so it is not part of the repository content.

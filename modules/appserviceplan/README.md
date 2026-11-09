@@ -3,7 +3,7 @@
 
 [![Test workflow](https://github.com/PerfectThymeTech/terraform-azurerm-modules/actions/workflows/terraform-appserviceplan.yml/badge.svg?branch=main)](https://github.com/PerfectThymeTech/terraform-azurerm-modules/actions/workflows/terraform-appserviceplan.yml)
 
-Deploys an Azure App Service plan with configurable SKU, operating system and worker count, with optional diagnostic settings.
+Deploys an Azure App Service plan with configurable SKU (pricing tier), operating system and worker count, with optional diagnostic settings.
 
 ## 📦 Overview
 
@@ -26,7 +26,7 @@ Deploys an Azure App Service plan with configurable SKU, operating system and wo
 
 - Zone balancing can only be enabled with a worker count of 3 or more (stated in the variable description, not enforced by a validation).
 - `service_plan_maximum_elastic_worker_count` can only be set for an elastic SKU.
-- Each `diagnostics_configurations` entry needs a Log Analytics workspace ID, a storage account ID, or both.
+- Each `diagnostics_configurations` entry needs a Log Analytics workspace identifier (ID), a storage account ID, or both.
 
 ## 🚀 Usage
 

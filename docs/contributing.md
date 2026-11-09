@@ -2,6 +2,9 @@
 
 This page explains how to change a module, add a new module, and keep the documentation current. The rules come from the repository [constitution](../.specify/memory/constitution.md); where this page and the constitution differ, the constitution wins.
 
+> [!NOTE]
+> This page is a point-in-time baseline (November 2026). The constitution and the repository files are authoritative.
+
 ## 🔄 Contribution flow
 
 ```mermaid
@@ -40,10 +43,10 @@ A pull request that adds a module contains all of the following:
 | Module code | `modules/<name>/` | Use only the files that apply, as listed in [Module anatomy](module-anatomy.md). Declare providers in `terraform.tf` (`azurerm` constrained to `~> 5.0`). Do not add `provider` blocks. |
 | Documentation | `README_header.md`, `README_footer.md`, generated `README.md` | Follow the [header layout](#-documentation-workflow). Every `variable` and `output` needs a `description`; every script needs a header comment. |
 | Tests | `tests/test.tftest.hcl` | Run with `terraform test`. A `tests/setup/` module that needs other modules references them by relative local path, for example `../../../keyvault`. |
-| CI workflow | `.github/workflows/terraform-<name>.yml` | Copy an existing module workflow, then change the name, both path filters and `config`. It calls `_terraformTestTemplate.yml`. |
+| Continuous integration (CI) workflow | `.github/workflows/terraform-<name>.yml` | Copy an existing module workflow, then change the name, both path filters and `config`. It calls `_terraformTestTemplate.yml`. |
 | Root list entry | `README.md` | Add the module to the table of its category, with a link to `modules/<name>/`. |
 | Catalog entry | [`docs/module-catalog.md`](module-catalog.md) | Add the module to its category and to the relationship diagram if it composes with other modules. |
-| Security entry | [`docs/security.md`](security.md) | Describe the secure defaults and any exception. |
+| Security entry | [`docs/security.md`](security.md) | Describe the secure defaults and any exception, and add the reason and the recommended mitigation of each exception to the [Reasons and mitigations for exceptions](security.md#-reasons-and-mitigations-for-exceptions) table. |
 | Scripted steps | [`docs/scripted-steps.md`](scripted-steps.md) | Only when the module uses a `local-exec` step. |
 
 > [!NOTE]
@@ -83,6 +86,10 @@ The header of every module follows the same layout:
 
 Never edit the generated `README.md` by hand. Edit `README_header.md`, `README_footer.md`, or the Terraform code (descriptions, types, defaults) and regenerate.
 
+### Add a documentation page
+
+When you add a page under `docs/`, add it with a one-line description to the [documentation index](README.md) and link it from the "Where to go next" section of the [root README](../README.md). Those two files are the only places that list the pages.
+
 ### Regenerate the pages
 
 ```bash
@@ -113,5 +120,5 @@ The first run exits with a failure when a hook changed files; run it again and i
 
 - `pre-commit run --all-files` passes and the regenerated `README.md` files are part of the change.
 - Documentation is updated for every changed variable, output, default or behavior.
-- No secret, tenant ID, subscription ID or client ID is added to documentation.
+- No secret, tenant identifier (ID), subscription ID or client ID is added to documentation.
 - For a new module: all deliverables in the table above exist.

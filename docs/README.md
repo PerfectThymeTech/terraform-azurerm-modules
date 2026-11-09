@@ -11,7 +11,7 @@ Documentation for the Terraform modules in this repository. It is a point-in-tim
 | [Common patterns](common-patterns.md) | Inputs and behavior shared across modules |
 | [Contributing](contributing.md) | How to change a module, add a new module and regenerate the documentation |
 | [Testing and automation](testing-and-automation.md) | The GitHub Actions workflows, the provider override file and local checks |
-| [Security](security.md) | The secure-by-default rules, and the secure defaults and exceptions of every module |
+| [Security](security.md) | The secure-by-default rules, the secure defaults and exceptions of every module, and the reasons and mitigations for each exception |
 | [Scripted steps](scripted-steps.md) | Every PowerShell and Azure command-line interface (CLI) step that modules run after Terraform provisions resources |
 
 > [!NOTE]

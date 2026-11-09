@@ -2,6 +2,9 @@
 
 Every folder under `modules/` follows the same layout. A module only contains the files that apply to it. This page lists the standard files and what they are for.
 
+> [!NOTE]
+> This page is a point-in-time baseline (November 2026). The folders in `modules/` and the [constitution](../.specify/memory/constitution.md) are authoritative.
+
 ## 📁 Files and folders
 
 | File or folder | Purpose |

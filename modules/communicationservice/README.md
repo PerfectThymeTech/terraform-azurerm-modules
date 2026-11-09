@@ -25,7 +25,7 @@ Deploys an Azure Communication Services resource with optional diagnostic settin
 
 **Prerequisites**
 
-- Each `diagnostics_configurations` entry needs a Log Analytics workspace ID, a storage account ID, or both.
+- Each `diagnostics_configurations` entry needs a Log Analytics workspace identifier (ID), a storage account ID, or both.
 
 ## 🚀 Usage
 

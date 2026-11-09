@@ -8,7 +8,7 @@ Deploys an Azure Bot with local authentication disabled, public network access o
 
 - An Azure Bot resource linked to an existing Application Insights component.
 - Two private endpoints: one for the `Bot` subresource and one for the `Token` subresource.
-- An optional Application Insights API key (created by default) and optional diagnostic settings.
+- An optional Application Insights application programming interface (API) key (created by default) and optional diagnostic settings.
 - The full list of deployed resources is in [Resources](#resources).
 
 ## 🛡️ Secure defaults
@@ -16,15 +16,15 @@ Deploys an Azure Bot with local authentication disabled, public network access o
 - Local authentication is disabled (hard-coded).
 - Public network access is disabled (`bot_service_public_network_access_enabled` defaults to `false`).
 - Both private endpoints are always created.
-- The bot endpoint and icon URL must use HTTPS (enforced by variable validation).
+- The bot endpoint and the icon Uniform Resource Locator (URL) must use Hypertext Transfer Protocol Secure (HTTPS); variable validation enforces this.
 - Customer-managed key (`customer_managed_key`) and diagnostics (`diagnostics_configurations`) are opt-in.
 
 ## ⚠️ Exceptions and prerequisites
 
 **Exceptions**
 
-- `bot_service_public_network_access_enabled = true` allows public network access.
-- `bot_service_application_insights_key_enabled` defaults to `true`: the module creates an Application Insights API key with read permissions (`aggregate`, `api`, `draft`, `extendqueries`, `search`) and no write permissions, and passes it to the bot.
+- `bot_service_public_network_access_enabled = true` allows public network access. *Reason:* not stated in the module code. *Mitigation:* keep it `false` (default) and use the private endpoints.
+- `bot_service_application_insights_key_enabled` defaults to `true`: the module creates an Application Insights API key with read permissions (`aggregate`, `api`, `draft`, `extendqueries`, `search`) and no write permissions, and passes it to the bot. *Reason:* not stated in the module code. *Mitigation:* set `bot_service_application_insights_key_enabled = false` if the bot does not need the key.
 - Known issue: `customer_managed_key` is validated for several fields, but only `key_vault_key_versionless_id` is used and the module creates no identity or role assignment for the key.
 
 **Prerequisites**
@@ -32,7 +32,7 @@ Deploys an Azure Bot with local authentication disabled, public network access o
 - An existing Application Insights component: `bot_service_application_insights_id`.
 - `bot_service_microsoft_app` with `app_id`, `app_msi_id`, `app_tenant_id` and `app_type` (`MultiTenant`, `SingleTenant` or `UserAssignedMSI`).
 - `bot_service_endpoint` must start with `https://`.
-- `subnet_id` for the private endpoints, and optional private DNS zone IDs `private_dns_zone_id_bot_framework_directline` (`privatelink.directline.botframework.com`) and `private_dns_zone_id_bot_framework_token` (`privatelink.token.botframework.com`).
+- `subnet_id` for the private endpoints, and optional private Domain Name System (DNS) zone identifiers (IDs) `private_dns_zone_id_bot_framework_directline` (`privatelink.directline.botframework.com`) and `private_dns_zone_id_bot_framework_token` (`privatelink.token.botframework.com`).
 - `bot_service_location` is one of `global`, `westeurope`, `westus` or `centralindia` (default `global`); `location` is only used for the private endpoints.
 
 ## 🚀 Usage

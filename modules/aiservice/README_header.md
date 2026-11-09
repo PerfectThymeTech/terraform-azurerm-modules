@@ -12,7 +12,7 @@ Deploys a private-only Cognitive Services account of a chosen kind with optional
 
 ## 🛡️ Secure defaults
 
-- Public network access is disabled and the firewall default action is `Deny` with no IP rules.
+- Public network access is disabled and the firewall default action is `Deny` with no Internet Protocol (IP) rules.
 - Key-based authentication is off (`cognitive_account_local_auth_enabled` defaults to `false`).
 - Outbound network access is restricted (`cognitive_account_outbound_network_access_restricted` defaults to `true`).
 - The account uses a system-assigned managed identity.
@@ -23,15 +23,15 @@ Deploys a private-only Cognitive Services account of a chosen kind with optional
 
 **Exceptions**
 
-- `cognitive_account_local_auth_enabled = true` enables key-based access.
-- `cognitive_account_firewall_bypass_azure_services` (default `false`) sets the firewall bypass to `AzureServices`. Not every AI service kind supports it.
-- `cognitive_account_outbound_network_access_restricted = false` removes the outbound restriction, and `cognitive_account_outbound_network_access_allowed_fqdns` (default `[]`) adds allowed outbound FQDNs.
+- `cognitive_account_local_auth_enabled = true` enables key-based access. *Reason:* not stated in the module code. *Mitigation:* keep it `false` and use Microsoft Entra ID with Azure role-based access control; if keys are unavoidable, store and rotate them in a key vault.
+- `cognitive_account_firewall_bypass_azure_services` (default `false`) sets the firewall bypass to `AzureServices`. Not every AI service kind supports it. *Reason:* the variable description says this is required for some common integration scenarios. *Mitigation:* enable it only when a trusted Azure service needs access, and limit that service with Azure role-based access control.
+- `cognitive_account_outbound_network_access_restricted = false` removes the outbound restriction, and `cognitive_account_outbound_network_access_allowed_fqdns` (default `[]`) adds allowed outbound fully qualified domain names (FQDNs). *Reason:* not stated in the module code. *Mitigation:* keep the restriction on and list only the outbound domain names the workload needs.
 
 **Prerequisites**
 
-- `subnet_id`: the resource ID of the subnet for the private endpoint.
+- `subnet_id`: the resource identifier (ID) of the subnet for the private endpoint.
 - `cognitive_account_kind` must be one of the values allowed by the variable validation (for example `OpenAI`, `SpeechServices` or `FormRecognizer`).
-- Optional `private_dns_zone_id_cognitive_account` must end with `privatelink.cognitiveservices.azure.com` or `privatelink.openai.azure.com`. It is not required when DNS A-records are created through Azure Policy.
+- Optional `private_dns_zone_id_cognitive_account` must end with `privatelink.cognitiveservices.azure.com` or `privatelink.openai.azure.com`. It is not required when Domain Name System (DNS) A-records are created through Azure Policy.
 - `customer_managed_key` needs a Key Vault, key and user-assigned identity (five validated fields).
 - `cognitive_account_deployments` is only applicable to accounts of kind OpenAI.
 

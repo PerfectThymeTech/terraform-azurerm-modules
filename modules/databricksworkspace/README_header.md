@@ -2,19 +2,19 @@
 
 [![Test workflow](https://github.com/PerfectThymeTech/terraform-azurerm-modules/actions/workflows/terraform-databricksworkspace.yml/badge.svg?branch=main)](https://github.com/PerfectThymeTech/terraform-azurerm-modules/actions/workflows/terraform-databricksworkspace.yml)
 
-Deploys a VNet-injected, premium Azure Databricks workspace without public access, with private endpoints and optional customer-managed keys.
+Deploys a premium Azure Databricks workspace that is injected into a virtual network, without public access, with private endpoints and optional customer-managed keys.
 
 ## 📦 Overview
 
-- An Azure Databricks workspace (`azurerm_databricks_workspace`, SKU `premium`) injected into an existing virtual network.
-- Private endpoints for the UI and API, the DBFS `blob` and the DBFS `dfs` endpoints, and optionally for browser authentication.
+- An Azure Databricks workspace (`azurerm_databricks_workspace`, SKU (pricing tier) `premium`) injected into an existing virtual network.
+- Private endpoints for the user interface (UI) and application programming interface (API), the Databricks File System (DBFS) `blob` and the DBFS `dfs` endpoints, and optionally for browser authentication.
 - Optional diagnostic settings and, when `customer_managed_key` is set, customer-managed keys for managed disks, managed services and root DBFS with the required role assignments.
 - The full list of deployed resources is in [Resources](#resources).
 
 ## 🛡️ Secure defaults
 
 - Public network access is disabled; no variable changes it.
-- Clusters have no public IP and the workspace requires no Azure Databricks network security group rules.
+- Clusters have no public Internet Protocol (IP) address and the workspace requires no Azure Databricks network security group rules.
 - Infrastructure encryption and the DBFS storage firewall are enabled.
 - Enhanced security and compliance is on: automatic cluster update, compliance security profile and enhanced security monitoring.
 - Private endpoints for UI and API, DBFS `blob` and DBFS `dfs` are always created with automatic approval.
@@ -29,10 +29,10 @@ Deploys a VNet-injected, premium Azure Databricks workspace without public acces
 
 **Prerequisites**
 
-- An existing virtual network with a private and a public subnet (by name) and their network security group association IDs.
+- An existing virtual network with a private and a public subnet (by name) and their network security group association identifiers (IDs).
 - An existing Azure Databricks access connector: `databricks_workspace_access_connector_id`.
 - `subnet_id` for the private endpoints; optional `location_private_endpoint` when they must reside in another region.
-- Optional private DNS zone IDs ending in `privatelink.azuredatabricks.net`, `privatelink.blob.core.windows.net` and `privatelink.dfs.core.windows.net`. They are not required when DNS A-records are created through Azure Policy.
+- Optional private Domain Name System (DNS) zone IDs ending in `privatelink.azuredatabricks.net`, `privatelink.blob.core.windows.net` and `privatelink.dfs.core.windows.net`. They are not required when DNS A-records are created through Azure Policy.
 - With `customer_managed_key` the module creates role assignments at the Key Vault scope, so the deploying identity must be allowed to create them.
 
 ## 🚀 Usage

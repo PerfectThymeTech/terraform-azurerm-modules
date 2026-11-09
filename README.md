@@ -42,7 +42,7 @@ The [Security](docs/security.md) page lists the rules and the secure defaults an
 | [Azure Databricks Workspace](modules/databricksworkspace/) | Premium Databricks workspace injected into a virtual network, without public access |
 | [Microsoft Fabric Capacity](modules/fabriccapacity/) | Fabric capacity with the deploying identity as administrator |
 | [Microsoft Fabric Workspace](modules/fabricworkspace/) | Fabric workspace on an existing capacity with optional Git, network policy and private link |
-| [Azure SQL Server](modules/mssqlserver/) | SQL logical server with Entra ID-only authentication and a private endpoint |
+| [Azure SQL Server](modules/mssqlserver/) | Structured Query Language (SQL) logical server with Entra ID-only authentication and a private endpoint |
 | [Azure Postgresql Flexible Server](modules/postgresqlflexible/) | PostgreSQL flexible server with Entra ID authentication only and a private endpoint |
 | [Microsoft Purview](modules/purview/) | Purview account with private endpoints for the platform and ingestion storage |
 | [Azure Storage Account](modules/storage/) | Locked-down storage account with Entra ID-first access and private endpoints |

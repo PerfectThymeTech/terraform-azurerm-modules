@@ -13,7 +13,7 @@ Deploys an Azure Application Insights component linked to a Log Analytics worksp
 
 ## 🛡️ Secure defaults
 
-- IP masking is enabled.
+- Internet Protocol (IP) masking is enabled.
 - The instrumentation key and connection string outputs are marked sensitive.
 - Diagnostics (`diagnostics_configurations`) are opt-in.
 
@@ -21,14 +21,14 @@ Deploys an Azure Application Insights component linked to a Log Analytics worksp
 
 **Exceptions**
 
-- Internet ingestion and internet query are enabled by default (`application_insights_internet_ingestion_enabled` and `application_insights_internet_query_enabled` default to `true`).
-- Local authentication stays enabled unless `application_insights_local_authentication_disabled` is set to `true` (default `false`).
+- Internet ingestion and internet query are enabled by default (`application_insights_internet_ingestion_enabled` and `application_insights_internet_query_enabled` default to `true`). *Reason:* not stated in the module code. *Mitigation:* set both to `false` and use an Azure Monitor private link scope outside this module.
+- Local authentication stays enabled unless `application_insights_local_authentication_disabled` is set to `true` (default `false`). *Reason:* not stated in the module code. *Mitigation:* set it to `true` and use Microsoft Entra ID authentication for ingestion.
 - The module has no private endpoint and no network variables.
 
 **Prerequisites**
 
 - An existing Log Analytics workspace: `application_insights_log_analytics_workspace_id`.
-- Each `diagnostics_configurations` entry needs a Log Analytics workspace ID, a storage account ID, or both.
+- Each `diagnostics_configurations` entry needs a Log Analytics workspace identifier (ID), a storage account ID, or both.
 
 ## 🚀 Usage
 

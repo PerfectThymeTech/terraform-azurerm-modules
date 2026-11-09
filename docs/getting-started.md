@@ -13,7 +13,7 @@ This page shows how to use a module from this repository in your own Terraform c
 | Providers | Modules that deploy Azure resources through `azurerm` require `~> 5.0`. Several modules also use `azapi` (`~> 2.0`) and `time` (`~> 0.9`), and `fabricworkspace` also uses the `microsoft/fabric` provider (`~> 1.0`). The exact list is in the **Providers** section of each module page. |
 | Provider configuration | Modules do not contain `provider` blocks. Configure the providers in your own root configuration. |
 | Azure access | Terraform needs an identity that can create the module's resources. Some modules also create role assignments for the identity running Terraform (for example `keyvault` assigns *Key Vault Administrator* and `storage` assigns *Storage Blob Data Owner*), so that identity must be allowed to create role assignments. |
-| Network | Modules for services that support Private Link create private endpoints and take the resource ID of an existing subnet in `subnet_id`. |
+| Network | Modules for services that support Private Link create private endpoints and take the resource identifier (ID) of an existing subnet in `subnet_id`. |
 | Scripts | A few modules run PowerShell or the Azure command-line interface (CLI) from the machine that runs Terraform (`aisearch`, `aistudiooutboundrules`, `datafactory` and `fabricworkspace`). Install `pwsh` and the Azure CLI and run `az login` before `terraform apply` when you use those features. |
 
 ## 🚀 Reference a module
