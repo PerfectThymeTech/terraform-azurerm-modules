@@ -1,7 +1,58 @@
 <!-- BEGIN_TF_DOCS -->
-# Azure Postgresql Flexible Server Terraform Module
+# 📊 Azure Postgresql Flexible Server Terraform Module
 
-## Documentation
+[![Test workflow](https://github.com/PerfectThymeTech/terraform-azurerm-modules/actions/workflows/terraform-postgresqlflexible.yml/badge.svg?branch=main)](https://github.com/PerfectThymeTech/terraform-azurerm-modules/actions/workflows/terraform-postgresqlflexible.yml)
+
+Deploys a PostgreSQL flexible server with Microsoft Entra ID authentication only and private endpoint connectivity, plus optional databases and server parameters.
+
+## 📦 Overview
+
+- An Azure Database for PostgreSQL flexible server (`azurerm_postgresql_flexible_server`).
+- Optional databases (`postgresql_databases`), server parameters (`postgresql_configuration`) and a Microsoft Entra group administrator.
+- A private endpoint for the `postgresqlServer` subresource and optional diagnostic settings.
+- The full list of deployed resources is in [Resources](#resources).
+
+## 🛡️ Secure defaults
+
+- Public network access is disabled.
+- Password authentication is disabled and Microsoft Entra ID authentication is enabled; no administrator login or password is set.
+- The private endpoint uses automatic approval.
+- Backups are kept for 30 days by default (`postgresql_backup_retention_days`, validated between 7 and 35).
+- Customer-managed key (`customer_managed_key`) and diagnostics (`diagnostics_configurations`) are opt-in.
+
+## ⚠️ Exceptions and prerequisites
+
+**Exceptions**
+
+- No input re-enables public network access or password authentication.
+- `postgresql_configuration` passes arbitrary server parameters (no validation).
+- With the default `postgresql_active_directory_administrator = {}` no Microsoft Entra administrator is created, while password authentication is disabled. Set both `object_id` and `group_name` to create one.
+- Known issue: the customer-managed key block passes the Key Vault resource ID where a key ID is expected, so the key configuration does not receive the key ID.
+- Known issue: the `postgresql_storage_tier` validation compares `postgresql_storage_mb` instead of the tier, so any non-null tier fails validation.
+
+**Prerequisites**
+
+- `subnet_id`: the resource ID of the subnet for the private endpoint. The server itself is not injected into the virtual network.
+- Optional private DNS zone ID in `private_dns_zone_id_postrgesql` (the variable name is spelled this way), ending in `privatelink.postgres.database.azure.com`. It is not required when DNS A-records are created through Azure Policy.
+- `postgresql_active_directory_administrator` needs both `object_id` and `group_name` (a Microsoft Entra group), or neither.
+
+## 🚀 Usage
+
+```hcl
+module "postgresql_flexible" {
+  source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/postgresqlflexible?ref=<release-tag>"
+
+  location            = "<azure-region>"
+  resource_group_name = "<resource-group-name>"
+  postgresql_name     = "<postgresql-server-name>"
+  subnet_id           = "<subnet-resource-id>"
+}
+```
+
+> [!TIP]
+> Replace `<release-tag>` with a tag from the [releases page](https://github.com/PerfectThymeTech/terraform-azurerm-modules/releases).
+
+## 📚 Documentation
 <!-- markdownlint-disable MD033 -->
 
 ## Requirements
@@ -13,6 +64,28 @@ The following requirements are needed by this module:
 - <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 5.0)
 
 - <a name="requirement_time"></a> [time](#requirement\_time) (~> 0.9)
+
+## Providers
+
+The following providers are used by this module:
+
+- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 5.0)
+
+- <a name="provider_time"></a> [time](#provider\_time) (~> 0.9)
+
+## Resources
+
+The following resources are used by this module:
+
+- [azurerm_monitor_diagnostic_setting.diagnostic_setting_postgresql_flexible_server](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) (resource)
+- [azurerm_postgresql_flexible_server.postgresql_flexible_server](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_flexible_server) (resource)
+- [azurerm_postgresql_flexible_server_active_directory_administrator.postgresql_flexible_server_active_directory_administrator](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_flexible_server_active_directory_administrator) (resource)
+- [azurerm_postgresql_flexible_server_configuration.postgresql_flexible_server_configuration](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_flexible_server_configuration) (resource)
+- [azurerm_postgresql_flexible_server_database.postgresql_flexible_server_database](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_flexible_server_database) (resource)
+- [azurerm_private_endpoint.private_endpoint_postgresql_flexible_server](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) (resource)
+- [time_sleep.sleep_connectivity](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) (resource)
+- [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) (data source)
+- [azurerm_monitor_diagnostic_categories.diagnostic_categories_postgresql_flexible_server](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/monitor_diagnostic_categories) (data source)
 
 ## Modules
 

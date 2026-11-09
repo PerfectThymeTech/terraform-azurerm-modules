@@ -1,9 +1,60 @@
 <!-- BEGIN_TF_DOCS -->
-# Azure Data Factory Terraform Module
+# 📊 Azure Data Factory Terraform Module
 
-NOTE: The `data_factory_triggers_start` and `data_factory_pipelines_run` features rely on Azure CLI and therefore require you to be authenticated.
+[![Test workflow](https://github.com/PerfectThymeTech/terraform-azurerm-modules/actions/workflows/terraform-datafactory.yml/badge.svg?branch=main)](https://github.com/PerfectThymeTech/terraform-azurerm-modules/actions/workflows/terraform-datafactory.yml)
 
-## Documentation
+Deploys a managed-VNet Azure Data Factory with public access disabled, a private endpoint and optional content deployment, trigger start and pipeline run steps.
+
+## 📦 Overview
+
+- An Azure Data Factory (`azurerm_data_factory`) with a system-assigned managed identity and an optional GitHub or Azure DevOps repository.
+- A private endpoint for the `dataFactory` subresource and optional diagnostic settings.
+- Optional managed private endpoints, an optional ARM template deployment of published content, and optional trigger start and pipeline run steps.
+- The full list of deployed resources is in [Resources](#resources).
+
+## 🛡️ Secure defaults
+
+- Public network access is disabled and the managed virtual network is enabled; no variable changes either.
+- The factory uses a system-assigned managed identity.
+- The private endpoint uses automatic approval (not a manual connection).
+- Customer-managed key (`customer_managed_key`) and diagnostics (`diagnostics_configurations`) are opt-in.
+
+## ⚠️ Exceptions and prerequisites
+
+**Exceptions**
+
+- Every entry in `data_factory_managed_private_endpoints` is approved automatically by a PowerShell script at create time. There is no opt-out flag.
+- `data_factory_triggers_start` and `data_factory_pipelines_run` (default `[]`) run Azure CLI commands (`az datafactory ...`) from the machine that runs Terraform. These two steps set no interpreter, so they use the default shell of that machine.
+- The approval step uses `pwsh` and the Azure CLI.
+
+**Prerequisites**
+
+- `subnet_id`: the resource ID of the subnet for the private endpoint.
+- Optional `private_dns_zone_id_data_factory` ending in `privatelink.datafactory.azure.net`. It is not required when DNS A-records are created through Azure Policy.
+- `data_factory_published_content` needs both a `parameters_file` and a `template_file`; triggers and pipelines only run when published content is set.
+- `data_factory_managed_private_endpoints` entries need `subresource_name` and `target_resource_id`.
+- The Azure CLI (`az`), signed in, and `pwsh` on `PATH` on the machine that runs Terraform when you use these features.
+
+> [!NOTE]
+> The `data_factory_triggers_start` and `data_factory_pipelines_run` features rely on Azure CLI and therefore require you to be authenticated.
+
+## 🚀 Usage
+
+```hcl
+module "data_factory" {
+  source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/datafactory?ref=<release-tag>"
+
+  location            = "<azure-region>"
+  resource_group_name = "<resource-group-name>"
+  data_factory_name   = "<data-factory-name>"
+  subnet_id           = "<subnet-resource-id>"
+}
+```
+
+> [!TIP]
+> Replace `<release-tag>` with a tag from the [releases page](https://github.com/PerfectThymeTech/terraform-azurerm-modules/releases).
+
+## 📚 Documentation
 <!-- markdownlint-disable MD033 -->
 
 ## Requirements
@@ -17,6 +68,32 @@ The following requirements are needed by this module:
 - <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 5.0)
 
 - <a name="requirement_time"></a> [time](#requirement\_time) (~> 0.9)
+
+## Providers
+
+The following providers are used by this module:
+
+- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 5.0)
+
+- <a name="provider_null"></a> [null](#provider\_null)
+
+- <a name="provider_time"></a> [time](#provider\_time) (~> 0.9)
+
+## Resources
+
+The following resources are used by this module:
+
+- [azurerm_data_factory.data_factory](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/data_factory) (resource)
+- [azurerm_data_factory_managed_private_endpoint.data_factory_managed_private_endpoints](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/data_factory_managed_private_endpoint) (resource)
+- [azurerm_monitor_diagnostic_setting.diagnostic_setting_data_factory](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) (resource)
+- [azurerm_private_endpoint.data_factory_private_endpoint_data_factory](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) (resource)
+- [azurerm_resource_group_template_deployment.data_factory_content_deployment](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group_template_deployment) (resource)
+- [null_resource.data_factory_managed_private_endpoint_storage_blob_approval](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) (resource)
+- [null_resource.data_factory_pipelines_run](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) (resource)
+- [null_resource.data_factory_triggers_start](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) (resource)
+- [time_sleep.sleep_connectivity](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) (resource)
+- [azurerm_monitor_diagnostic_categories.diagnostic_categories_data_factory](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/monitor_diagnostic_categories) (data source)
+- [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subscription) (data source)
 
 ## Modules
 
