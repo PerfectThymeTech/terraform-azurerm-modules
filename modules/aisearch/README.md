@@ -1,7 +1,58 @@
 <!-- BEGIN_TF_DOCS -->
-# Azure AI Search Terraform Module
+# 🤖 Azure AI Search Terraform Module
 
-## Documentation
+[![Test workflow](https://github.com/PerfectThymeTech/terraform-azurerm-modules/actions/workflows/terraform-aisearch.yml/badge.svg?branch=main)](https://github.com/PerfectThymeTech/terraform-azurerm-modules/actions/workflows/terraform-aisearch.yml)
+
+Deploys a private-only Azure AI Search service with optional shared private links that a script can approve.
+
+## 📦 Overview
+
+- An Azure AI Search service with a system-assigned managed identity.
+- A private endpoint for the `searchService` subresource and optional diagnostic settings.
+- Optional shared private links to other resources and, for links with `approve = true`, a PowerShell step that approves the connection on the target resource.
+- The full list of deployed resources is in [Resources](#resources).
+
+## 🛡️ Secure defaults
+
+- Public network access is disabled and no IP addresses are allowed.
+- API-key (local) authentication is off (`search_service_local_authentication_enabled` defaults to `false`).
+- The service uses a system-assigned managed identity.
+- The private endpoint is always created.
+- Diagnostics (`diagnostics_configurations`) are opt-in.
+
+## ⚠️ Exceptions and prerequisites
+
+**Exceptions**
+
+- The network rule bypass option is hard-coded to `AzureServices`; there is no variable to change it.
+- `search_service_local_authentication_enabled = true` enables key-based authentication.
+- Shared private links with `approve = true` run PowerShell and the Azure CLI on the machine that runs Terraform.
+- Known issue: `customer_managed_key` only switches on customer-managed key enforcement. The key fields are not used by any resource, and the module has no role assignment for the key.
+
+**Prerequisites**
+
+- `subnet_id`: the resource ID of the subnet for the private endpoint.
+- Optional `private_dns_zone_id_search_service` (`privatelink.search.windows.net`). It is not required when DNS A-records are created through Azure Policy.
+- Each shared private link needs a `target_resource_id` and a `subresource_name`.
+- For `approve = true`: `pwsh` and the Azure CLI (`az`), signed in, on the machine that runs Terraform.
+
+## 🚀 Usage
+
+```hcl
+module "ai_search" {
+  source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/aisearch?ref=<release-tag>"
+
+  location            = "<azure-region>"
+  resource_group_name = "<resource-group-name>"
+  search_service_name = "<search-service-name>"
+  subnet_id           = "<subnet-resource-id>"
+}
+```
+
+> [!TIP]
+> Replace `<release-tag>` with a tag from the [releases page](https://github.com/PerfectThymeTech/terraform-azurerm-modules/releases).
+
+## 📚 Documentation
 <!-- markdownlint-disable MD033 -->
 
 ## Requirements
@@ -13,6 +64,29 @@ The following requirements are needed by this module:
 - <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 5.0)
 
 - <a name="requirement_time"></a> [time](#requirement\_time) (~> 0.9)
+
+## Providers
+
+The following providers are used by this module:
+
+- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 5.0)
+
+- <a name="provider_null"></a> [null](#provider\_null)
+
+- <a name="provider_time"></a> [time](#provider\_time) (~> 0.9)
+
+## Resources
+
+The following resources are used by this module:
+
+- [azurerm_monitor_diagnostic_setting.diagnostic_setting_search_service](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) (resource)
+- [azurerm_private_endpoint.private_endpoint_search_service](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) (resource)
+- [azurerm_search_service.search_service](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/search_service) (resource)
+- [azurerm_search_shared_private_link_service.search_shared_private_link_service](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/search_shared_private_link_service) (resource)
+- [null_resource.search_shared_private_link_service_approval](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) (resource)
+- [time_sleep.sleep_connectivity](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) (resource)
+- [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) (data source)
+- [azurerm_monitor_diagnostic_categories.diagnostic_categories_search_service](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/monitor_diagnostic_categories) (data source)
 
 ## Modules
 

@@ -6,8 +6,11 @@ header-from: "README_header.md"
 footer-from: "README_footer.md"
 
 recursive:
-  enabled: false
+  enabled: true
   path: modules
+  include-main: false
+  exclude:
+    - tests
 
 sections:
   hide: []
@@ -16,10 +19,14 @@ sections:
 content: |
   {{ .Header }}
 
-  ## Documentation
+  ## 📚 Documentation
   <!-- markdownlint-disable MD033 -->
 
   {{ .Requirements }}
+
+  {{ .Providers }}
+
+  {{ .Resources }}
 
   {{ .Modules }}
 

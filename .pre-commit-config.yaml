@@ -1,33 +1,4 @@
-exclude: |
-  (?x)^(
-    modules/aifoundrybasic/README.md|
-    modules/aisearch/README.md|
-    modules/aiservice/README.md|
-    modules/aistudiohub/README.md|
-    modules/aistudioproject/README.md|
-    modules/applicationinsights/README.md|
-    modules/appserviceplan/README.md|
-    modules/botservice/README.md|
-    modules/communicationservice/README.md|
-    modules/containerregistry/README.md|
-    modules/cosmosdb/README.md|
-    modules/databricksaccessconnector/README.md|
-    modules/databricksworkspace/README.md|
-    modules/datafactory/README.md|
-    modules/eventgridnamespace/README.md|
-    modules/eventhubnamespace/README.md|
-    modules/fabriccapacity/README.md|
-    modules/fabricworkspace/README.md|
-    modules/keyvault/README.md|
-    modules/loganalytics/README.md|
-    modules/mssqlserver/README.md|
-    modules/postgresqlflexible/README.md|
-    modules/purview/README.md|
-    modules/storage/README.md|
-    modules/userassignedidentity/README.md|
-    modules/aistudiooutboundrules/README.md|
-    modules/synapseprivetlinkhub/README.md
-  )$
+exclude: ^modules/[^/]+/README\.md$
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.4.0
@@ -42,59 +13,10 @@ repos:
   rev: v0.24.0
   hooks:
     - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/aifoundrybasic"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/aisearch"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/aiservice"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/aistudiohub"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/aistudioproject"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/applicationinsights"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/appserviceplan"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/botservice"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/communicationservice"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/containerregistry"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/cosmosdb"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/databricksaccessconnector"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/databricksworkspace"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/datafactory"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/eventgridnamespace"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/eventhubnamespace"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/fabriccapacity"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/fabricworkspace"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/keyvault"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/loganalytics"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/mssqlserver"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/postgresqlflexible"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/purview"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/storage"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/userassignedidentity"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/aistudiooutboundrules"]
-    - id: terraform-docs-go
-      args: ["-c", "./.terraform-docs.yml", "./modules/synapseprivetlinkhub"]
+      name: terraform-docs (all modules)
+      args: ["-c", ".terraform-docs.yml", "."]
+      types: [text]
+      files: ^modules/
 - repo: local
   hooks:
     - id: terraform-fmt

@@ -1,9 +1,63 @@
 <!-- BEGIN_TF_DOCS -->
-# Microsoft Fabric Workspace Terraform Module
+# 📊 Microsoft Fabric Workspace Terraform Module
 
-NOTE: Be aware that support for service principal authentication is limited today. For most of the API endpoints, service principal authentication will be added over time.
+[![Test workflow](https://github.com/PerfectThymeTech/terraform-azurerm-modules/actions/workflows/terraform-fabricworkspace.yml/badge.svg?branch=main)](https://github.com/PerfectThymeTech/terraform-azurerm-modules/actions/workflows/terraform-fabricworkspace.yml)
 
-## Documentation
+Creates a Microsoft Fabric workspace on an existing capacity with optional Git integration, Spark settings, role assignments, network policy, private link and managed private endpoints.
+
+## 📦 Overview
+
+- A Fabric workspace (`fabric_workspace`) on the capacity named in `workspace_capacity_name`, with optional Spark settings and Git integration.
+- A workspace network communication policy and, when `workspace_outbound_gateway_rules` applies, outbound gateway rules.
+- Optional inbound private link (a private link service for Fabric and a private endpoint), role assignments and managed private endpoints.
+- Optional PowerShell steps for domain assignment, tags, OneLake diagnostics and managed private endpoint approval.
+- The full list of deployed resources is in [Resources](#resources).
+
+## 🛡️ Secure defaults
+
+- The workspace identity is on by default (`workspace_identity_enabled` defaults to `true`).
+- When private link is enabled (`workspace_private_endpoint_enabled`), the private endpoint uses automatic approval.
+- The scripts obtain the Fabric API token from the Azure CLI session at run time; no secret is stored in the module.
+
+## ⚠️ Exceptions and prerequisites
+
+**Exceptions**
+
+- The network communication policy defaults to `Allow` for both inbound and outbound public access, and the outbound gateway rules default to `Allow`.
+- Private link is off by default (`workspace_private_endpoint_enabled = false`).
+- With `workspace_managed_private_endpoints[*].approve = true`, connections are approved by a script (the attribute has no default).
+- The Git integration is hard-coded to `PreferWorkspace` with `allow_override_items = true`.
+- Several steps run PowerShell and the Azure CLI on the machine that runs Terraform (domain, tags, OneLake diagnostics and approval).
+
+**Prerequisites**
+
+- An existing Fabric capacity looked up by `workspace_capacity_name`. In practice the input is required: its validation and the capacity lookup do not tolerate `null`, although it has a `null` default.
+- `subnet_id` has no default and is required even when private link is disabled.
+- `workspace_git` is not supported when deploying with a service principal.
+- `pwsh` and the Azure CLI (`az`), signed in, on the machine that runs Terraform. The signed-in identity must be allowed to call the Fabric REST API and, for approvals, to approve private endpoint connections on the target resource.
+- Terraform `~> 1.8` and the `microsoft/fabric` provider (`~> 1.0`).
+
+> [!NOTE]
+> Be aware that support for service principal authentication is limited today. For most of the API endpoints, service principal authentication will be added over time.
+
+## 🚀 Usage
+
+```hcl
+module "fabric_workspace" {
+  source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/fabricworkspace?ref=<release-tag>"
+
+  location                = "<azure-region>"
+  resource_group_name     = "<resource-group-name>"
+  workspace_display_name  = "<workspace-display-name>"
+  workspace_capacity_name = "<fabric-capacity-name>"
+  subnet_id               = "<subnet-resource-id>"
+}
+```
+
+> [!TIP]
+> Replace `<release-tag>` with a tag from the [releases page](https://github.com/PerfectThymeTech/terraform-azurerm-modules/releases).
+
+## 📚 Documentation
 <!-- markdownlint-disable MD033 -->
 
 ## Requirements
@@ -19,6 +73,41 @@ The following requirements are needed by this module:
 - <a name="requirement_fabric"></a> [fabric](#requirement\_fabric) (~> 1.0)
 
 - <a name="requirement_time"></a> [time](#requirement\_time) (~> 0.9)
+
+## Providers
+
+The following providers are used by this module:
+
+- <a name="provider_azapi"></a> [azapi](#provider\_azapi) (~> 2.0)
+
+- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 5.0)
+
+- <a name="provider_fabric"></a> [fabric](#provider\_fabric) (~> 1.0)
+
+- <a name="provider_null"></a> [null](#provider\_null)
+
+- <a name="provider_time"></a> [time](#provider\_time) (~> 0.9)
+
+## Resources
+
+The following resources are used by this module:
+
+- [azapi_resource.fabric_private_link_service](https://registry.terraform.io/providers/Azure/azapi/latest/docs/resources/resource) (resource)
+- [azurerm_private_endpoint.private_endpoint_workspace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) (resource)
+- [fabric_spark_workspace_settings.workspace_settings](https://registry.terraform.io/providers/microsoft/fabric/latest/docs/resources/spark_workspace_settings) (resource)
+- [fabric_workspace.workspace](https://registry.terraform.io/providers/microsoft/fabric/latest/docs/resources/workspace) (resource)
+- [fabric_workspace_git.workspace_git](https://registry.terraform.io/providers/microsoft/fabric/latest/docs/resources/workspace_git) (resource)
+- [fabric_workspace_managed_private_endpoint.workspace_managed_private_endpoint](https://registry.terraform.io/providers/microsoft/fabric/latest/docs/resources/workspace_managed_private_endpoint) (resource)
+- [fabric_workspace_network_communication_policy.workspace_network_communication_policy](https://registry.terraform.io/providers/microsoft/fabric/latest/docs/resources/workspace_network_communication_policy) (resource)
+- [fabric_workspace_outbound_gateway_rules.workspace_outbound_gateway_rules](https://registry.terraform.io/providers/microsoft/fabric/latest/docs/resources/workspace_outbound_gateway_rules) (resource)
+- [fabric_workspace_role_assignment.workspace_role_assignment](https://registry.terraform.io/providers/microsoft/fabric/latest/docs/resources/workspace_role_assignment) (resource)
+- [null_resource.workspace_disagnostics_onelake](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) (resource)
+- [null_resource.workspace_domain](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) (resource)
+- [null_resource.workspace_managed_private_endpoint_approval](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) (resource)
+- [null_resource.workspace_tags](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) (resource)
+- [time_sleep.sleep_connectivity](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) (resource)
+- [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) (data source)
+- [fabric_capacity.capacity](https://registry.terraform.io/providers/microsoft/fabric/latest/docs/data-sources/capacity) (data source)
 
 ## Modules
 
