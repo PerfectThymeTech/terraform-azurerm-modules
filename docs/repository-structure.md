@@ -43,4 +43,4 @@ This page describes the content that is committed to the repository. It is a poi
 | `.gitignore`, `.gitattributes` | Git ignore rules and line-ending normalization. |
 
 > [!NOTE]
-> The `archive/` folder is unmaintained and not authoritative; the constitution states that it is not governed by it. `.gitignore` excludes it (`/archive/*`), so it exists only in some local clones (where it holds old experiments, for example test configurations and a Bicep file) and is not part of the repository content.
+> The `archive/` folder is unmaintained and not authoritative; the constitution states that it is not governed by it. `.gitignore` excludes it (`/archive/*`), so it is not part of the repository content.

@@ -46,7 +46,7 @@ A pull request that adds a module contains all of the following:
 | Continuous integration (CI) workflow | `.github/workflows/terraform-<name>.yml` | Copy an existing module workflow, then change the name, both path filters and `config`. It calls `_terraformTestTemplate.yml`. |
 | Root list entry | `README.md` | Add the module to the table of its category, with a link to `modules/<name>/`. |
 | Catalog entry | [`docs/module-catalog.md`](module-catalog.md) | Add the module to its category and to the relationship diagram if it composes with other modules. |
-| Security entry | [`docs/security.md`](security.md) | Describe the secure defaults and any exception. |
+| Security entry | [`docs/security.md`](security.md) | Describe the secure defaults and any exception, and add the reason and the recommended mitigation of each exception to the [Reasons and mitigations for exceptions](security.md#-reasons-and-mitigations-for-exceptions) table. |
 | Scripted steps | [`docs/scripted-steps.md`](scripted-steps.md) | Only when the module uses a `local-exec` step. |
 
 > [!NOTE]
