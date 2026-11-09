@@ -44,7 +44,7 @@ flowchart LR
 | 7 | `fabricworkspace` | Assign the workspace to a domain | `domain.tf` | When `workspace_domain_id` is set, on create | `Set-WorkspaceDomain.ps1` | `pwsh` |
 | 8 | `fabricworkspace` | Remove the workspace from the domain | `domain.tf` | On destroy of the same resource | `Set-WorkspaceDomain.ps1 -Unassign $true` | `pwsh` |
 | 9 | `fabricworkspace` | Approve a managed private endpoint | `managedprivateendpoint.tf` | For each endpoint with `approve = true` (no default), on create | `Approve-ManagedPrivateEndpoint.ps1` | `pwsh` |
-| 10 | `fabricworkspace` | Apply a tag | `tags.tf` | For each ID in `workspace_tag_ids`, on create | `Set-WorkspaceTags.ps1` | `pwsh` |
+| 10 | `fabricworkspace` | Apply a tag | `tags.tf` | For each identifier (ID) in `workspace_tag_ids`, on create | `Set-WorkspaceTags.ps1` | `pwsh` |
 | 11 | `fabricworkspace` | Remove a tag | `tags.tf` | On destroy of the same resource | `Set-WorkspaceTags.ps1 -Unassign $true` | `pwsh` |
 
 Rows 3 and 4 are inline commands; all other rows call a script in the module's `scripts/` folder (`working_dir` is `${path.module}/scripts/`).
@@ -56,7 +56,7 @@ Rows 3 and 4 are inline commands; all other rows call a script in the module's `
 | `Approve-ManagedPrivateEndpoint.ps1` | `aisearch` | Finds the private endpoint connection on the target resource whose description equals the request message, waits for it to appear and approves it unless it is already approved | `ResourceId`, `WorkspaceName`, `ManagedPrivateEndpointName`, `RequestMessage` | List, show and approve private endpoint connections on the target resource |
 | `Approve-ManagedPrivateEndpoint.ps1` | `aistudiooutboundrules` | Finds the connection by the endpoint name, fails when its status is `Failed`, and approves it unless it is already approved | `ResourceId`, `ManagedPrivateEndpointName`, optional `CheckIntervalInSeconds` and `Retries` (default 10 each) | List and approve private endpoint connections on the target resource |
 | `Approve-ManagedPrivateEndpoint.ps1` | `datafactory`, `fabricworkspace` (identical copies) | Finds the connection whose private endpoint ID contains `<WorkspaceName>.<ManagedPrivateEndpointName>`, waits for it to appear and approves it unless it is already approved | `ResourceId`, `WorkspaceName`, `ManagedPrivateEndpointName` | List and approve private endpoint connections on the target resource |
-| `Set-WorkspaceDomain.ps1` | `fabricworkspace` | Calls the Fabric REST API `assignToDomain` or, with `-Unassign $true`, `unassignFromDomain` | `WorkspaceId`, `DomainId`, optional `Unassign` | Permission to assign workspaces to the domain in Fabric |
+| `Set-WorkspaceDomain.ps1` | `fabricworkspace` | Calls the Fabric Representational State Transfer (REST) application programming interface (API) `assignToDomain` or, with `-Unassign $true`, `unassignFromDomain` | `WorkspaceId`, `DomainId`, optional `Unassign` | Permission to assign workspaces to the domain in Fabric |
 | `Set-WorkspaceTags.ps1` | `fabricworkspace` | Calls the Fabric REST API `applyTags` or, with `-Unassign $true`, `unapplyTags` | `WorkspaceId`, `TagIds`, optional `Unassign` | Permission to apply tags to the workspace in Fabric |
 | `Set-WorkspaceOneLakeDiagnostics.ps1` | `fabricworkspace` | Calls the Fabric REST API `onelake/settings/modifyDiagnostics` to enable diagnostics with a lakehouse as the destination | `WorkspaceId`, `OneLakeDiagnosticsWorkspaceId`, `OneLakeDiagnosticsLakehouseId` | Permission to change OneLake diagnostics settings of the workspace in Fabric |
 

@@ -2,9 +2,12 @@
 
 All modules in this repository, grouped by what they are used for. Each entry links to the module page. Every module appears exactly once.
 
+> [!NOTE]
+> This page is a point-in-time baseline (November 2026). The module code and each module page are authoritative.
+
 ## 🔗 How modules combine
 
-Some modules take the resource ID of another module's output. These relationships are required inputs in the module code.
+Some modules take the resource identifier (ID) of another module's output. These relationships are required inputs in the module code.
 
 ```mermaid
 flowchart LR
@@ -50,7 +53,7 @@ flowchart LR
 | [databricksworkspace](../modules/databricksworkspace/) | Azure Databricks | Premium workspace injected into a virtual network, without public access |
 | [fabriccapacity](../modules/fabriccapacity/) | Microsoft Fabric | Capacity with the deploying identity as administrator |
 | [fabricworkspace](../modules/fabricworkspace/) | Microsoft Fabric | Workspace on an existing capacity with optional Git, network policy and private link |
-| [mssqlserver](../modules/mssqlserver/) | Azure SQL Database | Logical server with Microsoft Entra ID-only authentication and a private endpoint |
+| [mssqlserver](../modules/mssqlserver/) | Azure SQL Database | Logical server for Structured Query Language (SQL) databases with Microsoft Entra ID-only authentication and a private endpoint |
 | [postgresqlflexible](../modules/postgresqlflexible/) | Azure Database for PostgreSQL | Flexible server with Entra ID authentication only and a private endpoint |
 | [purview](../modules/purview/) | Microsoft Purview | Account with private endpoints for the platform and ingestion storage |
 | [storage](../modules/storage/) | Azure Storage | Locked-down account with Entra ID-first access and private endpoints |

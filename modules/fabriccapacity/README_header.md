@@ -11,13 +11,13 @@ Deploys a Microsoft Fabric capacity in Azure with the deploying identity and opt
 
 ## 🛡️ Secure defaults
 
-- None. The module only sets the SKU and the capacity administrators; it defines no network, identity or encryption settings.
+- None. The module only sets the SKU (pricing tier) and the capacity administrators; it defines no network, identity or encryption settings.
 
 ## ⚠️ Exceptions and prerequisites
 
 **Exceptions**
 
-- The object ID of the identity that runs Terraform is always added as a capacity administrator. `fabric_capacity_admin_emails` (default `[]`) adds further administrators.
+- The object ID of the identity that runs Terraform is always added as a capacity administrator. `fabric_capacity_admin_emails` (default `[]`) adds further administrators. *Reason:* not stated in the module code. *Mitigation:* limit who can run Terraform, and list further administrators only when needed.
 
 **Prerequisites**
 

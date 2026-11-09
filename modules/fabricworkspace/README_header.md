@@ -16,24 +16,24 @@ Creates a Microsoft Fabric workspace on an existing capacity with optional Git i
 
 - The workspace identity is on by default (`workspace_identity_enabled` defaults to `true`).
 - When private link is enabled (`workspace_private_endpoint_enabled`), the private endpoint uses automatic approval.
-- The scripts obtain the Fabric API token from the Azure CLI session at run time; no secret is stored in the module.
+- The scripts obtain the Fabric application programming interface (API) token from the Azure command-line interface (CLI) session at run time; no secret is stored in the module.
 
 ## ⚠️ Exceptions and prerequisites
 
 **Exceptions**
 
-- The network communication policy defaults to `Allow` for both inbound and outbound public access, and the outbound gateway rules default to `Allow`.
-- Private link is off by default (`workspace_private_endpoint_enabled = false`).
-- With `workspace_managed_private_endpoints[*].approve = true`, connections are approved by a script (the attribute has no default).
-- The Git integration is hard-coded to `PreferWorkspace` with `allow_override_items = true`.
-- Several steps run PowerShell and the Azure CLI on the machine that runs Terraform (domain, tags, OneLake diagnostics and approval).
+- The network communication policy (`workspace_network_communication_policy`) defaults to `Allow` for both inbound and outbound public access, and the outbound gateway rules (`workspace_outbound_gateway_rules`) default to `Allow`. *Reason:* not stated in the module code. *Mitigation:* set `default_action = "Deny"` in both variables and enable private link.
+- Private link is off by default (`workspace_private_endpoint_enabled = false`). *Reason:* not stated in the module code. *Mitigation:* set `workspace_private_endpoint_enabled = true`.
+- With `workspace_managed_private_endpoints[*].approve = true`, connections are approved by a script (the attribute has no default). *Reason:* not stated in the module code. *Mitigation:* run Terraform from a trusted machine or pipeline whose identity can approve only the connections you intend.
+- The Git integration is hard-coded to `PreferWorkspace` with `allow_override_items = true`. *Reason:* not stated in the module code. *Mitigation:* review the Git settings before you use `workspace_git`.
+- Several steps run PowerShell and the Azure CLI on the machine that runs Terraform (domain, tags, OneLake diagnostics and approval; see [Scripted steps](../../docs/scripted-steps.md)). *Reason:* not stated in the module code. *Mitigation:* run Terraform from a trusted machine or pipeline whose identity has least privilege in Fabric.
 
 **Prerequisites**
 
 - An existing Fabric capacity looked up by `workspace_capacity_name`. In practice the input is required: its validation and the capacity lookup do not tolerate `null`, although it has a `null` default.
 - `subnet_id` has no default and is required even when private link is disabled.
 - `workspace_git` is not supported when deploying with a service principal.
-- `pwsh` and the Azure CLI (`az`), signed in, on the machine that runs Terraform. The signed-in identity must be allowed to call the Fabric REST API and, for approvals, to approve private endpoint connections on the target resource.
+- `pwsh` and the Azure CLI (`az`), signed in, on the machine that runs Terraform. The signed-in identity must be allowed to call the Fabric Representational State Transfer (REST) API and, for approvals, to approve private endpoint connections on the target resource.
 - Terraform `~> 1.8` and the `microsoft/fabric` provider (`~> 1.0`).
 
 > [!NOTE]

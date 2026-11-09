@@ -11,7 +11,7 @@ The rules come from Principle III of the repository [constitution](../.specify/m
 
 - Public network access is disabled by default, and private connectivity uses Private Link private endpoints where the service supports them.
 - Authentication uses Microsoft Entra ID and Azure role-based access control (RBAC). Shared keys, local authentication, access policies and anonymous access are disabled where the service allows.
-- Encryption in transit (current minimum Transport Layer Security (TLS) version, HTTPS only) and at rest is enabled. Protection features such as soft delete and purge protection are enabled where available.
+- Encryption in transit (current minimum Transport Layer Security (TLS) version, Hypertext Transfer Protocol Secure (HTTPS) only) and at rest is enabled. Protection features such as soft delete and purge protection are enabled where available.
 - Diagnostic settings are supported for services that expose logs or metrics.
 - Secrets are never hard-coded, committed or output in plain text. Variables and outputs that carry secrets are marked `sensitive = true`.
 - Insecure settings are not exposed as a convenience. Where a variable relaxes a secure setting, its default is the secure value.
@@ -42,17 +42,17 @@ The module pages list exceptions under **Exceptions and prerequisites**. Where t
 
 ## 📋 Secure defaults and exceptions per module
 
-Each row cites the files that contain the settings, relative to the module folder (for example `main.tf` of `keyvault` is `modules/keyvault/main.tf`). Module names link to the module page.
+Each row cites the files that contain the settings, relative to the module folder (for example `main.tf` of `keyvault` is `modules/keyvault/main.tf`). Module names link to the module page. The reason and the recommended mitigation for each exception are in [Reasons and mitigations for exceptions](#-reasons-and-mitigations-for-exceptions).
 
 ### 🤖 AI and Cognitive Services
 
 | Module | Secure defaults | Documented exceptions | Source |
 |--------|-----------------|-----------------------|--------|
 | [aifoundrybasic](../modules/aifoundrybasic/) | Public access disabled; firewall `Deny`; outbound access restricted; system-assigned identity; private endpoint always created | Firewall bypass `AzureServices` through `ai_services_firewall_bypass_azure_services` (default `false`); outbound restriction can be removed and fully qualified domain names (FQDNs) allowed | `main.tf`, `connectivity.tf`, `variables.tf` |
-| [aisearch](../modules/aisearch/) | Public access disabled; API-key authentication off; system-assigned identity; private endpoint always created | Network bypass hard-coded to `AzureServices`; `search_service_local_authentication_enabled = true` enables keys; approved shared private links run a script | `main.tf`, `connectivity.tf`, `sharedprivatelink.tf` |
+| [aisearch](../modules/aisearch/) | Public access disabled; application programming interface (API) key authentication off; system-assigned identity; private endpoint always created | Network bypass hard-coded to `AzureServices`; `search_service_local_authentication_enabled = true` enables keys; approved shared private links run a script | `main.tf`, `connectivity.tf`, `sharedprivatelink.tf` |
 | [aiservice](../modules/aiservice/) | Public access disabled; firewall `Deny`; key authentication off; outbound access restricted; system-assigned identity; private endpoint always created | `cognitive_account_local_auth_enabled = true`; optional firewall bypass `AzureServices`; outbound restriction can be removed | `main.tf`, `connectivity.tf`, `variables.tf` |
 | [aistudiohub](../modules/aistudiohub/) | Public access disabled; managed network `AllowOnlyApprovedOutbound` with no rules; workspace-identity datastores; data isolation and high business impact on; system-assigned identity; private endpoint always created; connections use Entra ID (`AAD`) | Connections can use credential-based authentication and are shared with all projects (`isSharedToAll = true`, hard-coded); the connections variable is not marked sensitive | `main.tf`, `connectivity.tf`, `connections.tf` |
-| [aistudiooutboundrules](../modules/aistudiooutboundrules/) | Isolation mode `AllowOnlyApprovedOutbound`; default private endpoint rules to the hub storage account (`table`, `queue`); provisioning and approval off | Variables add FQDN, service-endpoint and private-endpoint rules; a default FQDN allow-list and an `AzureOpenDatasets` service tag rule are always merged in; approval runs a script | `main.tf`, `locals.tf` |
+| [aistudiooutboundrules](../modules/aistudiooutboundrules/) | Isolation mode `AllowOnlyApprovedOutbound`; default private endpoint rules to the hub storage account (`table`, `queue`); provisioning and approval off | Variables add domain name, service-endpoint and private-endpoint rules; a default domain name allow-list and an `AzureOpenDatasets` service tag rule are always merged in; approval runs a script | `main.tf`, `locals.tf` |
 | [aistudioproject](../modules/aistudioproject/) | System-assigned identity; connections not shared with other projects (`isSharedToAll = false`); connections use `AAD` by default | Connections can use credential-based authentication and the variable is not marked sensitive; no network or key settings in the module | `main.tf`, `connections.tf` |
 | [botservice](../modules/botservice/) | Local authentication disabled; public access disabled; both private endpoints always created; HTTPS endpoints enforced | `bot_service_public_network_access_enabled = true`; an Application Insights read key is created and passed to the bot by default | `main.tf`, `connectivity.tf`, `variables.tf` |
 
@@ -60,9 +60,9 @@ Each row cites the files that contain the settings, relative to the module folde
 
 | Module | Secure defaults | Documented exceptions | Source |
 |--------|-----------------|-----------------------|--------|
-| [cosmosdb](../modules/cosmosdb/) | Public access disabled; key authentication disabled; TLS 1.2; virtual network filter on; no IP rules; continuous backup | Key authentication can be re-enabled; access key metadata writes and cross-origin resource sharing (CORS) rules can be set; the primary key is exposed as a sensitive output | `main.tf`, `connectivity.tf`, `variables.tf`, `outputs.tf` |
+| [cosmosdb](../modules/cosmosdb/) | Public access disabled; key authentication disabled; TLS 1.2; virtual network filter on; no Internet Protocol (IP) rules; continuous backup | Key authentication can be re-enabled; access key metadata writes and cross-origin resource sharing (CORS) rules can be set; the primary key is exposed as a sensitive output | `main.tf`, `connectivity.tf`, `variables.tf`, `outputs.tf` |
 | [datafactory](../modules/datafactory/) | Public access disabled; managed virtual network enabled; system-assigned identity; private endpoint with automatic approval | Managed private endpoints are always approved by a script; optional trigger-start and pipeline-run steps run the Azure CLI | `main.tf`, `connectivity.tf`, `managedprivateendpoint.tf`, `content.tf` |
-| [databricksaccessconnector](../modules/databricksaccessconnector/) | System-assigned identity; sensitive principal ID output | None | `main.tf`, `outputs.tf` |
+| [databricksaccessconnector](../modules/databricksaccessconnector/) | System-assigned identity; sensitive principal identifier (ID) output | None | `main.tf`, `outputs.tf` |
 | [databricksworkspace](../modules/databricksworkspace/) | Public access disabled; no public IP on clusters; infrastructure encryption; Databricks File System (DBFS) firewall; enhanced security and compliance; private endpoints always created | The browser authentication private endpoint is opt-in; no input relaxes the network or encryption defaults | `main.tf`, `connectivity.tf` |
 | [fabriccapacity](../modules/fabriccapacity/) | None; the module sets only the SKU (pricing tier) and administrators | The identity that runs Terraform is always a capacity administrator | `main.tf` |
 | [fabricworkspace](../modules/fabricworkspace/) | Workspace identity on by default; private endpoint with automatic approval when private link is enabled; scripts use a token from the Azure CLI session | Network communication policy defaults to `Allow` inbound and outbound; private link off by default; Git integration hard-coded to `PreferWorkspace`; several steps run scripts | `connectivity_inbound.tf`, `connectivity_outbound.tf`, `variables.tf` |
@@ -100,6 +100,39 @@ Each row cites the files that contain the settings, relative to the module folde
 |--------|-----------------|-----------------------|--------|
 | [appserviceplan](../modules/appserviceplan/) | None; the module has no network, identity or encryption settings | None | `main.tf` |
 | [containerregistry](../modules/containerregistry/) | Public access disabled; network rules deny by default; admin account off; anonymous pull off; private endpoint; system-assigned identity | Admin account and anonymous pull can be enabled; network bypass hard-coded to `AzureServices` | `main.tf`, `connectivity.tf`, `variables.tf` |
+
+## 🧯 Reasons and mitigations for exceptions
+
+The constitution requires every exception to be documented with the setting, the reason and the recommended mitigation. The table lists them for each module; the module page repeats them under **Exceptions and prerequisites**. *Not stated* means that neither a code comment nor a variable description gives a reason. Mitigations are recommendations, not module behavior. Modules without a row have no documented exception.
+
+| Module | Exception | Reason | Recommended mitigation |
+|--------|-----------|--------|------------------------|
+| `aifoundrybasic` | Firewall bypass `AzureServices` (opt-in) | Variable description: needed for some common integration scenarios, not supported by all AI services | Enable only when a trusted Azure service needs access and limit it with RBAC |
+| `aifoundrybasic`, `aiservice` | Outbound restriction can be removed and domain names allowed | Not stated | Keep the restriction on and list only the domain names the workload needs |
+| `aiservice` | Key-based access (`cognitive_account_local_auth_enabled`); optional firewall bypass | Bypass: same description as above; keys: not stated | Keep keys off and use Microsoft Entra ID; limit trusted services with RBAC |
+| `aisearch` | Bypass hard-coded to `AzureServices`; keys through `search_service_local_authentication_enabled` | Not stated | Keep keys off; limit trusted services with RBAC |
+| `aisearch`, `aistudiooutboundrules`, `datafactory`, `fabricworkspace` | Approval scripts for private endpoint connections | Not stated | Run Terraform from a trusted machine or pipeline whose identity can approve only the intended connections |
+| `aistudiohub` | Credential-based connections | Not stated | Prefer `AAD`; pass credentials from a secret store |
+| `aistudiohub` | Connections shared with all projects (`isSharedToAll = true`) | Variable description: provide only connections shared with all projects at hub level | Create project-specific connections with `aistudioproject` |
+| `aistudioproject` | Credential-based connections | Not stated | Prefer `AAD`; pass credentials from a secret store |
+| `aistudiooutboundrules` | Variables that add outbound destinations | Not stated | Add only needed destinations; prefer private endpoint rules |
+| `aistudiooutboundrules` | Default allow-list always merged in | Code comments in `locals.tf` label the entries as dependencies (general, Python package index, R, Visual Studio Code, samples, Hugging Face, Ubuntu) | Review the list before you deploy; the module cannot remove entries |
+| `applicationinsights` | Internet ingestion and query on by default; local authentication kept | Not stated | Set both ingestion and query inputs to `false` and `application_insights_local_authentication_disabled` to `true`, and use an Azure Monitor private link scope |
+| `botservice` | Public access (opt-in); Application Insights read key by default | Not stated | Keep public access off; set `bot_service_application_insights_key_enabled = false` if the key is not needed |
+| `containerregistry` | Admin account and anonymous pull (opt-in); bypass hard-coded to `AzureServices` | Not stated | Keep both off and use Microsoft Entra ID with managed identities; limit trusted services with RBAC |
+| `cosmosdb` | Key authentication (opt-in); metadata writes and CORS rules; primary key output | Not stated | Keep keys off; list only needed origins; protect the Terraform state that stores the output |
+| `datafactory` | Managed private endpoints always approved; trigger and pipeline steps use the default shell | Not stated | List only trusted targets; run the steps from a trusted machine with a least-privilege identity |
+| `eventhubnamespace` | Local authentication and `manage` or `send` rights (opt-in); trusted service access hard-coded | Not stated | Keep local authentication off and grant only needed rights; limit trusted services with RBAC |
+| `eventhubnamespace` | Network rule set default action `Allow` | Code comment: azurerm 5.3 and later reject `Deny` without rules, and the setting is inert while public access is disabled | Keep public network access disabled (hard-coded) |
+| `fabriccapacity` | Identity that runs Terraform is always an administrator | Not stated | Limit who can run Terraform; list further administrators only when needed |
+| `fabricworkspace` | Network policy and outbound gateway rules default to `Allow`; private link off by default | Not stated | Set `default_action = "Deny"` in both variables and enable private link |
+| `fabricworkspace` | Git integration `PreferWorkspace`; scripted steps | Not stated | Review the Git settings before use; run scripts from a trusted machine |
+| `keyvault` | Bypass hard-coded to `AzureServices`; *Key Vault Administrator* role for the Terraform identity | Not stated | Limit trusted services with RBAC; limit who can run Terraform |
+| `loganalytics` | Internet ingestion and query hard-coded to `Enabled` | Not stated | Use an Azure Monitor private link scope and control queries with RBAC |
+| `mssqlserver` | Terraform identity becomes the Entra administrator | Not stated | Limit who can run Terraform |
+| `postgresqlflexible` | Arbitrary server parameters | Not stated | Review parameters in code review; the module does not validate them |
+| `purview` | Account public network access hard-coded to `Enabled`; manual connections for ingestion private endpoints | Not stated | Control access with Microsoft Entra ID roles on the root collection and the private endpoints; approve connections only for intended storage accounts |
+| `storage` | `storage_public_network_access_enabled` defaults to `true`; shared key, copy scope, bypass, private link access, CORS, SFTP and NFSv3 variables; SAS policy fixed at one day with action `Log` | Not stated | Set public access to `false` when private endpoints cover all access; keep the defaults unless a workload needs a feature; monitor SAS logs |
 
 ## ⚠️ Known gaps that affect security
 

@@ -2,6 +2,9 @@
 
 Inputs and behavior that many modules share. The counts below come from the module variables as of this baseline; always check the module page for the exact inputs of a module.
 
+> [!NOTE]
+> The module code and the generated reference on each module page are authoritative.
+
 ## 🧱 Inputs shared by the modules
 
 | Input | What it does | Where it exists |
@@ -9,7 +12,7 @@ Inputs and behavior that many modules share. The counts below come from the modu
 | `location` | Azure region of the resources | 26 of 27 modules (not `aistudiooutboundrules`) |
 | `resource_group_name` | Resource group that receives the resources | 26 of 27 modules (not `aistudiooutboundrules`) |
 | `tags` | Map of tags for taggable resources, default `{}` | 26 of 27 modules (not `aistudiooutboundrules`) |
-| `subnet_id` | Resource ID of the subnet that receives the private endpoints | 18 modules, the ones that create private endpoints |
+| `subnet_id` | Resource identifier (ID) of the subnet that receives the private endpoints | 18 modules, the ones that create private endpoints |
 | `private_dns_zone_id_*` | Optional private Domain Name System (DNS) zone IDs for the private endpoints | Same 18 modules |
 | `connectivity_delay_in_seconds` | Wait after the private endpoint is created, default `120` | Same 18 modules |
 | `location_private_endpoint` | Region of the private endpoints when it differs from the service | `aifoundrybasic`, `aiservice`, `databricksworkspace` and `purview` |
@@ -37,6 +40,17 @@ The modules `aifoundrybasic`, `aisearch`, `aiservice`, `aistudiohub`, `botservic
 
 > [!CAUTION]
 > The inputs are not used the same way everywhere. Some modules create the role assignment for the key, others expect you to grant access outside the module, and in some modules not every field is used. Read the **Exceptions and prerequisites** section of the module page before you rely on it.
+
+## 🧩 Combining modules
+
+Some modules take the resource ID of another module's output as a required input. The diagram on the [Module catalog](module-catalog.md#-how-modules-combine) page shows the relationships. The links that exist in the module code are:
+
+- `aistudiohub` takes the IDs of an Application Insights component, a container registry, a Key Vault and a storage account.
+- `aistudioproject` and `aistudiooutboundrules` take the ID of an AI Hub, and `aistudiooutboundrules` also takes the storage account ID of that hub.
+- `applicationinsights` takes a Log Analytics workspace ID and `botservice` takes an Application Insights ID.
+- `databricksworkspace` takes the ID of a Databricks access connector.
+- `fabricworkspace` looks up an existing Fabric capacity by name.
+- `diagnostics_configurations` accepts the ID of a Log Analytics workspace or a storage account.
 
 ## 🛡️ Secure-default exceptions
 

@@ -21,7 +21,7 @@ Deploys an Azure AI Project attached to an existing Azure AI Hub, with optional 
 
 **Exceptions**
 
-- `ai_studio_project_connections[*].auth_type` can be set to credential-based types (for example `AccessKey`, `ApiKey` or `ServicePrincipal`) together with `credentials`. Note that `ai_studio_project_connections` is not marked sensitive.
+- `ai_studio_project_connections[*].auth_type` can be set to credential-based types (for example `AccessKey`, `ApiKey` or `ServicePrincipal`) together with `credentials`. Note that `ai_studio_project_connections` is not marked sensitive. *Reason:* not stated in the module code. *Mitigation:* prefer `AAD`; if credentials are needed, pass them from a secret store and never commit them.
 - The module defines no private endpoint, network or customer-managed key settings.
 
 **Prerequisites**

@@ -22,9 +22,9 @@ Applies all user-defined managed network outbound rules of an existing Azure AI 
 
 **Exceptions**
 
-- `ai_studio_hub_outbound_rules_fqdns`, `ai_studio_hub_outbound_rules_service_endpoints` and `ai_studio_hub_outbound_rules_private_endpoints` (default `{}`) add allowed outbound destinations.
-- A default FQDN allow-list (for example `*.docker.io`, `*.anaconda.com`, `huggingface.co` and `*.vscode.dev`) and an `AzureOpenDatasets` service tag rule on TCP 443 are always merged into the rules. There is no variable to remove them.
-- With `ai_studio_hub_approve_private_endpoints = true` the module runs PowerShell and the Azure CLI on the machine that runs Terraform.
+- `ai_studio_hub_outbound_rules_fqdns`, `ai_studio_hub_outbound_rules_service_endpoints` and `ai_studio_hub_outbound_rules_private_endpoints` (default `{}`) add allowed outbound destinations. *Reason:* not stated in the module code. *Mitigation:* add only destinations the workloads need and prefer private endpoint rules over domain name rules.
+- A default fully qualified domain name (FQDN) allow-list (for example `*.docker.io`, `*.anaconda.com`, `huggingface.co` and `*.vscode.dev`) and an `AzureOpenDatasets` service tag rule on TCP 443 are always merged into the rules. There is no variable to remove them. *Reason:* code comments in `locals.tf` label the entries as dependencies (general, Python package index, R, Visual Studio Code, AI Studio and Azure Machine Learning samples, Hugging Face model catalogue, Ubuntu). *Mitigation:* review the list in `locals.tf` before you deploy, because the module cannot remove entries.
+- With `ai_studio_hub_approve_private_endpoints = true` the module runs PowerShell and the Azure command-line interface (CLI) on the machine that runs Terraform (see [Scripted steps](../../docs/scripted-steps.md)). *Reason:* not stated in the module code. *Mitigation:* run Terraform from a trusted machine or pipeline whose identity can approve only the connections you intend.
 - Known issue: two `depends_on` entries in `main.tf` reference `azapi_update_resource.ai_studio_hub_outbound_rules`, which is not declared (the resource is declared as `azapi_resource_action`), so the reference cannot be resolved.
 
 **Prerequisites**

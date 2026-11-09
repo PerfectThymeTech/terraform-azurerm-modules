@@ -2,7 +2,7 @@
 
 [![Test workflow](https://github.com/PerfectThymeTech/terraform-azurerm-modules/actions/workflows/terraform-appserviceplan.yml/badge.svg?branch=main)](https://github.com/PerfectThymeTech/terraform-azurerm-modules/actions/workflows/terraform-appserviceplan.yml)
 
-Deploys an Azure App Service plan with configurable SKU, operating system and worker count, with optional diagnostic settings.
+Deploys an Azure App Service plan with configurable SKU (pricing tier), operating system and worker count, with optional diagnostic settings.
 
 ## 📦 Overview
 

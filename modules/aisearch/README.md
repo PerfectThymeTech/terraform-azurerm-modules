@@ -14,8 +14,8 @@ Deploys a private-only Azure AI Search service with optional shared private link
 
 ## 🛡️ Secure defaults
 
-- Public network access is disabled and no IP addresses are allowed.
-- API-key (local) authentication is off (`search_service_local_authentication_enabled` defaults to `false`).
+- Public network access is disabled and no Internet Protocol (IP) addresses are allowed.
+- Application programming interface (API) key (local) authentication is off (`search_service_local_authentication_enabled` defaults to `false`).
 - The service uses a system-assigned managed identity.
 - The private endpoint is always created.
 - Diagnostics (`diagnostics_configurations`) are opt-in.
@@ -24,15 +24,15 @@ Deploys a private-only Azure AI Search service with optional shared private link
 
 **Exceptions**
 
-- The network rule bypass option is hard-coded to `AzureServices`; there is no variable to change it.
-- `search_service_local_authentication_enabled = true` enables key-based authentication.
-- Shared private links with `approve = true` run PowerShell and the Azure CLI on the machine that runs Terraform.
+- The network rule bypass option is hard-coded to `AzureServices`; there is no variable to change it. *Reason:* not stated in the module code. *Mitigation:* limit what trusted Azure services can do with Azure role-based access control.
+- `search_service_local_authentication_enabled = true` enables key-based authentication. *Reason:* not stated in the module code. *Mitigation:* keep it `false` and use Microsoft Entra ID with Azure role-based access control; if keys are unavoidable, store and rotate them in a key vault.
+- Shared private links with `approve = true` run PowerShell and the Azure command-line interface (CLI) on the machine that runs Terraform (see [Scripted steps](../../docs/scripted-steps.md)). *Reason:* not stated in the module code. *Mitigation:* run Terraform from a trusted machine or pipeline whose identity can approve only the connections you intend.
 - Known issue: `customer_managed_key` only switches on customer-managed key enforcement. The key fields are not used by any resource, and the module has no role assignment for the key.
 
 **Prerequisites**
 
 - `subnet_id`: the resource ID of the subnet for the private endpoint.
-- Optional `private_dns_zone_id_search_service` (`privatelink.search.windows.net`). It is not required when DNS A-records are created through Azure Policy.
+- Optional `private_dns_zone_id_search_service` (`privatelink.search.windows.net`). It is not required when Domain Name System (DNS) A-records are created through Azure Policy.
 - Each shared private link needs a `target_resource_id` and a `subresource_name`.
 - For `approve = true`: `pwsh` and the Azure CLI (`az`), signed in, on the machine that runs Terraform.
 

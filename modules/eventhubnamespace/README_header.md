@@ -13,9 +13,9 @@ Deploys an Azure Event Hubs namespace with public access disabled, a private end
 
 ## 🛡️ Secure defaults
 
-- Public network access is disabled (hard-coded), and the IP and virtual network rule lists are empty.
+- Public network access is disabled (hard-coded), and the Internet Protocol (IP) and virtual network rule lists are empty.
 - Local (key-based) authentication is off (`event_hub_namespace_local_authentication_enabled` defaults to `false`).
-- The minimum TLS version is 1.2.
+- The minimum Transport Layer Security (TLS) version is 1.2.
 - The namespace uses a system-assigned managed identity.
 - The private endpoint uses automatic approval.
 - Authorization rules default to listen only (`listen = true`, `manage = false`, `send = false`).
@@ -26,9 +26,9 @@ Deploys an Azure Event Hubs namespace with public access disabled, a private end
 
 **Exceptions**
 
-- `event_hub_namespace_local_authentication_enabled = true` enables local authentication, and each authorization rule can set `manage` or `send` to `true`.
-- The network rule set has `default_action = "Allow"` (hard-coded). A code comment states that azurerm 5.3 and later reject `Deny` without rules and that the setting is inert while public access is disabled.
-- `trusted_service_access_enabled = true` is hard-coded.
+- `event_hub_namespace_local_authentication_enabled = true` enables local authentication, and each authorization rule can set `manage` or `send` to `true`. *Reason:* not stated in the module code. *Mitigation:* keep local authentication off and grant only the rights each client needs.
+- The network rule set has `default_action = "Allow"` (hard-coded). A code comment states that azurerm 5.3 and later reject `Deny` without rules and that the setting is inert while public access is disabled. *Reason:* as stated in that code comment. *Mitigation:* keep public network access disabled, which the module hard-codes.
+- `trusted_service_access_enabled = true` is hard-coded. *Reason:* not stated in the module code. *Mitigation:* limit what trusted Azure services can do with Azure role-based access control.
 - Known issue: `customer_managed_key` is declared and validated but no resource uses it, so no customer-managed key is applied.
 - Known issue: `event_hub_namespace_dedicated_cluster_id` is declared as `bool` although its description and validation treat it as a resource ID.
 - Known issue: the private endpoint, NIC and service connection names contain `datafactory`.
@@ -36,7 +36,7 @@ Deploys an Azure Event Hubs namespace with public access disabled, a private end
 **Prerequisites**
 
 - `subnet_id`: the resource ID of the subnet for the private endpoint.
-- Optional `private_dns_zone_id_servicebus` ending in `privatelink.servicebus.windows.net`. It is not required when DNS A-records are created through Azure Policy.
+- Optional `private_dns_zone_id_servicebus` ending in `privatelink.servicebus.windows.net`. It is not required when Domain Name System (DNS) A-records are created through Azure Policy.
 
 ## 🚀 Usage
 

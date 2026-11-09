@@ -2,6 +2,9 @@
 
 Every module is tested by its own GitHub Actions workflow. This page describes the workflows, the provider override file and how to run equivalent checks on your machine.
 
+> [!NOTE]
+> This page is a point-in-time baseline (November 2026). The files in `.github/workflows/` and `code/utilities/terraform_override.tf` are authoritative.
+
 ## ⚙️ Workflows
 
 | Workflow | File | Runs when | What it does |
@@ -39,7 +42,7 @@ flowchart LR
 
 ### Authentication
 
-Continuous integration (CI) authenticates to Azure with OpenID Connect (OIDC); no stored credentials are used. The test job sets `ARM_USE_OIDC` and `FABRIC_USE_OIDC` and passes the client ID from the `CLIENT_ID` secret. The workflow has `id-token: write` permission to request the token. GitHub Actions in the workflows are pinned to a full commit hash (SHA).
+Continuous integration (CI) authenticates to Azure with OpenID Connect (OIDC); no stored credentials are used. The test job sets `ARM_USE_OIDC` and `FABRIC_USE_OIDC` and passes the client identifier (ID) from the `CLIENT_ID` secret. The workflow has `id-token: write` permission to request the token. GitHub Actions in the workflows are pinned to a full commit hash (SHA).
 
 ## 🧩 Provider override file
 

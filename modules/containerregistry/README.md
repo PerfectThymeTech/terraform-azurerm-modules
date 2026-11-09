@@ -7,14 +7,14 @@ Deploys a Premium Azure Container Registry that is reachable only through a priv
 
 ## 📦 Overview
 
-- One container registry (`azurerm_container_registry`, SKU `Premium`).
+- One container registry (`azurerm_container_registry`, SKU (pricing tier) `Premium`).
 - A private endpoint for the `registry` subresource and a wait of `connectivity_delay_in_seconds` after it (default `120`).
 - Optional diagnostic settings and optional customer-managed key encryption.
 - The full list of deployed resources is in [Resources](#resources).
 
 ## 🛡️ Secure defaults
 
-- Public network access is disabled and the network rule set denies by default with no IP rules.
+- Public network access is disabled and the network rule set denies by default with no Internet Protocol (IP) rules.
 - The admin account is disabled (`container_registry_admin_enabled` defaults to `false`).
 - Anonymous pull is disabled (`container_registry_anonymous_pull_enabled` defaults to `false`).
 - The private endpoint is always created with automatic approval.
@@ -25,14 +25,14 @@ Deploys a Premium Azure Container Registry that is reachable only through a priv
 
 **Exceptions**
 
-- `container_registry_admin_enabled = true` enables the admin account, and `container_registry_anonymous_pull_enabled = true` enables anonymous pull.
-- The network rule bypass option is hard-coded to `AzureServices`; there is no variable to change it.
+- `container_registry_admin_enabled = true` enables the admin account, and `container_registry_anonymous_pull_enabled = true` enables anonymous pull. *Reason:* not stated in the module code. *Mitigation:* keep both `false` and use Microsoft Entra ID and managed identities to pull images.
+- The network rule bypass option is hard-coded to `AzureServices`; there is no variable to change it. *Reason:* not stated in the module code. *Mitigation:* limit what trusted Azure services can do with Azure role-based access control.
 - Known issue: `customer_managed_key` requires and validates `key_vault_id` and `key_vault_key_id`, but only `key_vault_key_versionless_id`, `user_assigned_identity_id` and `user_assigned_identity_client_id` are used. The module creates no role assignment.
 
 **Prerequisites**
 
 - `subnet_id`: the resource ID of the subnet for the private endpoint.
-- Optional `private_dns_zone_id_container_registry` ending in `privatelink.azurecr.io`. It is not required when DNS A-records are created through Azure Policy.
+- Optional `private_dns_zone_id_container_registry` ending in `privatelink.azurecr.io`. It is not required when Domain Name System (DNS) A-records are created through Azure Policy.
 
 ## 🚀 Usage
 
