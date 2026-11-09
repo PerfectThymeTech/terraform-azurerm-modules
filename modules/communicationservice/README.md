@@ -1,7 +1,48 @@
 <!-- BEGIN_TF_DOCS -->
-# Azure Communication Service Terraform Module
+# 🔌 Azure Communication Service Terraform Module
 
-## Documentation
+[![Test workflow](https://github.com/PerfectThymeTech/terraform-azurerm-modules/actions/workflows/terraform-communicationservice.yml/badge.svg?branch=main)](https://github.com/PerfectThymeTech/terraform-azurerm-modules/actions/workflows/terraform-communicationservice.yml)
+
+Deploys an Azure Communication Services resource with optional diagnostic settings.
+
+## 📦 Overview
+
+- One Azure Communication Services resource (`azurerm_communication_service`) with the data location you choose in `communication_service_data_location`.
+- Optional diagnostic settings.
+- The full list of deployed resources is in [Resources](#resources).
+
+## 🛡️ Secure defaults
+
+- None. The module sets only the name, resource group, tags and data location; it has no private endpoint and no identity.
+- The key and connection string outputs are marked sensitive.
+
+## ⚠️ Exceptions and prerequisites
+
+**Exceptions**
+
+- No security exceptions.
+- The `location` input is required but not used by any resource in the module.
+
+**Prerequisites**
+
+- Each `diagnostics_configurations` entry needs a Log Analytics workspace identifier (ID), a storage account ID, or both.
+
+## 🚀 Usage
+
+```hcl
+module "communication_service" {
+  source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/communicationservice?ref=<release-tag>"
+
+  location                  = "<azure-region>"
+  resource_group_name       = "<resource-group-name>"
+  communication_service_name = "<communication-service-name>"
+}
+```
+
+> [!TIP]
+> Replace `<release-tag>` with a tag from the [releases page](https://github.com/PerfectThymeTech/terraform-azurerm-modules/releases).
+
+## 📚 Documentation
 <!-- markdownlint-disable MD033 -->
 
 ## Requirements
@@ -11,6 +52,21 @@ The following requirements are needed by this module:
 - <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (>=0.12)
 
 - <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 5.0)
+
+## Providers
+
+The following providers are used by this module:
+
+- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 5.0)
+
+## Resources
+
+The following resources are used by this module:
+
+- [azurerm_communication_service.communication_service](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/communication_service) (resource)
+- [azurerm_monitor_diagnostic_setting.diagnostic_setting_communication_service](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) (resource)
+- [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) (data source)
+- [azurerm_monitor_diagnostic_categories.diagnostic_categories_communication_service](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/monitor_diagnostic_categories) (data source)
 
 ## Modules
 
