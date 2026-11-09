@@ -30,8 +30,8 @@ Deploys an Azure Event Hubs namespace with public access disabled, a private end
 - The network rule set has `default_action = "Allow"` (hard-coded). A code comment states that azurerm 5.3 and later reject `Deny` without rules and that the setting is inert while public access is disabled. *Reason:* as stated in that code comment. *Mitigation:* keep public network access disabled, which the module hard-codes.
 - `trusted_service_access_enabled = true` is hard-coded. *Reason:* not stated in the module code. *Mitigation:* limit what trusted Azure services can do with Azure role-based access control.
 - Known issue: `customer_managed_key` is declared and validated but no resource uses it, so no customer-managed key is applied.
-- Known issue: `event_hub_namespace_dedicated_cluster_id` is declared as `bool` although its description and validation treat it as a resource ID.
-- Known issue: the private endpoint, NIC and service connection names contain `datafactory`.
+- Known issue: `event_hub_namespace_dedicated_cluster_id` is declared as `bool` although its description and validation treat it as a resource identifier (ID).
+- Known issue: the private endpoint, network interface card (NIC) and service connection names contain `datafactory`.
 
 **Prerequisites**
 

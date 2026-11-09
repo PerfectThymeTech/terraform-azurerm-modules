@@ -37,7 +37,7 @@ Deploys a locked-down Azure Storage account with Microsoft Entra ID-first access
 
 **Prerequisites**
 
-- `subnet_id`: the resource ID of the subnet for the private endpoints.
+- `subnet_id`: the resource identifier (ID) of the subnet for the private endpoints.
 - Optional private Domain Name System (DNS) zone IDs `private_dns_zone_id_blob`, `_file`, `_table`, `_queue`, `_web` and `_dfs`, each validated against its `privatelink.<service>.core.windows.net` suffix. They are not required when DNS A-records are created through Azure Policy.
 - `customer_managed_key` needs `key_vault_key_versionless_id` and `user_assigned_identity_id`. The module creates no role assignment for that identity.
 

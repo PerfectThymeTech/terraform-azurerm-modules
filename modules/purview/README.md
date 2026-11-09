@@ -31,7 +31,7 @@ Deploys a Microsoft Purview account through the `azapi` provider with private en
 **Prerequisites**
 
 - `subnet_id` for all three private endpoints; optional `location_private_endpoint` when they must reside in another region.
-- Optional private Domain Name System (DNS) zone IDs ending in `privatelink.purview-service.microsoft.com` (`private_dns_zone_id_purview_platform`), `privatelink.blob.core.windows.net` (`private_dns_zone_id_blob`) and `privatelink.queue.core.windows.net` (`private_dns_zone_id_queue`). They are not required when DNS A-records are created through Azure Policy.
+- Optional private Domain Name System (DNS) zone identifiers (IDs) ending in `privatelink.purview-service.microsoft.com` (`private_dns_zone_id_purview_platform`), `privatelink.blob.core.windows.net` (`private_dns_zone_id_blob`) and `privatelink.queue.core.windows.net` (`private_dns_zone_id_queue`). They are not required when DNS A-records are created through Azure Policy.
 - `purview_account_root_collection_admins` is a map of Microsoft Entra object IDs (default `{}`).
 - The `azapi` provider (`~> 2.0`) in addition to `azurerm` and `time`.
 

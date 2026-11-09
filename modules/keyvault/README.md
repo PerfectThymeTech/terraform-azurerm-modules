@@ -31,7 +31,7 @@ Deploys a locked-down Azure Key Vault with role-based access control (RBAC) auth
 
 **Prerequisites**
 
-- `subnet_id`: the resource ID of the subnet for the private endpoint.
+- `subnet_id`: the resource identifier (ID) of the subnet for the private endpoint.
 - Optional `private_dns_zone_id_vault` ending in `privatelink.vaultcore.azure.net`. It is not required when Domain Name System (DNS) A-records are created through Azure Policy.
 - The identity that runs Terraform must be allowed to create the role assignment on the vault.
 

@@ -26,7 +26,7 @@ Deploys an Azure Synapse private link hub with a private endpoint for the `web` 
 
 **Prerequisites**
 
-- `subnet_id`: the resource ID of the subnet for the private endpoint.
+- `subnet_id`: the resource identifier (ID) of the subnet for the private endpoint.
 - Optional `private_dns_zone_id_synapse_portal` ending in `privatelink.azuresynapse.net`. It is not required when Domain Name System (DNS) A-records are created through Azure Policy.
 
 ## 🚀 Usage

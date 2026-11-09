@@ -25,7 +25,7 @@ Deploys an Azure App Service plan with configurable SKU (pricing tier), operatin
 
 - Zone balancing can only be enabled with a worker count of 3 or more (stated in the variable description, not enforced by a validation).
 - `service_plan_maximum_elastic_worker_count` can only be set for an elastic SKU.
-- Each `diagnostics_configurations` entry needs a Log Analytics workspace ID, a storage account ID, or both.
+- Each `diagnostics_configurations` entry needs a Log Analytics workspace identifier (ID), a storage account ID, or both.
 
 ## 🚀 Usage
 

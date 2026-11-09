@@ -30,7 +30,7 @@ Deploys a private-only Cognitive Services account of a chosen kind with optional
 
 **Prerequisites**
 
-- `subnet_id`: the resource ID of the subnet for the private endpoint.
+- `subnet_id`: the resource identifier (ID) of the subnet for the private endpoint.
 - `cognitive_account_kind` must be one of the values allowed by the variable validation (for example `OpenAI`, `SpeechServices` or `FormRecognizer`).
 - Optional `private_dns_zone_id_cognitive_account` must end with `privatelink.cognitiveservices.azure.com` or `privatelink.openai.azure.com`. It is not required when Domain Name System (DNS) A-records are created through Azure Policy.
 - `customer_managed_key` needs a Key Vault, key and user-assigned identity (five validated fields).

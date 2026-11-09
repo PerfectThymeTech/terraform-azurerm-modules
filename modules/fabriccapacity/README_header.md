@@ -17,7 +17,7 @@ Deploys a Microsoft Fabric capacity in Azure with the deploying identity and opt
 
 **Exceptions**
 
-- The object ID of the identity that runs Terraform is always added as a capacity administrator. `fabric_capacity_admin_emails` (default `[]`) adds further administrators. *Reason:* not stated in the module code. *Mitigation:* limit who can run Terraform, and list further administrators only when needed.
+- The object identifier (ID) of the identity that runs Terraform is always added as a capacity administrator. `fabric_capacity_admin_emails` (default `[]`) adds further administrators. *Reason:* not stated in the module code. *Mitigation:* limit who can run Terraform, and list further administrators only when needed.
 
 **Prerequisites**
 

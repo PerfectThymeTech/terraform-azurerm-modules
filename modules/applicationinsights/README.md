@@ -28,7 +28,7 @@ Deploys an Azure Application Insights component linked to a Log Analytics worksp
 **Prerequisites**
 
 - An existing Log Analytics workspace: `application_insights_log_analytics_workspace_id`.
-- Each `diagnostics_configurations` entry needs a Log Analytics workspace ID, a storage account ID, or both.
+- Each `diagnostics_configurations` entry needs a Log Analytics workspace identifier (ID), a storage account ID, or both.
 
 ## 🚀 Usage
 

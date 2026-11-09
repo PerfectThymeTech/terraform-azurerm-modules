@@ -29,7 +29,7 @@ Deploys a premium Azure Databricks workspace that is injected into a virtual net
 
 **Prerequisites**
 
-- An existing virtual network with a private and a public subnet (by name) and their network security group association IDs.
+- An existing virtual network with a private and a public subnet (by name) and their network security group association identifiers (IDs).
 - An existing Azure Databricks access connector: `databricks_workspace_access_connector_id`.
 - `subnet_id` for the private endpoints; optional `location_private_endpoint` when they must reside in another region.
 - Optional private Domain Name System (DNS) zone IDs ending in `privatelink.azuredatabricks.net`, `privatelink.blob.core.windows.net` and `privatelink.dfs.core.windows.net`. They are not required when DNS A-records are created through Azure Policy.

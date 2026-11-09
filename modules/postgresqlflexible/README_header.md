@@ -26,7 +26,7 @@ Deploys a PostgreSQL flexible server with Microsoft Entra ID authentication only
 - No input re-enables public network access or password authentication.
 - `postgresql_configuration` passes arbitrary server parameters (no validation). *Reason:* not stated in the module code. *Mitigation:* review the parameters in code review, because the module does not validate them.
 - With the default `postgresql_active_directory_administrator = {}` no Microsoft Entra administrator is created, while password authentication is disabled. Set both `object_id` and `group_name` to create one.
-- Known issue: the customer-managed key block passes the Key Vault resource ID where a key ID is expected, so the key configuration does not receive the key ID.
+- Known issue: the customer-managed key block passes the Key Vault resource identifier (ID) where a key ID is expected, so the key configuration does not receive the key ID.
 - Known issue: the `postgresql_storage_tier` validation compares `postgresql_storage_mb` instead of the tier, so any non-null tier fails validation.
 
 **Prerequisites**

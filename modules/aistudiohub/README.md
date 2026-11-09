@@ -35,7 +35,7 @@ Deploys a network-isolated Azure AI Hub workspace with a private endpoint, optio
 **Prerequisites**
 
 - Existing resources: `application_insights_id`, `container_registry_id`, `key_vault_id` and `storage_account_id`, plus `subnet_id` for the private endpoint.
-- Optional private Domain Name System (DNS) zone IDs `private_dns_zone_id_machine_learning_api` (`privatelink.api.azureml.ms`) and `private_dns_zone_id_machine_learning_notebooks` (`privatelink.notebooks.azure.net`). The DNS zone group is only created when both are set.
+- Optional private Domain Name System (DNS) zone identifiers (IDs) `private_dns_zone_id_machine_learning_api` (`privatelink.api.azureml.ms`) and `private_dns_zone_id_machine_learning_notebooks` (`privatelink.notebooks.azure.net`). The DNS zone group is only created when both are set.
 
 > [!WARNING]
 > **Info for CMK Deployments**

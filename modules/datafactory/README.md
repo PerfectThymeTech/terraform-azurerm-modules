@@ -9,7 +9,7 @@ Deploys an Azure Data Factory with a managed virtual network, with public access
 
 - An Azure Data Factory (`azurerm_data_factory`) with a system-assigned managed identity and an optional GitHub or Azure DevOps repository.
 - A private endpoint for the `dataFactory` subresource and optional diagnostic settings.
-- Optional managed private endpoints, an optional ARM template deployment of published content, and optional trigger start and pipeline run steps.
+- Optional managed private endpoints, an optional Azure Resource Manager (ARM) template deployment of published content, and optional trigger start and pipeline run steps.
 - The full list of deployed resources is in [Resources](#resources).
 
 ## 🛡️ Secure defaults
@@ -29,7 +29,7 @@ Deploys an Azure Data Factory with a managed virtual network, with public access
 
 **Prerequisites**
 
-- `subnet_id`: the resource ID of the subnet for the private endpoint.
+- `subnet_id`: the resource identifier (ID) of the subnet for the private endpoint.
 - Optional `private_dns_zone_id_data_factory` ending in `privatelink.datafactory.azure.net`. It is not required when Domain Name System (DNS) A-records are created through Azure Policy.
 - `data_factory_published_content` needs both a `parameters_file` and a `template_file`; triggers and pipelines only run when published content is set.
 - `data_factory_managed_private_endpoints` entries need `subresource_name` and `target_resource_id`.

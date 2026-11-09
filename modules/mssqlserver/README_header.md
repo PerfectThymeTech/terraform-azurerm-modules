@@ -31,7 +31,7 @@ Deploys an Azure SQL logical server that is reachable only through a private end
 
 **Prerequisites**
 
-- `subnet_id`: the resource ID of the subnet for the private endpoint.
+- `subnet_id`: the resource identifier (ID) of the subnet for the private endpoint.
 - Optional `private_dns_zone_id_sqlserver` ending in `privatelink.database.windows.net`. It is not required when Domain Name System (DNS) A-records are created through Azure Policy.
 - `customer_managed_key` needs a Key Vault key ID and a user-assigned identity ID. The module creates no role assignment or access policy for that identity.
 

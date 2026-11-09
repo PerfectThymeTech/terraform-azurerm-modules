@@ -31,7 +31,7 @@ Deploys a private-only Azure AI Search service with optional shared private link
 
 **Prerequisites**
 
-- `subnet_id`: the resource ID of the subnet for the private endpoint.
+- `subnet_id`: the resource identifier (ID) of the subnet for the private endpoint.
 - Optional `private_dns_zone_id_search_service` (`privatelink.search.windows.net`). It is not required when Domain Name System (DNS) A-records are created through Azure Policy.
 - Each shared private link needs a `target_resource_id` and a `subresource_name`.
 - For `approve = true`: `pwsh` and the Azure CLI (`az`), signed in, on the machine that runs Terraform.

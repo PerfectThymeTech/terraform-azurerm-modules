@@ -31,7 +31,7 @@ Deploys a Premium Azure Container Registry that is reachable only through a priv
 
 **Prerequisites**
 
-- `subnet_id`: the resource ID of the subnet for the private endpoint.
+- `subnet_id`: the resource identifier (ID) of the subnet for the private endpoint.
 - Optional `private_dns_zone_id_container_registry` ending in `privatelink.azurecr.io`. It is not required when Domain Name System (DNS) A-records are created through Azure Policy.
 
 ## 🚀 Usage

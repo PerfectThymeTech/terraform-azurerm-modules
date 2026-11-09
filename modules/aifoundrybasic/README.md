@@ -29,7 +29,7 @@ Deploys a private-only Azure AI Foundry (AI Services) account with optional proj
 
 **Prerequisites**
 
-- `subnet_id`: the resource ID of the subnet for the private endpoint.
+- `subnet_id`: the resource identifier (ID) of the subnet for the private endpoint.
 - Optional private Domain Name System (DNS) zone IDs: `private_dns_zone_id_ai_services` (`privatelink.services.ai.azure.com`), `private_dns_zone_id_cognitive_account` (`privatelink.cognitiveservices.azure.com`) and `private_dns_zone_id_open_ai` (`privatelink.openai.azure.com`). They are not required when DNS A-records are created through Azure Policy.
 - `customer_managed_key` needs a Key Vault, key and user-assigned identity (five validated fields).
 - `ai_services_deployments` is only applicable to OpenAI models.

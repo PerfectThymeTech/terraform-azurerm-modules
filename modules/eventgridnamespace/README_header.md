@@ -26,7 +26,7 @@ Deploys an Azure Event Grid namespace with public access disabled, a private end
 
 **Prerequisites**
 
-- `subnet_id`: the resource ID of the subnet for the private endpoint.
+- `subnet_id`: the resource identifier (ID) of the subnet for the private endpoint.
 - Optional `private_dns_zone_id_topic` ending in `privatelink.eventgrid.azure.net`. It is not required when Domain Name System (DNS) A-records are created through Azure Policy.
 - The `azapi` provider (`~> 2.0`) in addition to `azurerm` and `time`, and Terraform `>=1.3`.
 

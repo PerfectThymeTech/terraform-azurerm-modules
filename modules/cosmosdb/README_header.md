@@ -33,7 +33,7 @@ Deploys an Azure Cosmos DB account with public access disabled, private endpoint
 
 **Prerequisites**
 
-- `subnet_id`: the resource ID of the subnet for the private endpoints.
+- `subnet_id`: the resource identifier (ID) of the subnet for the private endpoints.
 - Optional private Domain Name System (DNS) zone IDs (`private_dns_zone_id_cosmos_sql`, `_mongodb`, `_cassandra`, `_gremlin`, `_table`, `_analytical`, `_coordinator`). Each must match the zone name of its subresource and is not required when DNS A-records are created through Azure Policy.
 - `customer_managed_key` needs a Key Vault, key and user-assigned identity. The module creates no role assignment, so grant the identity access to the key outside the module.
 

@@ -32,7 +32,7 @@ Deploys an Azure Bot with local authentication disabled, public network access o
 - An existing Application Insights component: `bot_service_application_insights_id`.
 - `bot_service_microsoft_app` with `app_id`, `app_msi_id`, `app_tenant_id` and `app_type` (`MultiTenant`, `SingleTenant` or `UserAssignedMSI`).
 - `bot_service_endpoint` must start with `https://`.
-- `subnet_id` for the private endpoints, and optional private Domain Name System (DNS) zone IDs `private_dns_zone_id_bot_framework_directline` (`privatelink.directline.botframework.com`) and `private_dns_zone_id_bot_framework_token` (`privatelink.token.botframework.com`).
+- `subnet_id` for the private endpoints, and optional private Domain Name System (DNS) zone identifiers (IDs) `private_dns_zone_id_bot_framework_directline` (`privatelink.directline.botframework.com`) and `private_dns_zone_id_bot_framework_token` (`privatelink.token.botframework.com`).
 - `bot_service_location` is one of `global`, `westeurope`, `westus` or `centralindia` (default `global`); `location` is only used for the private endpoints.
 
 ## 🚀 Usage
