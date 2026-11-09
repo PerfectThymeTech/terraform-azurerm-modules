@@ -68,6 +68,18 @@ variable "ai_studio_hub_outbound_rules_service_endpoints" {
   }
 }
 
+variable "ai_studio_hub_firewall_sku" {
+  description = "Specifies the firewall sku deployed in the managed vnet of the ai studio hub deployment."
+  type        = string
+  sensitive   = false
+  nullable    = false
+  default     = "Basic"
+  validation {
+    condition     = contains(["Basic", "Standard"], var.ai_studio_hub_firewall_sku)
+    error_message = "Please specify a valid sku. Allowed values are: [ 'Basic', 'Standard' ]."
+  }
+}
+
 variable "ai_studio_hub_provision_managed_network" {
   description = "Specifies whether the managed vnet should be provisioned as part of the ai studio hub deployment."
   type        = bool

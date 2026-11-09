@@ -1,5 +1,5 @@
 resource "azapi_resource_action" "ai_studio_hub_outbound_rules" {
-  type        = "Microsoft.MachineLearningServices/workspaces@2024-04-01"
+  type        = "Microsoft.MachineLearningServices/workspaces@2024-10-01"
   resource_id = var.ai_studio_hub_id
 
   action = null
@@ -13,6 +13,7 @@ resource "azapi_resource_action" "ai_studio_hub_outbound_rules" {
           sparkReady = true
           status     = "Active"
         }
+        firewallSku = var.ai_studio_hub_firewall_sku
       }
     }
   }
@@ -37,7 +38,7 @@ resource "azapi_resource_action" "ai_studio_hub_provision_managed_network" {
 
   response_export_values = []
   depends_on = [
-    azapi_update_resource.ai_studio_hub_outbound_rules,
+    azapi_resource_action.ai_studio_hub_outbound_rules,
   ]
 
   timeouts {
@@ -58,7 +59,7 @@ resource "null_resource" "ai_studio_hub_private_endpoints_approval" {
   }
 
   depends_on = [
-    azapi_update_resource.ai_studio_hub_outbound_rules,
+    azapi_resource_action.ai_studio_hub_outbound_rules,
     azapi_resource_action.ai_studio_hub_provision_managed_network,
   ]
 }

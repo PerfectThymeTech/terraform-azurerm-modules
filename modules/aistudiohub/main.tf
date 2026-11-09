@@ -1,5 +1,5 @@
 resource "azapi_resource" "ai_studio_hub" {
-  type      = "Microsoft.MachineLearningServices/workspaces@2024-04-01"
+  type      = "Microsoft.MachineLearningServices/workspaces@2024-10-01"
   name      = var.ai_studio_hub_name
   location  = var.location
   parent_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${var.resource_group_name}"
@@ -23,6 +23,7 @@ resource "azapi_resource" "ai_studio_hub" {
   body = {
     kind = "Hub"
     properties = {
+      allowRoleAssignmentOnRG         = false
       applicationInsights             = var.application_insights_id
       containerRegistry               = var.container_registry_id
       keyVault                        = var.key_vault_id
@@ -42,11 +43,12 @@ resource "azapi_resource" "ai_studio_hub" {
           sparkReady = true
           status     = "Active"
         }
+        firewallSku = var.ai_studio_hub_firewall_sku
       }
       primaryUserAssignedIdentity = null
       publicNetworkAccess         = "Disabled"
       softDeleteRetentionInDays   = 7
-      systemDatastoresAuthMode    = "identity"
+      systemDatastoresAuthMode    = "identity" # "accesskey"
       v1LegacyMode                = false
 
       # TODO: Evaluate adding below properties
@@ -60,6 +62,7 @@ resource "azapi_resource" "ai_studio_hub" {
       #   offlineStoreConnectionName = ""
       #   onlineStoreConnectionName = ""
       # }
+      # systemDatastoresAuthMode    = "identity"
       # workspaceHubConfig = {
       #   additionalWorkspaceStorageAccounts = []
       #   defaultWorkspaceResourceGroup = ""
