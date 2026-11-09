@@ -10,7 +10,7 @@ The following requirements are needed by this module:
 
 - <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (>=0.12)
 
-- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 4.0)
+- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 5.0)
 
 - <a name="requirement_time"></a> [time](#requirement\_time) (~> 0.9)
 
@@ -107,14 +107,6 @@ Description: Specifies retention policy in days for the container registry.
 Type: `number`
 
 Default: `7`
-
-### <a name="input_container_registry_trust_policy_enabled"></a> [container\_registry\_trust\_policy\_enabled](#input\_container\_registry\_trust\_policy\_enabled)
-
-Description: Specifies whether trust policy should be enabled for the container registry.
-
-Type: `bool`
-
-Default: `false`
 
 ### <a name="input_container_registry_zone_redundancy_enabled"></a> [container\_registry\_zone\_redundancy\_enabled](#input\_container\_registry\_zone\_redundancy\_enabled)
 

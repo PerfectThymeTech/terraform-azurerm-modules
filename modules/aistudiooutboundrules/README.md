@@ -22,7 +22,7 @@ The following requirements are needed by this module:
 
 - <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) (~> 2.0)
 
-- <a name="requirement_null"></a> [null](#requirement\_null) (>= 3.2.2)
+- <a name="requirement_null"></a> [null](#requirement\_null) (~> 3.2)
 
 ## Modules
 

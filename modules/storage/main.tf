@@ -19,13 +19,6 @@ resource "azurerm_storage_account" "storage_account" {
   account_replication_type        = var.storage_account_replication_type
   allow_nested_items_to_be_public = false
   allowed_copy_scope              = var.storage_account_allowed_copy_scope == "All" ? null : var.storage_account_allowed_copy_scope
-  dynamic "static_website" {
-    for_each = var.storage_static_website
-    content {
-      index_document     = static_website.value.index_document
-      error_404_document = static_website.value.error_404_document
-    }
-  }
   blob_properties {
     change_feed_enabled = var.storage_blob_change_feed_enabled
     container_delete_retention_policy {
@@ -103,11 +96,24 @@ resource "azurerm_storage_container" "storage_container" {
   ]
 }
 
+resource "azurerm_storage_account_static_website" "storage_account_static_website" {
+  count = length(var.storage_static_website) > 0 ? 1 : 0
+
+  storage_account_id = azurerm_storage_account.storage_account.id
+
+  error_404_document = var.storage_static_website[0].error_404_document
+  index_document     = var.storage_static_website[0].index_document
+
+  depends_on = [
+    azurerm_role_assignment.current_roleassignment_storage_blob_data_owner,
+    time_sleep.sleep_connectivity,
+  ]
+}
+
 resource "azurerm_storage_account_customer_managed_key" "storage_account_customer_managed_key" {
   count = var.customer_managed_key != null ? 1 : 0
 
   storage_account_id        = azurerm_storage_account.storage_account.id
-  key_vault_id              = var.customer_managed_key.key_vault_id
-  key_name                  = reverse(split("/", var.customer_managed_key.key_vault_key_versionless_id))[0]
+  key_vault_key_id          = var.customer_managed_key.key_vault_key_versionless_id
   user_assigned_identity_id = var.customer_managed_key.user_assigned_identity_id
 }

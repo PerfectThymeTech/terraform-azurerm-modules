@@ -85,14 +85,6 @@ variable "container_registry_retention_policy_in_days" {
   default     = 7
 }
 
-variable "container_registry_trust_policy_enabled" {
-  description = "Specifies whether trust policy should be enabled for the container registry."
-  type        = bool
-  sensitive   = false
-  nullable    = false
-  default     = false
-}
-
 variable "container_registry_zone_redundancy_enabled" {
   description = "Specifies whether zone redundancy should be enabled for the container registry."
   type        = bool

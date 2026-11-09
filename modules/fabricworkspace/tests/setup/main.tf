@@ -1,5 +1,5 @@
 module "fabric_capacity" {
-  source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/fabriccapacity?ref=main"
+  source = "../../../fabriccapacity"
   providers = {
     azurerm = azurerm
     azapi   = azapi

@@ -41,6 +41,5 @@ resource "azurerm_container_registry" "container_registry" {
   quarantine_policy_enabled     = var.container_registry_quarantine_policy_enabled
   retention_policy_in_days      = var.container_registry_retention_policy_in_days
   sku                           = "Premium"
-  trust_policy_enabled          = var.container_registry_trust_policy_enabled
   zone_redundancy_enabled       = var.container_registry_zone_redundancy_enabled
 }

@@ -65,7 +65,7 @@ resource "azapi_resource" "databricks_public_subnet" {
 }
 
 module "databricks_access_connector" {
-  source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/databricksaccessconnector?ref=main"
+  source = "../../../databricksaccessconnector"
   providers = {
     azurerm = azurerm
   }
